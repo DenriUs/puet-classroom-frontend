@@ -20,26 +20,25 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------------------------*/
 
 // Import variables and mixins.
-@import "abstracts/abstracts";
+@import 'abstracts/abstracts';
 
 /* Normalize
 --------------------------------------------- */
-@import "generic/normalize";
+@import 'generic/normalize';
 
 /* Box sizing
 --------------------------------------------- */
-@import "generic/box-sizing";
+@import 'generic/box-sizing';
 
 /*--------------------------------------------------------------
 # Base
 --------------------------------------------------------------*/
-@import "base/base";
+@import 'base/base';
 
 /* Accessibility
 --------------------------------------------- */
-@import "utilities/accessibility";
+@import 'utilities/accessibility';
 
 /* Alignments
 --------------------------------------------- */
-@import "utilities/alignments";
-
+@import 'utilities/alignments';
