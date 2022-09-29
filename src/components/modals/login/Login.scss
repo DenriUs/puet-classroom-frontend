@@ -1,9 +1,11 @@
 .login-modal {
   position: fixed;
+  display: flex;
+  flex-direction: row;
   top: 50%;
   left: 50%;
-  width: 1120px;
-  height: 690px;
+  width: 900px;
+  height: 600px;
   max-width: 95%;
   max-height: 95%;
   z-index: 1010;
@@ -13,26 +15,36 @@
 
   &__left-side {
     position: relative;
-
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    bottom: 1%;
+    bottom: 1.5%;
     width: 50%;
-    height: 102%;
+    height: 103%;
     border-radius: 30px;
+    border-top-right-radius: 20% 80%;
+    border-bottom-right-radius: 20% 80%;
     background: linear-gradient(180deg, #ff6d4f 0%, #0c4267 100%);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
   }
 
   &__right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
+    height: 100%;
+    padding: 5%;
   }
+}
+
+.left-side__logo-name {
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: 20px;
+  color: #ffffff;
 }
 
 .modal-overlay--login {
@@ -44,4 +56,50 @@
   z-index: 1000;
   background: linear-gradient(180deg, #e34931 0%, #5b81ae 100%);
   filter: blur(350px);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 80%;
+  height: 75%;
+  margin-top: 20px;
+
+  .header {
+    display: flex;
+    width: 100%;
+    font-size: 40px;
+    color: #000000;
+    align-items: flex-start;
+  }
+
+  .email-input {
+    width: 100%;
+  }
+
+  .password-input {
+    width: 100%;
+  }
+
+  .submit-button {
+    width: 55%;
+    height: 12%;
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: capitalize;
+    background-color: #e4553a;
+    border-radius: 50px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      background-color: #d65137;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+    }
+  }
 }
