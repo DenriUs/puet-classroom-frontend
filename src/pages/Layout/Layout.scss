@@ -1,0 +1,13 @@
+.home {
+  display: grid;
+  grid-template-columns: max(1fr, 300px) 4fr;
+  grid-template-rows: 1fr 8fr;
+  grid-template-areas:
+    'sidebar header'
+    'sidebar content';
+
+  &__container {
+    background-color: rgb(180, 43, 43);
+    grid-area: content;
+  }
+}
