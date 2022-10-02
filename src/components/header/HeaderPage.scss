@@ -1,0 +1,48 @@
+.header {
+  background: rgba(255, 255, 255, 0);
+  height: 120px;
+  border-bottom: 0.5px solid rgb(231, 228, 228);
+  align-items: center;
+  font-size: 14px;
+
+  .wrapper {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 20px 0;
+
+    &__name {
+      display: grid;
+      align-items: center;
+      font-size: max(2.5vw, 25px);
+      font-weight: 700;
+      line-height: 27px;
+    }
+  }
+
+  .items {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+
+    &__image {
+      max-width: 60px;
+      max-height: 60px;
+    }
+
+    &__name {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 27px;
+      color: rgba(0, 0, 0, 0.76);
+      padding-left: 30px;
+      padding-right: 11px;
+    }
+
+    &__icon {
+      font-size: 20px;
+    }
+  }
+}
