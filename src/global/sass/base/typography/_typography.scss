@@ -4,11 +4,27 @@ input,
 select,
 optgroup,
 textarea {
-	color: $color__text-main;
-	font-family: $font__main;
-	font-size: 1rem;
-	line-height: $font__line-height-body;
+  color: $color__text-main;
+  font-family: $font__main;
+  font-size: 1rem;
+  line-height: $font__line-height-body;
 }
 
-@import "headings";
-@import "copy";
+.ant-input,
+.ant-input-password,
+.ant-input-affix-wrapper .ant-input-affix-wrapper-focused {
+  height: 45px;
+  font-size: 15px;
+
+  &:hover {
+    border-color: #0c4267 !important;
+  }
+}
+
+.form-error-label {
+  font-size: 12px;
+  color: #ff0101;
+}
+
+@import 'headings';
+@import 'copy';

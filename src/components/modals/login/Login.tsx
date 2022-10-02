@@ -1,31 +1,125 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Input, Button } from 'antd';
+import { EyeInvisibleOutlined, EyeOutlined, CloseOutlined } from '@ant-design/icons';
+import zod from 'zod';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import puetLogo from '../../../assets/puetLogo.png';
 
 import './Login.scss';
+import { ApiService } from '../../../common/api';
+import { useCallback } from 'react';
+
+const loginSchema = zod.object({
+  email: zod
+    .string({
+      required_error: 'Введіть пошту',
+    })
+    .email({
+      message: 'Введіть пошту коректно',
+    }),
+  password: zod
+    .string({
+      required_error: 'Введіть пароль',
+    })
+    .min(4, 'Закороткий пароль'),
+});
+
+type LoginSchemaType = zod.infer<typeof loginSchema>;
 
 const LoginModal = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginSchemaType>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(loginSchema),
+  });
+
+  const handleLoginSubmit = useCallback(async (data: LoginSchemaType): Promise<void> => {
+    await ApiService.login(data);
+  }, []);
+
   return (
     <>
       <div className='login-modal'>
         <div className='login-modal__left-side'>
-          <img className='left-side__logo' src={puetLogo} />
-          <p className='left-side__logo-name'>Classroom</p>
-        </div>
-        <div className='login-modal__right-side'>
-          <div className='login-form'>
-            <div className='header'>
-              <p>Вхід</p>
-            </div>
-            <TextField className='email-input' label='Email' variant='standard' />
-            <TextField className='password-input' label='Password' variant='standard' />
-            <Button className='submit-button' variant='contained' size='large'>
-              Увійти
-            </Button>
+          <div className='login-modal__left-side-content'>
+            <img className='login-modal__logo' src={puetLogo} />
+            <p className='login-modal__logo-name'>Classroom</p>
           </div>
         </div>
+        <div className='login-modal__right-side'>
+          <div className='login-modal__right-side-content'>
+            <div className='login-modal__header'>
+              <p>Вхід</p>
+            </div>
+            <form className='login-modal__form' onSubmit={handleSubmit(handleLoginSubmit)}>
+              <div>
+                <label htmlFor='email'>
+                  Пошта:
+                  <Controller
+                    control={control}
+                    name='email'
+                    render={({ field: { onBlur, onChange, value } }) => (
+                      <Input
+                        className='login-modal__email-input email-input'
+                        placeholder='email@example.com'
+                        onBlur={onBlur}
+                        onChange={onChange}
+                        value={value}
+                        disabled={isSubmitting}
+                      />
+                    )}
+                  />
+                </label>
+                {errors.email && <p className='form-error-label'>{errors.email.message}</p>}
+              </div>
+              <div>
+                <label htmlFor='password'>
+                  Пароль:
+                  <Controller
+                    control={control}
+                    name='password'
+                    render={({ field: { onBlur, onChange, value } }) => (
+                      <Input.Password
+                        className='login-modal__password-input password-input'
+                        placeholder='Введіть пароль'
+                        iconRender={(visible: boolean) =>
+                          visible ? (
+                            <EyeOutlined className='eye' />
+                          ) : (
+                            <EyeInvisibleOutlined className='eye-invisible' />
+                          )
+                        }
+                        onBlur={onBlur}
+                        onChange={onChange}
+                        value={value}
+                        disabled={isSubmitting}
+                      />
+                    )}
+                  />
+                </label>
+                {errors.password && <p className='form-error-label'>{errors.password.message}</p>}
+              </div>
+              <Button className='login-modal__submit-button' htmlType='submit'>
+                Увійти
+              </Button>
+            </form>
+          </div>
+        </div>
+        <div className='login-modal__close-button-container'>
+          <Button
+            className='login-modal__close-button'
+            shape='circle'
+            size='large'
+            icon={<CloseOutlined />}
+          ></Button>
+        </div>
       </div>
-      <div className='modal-overlay--login'></div>
+      <div className='modal-overlay modal-overlay_login'></div>
     </>
   );
 };

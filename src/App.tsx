@@ -1,5 +1,6 @@
 import LoginModal from './components/modals/Login';
 
+import 'antd/dist/antd.css';
 import './global/sass/style.scss';
 
 function App() {

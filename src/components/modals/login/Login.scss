@@ -1,7 +1,7 @@
 .login-modal {
   position: fixed;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   top: 50%;
   left: 50%;
   width: 900px;
@@ -15,91 +15,147 @@
 
   &__left-side {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr;
     justify-content: center;
     align-items: center;
     bottom: 1.5%;
-    width: 50%;
     height: 103%;
     border-radius: 30px;
     border-top-right-radius: 20% 80%;
     border-bottom-right-radius: 20% 80%;
-    background: linear-gradient(180deg, #ff6d4f 0%, #0c4267 100%);
+    background: #0c4267 100%;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
   }
 
-  &__right-side {
-    display: flex;
-    flex-direction: column;
+  &__left-side-content {
+    justify-self: center;
     align-items: center;
-    width: 50%;
+  }
+
+  &__logo-name {
+    font-size: 35px;
+    font-weight: 600;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  &__right-side {
+    display: grid;
+    grid-template-rows: 1fr;
+    padding: 50px;
+    align-items: center;
     height: 100%;
-    padding: 5%;
+  }
+
+  &__right-side-content {
+    display: grid;
+    grid-template-rows: 0.5fr 1.5fr;
+    height: 80%;
+  }
+
+  &__header {
+    display: flex;
+    width: 100%;
+    font-size: 35px;
+    color: #000000;
+    align-items: flex-start;
+  }
+
+  &__form {
+    display: grid;
+    align-items: flex-start;
+  }
+
+  &__email-input {
+    width: 100%;
+    border-radius: 25px !important;
+  }
+
+  &__password-input {
+    width: 100%;
+    height: 45px;
+    border-radius: 25px !important;
+
+    .ant-input {
+      bottom: 5px;
+      background: transparent;
+    }
+  }
+
+  &__close-button-container {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 100%;
+    text-align: end;
   }
 }
 
-.left-side__logo-name {
-  font-size: 35px;
-  font-weight: 600;
-  line-height: 1;
-  margin-top: 20px;
+.ant-btn.login-modal__submit-button {
+  width: 55%;
+  height: 45px;
+  align-self: center;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: capitalize;
   color: #ffffff;
+  background-color: #e4553a;
+  border-color: #e4553a;
+  border-radius: 50px;
+  box-shadow: none;
+
+  &:hover {
+    background-color: #f07961;
+    border-color: #f07961;
+    color: #ffffff;
+  }
+
+  &:focus {
+    background-color: #f07961;
+    border-color: #f07961;
+    color: #ffffff;
+  }
+
+  &:active {
+    background-color: #cc4c33;
+    border-color: #cc4c33;
+    color: #ffffff;
+  }
 }
 
-.modal-overlay--login {
+.ant-btn.login-modal__close-button {
+  background-color: #ffffff;
+  color: #f07961;
+  border-color: #f07961;
+
+  &:hover {
+    background-color: #ffffff;
+    color: #f07961;
+    border-color: #f07961;
+  }
+
+  &:focus {
+    background-color: #ffffff;
+    color: #f07961;
+    border-color: #f07961;
+  }
+}
+
+.modal-overlay {
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, #e34931 0%, #5b81ae 100%);
-  filter: blur(350px);
-}
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  width: 80%;
-  height: 75%;
-  margin-top: 20px;
-
-  .header {
-    display: flex;
-    width: 100%;
-    font-size: 40px;
-    color: #000000;
-    align-items: flex-start;
-  }
-
-  .email-input {
-    width: 100%;
-  }
-
-  .password-input {
-    width: 100%;
-  }
-
-  .submit-button {
-    width: 55%;
-    height: 12%;
-    font-size: 17px;
-    font-weight: bold;
-    text-transform: capitalize;
-    background-color: #e4553a;
-    border-radius: 50px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
-
-    &:hover {
-      background-color: #d65137;
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    &:active {
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
-    }
+  &_login {
+    background: linear-gradient(180deg, #e34931 0%, #5b81ae 100%);
+    filter: blur(350px);
   }
 }
