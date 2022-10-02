@@ -1,14 +1,19 @@
 import puetLogo from '../../../public/puetLogo.png';
+import {
+  MenuOutlined,
+  FileTextFilled,
+  CloudFilled,
+  StarFilled,
+  SettingFilled,
+} from '@ant-design/icons';
+import { Layout } from 'antd';
 import './Sidebar.scss';
-import MenuIcon from '@mui/icons-material/Menu';
-import DescriptionIcon from '@mui/icons-material/Description';
-import CloudIcon from '@mui/icons-material/Cloud';
-import StarIcon from '@mui/icons-material/Star';
-import SettingsIcon from '@mui/icons-material/Settings';
+
+const { Sider } = Layout;
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <Sider breakpoint="md" collapsedWidth="0" className="sidebar" width={340}>
       <div className="sidebar__top">
         <div className="sidebar__logo-image">
           <img src={puetLogo} alt="logo" />
@@ -19,37 +24,37 @@ const Sidebar = () => {
         <ul className="sidebar__center__nav-links">
           <li>
             <a>
-              <MenuIcon className="sidebar__icon" />
+              <MenuOutlined className="sidebar__icon" />
               <span>Курси</span>
             </a>
           </li>
           <li>
             <a>
-              <DescriptionIcon className="sidebar__icon" />
+              <FileTextFilled className="sidebar__icon" />
               <span>Журанал оцінок</span>
             </a>
           </li>
           <li>
             <a>
-              <CloudIcon className="sidebar__icon" />
+              <CloudFilled className="sidebar__icon" />
               <span>Архів</span>
             </a>
           </li>
           <li>
             <a>
-              <StarIcon className="sidebar__icon" />
+              <StarFilled className="sidebar__icon" />
               <span>Мої файли</span>
             </a>
           </li>
           <li>
             <a>
-              <SettingsIcon className="sidebar__icon" />
+              <SettingFilled className="sidebar__icon" />
               <span>Налаштування</span>
             </a>
           </li>
         </ul>
       </div>
-    </div>
+    </Sider>
   );
 };
 
