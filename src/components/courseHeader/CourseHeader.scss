@@ -1,0 +1,80 @@
+@import '/src/global/sass/abstracts/variables/colors';
+
+.box-course {
+  background: $color__background-header_course;
+  color: #ffffff;
+  height: 342px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  padding-left: 48px;
+
+  &__name {
+    font-weight: 700;
+    font-size: max(3.84vw, 30px);
+    line-height: 87px;
+  }
+
+  &__author {
+    .image-author {
+      width: 100%;
+      max-width: 60px;
+      height: 100%;
+      max-height: 60px;
+    }
+
+    .name {
+      font-weight: 500;
+      font-size: max(1vw, 20px);
+      line-height: 27px;
+      padding-left: 21px;
+      padding-right: 10px;
+    }
+
+    .icon {
+      font-size: 20px;
+    }
+  }
+
+  &__button-group {
+    .button {
+      background-color: red;
+      width: 170px;
+      height: 45px;
+      border: 0.56px solid #e34c33;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      font-size: 17px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+  }
+
+  &__design {
+    display: grid;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: span 3;
+    justify-items: center;
+    align-items: center;
+    .image {
+      width: 100%;
+      max-width: 342px;
+      height: 100%;
+      max-height: 322px;
+    }
+  }
+}
+
+@media (max-width: 1360px) {
+  .box-course__author {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .name {
+    padding-left: 0px !important;
+    padding-top: 10px;
+  }
+}
