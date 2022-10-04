@@ -1,4 +1,4 @@
-import LayoutPage from './pages/Layout/LayoutPage';
+import LayoutPage from './pages/Layout/Layout';
 
 import './global/sass/style.scss';
 
