@@ -38,19 +38,6 @@
     }
   }
 
-  &__button-group {
-    .button {
-      background-color: red;
-      width: 170px;
-      height: 45px;
-      border: 0.56px solid #e34c33;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      font-size: 17px;
-      color: #ffffff;
-      font-weight: 700;
-    }
-  }
-
   &__design {
     display: grid;
     grid-column-start: 2;
@@ -67,7 +54,34 @@
   }
 }
 
-@media (max-width: 1360px) {
+.button-connect {
+  background-color: #e34c33;
+  width: 170px;
+  height: 45px;
+  border: 0.56px solid #e34c33;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 17px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.ant-dropdown-menu {
+  background: #ffffff;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 15px;
+}
+
+.ant-dropdown-menu-item-icon {
+  font-size: 24px;
+  color: #254664;
+}
+
+.ant-dropdown-menu-title-content {
+  font-weight: 400;
+  font-size: 15px;
+}
+
+@media (max-width: 1451px) {
   .box-course__author {
     display: grid;
     grid-template-columns: 1fr;
