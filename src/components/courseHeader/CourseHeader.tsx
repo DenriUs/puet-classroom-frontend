@@ -1,10 +1,28 @@
-import { Button } from 'antd';
+import { Button, Dropdown, Menu } from 'antd';
 import { PlayCircleOutlined, CaretDownOutlined } from '@ant-design/icons';
 import profileIcon from '../../../public/profileIcon.png';
 import diplomaImg from '../../../public/diploma.png';
 import './CourseHeader.scss';
+import { PhoneOutlined, MailOutlined } from '@ant-design/icons';
 
 interface Props {}
+
+const menu = (
+  <Menu
+    items={[
+      {
+        label: '+38099888239',
+        key: '1',
+        icon: <PhoneOutlined />,
+      },
+      {
+        label: 'den.tacii@gmail.com',
+        key: '2',
+        icon: <MailOutlined />,
+      },
+    ]}
+  />
+);
 
 const CourseHeader = (props: Props) => {
   return (
@@ -16,11 +34,17 @@ const CourseHeader = (props: Props) => {
         <img src={profileIcon} className="image-author" alt="name" />
         <span className="name">
           Ємець Олег Олексійович
-          <CaretDownOutlined className="icon" />
+          <Dropdown overlay={menu} placement="bottomLeft" className="drop-down">
+            <CaretDownOutlined className="icon" />
+          </Dropdown>
         </span>
       </div>
-      <div className="box-course__button-group">
-        <Button shape="round" icon={<PlayCircleOutlined className="icon" />} className="button">
+      <div>
+        <Button
+          shape="round"
+          icon={<PlayCircleOutlined className="icon" />}
+          className="button-connect"
+        >
           Приєднатися
         </Button>
       </div>
