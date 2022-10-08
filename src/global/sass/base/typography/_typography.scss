@@ -1,0 +1,19 @@
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+  color: $color__text-main;
+  font-family: $font__main;
+  font-size: 1rem;
+  line-height: $font__line-height-body;
+}
+
+.form-error-label {
+  font-size: 12px;
+  color: #ff0101;
+}
+
+@import 'headings';
+@import 'copy';
