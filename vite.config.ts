@@ -11,6 +11,7 @@ export default defineConfig({
         javascriptEnabled: true,
         modifyVars: {
           'primary-color': '#e4553a',
+          'input-hover-border-color': '#0c4267',
         },
       },
     },

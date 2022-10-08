@@ -88,7 +88,7 @@ const LoginModal = () => {
                 </label>
                 {errors.password && <p className='form-error-label'>{errors.password.message}</p>}
               </div>
-              <Button className='login-modal__submit-button' htmlType='submit'>
+              <Button className='login-modal__submit-button' type='primary' htmlType='submit'>
                 Увійти
               </Button>
             </form>

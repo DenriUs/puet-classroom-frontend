@@ -1,4 +1,4 @@
-import LoginModal from './components/modals/Login';
+import LoginModal from './components/modals/login';
 
 import 'antd/dist/antd.less';
 import './global/sass/style.scss';
