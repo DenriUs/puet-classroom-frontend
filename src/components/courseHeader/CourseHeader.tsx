@@ -26,11 +26,11 @@ const menu = (
 
 const CourseHeader = (props: Props) => {
   return (
-    <div className="box-course">
-      <div className="box-course__name">
+    <div className="course-header">
+      <div className="course-header__name-container">
         <span>Хімія</span>
       </div>
-      <div className="box-course__author">
+      <div className="course-header__author-container">
         <img src={profileIcon} className="image-author" alt="name" />
         <span className="name">
           Ємець Олег Олексійович
@@ -39,17 +39,15 @@ const CourseHeader = (props: Props) => {
           </Dropdown>
         </span>
       </div>
-      <div>
-        <Button
-          shape="round"
-          icon={<PlayCircleOutlined className="icon" />}
-          className="button-connect"
-        >
-          Приєднатися
-        </Button>
-      </div>
-      <div className="box-course__design">
-        <img src={diplomaImg} alt="name" className="image" />
+      <Button
+        shape="round"
+        icon={<PlayCircleOutlined className="icon" />}
+        className="course-header__button-connect"
+      >
+        Приєднатися
+      </Button>
+      <div className="course-header__design-container">
+        <img src={diplomaImg} alt="name" className="course-header__image" />
       </div>
     </div>
   );
