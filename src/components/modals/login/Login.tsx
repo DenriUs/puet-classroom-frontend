@@ -7,25 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import puetLogo from '../../../assets/puetLogo.png';
 
 import './Login.scss';
-import { ApiService } from '../../../common/api';
-import { useCallback } from 'react';
-
-const loginSchema = zod.object({
-  email: zod
-    .string({
-      required_error: 'Введіть пошту',
-    })
-    .email({
-      message: 'Введіть пошту коректно',
-    }),
-  password: zod
-    .string({
-      required_error: 'Введіть пароль',
-    })
-    .min(4, 'Закороткий пароль'),
-});
-
-type LoginSchemaType = zod.infer<typeof loginSchema>;
+import { LoginService } from '../../../common/api';
+import { LoginSchemaType } from './types';
+import { loginSchema } from './schemas';
 
 const LoginModal = () => {
   const {
@@ -38,9 +22,9 @@ const LoginModal = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const handleLoginSubmit = useCallback(async (data: LoginSchemaType): Promise<void> => {
-    await ApiService.login(data);
-  }, []);
+  const handleLoginSubmit = async (data: LoginSchemaType): Promise<void> => {
+    await LoginService.login(data);
+  };
 
   return (
     <>

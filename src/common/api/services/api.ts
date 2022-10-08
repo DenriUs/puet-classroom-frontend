@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
-import { defaultConfig, JWT_KEY } from './constants';
-import { APIResponse } from './types';
+import axios, { AxiosRequestHeaders } from 'axios';
+import { defaultConfig } from '../constants';
+import { APIResponse } from '../types';
 
 enum Methods {
   GET = 'GET',
@@ -9,9 +9,7 @@ enum Methods {
   DELETE = 'DELETE',
 }
 
-const localStorage = window.localStorage;
-
-export abstract class ApiService {
+export default abstract class ApiService {
   private static axiosInstance = axios.create({ ...defaultConfig });
 
   public static async makeRequest<T = any>(
@@ -60,13 +58,4 @@ export abstract class ApiService {
   ): Promise<APIResponse<T>> {
     return ApiService.makeRequest<T>(Methods.DELETE, url, data, headers);
   }
-
-  public static async login(data: any): Promise<void> {
-    const response = await ApiService.makePostRequest('/auth/login', data);
-    updateStorageAuthToken(response.data?.accessToken || '');
-  }
 }
-
-export const updateStorageAuthToken = (authToken: string): void => {
-  localStorage.setItem(JWT_KEY, authToken);
-};
