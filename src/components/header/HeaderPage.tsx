@@ -8,19 +8,16 @@ const { Header } = Layout;
 const HeaderPage = () => {
   return (
     <Header className="header">
-      <div className="wrapper">
-        <div className="wrapper__name">
+      <div className="header-page">
+        <div className="header-page__name-container">
           <span>Ласкаво просимо, Денис</span>
         </div>
-        <div className="items">
-          <div className="items__image">
+        <div className="header-page__items-container">
+          <div className="image-container">
             <img src={profileIcon} alt="icon" />
           </div>
-          <div className="items__name">
+          <div className="name-container">
             <span>Денис Тацій</span>
-          </div>
-          <div className="items__icon">
-            <CaretDownOutlined />
           </div>
         </div>
       </div>

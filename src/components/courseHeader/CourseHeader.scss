@@ -1,6 +1,6 @@
 @import '/src/global/sass/abstracts/variables/colors';
 
-.box-course {
+.course-header {
   background: $color__background-header_course;
   color: #ffffff;
   height: 342px;
@@ -11,13 +11,13 @@
   align-items: center;
   padding-left: 48px;
 
-  &__name {
+  &__name-container {
     font-weight: 700;
     font-size: max(3.84vw, 30px);
     line-height: 87px;
   }
 
-  &__author {
+  &__author-container {
     .image-author {
       width: 100%;
       max-width: 60px;
@@ -38,31 +38,44 @@
     }
   }
 
-  &__design {
+  &__design-container {
     display: grid;
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: span 3;
     justify-items: center;
     align-items: center;
-    .image {
-      width: 100%;
-      max-width: 342px;
-      height: 100%;
-      max-height: 322px;
-    }
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 342px;
+    height: 100%;
+    max-height: 322px;
+  }
+
+  &__button-connect {
+    background-color: #e34c33;
+    width: 170px;
+    height: 45px;
+    border: 0.56px solid #e34c33;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 17px;
+    color: #ffffff;
+    font-weight: 700;
   }
 }
 
-.button-connect {
-  background-color: #e34c33;
-  width: 170px;
-  height: 45px;
-  border: 0.56px solid #e34c33;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: 17px;
-  color: #ffffff;
-  font-weight: 700;
+@media (max-width: 1451px) {
+  .course-header__author-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .name {
+    padding-left: 0px !important;
+    padding-top: 10px;
+  }
 }
 
 .ant-dropdown-menu {
@@ -79,16 +92,4 @@
 .ant-dropdown-menu-title-content {
   font-weight: 400;
   font-size: 15px;
-}
-
-@media (max-width: 1451px) {
-  .box-course__author {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-  .name {
-    padding-left: 0px !important;
-    padding-top: 10px;
-  }
 }
