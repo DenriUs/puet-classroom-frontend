@@ -1,3 +1,5 @@
+@import '/src/global/sass/abstracts/variables/colors';
+
 .login-modal {
   position: fixed;
   display: grid;
@@ -24,7 +26,7 @@
     border-radius: 30px;
     border-top-right-radius: 20% 80%;
     border-bottom-right-radius: 20% 80%;
-    background: #0c4267 100%;
+    background: $secondary-color 100%;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
   }
 
@@ -70,22 +72,6 @@
     align-items: flex-start;
   }
 
-  &__email-input {
-    width: 100%;
-    border-radius: 25px !important;
-  }
-
-  &__password-input {
-    width: 100%;
-    height: 45px;
-    border-radius: 25px !important;
-
-    .ant-input {
-      bottom: 5px;
-      background: transparent;
-    }
-  }
-
   &__close-button-container {
     position: absolute;
     top: 5px;
@@ -97,53 +83,7 @@
 
 .ant-btn.login-modal__submit-button {
   width: 55%;
-  height: 45px;
-  align-self: center;
-  font-size: 17px;
-  font-weight: bold;
   margin-bottom: 20px;
-  text-transform: capitalize;
-  color: #ffffff;
-  background-color: #e4553a;
-  border-color: #e4553a;
-  border-radius: 50px;
-  box-shadow: none;
-
-  &:hover {
-    background-color: #f07961;
-    border-color: #f07961;
-    color: #ffffff;
-  }
-
-  &:focus {
-    background-color: #f07961;
-    border-color: #f07961;
-    color: #ffffff;
-  }
-
-  &:active {
-    background-color: #cc4c33;
-    border-color: #cc4c33;
-    color: #ffffff;
-  }
-}
-
-.ant-btn.login-modal__close-button {
-  background-color: #ffffff;
-  color: #f07961;
-  border-color: #f07961;
-
-  &:hover {
-    background-color: #ffffff;
-    color: #f07961;
-    border-color: #f07961;
-  }
-
-  &:focus {
-    background-color: #ffffff;
-    color: #f07961;
-    border-color: #f07961;
-  }
 }
 
 .modal-overlay {
@@ -155,7 +95,7 @@
   z-index: 1000;
 
   &_login {
-    background: linear-gradient(180deg, #e34931 0%, #5b81ae 100%);
+    background: linear-gradient(180deg, $primary-color 0%, $secondary-color 100%);
     filter: blur(350px);
   }
 }

@@ -1,6 +1,5 @@
 import { Input, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, CloseOutlined } from '@ant-design/icons';
-import zod from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -49,8 +48,7 @@ const LoginModal = () => {
                     name='email'
                     render={({ field: { onBlur, onChange, value } }) => (
                       <Input
-                        className='login-modal__email-input email-input'
-                        placeholder='email@example.com'
+                        placeholder='email@gmail.com'
                         onBlur={onBlur}
                         onChange={onChange}
                         value={value}
@@ -69,7 +67,6 @@ const LoginModal = () => {
                     name='password'
                     render={({ field: { onBlur, onChange, value } }) => (
                       <Input.Password
-                        className='login-modal__password-input password-input'
                         placeholder='Введіть пароль'
                         iconRender={(visible: boolean) =>
                           visible ? (

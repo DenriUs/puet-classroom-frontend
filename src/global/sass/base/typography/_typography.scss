@@ -10,21 +10,6 @@ textarea {
   line-height: $font__line-height-body;
 }
 
-.ant-input,
-.ant-input-password,
-.ant-input-affix-wrapper .ant-input-affix-wrapper-focused {
-  height: 45px;
-  font-size: 15px;
-
-  &:hover {
-    border-color: #0c4267 !important;
-  }
-
-  &:focus {
-    border-color: #0c4267 !important;
-  }
-}
-
 .form-error-label {
   font-size: 12px;
   color: #ff0101;
