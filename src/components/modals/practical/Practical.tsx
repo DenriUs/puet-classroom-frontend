@@ -29,14 +29,7 @@ const PracticalModal = (props: IProps) => {
   };
 
   return (
-    <Modal
-      centered
-      open={onStart}
-      onCancel={handleClose}
-      footer={null}
-      className="modal-practical"
-      width={1000}
-    >
+    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={600}>
       <div className="practical-modal-title">
         Практична робота 1. Базові поняття інформаційних мереж
       </div>
