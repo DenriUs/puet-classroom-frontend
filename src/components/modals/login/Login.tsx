@@ -100,7 +100,7 @@ const LoginModal = () => {
             shape='circle'
             size='large'
             icon={<CloseOutlined />}
-          ></Button>
+          />
         </div>
       </div>
       <div className='modal-overlay modal-overlay_login'></div>
