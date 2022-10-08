@@ -1,11 +1,12 @@
-import LayoutPage from './pages/Layout/Layout';
+import LoginModal from './components/modals/login';
 
+import 'antd/dist/antd.less';
 import './global/sass/style.scss';
 
 function App() {
   return (
-    <div className="App">
-      <LayoutPage />
+    <div className='App'>
+      <LoginModal />
     </div>
   );
 }
