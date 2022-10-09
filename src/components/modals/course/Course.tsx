@@ -1,9 +1,9 @@
+import { FileImageOutlined } from '@ant-design/icons';
 import { Button, Input, message, Modal, Select } from 'antd';
 import Dragger from 'antd/lib/upload/Dragger';
-import { FileImageOutlined, CheckOutlined } from '@ant-design/icons';
+import TextArea from 'antd/lib/input/TextArea';
 
 import './Course.scss';
-import TextArea from 'antd/lib/input/TextArea';
 
 const { Option } = Select;
 
@@ -33,36 +33,36 @@ const CourseModal = (props: IProps) => {
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={600}>
-      <div className="course-modal">
-        <div className="course-modal__title-container">Додати курс</div>
-        <div className="course-modal__input-container">
+      <div className='course-modal'>
+        <div className='course-modal__title-container'>Додати курс</div>
+        <div className='course-modal__input-container'>
           <div>Назва курсу</div>
-          <Input className="course-modal__input input" />
+          <Input className='course-modal__input input' />
         </div>
-        <div className="course-modal__description-container">
+        <div className='course-modal__description-container'>
           <TextArea
-            className="course-modal__area"
+            className='course-modal__area'
             autoSize={{ minRows: 4, maxRows: 4 }}
-            placeholder="Опис курсу"
+            placeholder='Опис курсу'
             maxLength={1000}
           />
         </div>
-        <div className="course-modal__select-container">
-          <Select className="course-modal__select" placeholder="Існуючий курс" allowClear>
+        <div className='course-modal__select-container'>
+          <Select className='course-modal__select' placeholder='Існуючий курс' allowClear>
             <Option>Хімія</Option>
           </Select>
         </div>
-        <div className="course-modal__upload-container">
-          <Dragger name="Fiel" multiple={true} maxCount={1} onChange={onChange} onDrop={onDrop}>
-            <p className="ant-upload-drag-icon">
+        <div className='course-modal__upload-container'>
+          <Dragger name='Fiel' multiple maxCount={1} onChange={onChange} onDrop={onDrop}>
+            <p className='ant-upload-drag-icon'>
               <FileImageOutlined />
             </p>
-            <p className="ant-upload-text">Оформлення курсу</p>
-            <p className="ant-upload-hint">Click or drag image to this area to upload</p>
+            <p className='ant-upload-text'>Оформлення курсу</p>
+            <p className='ant-upload-hint'>Click or drag image to this area to upload</p>
           </Dragger>
         </div>
-        <div className="course-modal__button-container">
-          <Button shape="round" onClick={handleClose} className="course-modal__button button">
+        <div className='course-modal__button-container'>
+          <Button shape='round' onClick={handleClose} className='course-modal__button button'>
             Створити
           </Button>
         </div>

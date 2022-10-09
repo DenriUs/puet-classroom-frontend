@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios';
+import { showErrorMessage } from '../../helpers';
 
 import { defaultConfig } from '../constants';
 import { APIResponse } from '../types';
@@ -23,7 +24,9 @@ export default abstract class ApiService {
       const response = await ApiService.axiosInstance.request({ method, url, data, headers });
       return { data: response.data };
     } catch (error: any) {
-      console.log(error);
+      const errorMessage = error.response?.data?.message || error.response?.data || error.message;
+      const message = Array.isArray(errorMessage) ? errorMessage[0] : errorMessage;
+      showErrorMessage('Request error', message);
       return { error: error.message };
     }
   }

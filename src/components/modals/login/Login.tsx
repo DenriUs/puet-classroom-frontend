@@ -26,7 +26,7 @@ const LoginModal = () => {
 
   const handleLoginSubmit = async (data: LoginSchemaType): Promise<void> => {
     await LoginService.login(data);
-    navigate('main');
+    navigate('/main/home');
   };
 
   return (
@@ -34,7 +34,7 @@ const LoginModal = () => {
       <div className='login-modal'>
         <div className='login-modal__left-side'>
           <div className='login-modal__left-side-content'>
-            <img className='login-modal__logo' src={puetLogo} />
+            <img alt='logo' className='login-modal__logo' src={puetLogo} />
             <p className='login-modal__logo-name'>Classroom</p>
           </div>
         </div>
@@ -104,7 +104,7 @@ const LoginModal = () => {
           />
         </div>
       </div>
-      <div className='modal-overlay modal-overlay_login'></div>
+      <div className='modal-overlay modal-overlay_login' />
     </>
   );
 };

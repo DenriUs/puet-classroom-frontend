@@ -30,25 +30,25 @@ const PracticalModal = (props: IProps) => {
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={600}>
-      <div className="practical-modal-title">
+      <div className='practical-modal-title'>
         Практична робота 1. Базові поняття інформаційних мереж
       </div>
-      <Dragger name="Fiel" multiple={true} maxCount={1} onChange={onChange} onDrop={onDrop}>
-        <p className="ant-upload-drag-icon">
+      <Dragger name='Fiel' multiple maxCount={1} onChange={onChange} onDrop={onDrop}>
+        <p className='ant-upload-drag-icon'>
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">
+        <p className='ant-upload-text'>Click or drag file to this area to upload</p>
+        <p className='ant-upload-hint'>
           Support for a single or bulk upload. Strictly prohibit from uploading company data or
           other band files
         </p>
       </Dragger>
-      <div className="practical-modal-button">
+      <div className='practical-modal-button'>
         <Button
-          shape="round"
-          icon={<CheckOutlined className="icon" />}
+          shape='round'
+          icon={<CheckOutlined className='icon' />}
           onClick={handleClose}
-          className="button-connect"
+          className='button-connect'
         >
           Здати роботу
         </Button>
