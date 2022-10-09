@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios';
+
 import { defaultConfig } from '../constants';
 import { APIResponse } from '../types';
 
@@ -10,7 +11,7 @@ enum Methods {
 }
 
 export default abstract class ApiService {
-  private static axiosInstance = axios.create({ ...defaultConfig });
+  private static axiosInstance = axios.create(defaultConfig);
 
   public static async makeRequest<T = any>(
     method: Methods,

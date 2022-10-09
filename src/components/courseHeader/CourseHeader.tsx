@@ -26,28 +26,29 @@ const menu = (
 
 const CourseHeader = (props: Props) => {
   return (
-    <div className="course-header">
-      <div className="course-header__name-container">
+    <div className='course-header'>
+      <div className='course-header__name-container'>
         <span>Хімія</span>
       </div>
-      <div className="course-header__author-container">
-        <img src={profileIcon} className="image-author" alt="name" />
-        <span className="name">
+      <div className='course-header__author-container'>
+        <img src={profileIcon} className='image-author' alt='name' />
+        <span className='name'>
           Ємець Олег Олексійович
-          <Dropdown overlay={menu} placement="bottomLeft" className="drop-down">
-            <CaretDownOutlined className="icon" />
+          <Dropdown overlay={menu} placement='bottomLeft' className='drop-down'>
+            <CaretDownOutlined className='icon' />
           </Dropdown>
         </span>
       </div>
       <Button
-        shape="round"
-        icon={<PlayCircleOutlined className="icon" />}
-        className="course-header__button-connect"
+        type='primary'
+        // shape='round'
+        icon={<PlayCircleOutlined className='icon' />}
+        // className="course-header__button-connect"
       >
         Приєднатися
       </Button>
-      <div className="course-header__design-container">
-        <img src={diplomaImg} alt="name" className="course-header__image" />
+      <div className='course-header__design-container'>
+        <img src={diplomaImg} alt='name' className='course-header__image' />
       </div>
     </div>
   );
