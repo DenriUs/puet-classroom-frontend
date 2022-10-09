@@ -1,7 +1,6 @@
 import { Layout } from 'antd';
 import { PropsWithChildren } from 'react';
 
-import 'antd/dist/antd.css';
 import './Layout.scss';
 
 import Sidebar from '../../components/sidebar/Sidebar';

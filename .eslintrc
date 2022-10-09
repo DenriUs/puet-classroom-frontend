@@ -1,0 +1,50 @@
+{
+  "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended", "prettier"],
+  "plugins": ["jsx-a11y", "prettier", "only-warn", "@typescript-eslint"],
+  "ignorePatterns": ["/src/vendors/**/*.js", "node_modules/", "/src/**/*.test.js", "/cypress/"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "no-useless-catch": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "import/no-named-as-default": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/require-default-props": "off",
+    "no-restricted-syntax": "off",
+    "no-param-reassign": "off",
+    "no-continue": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-empty": "off",
+    "no-shadow": "off",
+    "camelcase": "off",
+    "consistent-return": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}

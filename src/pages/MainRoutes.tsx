@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router';
 
 import { getFromLocalStorage } from '../common/helpers';
-import CoursePage from './Courses/Course';
+import Course from './Course/Course';
+import Home from './Home/Home';
 import LayoutPage from './Layout/Layout';
 
 const MainRoutes = () => {
@@ -15,7 +16,8 @@ const MainRoutes = () => {
     <LayoutPage>
       <Routes>
         <Route index element={<Navigate to='/main/home' />} />
-        <Route path='course/:id' element={<CoursePage />} />
+        <Route path='home' element={<Home />} />
+        <Route path='course/:id' element={<Course />} />
         <Route path='*' element={<Navigate to='/main/home' />} />
       </Routes>
     </LayoutPage>

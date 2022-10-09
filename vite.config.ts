@@ -12,6 +12,7 @@ export default defineConfig({
         modifyVars: {
           'primary-color': '#e4553a',
           'input-hover-border-color': '#0c4267',
+          'input-icon-hover-color': '#0c4267',
         },
       },
     },
