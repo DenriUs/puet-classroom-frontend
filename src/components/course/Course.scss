@@ -1,3 +1,5 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
 .course {
   margin: 47px;
 
@@ -9,28 +11,15 @@
   }
 
   &__title {
-    font-weight: 700;
-    font-size: max(2.5vw, 25px);
-    line-height: 44px;
-    color: #000000;
+    @extend %main-title;
+    padding-bottom: 30px;
     margin-top: 50px;
   }
 
   &__button {
-    background-color: #e34c33;
+    @extend %button-title;
     height: 45px;
-    border: 0.56px solid #e34c33;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size: 17px;
-    color: #ffffff;
-    font-weight: 700;
     margin-top: 10px;
-  }
-
-  .ant-btn:hover,
-  .ant-btn:focus {
-    color: #e34c33;
-    border-color: #e34c33;
   }
 }
 
@@ -42,16 +31,13 @@
   justify-items: center;
 
   &__container {
+    @extend %card;
     display: grid;
     grid-template-columns: minmax(200px, 200px) minmax(100px, 150px);
     grid-template-rows: 2fr 3.5fr;
-    background: #ffffff;
-    border-radius: 10px;
-    filter: drop-shadow(0px 5px 82px rgba(0, 0, 0, 0.25));
 
     .title {
-      font-weight: 700;
-      font-size: 20px;
+      @extend %card-title;
       padding-left: 22px;
       padding-top: 18px;
       padding-bottom: 11px;
@@ -73,15 +59,9 @@
       justify-items: start;
       align-items: end;
       padding-left: 22px;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 27px;
+      @extend %sub-title;
 
       &__teacher {
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 27px;
-        color: #696868;
         padding-top: 30px;
       }
 
@@ -103,8 +83,7 @@
 
       img {
         position: absolute;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 30px;
+        @extend %image-avatar;
       }
     }
   }

@@ -1,7 +1,5 @@
 import { Tabs } from 'antd';
 
-import './CourseMain.scss';
-
 import CardLecture from '../cardLecture/CardLecture';
 import PracticalLecture from '../practicalLecture/PracticalLecture';
 

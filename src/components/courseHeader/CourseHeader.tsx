@@ -46,9 +46,9 @@ const CourseHeader = (props: Props) => (
     </div>
     <Button
       type='primary'
-      // shape='round'
+      shape='round'
       icon={<PlayCircleOutlined className='icon' />}
-      // className="course-header__button-connect"
+      className='course-header__button-connect'
     >
       Приєднатися
     </Button>

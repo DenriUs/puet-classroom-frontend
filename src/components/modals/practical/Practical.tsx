@@ -46,6 +46,7 @@ const PracticalModal = (props: IProps) => {
       <div className='practical-modal-button'>
         <Button
           shape='round'
+          type='primary'
           icon={<CheckOutlined className='icon' />}
           onClick={handleClose}
           className='button-connect'

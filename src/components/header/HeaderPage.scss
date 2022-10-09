@@ -1,7 +1,10 @@
+@import '/src/global/sass/abstracts/variables/colors';
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
 .header {
-  background: rgba(255, 255, 255, 0);
+  background: $color__background-header_home;
   height: 120px;
-  border-bottom: 0.5px solid rgb(231, 228, 228);
+  border-bottom: 0.5px solid $color__background-header_line;
   align-items: center;
   font-size: 14px;
 
@@ -16,9 +19,7 @@
     &__name-container {
       display: grid;
       align-items: center;
-      font-size: max(2.5vw, 25px);
-      font-weight: 700;
-      line-height: 27px;
+      @extend %main-title;
     }
 
     &__items-container {
@@ -27,15 +28,11 @@
       align-items: center;
 
       .image-container {
-        max-width: 60px;
-        max-height: 60px;
+        @extend %image-avatar;
       }
 
       .name-container {
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 27px;
-        color: rgba(0, 0, 0, 0.76);
+        @extend %sub-title;
         padding-left: 30px;
         padding-right: 11px;
       }

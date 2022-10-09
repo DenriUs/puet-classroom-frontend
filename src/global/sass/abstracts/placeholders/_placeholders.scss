@@ -1,0 +1,53 @@
+%main-title {
+  font-size: max(2.5vw, 25px);
+  font-weight: 700;
+  line-height: 27px;
+  color: #000000;
+}
+
+%sub-title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  color: #000000;
+}
+
+%image-avatar {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  max-width: 60px;
+  max-height: 60px;
+}
+
+%card {
+  background: #ffffff;
+  border-radius: 10px;
+  filter: drop-shadow(0px 5px 82px rgba(0, 0, 0, 0.25));
+}
+
+%card-title {
+  font-weight: 700;
+  font-size: 20px;
+  color: #000000;
+}
+
+%button-title {
+  font-size: 17px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+%modal-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 49px;
+  color: #000000;
+}
+
+%icon-file {
+  margin-left: 10px;
+  margin-right: 32px;
+  font-size: 30px;
+  color: #e34c33;
+}

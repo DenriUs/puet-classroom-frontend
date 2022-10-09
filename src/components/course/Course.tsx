@@ -21,6 +21,7 @@ const Course = (props: Props) => {
         <p className='course__title'>Мої курси</p>
         <Button
           shape='round'
+          type='primary'
           icon={<PlusCircleFilled className='icon' />}
           className='course__button'
           onClick={handleShow}
