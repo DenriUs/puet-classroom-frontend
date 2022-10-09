@@ -2,6 +2,7 @@ import { Input, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, CloseOutlined } from '@ant-design/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 
 import puetLogo from '../../../assets/puetLogo.png';
 
@@ -11,6 +12,8 @@ import { LoginSchemaType } from './types';
 import { loginSchema } from './schemas';
 
 const LoginModal = () => {
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -23,6 +26,7 @@ const LoginModal = () => {
 
   const handleLoginSubmit = async (data: LoginSchemaType): Promise<void> => {
     await LoginService.login(data);
+    navigate('main');
   };
 
   return (

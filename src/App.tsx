@@ -1,13 +1,20 @@
-import LoginModal from './components/modals/login';
+import { Routes, Route, Navigate } from 'react-router';
 
-import 'antd/dist/antd.less';
-import './global/sass/style.scss';
+import { getFromLocalStorage } from './common/helpers';
+import LoginModal from './components/modals/login';
+import MainRoutes from './pages/MainRoutes';
 
 function App() {
   return (
-    <div className='App'>
-      <LoginModal />
-    </div>
+    <Routes>
+      <Route
+        index
+        element={getFromLocalStorage('token') ? <Navigate to='/main' /> : <Navigate to='/auth' />}
+      />
+      <Route path='/auth' element={<LoginModal />} />
+      <Route path='/main/*' element={<MainRoutes />} />
+      <Route path='*' element={<Navigate to='/' />} />
+    </Routes>
   );
 }
 
