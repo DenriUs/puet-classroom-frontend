@@ -1,14 +1,15 @@
-.box {
-  margin: 47px 47px 0;
-  &__name {
-    font-weight: 700;
-    font-size: max(2.5vw, 25px);
-    line-height: 44px;
-    color: #000000;
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.schedule {
+  margin: 47px;
+
+  &__title {
+    @extend %main-title;
+    padding-bottom: 30px;
   }
 }
 
-.containers {
+.schedule-containers {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 47px;
@@ -16,56 +17,45 @@
   justify-items: center;
 
   &__container {
+    @extend %card;
     display: grid;
     grid-template-columns: minmax(200px, 200px) minmax(100px, 150px);
     grid-template-rows: 2fr 3fr;
-    background: #ffffff;
-    border-radius: 10px;
-    filter: drop-shadow(0px 5px 82px rgba(0, 0, 0, 0.25));
 
     .title {
-      font-weight: 700;
-      font-size: 20px;
+      @extend %card-title;
       padding-left: 22px;
       padding-top: 18px;
       padding-bottom: 11px;
     }
 
     .couple {
+      @extend %card-title;
       display: grid;
       justify-items: center;
       align-items: center;
-      font-weight: 700;
-      font-size: 20px;
     }
 
     .decription {
+      @extend %sub-title;
       display: grid;
       align-items: center;
       padding-left: 22px;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 27px;
 
       &__online {
         padding-bottom: 19px;
       }
     }
 
-    .button-group {
+    .button-container {
       display: grid;
       justify-items: center;
       align-items: center;
       padding-bottom: 10px;
 
-      .button {
-        background: #e34c33;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 30px;
+      .schedule-button {
         width: 50px;
         height: 50px;
-        border: 0.56px solid #e34c33;
-
         &__icon {
           color: white;
           font-size: 21px;

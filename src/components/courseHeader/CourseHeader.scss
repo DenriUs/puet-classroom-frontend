@@ -1,8 +1,8 @@
 @import '/src/global/sass/abstracts/variables/colors';
+@import '/src/global/sass/abstracts/placeholders/placeholders';
 
 .course-header {
   background: $color__background-header_course;
-  color: #ffffff;
   height: 342px;
   width: 100%;
   display: grid;
@@ -12,22 +12,20 @@
   padding-left: 48px;
 
   &__name-container {
-    font-weight: 700;
+    @extend %main-title;
     font-size: max(3.84vw, 30px);
-    line-height: 87px;
+    color: #ffffff;
   }
 
   &__author-container {
     .image-author {
-      width: 100%;
-      max-width: 60px;
-      height: 100%;
-      max-height: 60px;
+      @extend %image-avatar;
     }
 
     .name {
       font-weight: 500;
       font-size: max(1vw, 20px);
+      color: #ffffff;
       line-height: 27px;
       padding-left: 21px;
       padding-right: 10px;
@@ -55,14 +53,9 @@
   }
 
   &__button-connect {
-    background-color: #e34c33;
     width: 170px;
     height: 45px;
-    border: 0.56px solid #e34c33;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size: 17px;
-    color: #ffffff;
-    font-weight: 700;
+    @extend %button-title;
   }
 }
 
@@ -76,20 +69,4 @@
     padding-left: 0px !important;
     padding-top: 10px;
   }
-}
-
-.ant-dropdown-menu {
-  background: #ffffff;
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 15px;
-}
-
-.ant-dropdown-menu-item-icon {
-  font-size: 24px;
-  color: #254664;
-}
-
-.ant-dropdown-menu-title-content {
-  font-weight: 400;
-  font-size: 15px;
 }

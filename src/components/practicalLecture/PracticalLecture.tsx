@@ -28,7 +28,7 @@ const PracticalLecture = (props: Props) => {
         </div>
         <div className='mark'>Оцінка 0,00 / 4,00</div>
         <div>
-          <Button shape='round' className='button-pass' onClick={handleShow}>
+          <Button shape='round' type='primary' className='button-pass' onClick={handleShow}>
             Здати роботу
           </Button>
           <Practical onStart={show} handleClose={handleClose} />

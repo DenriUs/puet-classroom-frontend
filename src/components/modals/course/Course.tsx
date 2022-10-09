@@ -32,7 +32,7 @@ const CourseModal = (props: IProps) => {
   };
 
   return (
-    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={600}>
+    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={500}>
       <div className='course-modal'>
         <div className='course-modal__title-container'>Додати курс</div>
         <div className='course-modal__input-container'>
@@ -62,7 +62,12 @@ const CourseModal = (props: IProps) => {
           </Dragger>
         </div>
         <div className='course-modal__button-container'>
-          <Button shape='round' onClick={handleClose} className='course-modal__button button'>
+          <Button
+            shape='round'
+            onClick={handleClose}
+            type='primary'
+            className='course-modal__button button'
+          >
             Створити
           </Button>
         </div>
