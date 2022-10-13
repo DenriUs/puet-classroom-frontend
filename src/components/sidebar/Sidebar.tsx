@@ -1,5 +1,6 @@
 import {
-  MenuOutlined,
+  HomeFilled,
+  BookFilled,
   FileTextFilled,
   CloudFilled,
   StarFilled,
@@ -25,32 +26,50 @@ const Sidebar = () => (
       <ul className='sidebar__center__nav-links'>
         <li>
           <a href='*'>
-            <MenuOutlined className='sidebar__icon' />
-            <span>Курси</span>
+            <div className='icon-container'>
+              <HomeFilled className='sidebar__icon' />
+            </div>
+            <span className='sidebar-title'>Головна</span>
           </a>
         </li>
         <li>
           <a href='*'>
-            <FileTextFilled className='sidebar__icon' />
-            <span>Журанал оцінок</span>
+            <div className='icon-container'>
+              <BookFilled className='sidebar__icon' />
+            </div>
+            <span className='sidebar-title'>Курси</span>
           </a>
         </li>
         <li>
           <a href='*'>
-            <CloudFilled className='sidebar__icon' />
-            <span>Архів</span>
+            <div className='icon-container'>
+              <FileTextFilled className='sidebar__icon' />
+            </div>
+            <span className='sidebar-title'>Журанал оцінок</span>
           </a>
         </li>
         <li>
           <a href='*'>
-            <StarFilled className='sidebar__icon' />
-            <span>Мої файли</span>
+            <div className='icon-container'>
+              <CloudFilled className='sidebar__icon' />
+            </div>
+            <span className='sidebar-title'>Архів</span>
           </a>
         </li>
         <li>
           <a href='*'>
-            <SettingFilled className='sidebar__icon' />
-            <span>Налаштування</span>
+            <div className='icon-container'>
+              <StarFilled className='sidebar__icon' />
+            </div>
+            <span className='sidebar-title'>Мої файли</span>
+          </a>
+        </li>
+        <li>
+          <a href='*'>
+            <div className='icon-container'>
+              <SettingFilled className='sidebar__icon' />
+            </div>
+            <span className='sidebar-title'>Налаштування</span>
           </a>
         </li>
       </ul>

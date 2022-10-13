@@ -2,7 +2,7 @@
 @import '/src/global/sass/abstracts/variables/typography';
 
 .sidebar {
-  background: $color__background-sidebar;
+  background: #ffffff;
   height: 100vh;
   position: sticky;
   left: 0;
@@ -32,7 +32,7 @@
     font-size: 20px;
     line-height: 30px;
     text-align: center;
-    color: #ffffff;
+    color: #254664;
     font-family: $font__logo;
   }
 
@@ -58,24 +58,53 @@
       padding-left: 29px;
     }
 
-    span {
-      text-align: left;
-      font-style: normal;
-      font-weight: 800;
-      font-size: 18px;
-      line-height: 22px;
+    .icon-container {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      background: rgba(37, 70, 100, 0.75);
+      box-shadow: 0px 10px 23px rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+      width: 42.11px;
+      height: 40px;
     }
 
-    li a:hover {
+    .sidebar-title {
+      padding-left: 15px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 22px;
+      color: #959595;
+    }
+
+    li:hover {
       border: 0.56px solid #ffffff;
       border-radius: 10px;
+
+      .icon-container {
+        background: #254664;
+        box-shadow: 0px 10px 23px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+      }
+
+      .sidebar-title {
+        color: #000000;
+        font-weight: 800;
+      }
+
+      .sidebar__icon {
+        color: #ffffff;
+      }
     }
   }
 
   &__icon {
+    color: #ffffff;
+    font-size: 22px;
     min-width: 30px;
     min-height: 30px;
-    padding-top: 6px;
+    padding-top: 4px;
   }
 }
 
