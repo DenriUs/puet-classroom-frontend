@@ -14,7 +14,7 @@ import puetLogo from '../../assets/puetLogo.png';
 const { Sider } = Layout;
 
 const Sidebar = () => (
-  <Sider breakpoint='md' collapsedWidth='0' className='sidebar' width={340}>
+  <Sider breakpoint='md' collapsedWidth='0' className='sidebar' width={320}>
     <div className='sidebar__top'>
       <div className='sidebar__logo-image'>
         <img src={puetLogo} alt='logo' />

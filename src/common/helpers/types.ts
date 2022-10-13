@@ -1,1 +1,1 @@
-export type LocalStorageData = 'token' | 'photoUrl' | 'username';
+export type LocalStorageData = 'token';

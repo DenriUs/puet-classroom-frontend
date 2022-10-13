@@ -3,17 +3,14 @@
 
 .header {
   background: $color__background-header_home;
-  height: 120px;
+  height: 80px;
   border-bottom: 0.5px solid $color__background-header_line;
-  align-items: center;
   font-size: 14px;
 
   .header-page {
-    width: 100%;
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
-    align-items: center;
     padding: 20px 0 20px 0;
 
     &__name-container {
@@ -26,15 +23,14 @@
       display: grid;
       grid-auto-flow: column;
       align-items: center;
+      gap: 20px;
 
-      .image-container {
-        @extend %image-avatar;
+      .profile-icon {
+        width: 45px;
       }
 
       .name-container {
         @extend %sub-title;
-        padding-left: 30px;
-        padding-right: 11px;
       }
     }
   }
