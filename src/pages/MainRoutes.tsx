@@ -17,7 +17,7 @@ const MainRoutes = () => {
       <Routes>
         <Route index element={<Navigate to='/main/home' />} />
         <Route path='home' element={<Home />} />
-        <Route path='course/:id' element={<Course />} />
+        <Route path='course' element={<Course />} />
         <Route path='*' element={<Navigate to='/main/home' />} />
       </Routes>
     </LayoutPage>

@@ -54,6 +54,10 @@
   color: gray;
 }
 
+.ant-layout {
+  background-color: #ffffff;
+}
+
 // select
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   border: 1px solid;
@@ -105,4 +109,22 @@
 
 .ant-tabs-tab + .ant-tabs-tab {
   margin: 0 0 0 93px;
+}
+
+// road
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
+  background: #1890ff;
+}
+
+.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon .ant-steps-icon-dot {
+  background: #1890ff;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
+  background: #1890ff;
+}
+
+//progress
+.ant-progress-circle .ant-progress-text {
+  color: rgba(0, 0, 0, 0.47);
 }

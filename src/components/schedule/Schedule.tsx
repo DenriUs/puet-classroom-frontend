@@ -1,88 +1,23 @@
-import { Button } from 'antd';
-import { VideoCameraFilled } from '@ant-design/icons';
+import { Steps } from 'antd';
 import './Schedule.scss';
+
+const { Step } = Steps;
 
 interface Props {}
 
 const Schedule = (props: Props) => (
   <div className='schedule'>
-    <p className='schedule__title'>Розклад на сьогодні</p>
-    <div className='schedule-containers'>
-      <div className='schedule-containers__container'>
-        <span className='title'>Хімія</span>
-        <div className='couple'>
-          <span>2 пара</span>
-        </div>
-        <div className='decription'>
-          <span className='decription__time'>09:30-10:50</span>
-          <span className='decription__online'>Дистанційно</span>
-        </div>
-        <div className='button-container'>
-          <Button shape='circle' type='primary' className='schedule-button'>
-            <VideoCameraFilled className='button__icon' />
-          </Button>
-        </div>
-      </div>
-      <div className='schedule-containers__container'>
-        <span className='title'>Хімія</span>
-        <div className='couple'>
-          <span>2 пара</span>
-        </div>
-        <div className='decription'>
-          <span className='decription__time'>09:30-10:50</span>
-          <span className='decription__online'>Дистанційно</span>
-        </div>
-        <div className='button-container'>
-          <Button shape='circle' type='primary' className='schedule-button'>
-            <VideoCameraFilled className='button__icon' />
-          </Button>
-        </div>
-      </div>
-      <div className='schedule-containers__container'>
-        <span className='title'>Хімія</span>
-        <div className='couple'>
-          <span>2 пара</span>
-        </div>
-        <div className='decription'>
-          <span className='decription__time'>09:30-10:50</span>
-          <span className='decription__online'>Дистанційно</span>
-        </div>
-        <div className='button-container'>
-          <Button shape='circle' type='primary' className='schedule-button'>
-            <VideoCameraFilled className='button__icon' />
-          </Button>
-        </div>
-      </div>
-      <div className='schedule-containers__container'>
-        <span className='title'>Хімія</span>
-        <div className='couple'>
-          <span>2 пара</span>
-        </div>
-        <div className='decription'>
-          <span className='decription__time'>09:30-10:50</span>
-          <span className='decription__online'>Дистанційно</span>
-        </div>
-        <div className='button-container'>
-          <Button shape='circle' type='primary' className='schedule-button'>
-            <VideoCameraFilled className='button__icon' />
-          </Button>
-        </div>
-      </div>
-      <div className='schedule-containers__container'>
-        <span className='title'>Хімія</span>
-        <div className='couple'>
-          <span>2 пара</span>
-        </div>
-        <div className='decription'>
-          <span className='decription__time'>09:30-10:50</span>
-          <span className='decription__online'>Дистанційно</span>
-        </div>
-        <div className='button-container'>
-          <Button shape='circle' type='primary' className='schedule-button'>
-            <VideoCameraFilled className='button__icon' />
-          </Button>
-        </div>
-      </div>
+    <div className='schedule__title'>РОЗКЛАД НА СЬОГОДНІ 11.10.2022</div>
+    <div>
+      <Steps size='small' progressDot current={2} direction='vertical'>
+        <Step title='Бази даних та інформаційні системи' description='8.00 - 9.30' />
+        <Step
+          title='Аналіз даних та прикладні пакети статистичної обробки'
+          description='9.30 - 10.50'
+        />
+        <Step title='Хімія' description='11.00 - 12.20' />
+        <Step title='Фізкультура' description='12.40 - 13.20' />
+      </Steps>
     </div>
   </div>
 );

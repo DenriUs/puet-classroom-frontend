@@ -1,0 +1,49 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.current-activity {
+  @extend %card;
+  margin-right: 40px;
+  margin-top: 25px;
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr minmax(50px, 80px);
+    align-items: center;
+    justify-items: start;
+  }
+
+  &__title {
+    padding: 15px;
+    font-weight: 400;
+    font-size: max(14px, 16px);
+    color: #828282;
+  }
+
+  &__owner {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 0.3fr 1fr;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    padding: 0 15px 15px 15px;
+  }
+
+  &__image {
+    grid-row-start: 1;
+    grid-row-end: span 2;
+
+    img {
+      max-width: 50px;
+      max-height: 50px;
+    }
+  }
+}
+
+@media (max-width: 1260px) {
+  .current-activity {
+    margin-top: 40px;
+    margin-left: 40px;
+  }
+}

@@ -2,7 +2,6 @@ import {
   HomeFilled,
   BookFilled,
   FileTextFilled,
-  CloudFilled,
   StarFilled,
   SettingFilled,
 } from '@ant-design/icons';
@@ -46,14 +45,6 @@ const Sidebar = () => (
               <FileTextFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Журанал оцінок</span>
-          </a>
-        </li>
-        <li>
-          <a href='*'>
-            <div className='icon-container'>
-              <CloudFilled className='sidebar__icon' />
-            </div>
-            <span className='sidebar-title'>Архів</span>
           </a>
         </li>
         <li>
