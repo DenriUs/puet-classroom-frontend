@@ -20,9 +20,6 @@ const HeaderPage = () => {
   return (
     <Header className='header'>
       <div className='header-page'>
-        <div className='header-page__name-container'>
-          <span>Головна сторінка</span>
-        </div>
         <div className='header-page__items-container'>
           <img className='profile-icon' src={profileIcon} alt='icon' />
           <div className='name-container'>

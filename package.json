@@ -10,6 +10,7 @@
     "reinstall-dependencies": "del package-lock.json & echo y|rmdir /s node_modules & npm i"
   },
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@hookform/resolvers": "^2.9.8",

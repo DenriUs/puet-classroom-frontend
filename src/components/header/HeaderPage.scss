@@ -4,20 +4,13 @@
 .header {
   background: $color__background-header_home;
   height: 80px;
-  border-bottom: 0.5px solid $color__background-header_line;
   font-size: 14px;
 
   .header-page {
     display: grid;
     grid-auto-flow: column;
-    justify-content: space-between;
+    justify-content: end;
     padding: 20px 0 20px 0;
-
-    &__name-container {
-      display: grid;
-      align-items: center;
-      @extend %main-title;
-    }
 
     &__items-container {
       display: grid;
