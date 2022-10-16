@@ -1,4 +1,3 @@
-import { Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import hatIcon from '../../global/images/icons/hat.svg';
 import { Progress } from 'antd';

@@ -1,1 +1,54 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
 
+.course-page {
+  display: grid;
+
+  &__name-container {
+    display: grid;
+    align-items: center;
+    margin: 25px 45px 0px 45px;
+    @extend %main-title;
+  }
+
+  &__table-container {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  &__table {
+    width: 80%;
+    padding: 40px 40px 20px 40px;
+    @extend %card;
+  }
+}
+
+.course-name {
+  color: #254664;
+  font-weight: 600;
+  font-size: max(10px, 16px);
+}
+
+.course-name:hover {
+  color: rgba(37, 70, 100, 0.5);
+}
+
+.course-teacher {
+  font-weight: 600;
+  font-size: max(13px, 14px);
+  color: #4f4f4f;
+}
+
+.course-count {
+  font-weight: 400;
+  font-size: max(13px, 14px);
+  color: #4f4f4f;
+}
+
+@media (max-width: 500px) {
+  .course-page__table {
+    overflow-x: scroll;
+  }
+}
