@@ -1,5 +1,3 @@
-import { Button } from 'antd';
-import { VideoCameraFilled } from '@ant-design/icons';
 import './CardStatistics.scss';
 import clock from '../../global/images/icons/clock.svg';
 import finish from '../../global/images/icons/finish.svg';
