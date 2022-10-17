@@ -6,7 +6,7 @@ interface Props {}
 const CardLecture = (props: Props) => (
   <div className='box'>
     <div className='box-card'>
-      <div className='box-card__title-lecture'>Тема 1. Базові поняття інформаційних мереж</div>
+      <div className='box-card__title-lecture'>Лекція 1. Підготовка вхідної інформації</div>
       <div className='box-card__file'>
         <div className='name-file'>Базові поняття інформаційних мереж.pptx</div>
         <div className='icon-file'>
