@@ -2,7 +2,7 @@
 @import '/src/global/sass/abstracts/placeholders/placeholders';
 
 .course-header {
-  background: $color__background-header_course;
+  background: rgba(228, 82, 55, 0.6);
   height: 342px;
   width: 100%;
   display: grid;
@@ -13,7 +13,7 @@
 
   &__name-container {
     @extend %main-title;
-    font-size: max(3.84vw, 30px);
+    font-size: max(1.7vw, 50px);
     color: #ffffff;
   }
 

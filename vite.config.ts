@@ -17,7 +17,7 @@ export default defineConfig({
       less: {
         javascriptEnabled: true,
         modifyVars: {
-          'primary-color': '#e4553a',
+          'primary-color': '#254664',
           'secondary-color': '#0c4267',
           'input-hover-border-color': '#0c4267',
           'input-icon-hover-color': '#0c4267',

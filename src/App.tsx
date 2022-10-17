@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route
         index
-        element={getFromLocalStorage('token') ? <Navigate to='/main' /> : <Navigate to='/auth' />}
+        element={getFromLocalStorage('token') ? <Navigate to='/main' /> : <Navigate to='/main' />}
       />
       <Route path='/auth' element={<LoginModal />} />
       <Route path='/main/*' element={<MainRoutes />} />

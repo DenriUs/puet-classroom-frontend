@@ -17,6 +17,9 @@
 
     &__title-lecture {
       @extend %card-title;
+      font-weight: 700;
+      font-size: 20px;
+      color: #000000;
       margin-left: 32px;
       margin-right: 32px;
       margin-top: 26px;
