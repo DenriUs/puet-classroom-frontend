@@ -1,0 +1,102 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.settings-profile {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template: 1fr / 0.45fr;
+
+  &__container {
+    @extend %card;
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr;
+    grid-template-rows: 0.4fr 1.6fr 0.4fr;
+  }
+
+  &__title {
+    @extend %card-title;
+    display: grid;
+    grid-column-start: span 2;
+    font-weight: 700;
+    font-size: 26px;
+    color: #000000;
+    padding: 30px 5px 10px 50px;
+  }
+
+  &__form {
+    display: grid;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  &__upload {
+    display: grid;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    align-content: center;
+    justify-content: start;
+  }
+
+  &__button {
+    display: grid;
+    grid-row-start: 3;
+    grid-column-start: span 2;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .settings-input {
+    padding: 10px 5px 10px 50px;
+    width: 65%;
+  }
+
+  .settings-title-input {
+    color: #b6b6b6;
+  }
+
+  .upload-title {
+    font-weight: 400;
+    font-size: 14px;
+    color: #b6b6b6;
+  }
+
+  .settings-icon {
+    color: #b6b6b6;
+    font-size: 40px;
+  }
+
+  .save-button {
+    width: 170px;
+    height: 45px;
+    @extend %button-title;
+  }
+}
+
+@media (max-width: 1400px) {
+  .settings-profile {
+    margin-top: 40px;
+    grid-template: 1fr / 0.8fr;
+  }
+
+  .settings-profile__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.4fr 1.6fr 0.9fr 0.4fr;
+  }
+
+  .settings-profile__upload {
+    grid-column-start: 1;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    justify-content: center;
+  }
+
+  .settings-profile__button {
+    grid-row-start: 4;
+    grid-row-end: 5;
+  }
+
+  .settings-input {
+    width: 80% !important;
+  }
+}
