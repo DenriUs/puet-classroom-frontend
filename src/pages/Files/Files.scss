@@ -1,0 +1,88 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.files-page {
+  display: grid;
+
+  &-footer {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+
+    &__name-container {
+      display: grid;
+      align-items: center;
+      margin: 25px 45px 0px 45px;
+      @extend %main-title;
+    }
+
+    &__button-container {
+      display: grid;
+      align-items: center;
+      justify-items: end;
+      margin-top: 25px;
+    }
+  }
+
+  &__table-container {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template: 1fr / 0.65fr;
+  }
+
+  &__table {
+    display: grid;
+    padding: 40px 10px 20px 40px;
+    @extend %card;
+  }
+}
+
+.button-upload-file {
+  width: 220px;
+  height: 45px;
+  margin-right: 40px;
+  @extend %button-title;
+}
+
+.file-name {
+  color: #254664;
+  font-weight: 600;
+  font-size: max(10px, 16px);
+}
+
+.file-size {
+  font-weight: 600;
+  font-size: max(13px, 14px);
+  color: #4f4f4f;
+}
+
+.file-date {
+  font-weight: 600;
+  font-size: max(13px, 14px);
+  color: #4f4f4f;
+}
+
+.file-icon {
+  font-size: 20px;
+}
+
+@media (max-width: 500px) {
+  .files-page-footer__name-container {
+    text-align: center;
+  }
+
+  .button-upload-file {
+    @extend %button-title;
+    width: 170px;
+    height: 45px;
+    margin-right: 50px;
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  .files-page__table {
+    overflow-x: scroll;
+  }
+}
