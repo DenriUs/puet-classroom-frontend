@@ -2,12 +2,19 @@ import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import { APIResponse } from './common/api';
 import Api from './common/api/services/api';
-import { getSortingDirectionShortName, constructPaginationUrlQuery } from './common/helpers';
+import {
+  getSortingDirectionShortName,
+  constructPaginationUrlQuery,
+  selectState,
+} from './common/helpers';
 import { LoadDataPayload, ReduxAction, SagaAction } from './common/types';
+import { setPaginatedDataTotal } from './store/paginated-data.slice';
 
 function* loadData(action: ReduxAction<LoadDataPayload>) {
   if (!action.payload) return;
-  const { page, take, search, sortingField, sortingDirection } = action.payload;
+  const { page, take, search, sortingField, sortingDirection } = yield selectState(
+    (state) => state.paginatedDataReducer,
+  );
   const shortSortingDirection = getSortingDirectionShortName(sortingDirection);
   const response: APIResponse = yield call(
     Api.get,
@@ -20,7 +27,8 @@ function* loadData(action: ReduxAction<LoadDataPayload>) {
     })}`,
   );
   if (response.error) return;
-  yield put(action.payload.action(response.data));
+  yield put(action.payload.action(response.data.result));
+  yield put(setPaginatedDataTotal(response.data.total));
 }
 
 function* watchRequests() {

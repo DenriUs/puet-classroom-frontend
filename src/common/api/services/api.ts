@@ -5,10 +5,10 @@ import { defaultConfig } from '../constants';
 import { APIResponse } from '../types';
 
 enum Methods {
-  GET = 'GET',
-  POST = 'POST',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE',
+  GET = 'get',
+  POST = 'post',
+  PATCH = 'patch',
+  DELETE = 'delete',
 }
 
 export default class Api {
@@ -32,7 +32,8 @@ export default class Api {
     headers?: AxiosRequestHeaders,
   ): Promise<APIResponse<T>> {
     try {
-      const response = await Api.axios.request({ method, url, data, headers });
+      const requestBody = method === Methods.DELETE ? { data } : data;
+      const response = await Api.axios[method](url, requestBody, { headers });
       return { data: response.data };
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.response?.data || error.message;

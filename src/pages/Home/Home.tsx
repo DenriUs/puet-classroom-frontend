@@ -8,6 +8,10 @@ import Schedule from '../../components/schedule/Schedule';
 import Course from '../../components/course/Course';
 import CardStatistics from '../../components/cardStatistics/CardStatistics';
 import CurrentActivity from '../../components/currentActivity/CurrentActivity';
+import { useEffect } from 'react';
+import { SagaAction } from '../../common/types';
+import AppLoader from '../../components/AppLoader';
+import { useAppSelector, useAppDispatch } from '../../hooks/reduxhooks';
 
 const data = [
   {
@@ -80,33 +84,50 @@ const configLiquid = {
   },
 };
 
-const Home = () => (
-  <Layout>
-    <HeaderPage />
-    <div className='home-page__name-container'>
-      <span>Головна сторінка</span>
-    </div>
-    <div className='home-page'>
-      <div className='container-statistics'>
-        <div className='container-statistics-cards'>
-          <CardStatistics />
-        </div>
-        <CurrentActivity />
+const Home = () => {
+  const { courses } = useAppSelector((state) => state.coursesReducer);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch({ type: SagaAction.COURSES_GET });
+  }, [dispatch]);
+
+  const renderedCourses = courses?.map((course) => <Course data={course} />);
+
+  return (
+    <Layout>
+      <HeaderPage />
+      <div className='home-page__name-container'>
+        <span>Головна сторінка</span>
       </div>
-      <div className='container-chart'>
-        <div className='home-page-column'>
-          <span className='column-name'>CТУДЕНСЬКА АКТИВНІСТЬ</span>
-          <Column {...configColumn} />
+      <div className='home-page'>
+        <div className='container-statistics'>
+          <div className='container-statistics-cards'>
+            <CardStatistics />
+          </div>
+          <CurrentActivity />
         </div>
-        <div className='home-page-liquid'>
-          <span className='liquid-name'>ПРОГРЕС СЕМЕСТРУ</span>
-          <Liquid {...configLiquid} />
+        <div className='container-chart'>
+          <div className='home-page-column'>
+            <span className='column-name'>CТУДЕНСЬКА АКТИВНІСТЬ</span>
+            <Column {...configColumn} />
+          </div>
+          <div className='home-page-liquid'>
+            <span className='liquid-name'>ПРОГРЕС СЕМЕСТРУ</span>
+            <Liquid {...configLiquid} />
+          </div>
+          <Schedule />
         </div>
-        <Schedule />
       </div>
-    </div>
-    <Course />
-  </Layout>
-);
+      <div className='course'>
+        <div className='course__title-container'>
+          <p className='course__title'>Мої поточні курси</p>
+        </div>
+        {courses ? <div className='course-card'>{renderedCourses}</div> : <AppLoader />}
+      </div>
+    </Layout>
+  );
+};
 
 export default Home;
