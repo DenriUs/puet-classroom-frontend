@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import { Column, Liquid } from '@ant-design/plots';
 
 import './Home.scss';
 
@@ -6,8 +7,6 @@ import HeaderPage from '../../components/header/HeaderPage';
 import Schedule from '../../components/schedule/Schedule';
 import Course from '../../components/course/Course';
 import CardStatistics from '../../components/cardStatistics/CardStatistics';
-
-import { Column, Liquid } from '@ant-design/plots';
 import CurrentActivity from '../../components/currentActivity/CurrentActivity';
 
 const data = [
@@ -89,7 +88,9 @@ const Home = () => (
     </div>
     <div className='home-page'>
       <div className='container-statistics'>
-        <CardStatistics />
+        <div className='container-statistics-cards'>
+          <CardStatistics />
+        </div>
         <CurrentActivity />
       </div>
       <div className='container-chart'>
