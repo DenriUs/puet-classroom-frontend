@@ -58,6 +58,12 @@
   }
 }
 
+@media (max-width: 536px) {
+  .home-page-column, .home-page-liquid, .container-statistics-cards {
+    display: none;
+  }
+}
+
 @media (max-width: 1260px) {
   .container-statistics {
     display: grid !important;
