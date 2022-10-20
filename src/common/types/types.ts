@@ -5,6 +5,8 @@ import store from '../../store';
 export enum SagaAction {
   LOAD_DATA = 'LOAD_DATA',
   LOG_OUT = 'LOG_OUT',
+
+  COURSES_GET = 'COURSES_GET',
 }
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -33,11 +35,6 @@ export interface LoadDataPayload<T = any> {
   endpoint: string;
   action: (data: T) => Action;
   query?: Record<string, string | number>;
-  page: number;
-  take: number;
-  search?: string;
-  sortingField?: string;
-  sortingDirection?: SortingDirection;
 }
 
 export interface ReduxAction<T = any> {

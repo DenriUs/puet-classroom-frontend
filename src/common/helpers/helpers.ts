@@ -1,7 +1,16 @@
 import { notification } from 'antd';
+import { Action } from 'redux';
 import { SelectEffect, select as sagaSelect } from 'redux-saga/effects';
 
-import { PaginationQueryParams, RootState, SortingDirection } from '../types';
+import {
+  LoadDataPayload,
+  PaginationQueryParams,
+  ReduxAction,
+  RootState,
+  SagaAction,
+  SortingDirection,
+  UserEntity,
+} from '../types';
 
 import { LocalStorageData } from './types';
 
@@ -29,3 +38,18 @@ export const constructPaginationUrlQuery = (params: PaginationQueryParams) =>
 
 export const getSortingDirectionShortName = (direction?: SortingDirection) =>
   direction === 'ascend' ? 'asc' : 'desc';
+
+export const loadData = <T = any>(
+  endpoint: string,
+  action: (data: T) => Action,
+  query?: Record<string, string | number>,
+): ReduxAction<LoadDataPayload> => ({
+  type: SagaAction.LOAD_DATA,
+  payload: { endpoint, action, query },
+});
+
+export const getTeacherShortName = (teacher: Partial<UserEntity>) =>
+  `${teacher.firstName} ${teacher.lastName}`;
+
+export const getTeacherFullName = (teacher: Partial<UserEntity>) =>
+  `${teacher.lastName} ${teacher.firstName} ${teacher.middleName}`;
