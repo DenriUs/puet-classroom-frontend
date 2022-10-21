@@ -48,6 +48,32 @@
   }
 }
 
+.course {
+  margin: 0px 40px 40px 40px;
+
+  &__title-container {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: max(1.2vw, 20px);
+    color: #000000;
+    padding-bottom: 30px;
+  }
+}
+
+.course-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 40px;
+  align-items: center;
+  justify-items: center;
+}
+
 @media (max-width: 1500px) {
   .home-page-column {
     margin: 40px !important;
@@ -55,6 +81,12 @@
 
   .home-page-liquid {
     margin: 40px !important;
+  }
+}
+
+@media (max-width: 536px) {
+  .home-page-column, .home-page-liquid, .container-statistics-cards {
+    display: none;
   }
 }
 

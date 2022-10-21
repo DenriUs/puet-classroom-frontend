@@ -6,6 +6,7 @@ import {
   SettingFilled,
 } from '@ant-design/icons';
 import { Layout } from 'antd';
+import { Link } from 'react-router-dom';
 
 import './Sidebar.scss';
 

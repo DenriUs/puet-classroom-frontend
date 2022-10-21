@@ -1,4 +1,16 @@
 import { notification } from 'antd';
+import { Action } from 'redux';
+import { SelectEffect, select as sagaSelect } from 'redux-saga/effects';
+
+import {
+  LoadDataPayload,
+  PaginationQueryParams,
+  ReduxAction,
+  RootState,
+  SagaAction,
+  SortingDirection,
+  UserEntity,
+} from '../types';
 
 import { LocalStorageData } from './types';
 
@@ -15,3 +27,29 @@ export const showSuccessMessage = (message: string, description?: string) =>
 
 export const showErrorMessage = (message: string, description?: string) =>
   notification.error({ message, description });
+
+export const selectState = <T>(selector: (s: RootState) => T): SelectEffect => sagaSelect(selector);
+
+export const constructPaginationUrlQuery = (params: PaginationQueryParams) =>
+  Object.entries(params)
+    .map(([name, param]) => param && `${name}=${param}`)
+    .filter((param) => param)
+    .join('&');
+
+export const getSortingDirectionShortName = (direction?: SortingDirection) =>
+  direction === 'ascend' ? 'asc' : 'desc';
+
+export const loadData = <T = any>(
+  endpoint: string,
+  action: (data: T) => Action,
+  query?: Record<string, string | number>,
+): ReduxAction<LoadDataPayload> => ({
+  type: SagaAction.LOAD_DATA,
+  payload: { endpoint, action, query },
+});
+
+export const getTeacherShortName = (teacher: Partial<UserEntity>) =>
+  `${teacher.firstName} ${teacher.lastName}`;
+
+export const getTeacherFullName = (teacher: Partial<UserEntity>) =>
+  `${teacher.lastName} ${teacher.firstName} ${teacher.middleName}`;
