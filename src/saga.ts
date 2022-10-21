@@ -27,8 +27,8 @@ function* loadData(action: ReduxAction<LoadDataPayload>) {
     })}`,
   );
   if (response.error) return;
-  yield put(action.payload.action(response.data.result));
-  yield put(setPaginatedDataTotal(response.data.total));
+  yield put(action.payload.action(response.data.data.result));
+  yield put(setPaginatedDataTotal(response.data.data.total));
 }
 
 function* watchRequests() {

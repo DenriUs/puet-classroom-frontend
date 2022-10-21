@@ -6,6 +6,7 @@ import {
   SettingFilled,
 } from '@ant-design/icons';
 import { Layout } from 'antd';
+import { Link } from 'react-router-dom';
 
 import './Sidebar.scss';
 
@@ -24,20 +25,20 @@ const Sidebar = () => (
     <div className='sidebar__center'>
       <ul className='sidebar__center__nav-links'>
         <li>
-          <a href='*'>
+          <Link to='/main/home'>
             <div className='icon-container'>
               <HomeFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Головна</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='*'>
+          <Link to='/main/courses'>
             <div className='icon-container'>
               <BookFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Курси</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a href='*'>
