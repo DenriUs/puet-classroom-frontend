@@ -1,0 +1,68 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.grade-page {
+  display: grid;
+
+  &__name-container {
+    display: grid;
+    align-items: center;
+    margin: 25px 45px 0px 45px;
+    @extend %main-title;
+  }
+
+  &__table-container {
+    display: grid;
+    grid-template: 1fr / 0.8fr;
+    justify-content: center;
+    align-content: center;
+    margin-top: 45px;
+    margin-bottom: 40px;
+  }
+
+  &__card {
+    @extend %card;
+    padding: 40px;
+  }
+
+  &__table {
+    display: grid;
+  }
+
+  &__select {
+    display: grid;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+}
+
+.grade-select {
+  width: 25%;
+}
+
+.grade-name {
+  color: #254664;
+  font-weight: 600;
+  font-size: max(10px, 16px);
+}
+
+.grade-mark {
+  font-weight: 600;
+  font-size: max(13px, 14px);
+  color: #4f4f4f;
+}
+
+.grade-interval {
+  font-weight: 600;
+  font-size: max(13px, 14px);
+  color: #4f4f4f;
+}
+
+@media (max-width: 800px) {
+  .grade-select {
+    width: 200px;
+  }
+  .grade-page__card{
+    overflow-x: scroll;
+  }
+
+}

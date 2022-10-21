@@ -10,6 +10,7 @@ import { Layout } from 'antd';
 import './Sidebar.scss';
 
 import puetLogo from '../../assets/puetLogo.png';
+import { Link } from 'react-router-dom';
 
 const { Sider } = Layout;
 
@@ -24,44 +25,44 @@ const Sidebar = () => (
     <div className='sidebar__center'>
       <ul className='sidebar__center__nav-links'>
         <li>
-          <a href='*'>
+          <Link to='home'>
             <div className='icon-container'>
               <HomeFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Головна</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='*'>
+          <Link to='courses'>
             <div className='icon-container'>
               <BookFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Курси</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='*'>
+          <Link to='grade'>
             <div className='icon-container'>
               <FileTextFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Журанал оцінок</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='*'>
+          <Link to='files'>
             <div className='icon-container'>
               <StarFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Мої файли</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='*'>
+          <Link to='settings'>
             <div className='icon-container'>
               <SettingFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Налаштування</span>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
