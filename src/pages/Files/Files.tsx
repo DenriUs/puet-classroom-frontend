@@ -31,7 +31,7 @@ const columns = [
   },
   {
     title: 'Дія',
-    key: 'progress',
+    key: 'delete',
     width: '8%',
     render: () => (
       <a>
