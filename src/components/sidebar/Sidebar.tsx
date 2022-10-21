@@ -6,12 +6,11 @@ import {
   SettingFilled,
 } from '@ant-design/icons';
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Sidebar.scss';
 
 import puetLogo from '../../assets/puetLogo.png';
-import { Link } from 'react-router-dom';
 
 const { Sider } = Layout;
 
@@ -26,44 +25,44 @@ const Sidebar = () => (
     <div className='sidebar__center'>
       <ul className='sidebar__center__nav-links'>
         <li>
-          <Link to='home'>
+          <NavLink to='home'>
             <div className='icon-container'>
               <HomeFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Головна</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='courses'>
+          <NavLink to='courses'>
             <div className='icon-container'>
               <BookFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Курси</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='grade'>
+          <NavLink to='grade'>
             <div className='icon-container'>
               <FileTextFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Журанал оцінок</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='files'>
+          <NavLink to='files'>
             <div className='icon-container'>
               <StarFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Мої файли</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='settings'>
+          <NavLink to='settings'>
             <div className='icon-container'>
               <SettingFilled className='sidebar__icon' />
             </div>
             <span className='sidebar-title'>Налаштування</span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>
