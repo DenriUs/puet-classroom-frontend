@@ -8,15 +8,17 @@ import { getTeacherShortName } from '../../common/helpers';
 
 interface Props {
   data: CourseEntity;
+  onClick: () => void;
 }
 
 const Course = (props: Props) => {
   const {
+    onClick,
     data: { name, teacher },
   } = props;
 
   return (
-    <div className='course-card__container'>
+    <div className='course-card__container' onClick={onClick}>
       <img src={hatIcon} className='icon-study' alt='icon' />
       <span className='title'>{name}</span>
       <div className='decription'>

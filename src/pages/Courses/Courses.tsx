@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Layout, Table } from 'antd';
 
-import './Course.scss';
+import './Courses.scss';
 
 import CourseStatistics from '../../components/courseStatistics/CourseStatistics';
 import HeaderPage from '../../components/header/HeaderPage';
@@ -11,7 +11,7 @@ import { getTeacherShortName } from '../../common/helpers';
 import { coursesColumns } from './constants';
 import { SagaAction } from '../../common/types';
 
-const Course = () => {
+const Courses = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
   const { courses } = useAppSelector((state) => state.coursesReducer);
 
@@ -52,4 +52,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default Courses;

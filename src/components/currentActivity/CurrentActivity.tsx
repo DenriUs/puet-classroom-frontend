@@ -1,6 +1,8 @@
-import './CurrentActitivity.scss';
-import live from '../../global/images/icons/live.png';
 import { UserOutlined } from '@ant-design/icons';
+
+import './CurrentActitivity.scss';
+
+import live from '../../global/images/icons/live.png';
 
 interface Props {}
 
