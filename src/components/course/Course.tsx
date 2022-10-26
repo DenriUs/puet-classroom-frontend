@@ -1,5 +1,6 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Progress } from 'antd';
+import { String2HexCodeColor } from 'string-to-hex-code-color';
 
 import './Course.scss';
 import hatIcon from '../../global/images/icons/hat.svg';
@@ -11,6 +12,9 @@ interface Props {
   onClick: () => void;
 }
 
+const colorCard = new String2HexCodeColor(0.75);
+const colorProgress = new String2HexCodeColor(0.4);
+
 const Course = (props: Props) => {
   const {
     onClick,
@@ -18,7 +22,11 @@ const Course = (props: Props) => {
   } = props;
 
   return (
-    <div className='course-card__container' onClick={onClick}>
+    <div
+      className='course-card__container'
+      style={{ backgroundColor: colorCard.stringToColor(name) }}
+      onClick={onClick}
+    >
       <img src={hatIcon} className='icon-study' alt='icon' />
       <span className='title'>{name}</span>
       <div className='decription'>
@@ -29,7 +37,7 @@ const Course = (props: Props) => {
       </div>
       <div className='progress-container'>
         <Progress
-          strokeColor='rgba(219, 69, 46, 0.49)'
+          strokeColor={colorProgress.stringToColor(name)}
           trailColor='rgba(255, 255, 255, 0.54)'
           type='circle'
           percent={40}

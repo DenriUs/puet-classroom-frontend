@@ -2,19 +2,20 @@
 @import '/src/global/sass/abstracts/placeholders/placeholders';
 
 .course-header {
-  background: rgba(228, 82, 55, 0.6);
-  height: 342px;
+  height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.6fr 0.4fr 0.5fr;
   align-items: center;
   padding-left: 48px;
 
   &__name-container {
     @extend %main-title;
-    font-size: max(1.7vw, 50px);
-    color: #ffffff;
+    margin-top: 10px;
+    font-size: 40px;
+    line-height: 40px;
+    color: #4f4f4f;
   }
 
   &__author-container {
@@ -25,7 +26,7 @@
     .name {
       font-weight: 500;
       font-size: max(1vw, 20px);
-      color: #ffffff;
+      color: #4f4f4f;
       line-height: 27px;
       padding-left: 21px;
       padding-right: 10px;
@@ -47,7 +48,7 @@
 
   &__image {
     width: 100%;
-    max-width: 342px;
+    max-width: 322px;
     height: 100%;
     max-height: 322px;
   }
@@ -59,14 +60,39 @@
   }
 }
 
-@media (max-width: 1451px) {
+@media (max-width: 1000px) {
+  .course-header {
+    grid-template-rows: 1fr 0.6fr 0.7fr;
+    height: 380px;
+  }
+  .course-header__name-container {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding-top: 20px;
+    padding-right: 40px;
+    font-size: 30px;
+  }
+  .course-header__design-container {
+    display: grid;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    grid-row-end: span 2;
+    padding-right: 40px;
+  }
   .course-header__author-container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+    padding-top: 20px;
   }
   .name {
     padding-left: 0px !important;
     padding-top: 10px;
+  }
+
+  .course-header__button-connect {
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }

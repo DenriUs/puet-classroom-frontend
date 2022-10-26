@@ -20,6 +20,7 @@ export interface UserEntity {
   lastName: string;
   middleName: string;
   email: string;
+  phoneNumber?: string;
   role: UserRoleEnum;
   cover: Partial<FileEntity>;
   createdAt: Date;
