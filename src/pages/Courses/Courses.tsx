@@ -28,7 +28,7 @@ const Courses = () => {
     name,
     teacher: getTeacherShortName(teacher),
     count: '15/30',
-    progress: 100,
+    progress: 80,
   }));
 
   return (

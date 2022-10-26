@@ -7,6 +7,9 @@ export enum SagaAction {
   LOG_OUT = 'LOG_OUT',
 
   COURSES_GET = 'COURSES_GET',
+  COURSE_GET = 'COURSE_GET',
+  COURSE_UPDATE = 'COURSE_UPDATE',
+  COURSE_DELETE = 'COURSE_DELETE',
 }
 
 export type RootState = ReturnType<typeof store.getState>;

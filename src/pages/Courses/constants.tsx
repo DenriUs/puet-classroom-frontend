@@ -1,12 +1,21 @@
 import { Progress } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+
+interface Course {
+  key: string;
+}
 
 export const coursesColumns = [
   {
     dataIndex: 'name',
     key: 'name',
     width: '35%',
-    render: (name: string) => <a className='course-name'>{name}</a>,
+    render: (name: string, course: Course) => (
+      <Link to={'/main/courses/' + course.key} className='course-name'>
+        {name}
+      </Link>
+    ),
   },
   {
     dataIndex: 'teacher',

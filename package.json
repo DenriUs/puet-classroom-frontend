@@ -28,6 +28,7 @@
     "react-router-dom": "^6.4.2",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.1",
+    "string-to-hex-code-color": "^1.0.8",
     "zod": "^3.19.1"
   },
   "devDependencies": {
