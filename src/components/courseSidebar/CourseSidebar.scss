@@ -1,8 +1,9 @@
 .course-sidebar {
   margin-left: 15px;
   margin-top: 15px;
+  border-bottom: 1px solid #d9d9d9;
   &__title {
-    padding: 15px;
+    padding: 15px 0 10px 15px;
     font-weight: 600;
     font-size: max(14px, 16px);
     line-height: 22px;

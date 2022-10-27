@@ -84,3 +84,10 @@ export interface CourseEntity {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface TopicEntity {
+  id: string;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

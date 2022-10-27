@@ -2,49 +2,14 @@
 
 .home-page {
   display: grid;
+  grid-template-columns: minmax(400px, 0.35fr) minmax(410px, 0.3fr);
+  grid-auto-flow: column;
 
   &__name-container {
     display: grid;
     align-items: center;
     margin: 25px 45px 0px 45px;
     @extend %main-title;
-  }
-
-  .container-statistics {
-    display: grid;
-    grid-template-columns: minmax(100px, 1200px) minmax(100px, 400px);
-    align-items: start;
-  }
-
-  .container-chart {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-    grid-template-rows: minmax(400px, 410px);
-    justify-content: space-between;
-  }
-
-  .home-page-column {
-    @extend %card;
-    padding: 30px 40px;
-    margin: 40px 20px 40px 40px;
-
-    .column-name {
-      font-weight: 400;
-      font-size: max(14px, 16px);
-      color: #828282;
-    }
-  }
-
-  .home-page-liquid {
-    @extend %card;
-    margin: 40px 20px 40px 20px;
-    padding: 30px 40px;
-
-    .liquid-name {
-      font-weight: 400;
-      font-size: max(14px, 16px);
-      color: #828282;
-    }
   }
 }
 
@@ -74,26 +39,20 @@
   justify-items: center;
 }
 
-@media (max-width: 1500px) {
-  .home-page-column {
-    margin: 40px !important;
-  }
-
-  .home-page-liquid {
-    margin: 40px !important;
-  }
-}
-
-@media (max-width: 536px) {
-  .home-page-column, .home-page-liquid, .container-statistics-cards {
-    display: none;
+@media (max-width: 1100px) and (min-width: 768px) {
+  .home-page {
+    display: grid;
+    grid-template-columns: 0.8fr;
+    justify-content: center;
+    grid-template-rows: 1fr auto;
   }
 }
 
-@media (max-width: 1260px) {
-  .container-statistics {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 600px)) !important;
-    align-items: start !important;
+@media (max-width: 768px){
+  .home-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    grid-template-rows: 1fr auto;
   }
 }

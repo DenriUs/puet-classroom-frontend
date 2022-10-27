@@ -10,6 +10,7 @@ export enum SagaAction {
   COURSE_GET = 'COURSE_GET',
   COURSE_UPDATE = 'COURSE_UPDATE',
   COURSE_DELETE = 'COURSE_DELETE',
+  COURSES_TOPICS_GET ='COURSES_TOPICS_GET'
 }
 
 export type RootState = ReturnType<typeof store.getState>;
