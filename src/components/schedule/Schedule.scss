@@ -3,7 +3,7 @@
 .schedule {
   @extend %card;
   display: grid;
-  margin: 40px 40px 40px 20px;
+  margin: 40px 40px 40px 40px;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 5fr;
   align-items: start;
@@ -18,9 +18,8 @@
   }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 768px) {
   .schedule {
-    margin-right: 40px;
-    margin-left: 40px;
+    margin-bottom: 0;
   }
 }

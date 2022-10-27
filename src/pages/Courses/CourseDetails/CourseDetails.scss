@@ -14,6 +14,12 @@
   height: 100vh;
 }
 
+.empty-title {
+  font-size: 27px;
+  font-weight: 700;
+  color: #999999;
+}
+
 @media screen and (max-width: 767px) {
   .course-page__task {
     position: absolute;
