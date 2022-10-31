@@ -7,7 +7,7 @@ import CourseStatistics from '../../components/courseStatistics/CourseStatistics
 import HeaderPage from '../../components/header/HeaderPage';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../../components/AppLoader';
-import { getTeacherShortName } from '../../common/helpers';
+import { getUserShortName } from '../../common/helpers';
 import { coursesColumns } from './constants';
 import { SagaAction } from '../../common/types';
 
@@ -26,7 +26,7 @@ const Courses = () => {
   const tableData = courses.map(({ id, name, teacher }) => ({
     key: id,
     name,
-    teacher: getTeacherShortName(teacher),
+    teacher: getUserShortName(teacher),
     count: '15/30',
     progress: 80,
   }));

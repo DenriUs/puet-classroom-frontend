@@ -1,14 +1,21 @@
 import { FilePdfOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useState } from 'react';
+import { CourseActivityEntity } from '../../common/types';
 
 import './PracticalLecture.scss';
 
 import Practical from '../modals/practical/Practical';
 
-interface Props {}
+interface Props {
+  data: CourseActivityEntity;
+}
 
 const PracticalLecture = (props: Props) => {
+  const {
+    data: { title },
+  } = props;
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -17,9 +24,7 @@ const PracticalLecture = (props: Props) => {
   return (
     <div className='box'>
       <div className='box-card'>
-        <div className='box-card__title-lecture'>
-          Практична робота 1. Базові поняття інформаційних мереж
-        </div>
+        <div className='box-card__title-lecture'>{title}</div>
         <div className='box-card__file'>
           <div className='name-file'>Інформаційних мереж.pdf</div>
           <div className='icon-file'>

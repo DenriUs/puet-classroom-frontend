@@ -5,7 +5,7 @@ import { String2HexCodeColor } from 'string-to-hex-code-color';
 import './Course.scss';
 import hatIcon from '../../global/images/icons/hat.svg';
 import { CourseEntity } from '../../common/types';
-import { getTeacherShortName } from '../../common/helpers';
+import { getUserShortName } from '../../common/helpers';
 
 interface Props {
   data: CourseEntity;
@@ -33,7 +33,7 @@ const Course = (props: Props) => {
         <span className='decription__icon'>
           <UserOutlined />
         </span>
-        <span className='decription__name'>{getTeacherShortName(teacher)}</span>
+        <span className='decription__name'>{getUserShortName(teacher)}</span>
       </div>
       <div className='progress-container'>
         <Progress

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { CourseEntity, TopicEntity } from '../common/types';
+import { CourseActivityEntity, CourseEntity, TopicEntity } from '../common/types';
 
 export interface CoursesState {
   courses?: CourseEntity[];
   course?: CourseEntity;
   courseTopics?: TopicEntity[];
+  courseTopicsActivities?: CourseActivityEntity[];
 }
 
 const getInitialState = (): CoursesState => ({});
@@ -17,7 +18,6 @@ const coursesSlice = createSlice({
   initialState,
   reducers: {
     setCourses: (state, action: PayloadAction<CourseEntity[]>) => {
-      console.log(action.payload);
       state.courses = action.payload;
     },
     setCourse: (state, action: PayloadAction<CourseEntity>) => {
@@ -26,9 +26,13 @@ const coursesSlice = createSlice({
     setCourseTopic: (state, action: PayloadAction<TopicEntity[]>) => {
       state.courseTopics = action.payload;
     },
+    setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
+      state.courseTopicsActivities = action.payload;
+    },
   },
 });
 
-export const { setCourses, setCourse, setCourseTopic } = coursesSlice.actions;
+export const { setCourses, setCourse, setCourseTopic, setCourseTopicActivities } =
+  coursesSlice.actions;
 
 export const coursesReducer = coursesSlice.reducer;

@@ -48,7 +48,7 @@ export const loadData = <T = any>(
   payload: { endpoint, action, query },
 });
 
-export const getTeacherShortName = (teacher: Partial<UserEntity>) =>
+export const getUserShortName = (teacher: Partial<UserEntity>) =>
   `${teacher.firstName} ${teacher.lastName}`;
 
 export const getTeacherFullName = (teacher: Partial<UserEntity>) =>
