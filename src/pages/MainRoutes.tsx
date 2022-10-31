@@ -8,6 +8,9 @@ import GradeBook from './GradeBook/GradeBook';
 import Home from './Home/Home';
 import LayoutPage from './Layout/Layout';
 import Settings from './Settings/Settings';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../hooks/reduxhooks';
+import { SagaAction } from '../common/types';
 
 const MainRoutes = () => {
   const isAuthorized = getFromLocalStorage('token');
@@ -15,6 +18,12 @@ const MainRoutes = () => {
   if (!isAuthorized) {
     return <Navigate to='/auth' />;
   }
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch({ type: SagaAction.PROFILE_GET });
+  }, [dispatch]);
 
   return (
     <LayoutPage>

@@ -1,16 +1,18 @@
-import { Layout } from 'antd';
+import { Avatar, Layout } from 'antd';
 import { useNavigate } from 'react-router';
+import { UserOutlined } from '@ant-design/icons';
 
 import './HeaderPage.scss';
 
-import profileIcon from '../../assets/profileIcon.png';
 import LogoutIcon from '../Icons/LogoutIcon';
-import { removeFromLocalStorage } from '../../common/helpers';
+import { getUserShortName, removeFromLocalStorage } from '../../common/helpers';
+import { useAppSelector } from '../../hooks/reduxhooks';
 
 const { Header } = Layout;
 
 const HeaderPage = () => {
   const navigate = useNavigate();
+  const { user } = useAppSelector((state) => state.authReducer);
 
   const onLogoutClick = () => {
     removeFromLocalStorage('token');
@@ -21,9 +23,9 @@ const HeaderPage = () => {
     <Header className='header'>
       <div className='header-page'>
         <div className='header-page__items-container'>
-          <img className='profile-icon' src={profileIcon} alt='icon' />
+          <Avatar size={45} icon={<UserOutlined />} />
           <div className='name-container'>
-            <span>Денис Тацій</span>
+            <span>{user ? getUserShortName(user) : 'Користувач'}</span>
           </div>
           <LogoutIcon onClick={onLogoutClick} />
         </div>
