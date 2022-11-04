@@ -1,11 +1,15 @@
-import { FileImageOutlined } from '@ant-design/icons';
-import { Button, Input, message, Modal, Select } from 'antd';
-import Dragger from 'antd/lib/upload/Dragger';
-import TextArea from 'antd/lib/input/TextArea';
+import { Button, Input, Modal, Select } from 'antd';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import './Course.scss';
 
-const { Option } = Select;
+import { useAppDispatch } from '../../../hooks/reduxhooks';
+import { group } from './constants';
+import { courseSchema } from './schemas';
+import { CourseSchemaType } from './type';
+import { SagaAction } from '../../../common/types';
+import { showSuccessMessage } from '../../../common/helpers';
 
 interface IProps {
   onStart: boolean;
@@ -14,63 +18,85 @@ interface IProps {
 
 const CourseModal = (props: IProps) => {
   const { onStart, handleClose } = props;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<CourseSchemaType>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(courseSchema),
+  });
 
-  const onChange = (info: any) => {
-    const { status } = info.file;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  };
+  const dispatch = useAppDispatch();
 
-  const onDrop = (e: any) => {
-    console.log('Dropped files', e.dataTransfer.files);
+  const handleLoginSubmit = (data: CourseSchemaType) => {
+    dispatch({ type: SagaAction.COURSES_CREATE, payload: data });
+    handleClose();
+    showSuccessMessage('Курс успішно додано!');
   };
 
   return (
-    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={500}>
+    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={530}>
       <div className='course-modal'>
         <div className='course-modal__title-container'>Додати курс</div>
-        <div className='course-modal__input-container'>
-          <div>Назва курсу</div>
-          <Input className='course-modal__input input' />
-        </div>
-        <div className='course-modal__description-container'>
-          <TextArea
-            className='course-modal__area'
-            autoSize={{ minRows: 4, maxRows: 4 }}
-            placeholder='Опис курсу'
-            maxLength={1000}
-          />
-        </div>
-        <div className='course-modal__select-container'>
-          <Select className='course-modal__select' placeholder='Існуючий курс' allowClear>
-            <Option>Хімія</Option>
-          </Select>
-        </div>
-        <div className='course-modal__upload-container'>
-          <Dragger name='Fiel' multiple maxCount={1} onChange={onChange} onDrop={onDrop}>
-            <p className='ant-upload-drag-icon'>
-              <FileImageOutlined />
-            </p>
-            <p className='ant-upload-text'>Оформлення курсу</p>
-            <p className='ant-upload-hint'>Click or drag image to this area to upload</p>
-          </Dragger>
-        </div>
-        <div className='course-modal__button-container'>
-          <Button
-            shape='round'
-            onClick={handleClose}
-            type='primary'
-            className='course-modal__button button'
-          >
-            Створити
-          </Button>
-        </div>
+        <form className='course-modal__form-container' onSubmit={handleSubmit(handleLoginSubmit)}>
+          <div className='course-modal__input-container'>
+            <label htmlFor='name'>
+              Назва курсу
+              <Controller
+                control={control}
+                name='name'
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <Input
+                    size='large'
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
+                    disabled={isSubmitting}
+                  />
+                )}
+              />
+            </label>
+            {errors.name && <p className='form-error-label'>{errors.name.message}</p>}
+          </div>
+          <div className='course-modal__select-container'>
+            <label htmlFor='group'>
+              <Controller
+                control={control}
+                name='group'
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <Select
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
+                    disabled={isSubmitting}
+                    showSearch
+                    optionFilterProp='children'
+                    size='large'
+                    className='course-modal__select'
+                    placeholder='Введіть назву групи'
+                    filterOption={(input: string, option: any) =>
+                      (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={group}
+                  />
+                )}
+              />
+            </label>
+            {errors.group && <p className='form-error-label'>{errors.group.message}</p>}
+          </div>
+          <div className='course-modal__button-container'>
+            <Button
+              shape='round'
+              type='primary'
+              htmlType='submit'
+              className='course-modal__button button'
+            >
+              Створити
+            </Button>
+          </div>
+        </form>
       </div>
     </Modal>
   );

@@ -2,6 +2,7 @@
 
 .course-page {
   display: grid;
+  grid-template-columns: repeat(2, auto);
 
   &__name-container {
     display: grid;
@@ -11,11 +12,24 @@
   }
 
   &__table-container {
-    margin-top: 30px;
+    margin-top: 70px;
     margin-bottom: 40px;
     display: grid;
     justify-items: center;
     align-items: center;
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: end;
+  }
+
+  &__button-connect {
+    margin-top: 10px;
+    margin-right: 48px;
+    width: 170px;
+    height: 45px;
+    @extend %button-title;
   }
 
   &__table {
@@ -50,5 +64,8 @@
 @media (max-width: 500px) {
   .course-page__table {
     overflow-x: scroll;
+  }
+  .course-page__name-container {
+    text-align: left;
   }
 }

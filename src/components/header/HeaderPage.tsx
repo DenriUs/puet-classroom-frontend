@@ -25,7 +25,7 @@ const HeaderPage = () => {
         <div className='header-page__items-container'>
           <Avatar size={45} icon={<UserOutlined />} />
           <div className='name-container'>
-            <span>{user ? getUserShortName(user) : 'Користувач'}</span>
+            <span>{user && getUserShortName(user)}</span>
           </div>
           <LogoutIcon onClick={onLogoutClick} />
         </div>

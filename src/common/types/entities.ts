@@ -75,7 +75,7 @@ export interface CourseParticipantEntity {
 export interface CourseEntity {
   id: string;
   name: string;
-  description: string;
+  group: string;
   meetingUrl?: string;
   cover: Partial<FileEntity>;
   teacher: Partial<UserEntity>;
