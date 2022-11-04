@@ -4,8 +4,9 @@ import { String2HexCodeColor } from 'string-to-hex-code-color';
 
 import './Course.scss';
 import hatIcon from '../../global/images/icons/hat.svg';
-import { CourseEntity } from '../../common/types';
+import { CourseEntity, UserRoleEnum } from '../../common/types';
 import { getUserShortName } from '../../common/helpers';
+import { useAppSelector } from '../../hooks/reduxhooks';
 
 interface Props {
   data: CourseEntity;
@@ -18,8 +19,10 @@ const colorProgress = new String2HexCodeColor(0.4);
 const Course = (props: Props) => {
   const {
     onClick,
-    data: { name, teacher },
+    data: { name, teacher, group },
   } = props;
+
+  const { user } = useAppSelector((state) => state.authReducer);
 
   return (
     <div
@@ -33,7 +36,9 @@ const Course = (props: Props) => {
         <span className='decription__icon'>
           <UserOutlined />
         </span>
-        <span className='decription__name'>{getUserShortName(teacher)}</span>
+        <span className='decription__name'>
+          {user?.role == UserRoleEnum.STUDENT ? getUserShortName(teacher) : group}
+        </span>
       </div>
       <div className='progress-container'>
         <Progress

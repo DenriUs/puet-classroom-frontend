@@ -23,6 +23,9 @@ const coursesSlice = createSlice({
     setCourse: (state, action: PayloadAction<CourseEntity>) => {
       state.course = action.payload;
     },
+    createCourses: (state, action: PayloadAction<CourseEntity>) => {
+      state.courses?.push(action.payload);
+    },
     setCourseTopic: (state, action: PayloadAction<TopicEntity[]>) => {
       state.courseTopics = action.payload;
     },
@@ -32,7 +35,7 @@ const coursesSlice = createSlice({
   },
 });
 
-export const { setCourses, setCourse, setCourseTopic, setCourseTopicActivities } =
+export const { setCourses, setCourse, createCourses, setCourseTopic, setCourseTopicActivities } =
   coursesSlice.actions;
 
 export const coursesReducer = coursesSlice.reducer;
