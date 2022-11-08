@@ -41,7 +41,6 @@ export interface CourseTopicEntity {
 export interface CourseActivityEntity {
   id: string;
   title: string;
-  description: string;
   type: CourseActivityTypeEnum;
   files: Partial<FileEntity>[];
   topic: Partial<CourseTopicEntity>;
