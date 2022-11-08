@@ -30,7 +30,7 @@ const CourseModal = (props: IProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleLoginSubmit = (data: CourseSchemaType) => {
+  const handleCourseSubmit = (data: CourseSchemaType) => {
     dispatch({ type: SagaAction.COURSES_CREATE, payload: data });
     handleClose();
     showSuccessMessage('Курс успішно додано!');
@@ -40,7 +40,7 @@ const CourseModal = (props: IProps) => {
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={530}>
       <div className='course-modal'>
         <div className='course-modal__title-container'>Додати курс</div>
-        <form className='course-modal__form-container' onSubmit={handleSubmit(handleLoginSubmit)}>
+        <form className='course-modal__form-container' onSubmit={handleSubmit(handleCourseSubmit)}>
           <div className='course-modal__input-container'>
             <label htmlFor='name'>
               Назва курсу

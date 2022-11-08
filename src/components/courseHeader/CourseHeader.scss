@@ -37,6 +37,13 @@
     }
   }
 
+  &__buttons-container {
+    display: grid;
+    grid-column-start: 2;
+    grid-row-start: 3;
+    justify-items: end;
+  }
+
   &__design-container {
     display: grid;
     grid-column-start: 2;
@@ -58,6 +65,14 @@
     height: 45px;
     @extend %button-title;
   }
+
+  &__button-teacher {
+    margin-right: 30px;
+    margin-bottom: 10px;
+    width: 45px;
+    height: 45px;
+    @extend %button-title;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -73,6 +88,7 @@
     padding-right: 40px;
     font-size: 30px;
   }
+
   .course-header__design-container {
     display: grid;
     grid-column-start: 2;
