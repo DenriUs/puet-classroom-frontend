@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { CourseActivityEntity, CourseEntity, TopicEntity } from '../common/types';
+import {
+  CourseActivityEntity,
+  CourseActivityTypeEnum,
+  CourseEntity,
+  TopicEntity,
+} from '../common/types';
 
 export interface CoursesState {
   courses?: CourseEntity[];
   course?: CourseEntity;
   courseTopics?: TopicEntity[];
   courseTopic?: TopicEntity;
-  courseTopicsActivities?: CourseActivityEntity[];
+  courseActivitiesLecture?: CourseActivityEntity[];
+  courseActivitiesAssignment?: CourseActivityEntity[];
 }
 
 const getInitialState = (): CoursesState => ({});
@@ -36,11 +42,18 @@ const coursesSlice = createSlice({
     createCoursesTopic: (state, action: PayloadAction<TopicEntity>) => {
       state.courseTopics?.push(action.payload);
     },
-    setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
-      state.courseTopicsActivities = action.payload;
+    setCourseTopicActivitiesLecture: (state, action: PayloadAction<CourseActivityEntity[]>) => {
+      state.courseActivitiesLecture = action.payload;
+    },
+    setCourseTopicActivitiesAssignment: (state, action: PayloadAction<CourseActivityEntity[]>) => {
+      state.courseActivitiesAssignment = action.payload;
     },
     createCoursesTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
-      state.courseTopicsActivities?.push(action.payload);
+      if (action.payload.type == CourseActivityTypeEnum.LECTURE) {
+        state.courseActivitiesLecture?.push(action.payload);
+      } else {
+        state.courseActivitiesAssignment?.push(action.payload);
+      }
     },
   },
 });
@@ -51,7 +64,8 @@ export const {
   createCourses,
   setCourseTopics,
   setCourseTopic,
-  setCourseTopicActivities,
+  setCourseTopicActivitiesLecture,
+  setCourseTopicActivitiesAssignment,
   createCoursesTopic,
   createCoursesTopicActivity,
 } = coursesSlice.actions;

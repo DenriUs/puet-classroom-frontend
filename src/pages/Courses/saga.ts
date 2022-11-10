@@ -8,11 +8,12 @@ import {
   setCourses,
   setCourse,
   setCourseTopics,
-  setCourseTopicActivities,
   createCourses,
   createCoursesTopic,
   setCourseTopic,
   createCoursesTopicActivity,
+  setCourseTopicActivitiesAssignment,
+  setCourseTopicActivitiesLecture,
 } from '../../store/courses.slice';
 
 interface Topic {
@@ -62,10 +63,22 @@ function* createTopic(action: ReduxAction<Topic>) {
   yield put(createCoursesTopic(response.data.data));
 }
 
-function* getActivities(action: ReduxAction<string>) {
-  const response: APIResponse = yield call(Api.get, `courses/topics/${action.payload}/activities`);
+function* getLectureActivities(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(
+    Api.get,
+    `courses/topics/${action.payload}/activities?type=LECTURE`,
+  );
   if (response.error) return;
-  yield put(setCourseTopicActivities(response.data.data.result));
+  yield put(setCourseTopicActivitiesLecture(response.data.data.result));
+}
+
+function* getAssignmentActivities(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(
+    Api.get,
+    `courses/topics/${action.payload}/activities?type=ASSIGNMENT`,
+  );
+  if (response.error) return;
+  yield put(setCourseTopicActivitiesAssignment(response.data.data.result));
 }
 
 function* createActivity(action: ReduxAction<Activity>) {
@@ -86,7 +99,8 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPICS_GET, getTopics);
   yield takeLatest(SagaAction.COURSES_TOPIC_GET, getTopic);
   yield takeLatest(SagaAction.COURSES_TOPICS_CREATE, createTopic);
-  yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITIES_GET, getActivities);
+  yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ACTIVITIES_GET, getLectureActivities);
+  yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ASSIGNMENT_GET, getAssignmentActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_CREATE, createActivity);
 }
 
