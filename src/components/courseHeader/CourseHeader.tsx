@@ -73,9 +73,6 @@ const CourseHeader = () => {
           <Button className='course-header__button-teacher' shape='circle' type='primary'>
             <SettingOutlined className='button__icon' />
           </Button>
-          <Button className='course-header__button-teacher' shape='circle' type='primary'>
-            <UserOutlined className='button__icon' />
-          </Button>
         </div>
       )}
       <div className='course-header__design-container'>

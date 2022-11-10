@@ -25,16 +25,17 @@ const Course = () => {
 
   const { id } = useParams();
 
-  const { course, courseTopics, courseTopicsActivities } = useAppSelector(
-    (state) => state.coursesReducer,
-  );
+  const { course, courseTopics, courseActivitiesLecture, courseActivitiesAssignment } =
+    useAppSelector((state) => state.coursesReducer);
 
   const { user } = useAppSelector((state) => state.authReducer);
+
 
   const dispatch = useAppDispatch();
 
   const onTopicClick = (id: string) => {
-    dispatch({ type: SagaAction.COURSES_TOPICS_ACTIVITIES_GET, payload: id });
+    dispatch({ type: SagaAction.COURSES_TOPICS_LECTURE_ACTIVITIES_GET, payload: id });
+    dispatch({ type: SagaAction.COURSES_TOPICS_LECTURE_ASSIGNMENT_GET, payload: id });
     dispatch({ type: SagaAction.COURSES_TOPIC_GET, payload: id });
   };
 
@@ -49,11 +50,13 @@ const Course = () => {
     <CourseSidebar onClick={() => onTopicClick(topic.id)} key={topic.id} data={topic} />
   ));
 
-  const renderedCourseTopics = courseTopicsActivities?.map((activities) => {
-    if (activities.type == CourseActivityTypeEnum.LECTURE) {
-      return <CardLecture key={activities.id} data={activities} />;
-    }
-  });
+  const renderedTopicsLecture = courseActivitiesLecture?.map((activities) => (
+    <CardLecture key={activities.id} data={activities} />
+  ));
+
+  const renderedTopicsAssigment = courseActivitiesAssignment?.map((activities) => (
+    <PracticalLecture key={activities.id} data={activities} />
+  ));
 
   const renderButton = (title: string, modal: any) => {
     return (
@@ -89,15 +92,16 @@ const Course = () => {
             )}
           </div>
           <div className='course-page__task'>
-            {!courseTopicsActivities ? (
+            {!renderedTopicsLecture || !renderedTopicsAssigment ? (
               <Empty description={<span className='empty-title'>Виберіть тему</span>} />
             ) : (
               <>
-                {courseTopicsActivities?.length == 0 ? (
+                {renderedTopicsLecture?.length == 0 && renderedTopicsAssigment?.length == 0 ? (
                   <>{renderButton('Матеріал відсутній', handleMaterialShow)}</>
                 ) : (
                   <>
-                    {renderedCourseTopics}
+                    {renderedTopicsLecture}
+                    {renderedTopicsAssigment}
                     {user?.role == UserRoleEnum.TEACHER && (
                       <div className='box-create-activity'>
                         <div className='box-card-create-activity'>
