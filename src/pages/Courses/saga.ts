@@ -14,6 +14,9 @@ import {
   createCoursesTopicActivity,
   setCourseTopicActivitiesAssignment,
   setCourseTopicActivitiesLecture,
+  createCoursesParticipant,
+  setCoursesParticipants,
+  deleteCourseParticipant,
 } from '../../store/courses.slice';
 
 interface Topic {
@@ -25,6 +28,11 @@ interface Activity {
   courseTopicId: string;
   title: string;
   type: CourseActivityTypeEnum;
+}
+
+interface Paricipant {
+  courseId: string;
+  id: string;
 }
 
 function* getCourses() {
@@ -92,6 +100,26 @@ function* createActivity(action: ReduxAction<Activity>) {
   yield put(createCoursesTopicActivity(response.data.data));
 }
 
+function* getParticipants(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `courses/${action.payload}/participants`);
+  if (response.error) return;
+  yield put(setCoursesParticipants(response.data.data.result));
+}
+
+function* createParticipant(action: ReduxAction<Paricipant>) {
+  if (!action.payload) return;
+  const { courseId, id } = action.payload;
+  const response: APIResponse = yield call(Api.post, `courses/${courseId}/participants`, { id });
+  if (response.error) return;
+  yield put(createCoursesParticipant(response.data.data));
+}
+
+function* deleteParticipant(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.delete, `courses/participants/${action.payload}`);
+  if (response.error) return;
+  yield put(deleteCourseParticipant(action.payload));
+}
+
 function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_GET, getCourses);
   yield takeLatest(SagaAction.COURSE_GET, getCourse);
@@ -102,6 +130,9 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ACTIVITIES_GET, getLectureActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ASSIGNMENT_GET, getAssignmentActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_CREATE, createActivity);
+  yield takeLatest(SagaAction.COURSES_GET_PARTICIPANTS, getParticipants);
+  yield takeLatest(SagaAction.COURSES_CREATE_PARTICIPANTS, createParticipant);
+  yield takeLatest(SagaAction.COURSES_DELETE_PARTICIPANTS, deleteParticipant);
 }
 
 const coursesSagas = [fork(watchRequests)];

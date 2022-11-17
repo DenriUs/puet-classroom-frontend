@@ -1,6 +1,6 @@
 import { Layout, Empty, Button } from 'antd';
 import { useEffect, useState } from 'react';
-import { CourseActivityTypeEnum, SagaAction, UserRoleEnum } from '../../../common/types';
+import { SagaAction, UserRoleEnum } from '../../../common/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { useParams } from 'react-router';
 
@@ -10,9 +10,9 @@ import CourseHeader from '../../../components/courseHeader/CourseHeader';
 import CourseSidebar from '../../../components/courseSidebar/CourseSidebar';
 import PracticalLecture from '../../../components/practicalLecture/PracticalLecture';
 import TopicModal from '../../../components/modals/topic/Topic';
+import MaterialModal from '../../../components/modals/material/Material';
 
 import './CourseDetails.scss';
-import MaterialModal from '../../../components/modals/material/Material';
 
 const Course = () => {
   const [showAddTopic, setShowTopic] = useState(false);
@@ -29,7 +29,6 @@ const Course = () => {
     useAppSelector((state) => state.coursesReducer);
 
   const { user } = useAppSelector((state) => state.authReducer);
-
 
   const dispatch = useAppDispatch();
 

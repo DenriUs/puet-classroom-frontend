@@ -51,5 +51,5 @@ export const loadData = <T = any>(
 export const getUserShortName = (teacher: Partial<UserEntity>) =>
   `${teacher.firstName} ${teacher.lastName}`;
 
-export const getTeacherFullName = (teacher: Partial<UserEntity>) =>
+export const getUserFullName = (teacher: Partial<UserEntity>) =>
   `${teacher.lastName} ${teacher.firstName} ${teacher.middleName}`;

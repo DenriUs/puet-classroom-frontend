@@ -116,24 +116,32 @@
 // tabs
 
 .ant-tabs-tab {
-  font-size: max(1.6vw, 20px);
-  font-weight: 700;
+  font-size: max(1.1vw, 14px);
+  font-weight: 500;
 }
 
 .ant-tabs-tab:hover {
-  color: #000000;
+  color: rgba(36, 41, 47, 0.85);
 }
 
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #000000;
+  font-weight: 600;
+  color: rgba(36, 41, 47, 1);
 }
 
 .ant-tabs-ink-bar {
-  background: #e34c33;
+  background: #254664;
+  border-right: 6px solid #254664;
+  border-radius: 10px;
 }
 
 .ant-tabs-tab + .ant-tabs-tab {
   margin: 0 0 0 93px;
+}
+
+.ant-tabs-content-holder {
+  border-left: 6px solid #e7e7e7 !important;
+  margin-left: -6px !important;
 }
 
 // road
