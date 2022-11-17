@@ -1,0 +1,30 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.course-students {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+
+  &__title {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin: 25px 45px 30px 45px;
+    @extend %main-title;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__form {
+    display: grid;
+    align-items: center;
+    justify-items: left;
+    margin: 0 0 0 15px;
+  }
+}
+
+.grade-students-select {
+  margin-top: 5px;
+  width: 300px;
+}

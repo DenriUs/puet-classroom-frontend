@@ -6,25 +6,30 @@ import {
 } from '@ant-design/icons';
 import { Button, Dropdown, Menu } from 'antd';
 import { String2HexCodeColor } from 'string-to-hex-code-color';
-import { UserOutlined, SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 
 import './CourseHeader.scss';
 
 import profileIcon from '../../assets/profileIcon.png';
 import diplomaImg from '../../assets/diploma.png';
 import { UserRoleEnum } from '../../common/types';
-import { getTeacherFullName } from '../../common/helpers';
+import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
+import { useState } from 'react';
+import SettingModal from '../modals/settings/Settings';
 
 const colorCard = new String2HexCodeColor(0.5);
 
 const CourseHeader = () => {
+  const [showSettings, setShowSettings] = useState(false);
   const { course } = useAppSelector((state) => state.coursesReducer);
+  const { user } = useAppSelector((state) => state.authReducer);
 
   if (!course) return <AppLoader />;
 
-  const { user } = useAppSelector((state) => state.authReducer);
+  const handleSettingsClose = () => setShowSettings(false);
+  const handleSettingsShow = () => setShowSettings(true);
 
   const menu = (
     <Menu
@@ -54,7 +59,7 @@ const CourseHeader = () => {
       <div className='course-header__author-container'>
         <img src={profileIcon} className='image-author' alt='name' />
         <span className='name'>
-          {getTeacherFullName(course?.teacher)}
+          {getUserFullName(course?.teacher)}
           <Dropdown overlay={menu} placement='bottomLeft' className='drop-down'>
             <CaretDownOutlined className='icon' />
           </Dropdown>
@@ -69,11 +74,19 @@ const CourseHeader = () => {
         Приєднатися
       </Button>
       {user?.role == UserRoleEnum.TEACHER && (
-        <div className='course-header__buttons-container'>
-          <Button className='course-header__button-teacher' shape='circle' type='primary'>
-            <SettingOutlined className='button__icon' />
-          </Button>
-        </div>
+        <>
+          <div className='course-header__buttons-container'>
+            <Button
+              className='course-header__button-teacher'
+              shape='circle'
+              type='primary'
+              onClick={handleSettingsShow}
+            >
+              <SettingOutlined className='button__icon' />
+            </Button>
+          </div>
+          <SettingModal onStart={showSettings} handleClose={handleSettingsClose} />
+        </>
       )}
       <div className='course-header__design-container'>
         <img src={diplomaImg} alt='name' className='course-header__image' />

@@ -66,7 +66,7 @@ export interface CourseParticipantEntity {
   user: Partial<UserEntity>;
   // eslint-disable-next-line no-use-before-define
   course: Partial<CourseEntity>;
-  passedAssignments: Partial<CoursePassedAssignmentEntity>[];
+
   createdAt: Date;
   updatedAt: Date;
 }

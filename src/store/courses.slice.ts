@@ -4,6 +4,7 @@ import {
   CourseActivityEntity,
   CourseActivityTypeEnum,
   CourseEntity,
+  CourseParticipantEntity,
   TopicEntity,
 } from '../common/types';
 
@@ -14,6 +15,7 @@ export interface CoursesState {
   courseTopic?: TopicEntity;
   courseActivitiesLecture?: CourseActivityEntity[];
   courseActivitiesAssignment?: CourseActivityEntity[];
+  courseParticipants?: CourseParticipantEntity[];
 }
 
 const getInitialState = (): CoursesState => ({});
@@ -55,6 +57,18 @@ const coursesSlice = createSlice({
         state.courseActivitiesAssignment?.push(action.payload);
       }
     },
+    setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
+      state.courseParticipants = action.payload;
+    },
+    createCoursesParticipant: (state, action: PayloadAction<CourseParticipantEntity>) => {
+      state.courseParticipants?.push(action.payload);
+    },
+    deleteCourseParticipant: (state, action: PayloadAction<string | undefined>) => {
+      const newParticipants = state.courseParticipants?.filter(
+        (paticipant) => paticipant.id !== action.payload,
+      );
+      state.courseParticipants = newParticipants;
+    },
   },
 });
 
@@ -68,6 +82,9 @@ export const {
   setCourseTopicActivitiesAssignment,
   createCoursesTopic,
   createCoursesTopicActivity,
+  setCoursesParticipants,
+  createCoursesParticipant,
+  deleteCourseParticipant,
 } = coursesSlice.actions;
 
 export const coursesReducer = coursesSlice.reducer;
