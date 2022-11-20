@@ -35,6 +35,10 @@ const coursesSlice = createSlice({
     createCourses: (state, action: PayloadAction<CourseEntity>) => {
       state.courses?.push(action.payload);
     },
+    deleteCourses: (state, action: PayloadAction<string | undefined>) => {
+      const newCourses = state.courses?.filter((course) => course.id !== action.payload);
+      state.courses = newCourses;
+    },
     setCourseTopics: (state, action: PayloadAction<TopicEntity[]>) => {
       state.courseTopics = action.payload;
     },
@@ -43,6 +47,12 @@ const coursesSlice = createSlice({
     },
     createCoursesTopic: (state, action: PayloadAction<TopicEntity>) => {
       state.courseTopics?.push(action.payload);
+    },
+    deleteCourseTopic: (state, action: PayloadAction<string | undefined>) => {
+      const newTopics = state.courseTopics?.filter(
+        (paticipant) => paticipant.id !== action.payload,
+      );
+      state.courseTopics = newTopics;
     },
     setCourseTopicActivitiesLecture: (state, action: PayloadAction<CourseActivityEntity[]>) => {
       state.courseActivitiesLecture = action.payload;
@@ -55,6 +65,19 @@ const coursesSlice = createSlice({
         state.courseActivitiesLecture?.push(action.payload);
       } else {
         state.courseActivitiesAssignment?.push(action.payload);
+      }
+    },
+    deleteCourseActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
+      if (action.payload.type == CourseActivityTypeEnum.LECTURE) {
+        const newLectures = state.courseActivitiesLecture?.filter(
+          (lectures) => lectures.id !== action.payload.id,
+        );
+        state.courseActivitiesLecture = newLectures;
+      } else {
+        const newAssignment = state.courseActivitiesAssignment?.filter(
+          (assignments) => assignments.id !== action.payload.id,
+        );
+        state.courseActivitiesAssignment = newAssignment;
       }
     },
     setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
@@ -76,11 +99,14 @@ export const {
   setCourses,
   setCourse,
   createCourses,
+  deleteCourses,
   setCourseTopics,
   setCourseTopic,
   setCourseTopicActivitiesLecture,
   setCourseTopicActivitiesAssignment,
+  deleteCourseActivity,
   createCoursesTopic,
+  deleteCourseTopic,
   createCoursesTopicActivity,
   setCoursesParticipants,
   createCoursesParticipant,

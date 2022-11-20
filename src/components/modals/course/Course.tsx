@@ -31,7 +31,7 @@ const CourseModal = (props: IProps) => {
   const dispatch = useAppDispatch();
 
   const handleCourseSubmit = (data: CourseSchemaType) => {
-    dispatch({ type: SagaAction.COURSES_CREATE, payload: data });
+    dispatch({ type: SagaAction.COURSE_CREATE, payload: data });
     handleClose();
     showSuccessMessage('Курс успішно додано!');
   };

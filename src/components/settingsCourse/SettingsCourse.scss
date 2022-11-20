@@ -1,0 +1,43 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.setting-course {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+
+  &__title-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    justify-items: center;
+  }
+
+  &__edit-container {
+    display: grid;
+    justify-content: center;
+    margin: 20px 0 0 15px;
+    width: 100%;
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: center;
+    margin-top: 50px;
+  }
+
+  &__button-course {
+    width: 45px;
+    height: 45px;
+    margin-right: 80px;
+    @extend %button-title;
+  }
+}
+
+.setting-input-course {
+  width: 400px;
+}
+
+.setting-course-title {
+  padding-left: 130px;
+  margin: 25px 0 30px 0;
+  @extend %main-title;
+}

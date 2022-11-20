@@ -17,6 +17,9 @@ import {
   createCoursesParticipant,
   setCoursesParticipants,
   deleteCourseParticipant,
+  deleteCourseTopic,
+  deleteCourses,
+  deleteCourseActivity,
 } from '../../store/courses.slice';
 
 interface Topic {
@@ -51,6 +54,12 @@ function* createCourse(action: ReduxAction<string>) {
   yield put(createCourses(response.data.data));
 }
 
+function* deleteСourse(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.delete, `courses/${action.payload}`);
+  if (response.error) return;
+  yield put(deleteCourses(action.payload));
+}
+
 function* getTopics(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.get, `courses/${action.payload}/topics`);
   if (response.error) return;
@@ -69,6 +78,12 @@ function* createTopic(action: ReduxAction<Topic>) {
   const response: APIResponse = yield call(Api.post, `courses/${id}/topics`, { title });
   if (response.error) return;
   yield put(createCoursesTopic(response.data.data));
+}
+
+function* deleteTopic(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.delete, `courses/topics/${action.payload}`);
+  if (response.error) return;
+  yield put(deleteCourseTopic(action.payload));
 }
 
 function* getLectureActivities(action: ReduxAction<string>) {
@@ -100,6 +115,16 @@ function* createActivity(action: ReduxAction<Activity>) {
   yield put(createCoursesTopicActivity(response.data.data));
 }
 
+function* deleteActivity(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(
+    Api.delete,
+    `courses/topics/activities/${action.payload}`,
+  );
+  if (response.error) return;
+  const id = action.payload;
+  yield put(deleteCourseActivity({ id, ...response.data.data }));
+}
+
 function* getParticipants(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.get, `courses/${action.payload}/participants`);
   if (response.error) return;
@@ -123,16 +148,19 @@ function* deleteParticipant(action: ReduxAction<string>) {
 function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_GET, getCourses);
   yield takeLatest(SagaAction.COURSE_GET, getCourse);
-  yield takeLatest(SagaAction.COURSES_CREATE, createCourse);
+  yield takeLatest(SagaAction.COURSE_CREATE, createCourse);
+  yield takeLatest(SagaAction.COURSE_DELETE, deleteСourse);
   yield takeLatest(SagaAction.COURSES_TOPICS_GET, getTopics);
   yield takeLatest(SagaAction.COURSES_TOPIC_GET, getTopic);
   yield takeLatest(SagaAction.COURSES_TOPICS_CREATE, createTopic);
+  yield takeLatest(SagaAction.COURSES_TOPIC_DELETE, deleteTopic);
   yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ACTIVITIES_GET, getLectureActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ASSIGNMENT_GET, getAssignmentActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_CREATE, createActivity);
-  yield takeLatest(SagaAction.COURSES_GET_PARTICIPANTS, getParticipants);
-  yield takeLatest(SagaAction.COURSES_CREATE_PARTICIPANTS, createParticipant);
-  yield takeLatest(SagaAction.COURSES_DELETE_PARTICIPANTS, deleteParticipant);
+  yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, deleteActivity);
+  yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);
+  yield takeLatest(SagaAction.COURSES_PARTICIPANTS_CREATE, createParticipant);
+  yield takeLatest(SagaAction.COURSES_PARTICIPANTS_DELETE, deleteParticipant);
 }
 
 const coursesSagas = [fork(watchRequests)];

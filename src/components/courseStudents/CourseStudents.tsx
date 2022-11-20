@@ -21,7 +21,7 @@ const CourseStudents = () => {
   }, [dispatch]);
 
   const handleCourseStudentSubmit = (id: string) => {
-    dispatch({ type: SagaAction.COURSES_CREATE_PARTICIPANTS, payload: { courseId, id } });
+    dispatch({ type: SagaAction.COURSES_PARTICIPANTS_CREATE, payload: { courseId, id } });
     showSuccessMessage('Cтудента на курс успішно додано!');
   };
 
