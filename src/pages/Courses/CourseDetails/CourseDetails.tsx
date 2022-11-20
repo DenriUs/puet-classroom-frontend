@@ -57,7 +57,7 @@ const Course = () => {
     <PracticalLecture key={activities.id} data={activities} />
   ));
 
-  const renderButton = (title: string, modal: any) => {
+  const renderButton = (title: string, modal: () => void) => {
     return (
       <div className='topic-empty'>
         <Empty description={<span className='empty-title'>{title}</span>} />

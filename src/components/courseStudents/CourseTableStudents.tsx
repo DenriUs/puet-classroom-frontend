@@ -21,12 +21,12 @@ const CourseTableStudents = () => {
   const dispatch = useAppDispatch();
 
   const handleCourseStudentDelete = (id: string) => {
-    dispatch({ type: SagaAction.COURSES_DELETE_PARTICIPANTS, payload: id });
+    dispatch({ type: SagaAction.COURSES_PARTICIPANTS_DELETE, payload: id });
     showSuccessMessage('Cтудента видалено з курсу!');
   };
 
   useEffect(() => {
-    dispatch({ type: SagaAction.COURSES_GET_PARTICIPANTS, payload: courseId });
+    dispatch({ type: SagaAction.COURSES_PARTICIPANTS_GET, payload: courseId });
   }, [dispatch]);
 
   const showDeleteConfirm = (id: string) => {
@@ -79,7 +79,7 @@ const CourseTableStudents = () => {
   return (
     <Table
       pagination={{
-        defaultPageSize: 10,
+        defaultPageSize: 6,
       }}
       columns={coursesStudentsColumns}
       dataSource={tableData}

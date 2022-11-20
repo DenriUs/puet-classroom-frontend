@@ -1,5 +1,6 @@
 import { TeamOutlined, SettingOutlined, ReconciliationOutlined } from '@ant-design/icons';
 import CourseStudents from '../../courseStudents/CourseStudents';
+import SettingsCourse from '../../settingsCourse/SettingsCourse';
 
 export const tabsItems = [
   {
@@ -17,7 +18,7 @@ export const tabsItems = [
   {
     label: `Налаштування`,
     key: '3',
-    children: [],
+    children: [<SettingsCourse />],
     icon: <SettingOutlined />,
   },
 ];
