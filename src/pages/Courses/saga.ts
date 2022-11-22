@@ -20,6 +20,7 @@ import {
   deleteCourseTopic,
   deleteCourses,
   deleteCourseActivity,
+  resetCourse,
 } from '../../store/courses.slice';
 
 interface Topic {
@@ -145,6 +146,10 @@ function* deleteParticipant(action: ReduxAction<string>) {
   yield put(deleteCourseParticipant(action.payload));
 }
 
+function* resetCourses() {
+  yield put(resetCourse());
+}
+
 function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_GET, getCourses);
   yield takeLatest(SagaAction.COURSE_GET, getCourse);
@@ -161,6 +166,7 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_CREATE, createParticipant);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_DELETE, deleteParticipant);
+  yield takeLatest(SagaAction.COURSES_RESET, resetCourses);
 }
 
 const coursesSagas = [fork(watchRequests)];

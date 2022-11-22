@@ -92,6 +92,9 @@ const coursesSlice = createSlice({
       );
       state.courseParticipants = newParticipants;
     },
+    resetCourse: () => {
+      return initialState;
+    },
   },
 });
 
@@ -111,6 +114,7 @@ export const {
   setCoursesParticipants,
   createCoursesParticipant,
   deleteCourseParticipant,
+  resetCourse,
 } = coursesSlice.actions;
 
 export const coursesReducer = coursesSlice.reducer;
