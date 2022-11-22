@@ -19,12 +19,12 @@ import AppLoader from '../AppLoader';
 import { useState } from 'react';
 import SettingModal from '../modals/settings/Settings';
 
-const colorCard = new String2HexCodeColor(0.5);
-
 const CourseHeader = () => {
   const [showSettings, setShowSettings] = useState(false);
   const { course } = useAppSelector((state) => state.coursesReducer);
   const { user } = useAppSelector((state) => state.authReducer);
+
+  const colorCard = new String2HexCodeColor(0.5);
 
   if (!course) return <AppLoader />;
 

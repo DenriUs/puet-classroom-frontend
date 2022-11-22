@@ -43,6 +43,12 @@ const Course = () => {
     dispatch({ type: SagaAction.COURSES_TOPICS_GET, payload: id });
   }, [dispatch]);
 
+  useEffect(() => {
+    return () => {
+      dispatch({ type: SagaAction.COURSES_RESET });
+    };
+  }, []);
+
   if (!course) return <AppLoader />;
 
   const renderedTopics = courseTopics?.map((topic) => (
