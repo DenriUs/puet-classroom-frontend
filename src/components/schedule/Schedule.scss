@@ -3,12 +3,12 @@
 .schedule {
   @extend %card;
   display: grid;
-  margin: 40px 40px 40px 40px;
+  margin: 40px 20px;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 5fr;
   align-items: start;
   justify-items: start;
-  padding: 30px 40px;
+  padding: 20px 25px;
 
   &__title {
     display: grid;
@@ -16,10 +16,12 @@
     font-size: max(14px, 16px);
     color: #828282;
   }
-}
 
-@media (max-width: 768px) {
-  .schedule {
+  @media (max-width: 1486px) {
+    margin: 40px 40px;
+  }
+
+  @media (max-width: 768px) {
     margin-bottom: 0;
   }
 }

@@ -1,0 +1,49 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.meeting {
+  @extend %card;
+  display: grid;
+  margin: 40px 40px 40px 20px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px 100px 150px;
+  padding: 30px 40px;
+
+  &__title {
+    display: grid;
+    font-weight: 400;
+    font-size: max(14px, 16px);
+    color: #828282;
+  }
+
+  &__select-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  &__select {
+    width: 80%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__button-connect {
+    height: 45px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1486px) {
+    margin: 40px 40px;
+  }
+}
