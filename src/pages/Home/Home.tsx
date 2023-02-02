@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxhooks';
 import { useNavigate } from 'react-router';
-import { SagaAction } from '../../common/types';
+import { SagaAction, UserRoleEnum } from '../../common/types';
 
 import './Home.scss';
 
@@ -11,9 +11,12 @@ import Schedule from '../../components/schedule/Schedule';
 import Course from '../../components/course/Course';
 import CurrentActivity from '../../components/currentActivity/CurrentActivity';
 import AppLoader from '../../components/AppLoader';
+import CardStatistics from '../../components/cardStatistics/CardStatistics';
+import Meetings from '../../components/meetings/Meetings';
 
 const Home = () => {
   const { courses } = useAppSelector((state) => state.coursesReducer);
+  const { user } = useAppSelector((state) => state.authReducer);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -23,6 +26,8 @@ const Home = () => {
   useEffect(() => {
     dispatch({ type: SagaAction.COURSES_GET });
   }, [dispatch]);
+
+  if (!user) return <AppLoader />;
 
   const renderedCourses = courses?.map((course) => (
     <Course onClick={() => onCourseClick(course.id)} key={course.id} data={course} />
@@ -35,8 +40,11 @@ const Home = () => {
         <span>Головна сторінка</span>
       </div>
       <div className='home-page'>
+        <div className='container-statistics'>
+          <CardStatistics />
+        </div>
         <Schedule />
-        <CurrentActivity />
+        {user?.role == UserRoleEnum.TEACHER ? <Meetings /> : <CurrentActivity />}
       </div>
       <div className='course'>
         <div className='course__title-container'>

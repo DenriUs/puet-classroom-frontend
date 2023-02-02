@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { SagaAction, UserRoleEnum } from '../../../common/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { useParams } from 'react-router';
+import { PlusOutlined } from '@ant-design/icons';
 
 import AppLoader from '../../../components/AppLoader';
 import CardLecture from '../../../components/cardLecture/CardLecture';
@@ -68,11 +69,9 @@ const Course = () => {
       <div className='topic-empty'>
         <Empty description={<span className='empty-title'>{title}</span>} />
         {user?.role == UserRoleEnum.TEACHER && (
-          <>
-            <Button type='primary' shape='round' className='button-create-topic' onClick={modal}>
-              Додати
-            </Button>
-          </>
+          <Button type='primary' shape='round' className='button-create-topic' onClick={modal}>
+            Додати
+          </Button>
         )}
       </div>
     );
@@ -89,11 +88,12 @@ const Course = () => {
             <div className='smartphone-menu-trigger'></div>
             {renderedTopics}
             {user?.role == UserRoleEnum.TEACHER && (
-              <>
-                <div className='button-topic-add' onClick={handleTopicShow}>
-                  Додати
+              <div className='button-topic-add' onClick={handleTopicShow}>
+                <div>
+                  <PlusOutlined />
+                  <span className='sidebar-button-title'>Додати</span>
                 </div>
-              </>
+              </div>
             )}
           </div>
           <div className='course-page__task'>

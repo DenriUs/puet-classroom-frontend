@@ -4,6 +4,7 @@ import { String2HexCodeColor } from 'string-to-hex-code-color';
 
 import './Course.scss';
 import hatIcon from '../../global/images/icons/hat.svg';
+import test from '../../global/images/icons/Atom.png';
 import { CourseEntity, UserRoleEnum } from '../../common/types';
 import { getUserShortName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
@@ -40,11 +41,14 @@ const Course = (props: Props) => {
           {user?.role == UserRoleEnum.STUDENT ? getUserShortName(teacher) : group}
         </span>
       </div>
-      <div className='progress-container'>
+      <div className='course-card__image-container'>
+        <img src={test} alt='name' className='course-card__image' />
+      </div>
+      <div className='course-card__progress-container'>
         <Progress
+          type='line'
           strokeColor={colorProgress.stringToColor(name)}
           trailColor='rgba(255, 255, 255, 0.54)'
-          type='circle'
           percent={40}
         />
       </div>

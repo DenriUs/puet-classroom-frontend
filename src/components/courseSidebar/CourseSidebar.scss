@@ -1,28 +1,56 @@
 .course-sidebar {
   margin-left: 15px;
   margin-top: 15px;
-  border-bottom: 1px solid #d9d9d9;
+  margin-right: 15px;
+  background: #ffffff;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  border: 1px solid #dddddd;
+  cursor: pointer;
 
   &__container {
     display: grid;
     grid-auto-flow: column;
+    grid-template-columns: 1fr 0.1fr 0.15fr;
   }
 
   &__title {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
     padding: 15px 0 10px 15px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: max(14px, 16px);
-    color: rgba(0, 0, 0, 0.85);
-    cursor: pointer;
+    color: #828282;
     word-wrap: break-word;
     word-break: break-all;
   }
 
   &__button {
     display: grid;
-    justify-items: end;
+    justify-items: center;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
   }
+}
+
+.course-sidebar:hover {
+  background: #254664;
+
+  .course-sidebar__title {
+    color: #ffffff;
+  }
+
+  .course-sidebar-icon {
+    color: #ffffff;
+  }
+}
+
+.book-mark-icon {
+  font-size: 20px;
+  padding-right: 10px;
+}
+
+.course-sidebar-icon {
+  color: #828282;
+  font-size: 20px;
 }
