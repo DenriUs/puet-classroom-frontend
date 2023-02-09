@@ -1,23 +1,25 @@
 import {
   PlayCircleOutlined,
-  CaretDownOutlined,
   PhoneOutlined,
   MailOutlined,
+  SettingOutlined,
+  InfoCircleOutlined,
+  VideoCameraAddOutlined,
+  LeftOutlined,
 } from '@ant-design/icons';
-import { Button, Dropdown, Menu } from 'antd';
+import { Button, Dropdown, Menu, Progress } from 'antd';
 import { String2HexCodeColor } from 'string-to-hex-code-color';
-import { SettingOutlined } from '@ant-design/icons';
 
 import './CourseHeader.scss';
 
-import profileIcon from '../../assets/profileIcon.png';
-import diplomaImg from '../../assets/diploma.png';
+import test from '../../global/images/icons/Atom.png';
 import { UserRoleEnum } from '../../common/types';
 import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
 import { useState } from 'react';
 import SettingModal from '../modals/settings/Settings';
+import { description, statistics } from './constant';
 
 const CourseHeader = () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -48,48 +50,92 @@ const CourseHeader = () => {
     />
   );
 
+  const color = {
+    borderColor: colorCard.stringToColor(course.name),
+  };
+
   return (
-    <div
-      className='course-header'
-      style={{ backgroundColor: colorCard.stringToColor(course.name) }}
-    >
-      <div className='course-header__name-container'>
-        <span className='textt'>{course?.name}</span>
-      </div>
-      <div className='course-header__author-container'>
-        <img src={profileIcon} className='image-author' alt='name' />
-        <span className='name'>
-          {getUserFullName(course?.teacher)}
+    <div className='course-header' style={color}>
+      <div className='course-header__course-title-container'>
+        <div className='course-header__course-name-container'>
+          <LeftOutlined className='icon-back' />
+          <span className='course-header__course-name'>{course?.name}</span>
+        </div>
+        <div className='course-header__author-container'>
+          <span className='course-header__author-name'>{getUserFullName(course?.teacher)}</span>
           <Dropdown overlay={menu} placement='bottomLeft' className='drop-down'>
-            <CaretDownOutlined className='icon' />
+            <InfoCircleOutlined className='icon-info' />
           </Dropdown>
-        </span>
+        </div>
       </div>
-      <Button
-        type='primary'
-        shape='round'
-        icon={<PlayCircleOutlined className='icon' />}
-        className='course-header__button-connect'
-      >
-        Приєднатися
-      </Button>
-      {user?.role == UserRoleEnum.TEACHER && (
-        <>
-          <div className='course-header__buttons-container'>
+      <div className='course-header__statistics-container'>
+        {statistics.map((statistic) => (
+          <div className='course-header__statistic statistic'>
+            {statistic.icon}
+            <span className='statistic__text'>{statistic.number}</span>
+            <span className='statistic__text'>{statistic.title}</span>
+          </div>
+        ))}
+      </div>
+      <div className='course-header__description-container'>
+        <div className='course-header__description' style={color}>
+          {description}
+        </div>
+      </div>
+      <div>
+        {user?.role == UserRoleEnum.TEACHER ? (
+          <>
+            <div className='course-header__buttons-container'>
+              <Button
+                className='course-header__button-create-meet'
+                type='primary'
+                shape='round'
+                icon={<VideoCameraAddOutlined className='icon' />}
+              >
+                Розпочати зустріч
+              </Button>
+              <Button
+                className='course-header__button-settings'
+                icon={<SettingOutlined className='icon' />}
+                shape='circle'
+                type='primary'
+                onClick={handleSettingsShow}
+              >
+                Налаштування
+              </Button>
+            </div>
+            <SettingModal onStart={showSettings} handleClose={handleSettingsClose} />
+          </>
+        ) : (
+          <div className='course-header__button-connect-container'>
             <Button
-              className='course-header__button-teacher'
-              shape='circle'
+              className='course-header__button-connect'
               type='primary'
-              onClick={handleSettingsShow}
+              shape='round'
+              icon={<PlayCircleOutlined className='icon' />}
             >
-              <SettingOutlined className='button__icon' />
+              Приєднатися
             </Button>
           </div>
-          <SettingModal onStart={showSettings} handleClose={handleSettingsClose} />
-        </>
+        )}
+      </div>
+      {user?.role == UserRoleEnum.STUDENT && (
+        <div className='course-header__progress_container'>
+          <div className='course-header__progress-title'>
+            <span className='course-progress__name'>Прогрес курсу</span>
+            <span className='course-progress__count'>25 / 30 завдань</span>
+          </div>
+          <Progress
+            type='line'
+            strokeColor={colorCard.stringToColor(course.name)}
+            trailColor='rgba(199, 212, 224, 1)'
+            percent={70}
+            showInfo={false}
+          />
+        </div>
       )}
       <div className='course-header__design-container'>
-        <img src={diplomaImg} alt='name' className='course-header__image' />
+        <img src={test} alt='name' className='course-header__image' />
       </div>
     </div>
   );

@@ -31,7 +31,7 @@
 }
 
 %button-title {
-  font-size: 17px;
+  font-size: 15px;
   color: #ffffff;
   font-weight: 600;
 }
@@ -49,4 +49,12 @@
   margin-right: 32px;
   font-size: 30px;
   color: #e34c33;
+}
+
+$maxWidth: 1440;
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidth: $maxWidth - 414;
+  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 414px) / #{$maxWidth}));
 }
