@@ -1,6 +1,7 @@
-import { Button, Input, Modal, Select } from 'antd';
+import { Button, Input, Modal, Select, Upload } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 import './Course.scss';
 
@@ -10,6 +11,8 @@ import { courseSchema } from './schemas';
 import { CourseSchemaType } from './type';
 import { SagaAction } from '../../../common/types';
 import { showSuccessMessage } from '../../../common/helpers';
+import TextArea from 'antd/lib/input/TextArea';
+import { useState } from 'react';
 
 interface IProps {
   onStart: boolean;
@@ -17,6 +20,7 @@ interface IProps {
 }
 
 const CourseModal = (props: IProps) => {
+  const [loading, setLoading] = useState(false);
   const { onStart, handleClose } = props;
   const {
     control,
@@ -36,8 +40,15 @@ const CourseModal = (props: IProps) => {
     showSuccessMessage('Курс успішно додано!');
   };
 
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
-    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={530}>
+    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={630}>
       <div className='course-modal'>
         <div className='course-modal__title-container'>Додати курс</div>
         <form className='course-modal__form-container' onSubmit={handleSubmit(handleCourseSubmit)}>
@@ -85,6 +96,28 @@ const CourseModal = (props: IProps) => {
               />
             </label>
             {errors.group && <p className='form-error-label'>{errors.group.message}</p>}
+          </div>
+          <div className='course-modal__area-container'>
+            <TextArea
+              className='course-modal__area'
+              placeholder='Опис курсу'
+              showCount
+              rows={3}
+              maxLength={360}
+            />
+          </div>
+          <div className='course-modal__image-container'>
+            <div>
+              Оформлення
+            </div>
+            <Upload
+              name='avatar'
+              listType='picture-card'
+              className='course-modal__upload'
+              showUploadList={false}
+            >
+              {uploadButton}
+            </Upload>
           </div>
           <div className='course-modal__button-container'>
             <Button
