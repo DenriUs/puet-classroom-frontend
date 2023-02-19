@@ -11,6 +11,7 @@ import Settings from './Settings/Settings';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks/reduxhooks';
 import { SagaAction } from '../common/types';
+import CourseSettings from './Courses/CourseSettings/CourseSettings';
 
 const MainRoutes = () => {
   const isAuthorized = getFromLocalStorage('token');
@@ -35,6 +36,7 @@ const MainRoutes = () => {
         <Route path='files' element={<Files />} />
         <Route path='settings' element={<Settings />} />
         <Route path='courses/:id' element={<CourseDetails />} />
+        <Route path='courses/:id/settings' element={<CourseSettings />} />
         <Route path='*' element={<Navigate to='/main/home' />} />
       </Routes>
     </LayoutPage>

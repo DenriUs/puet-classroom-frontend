@@ -69,7 +69,7 @@ const TopicModal = (props: IProps) => {
               htmlType='submit'
               className='topic-modal__button button'
             >
-              Створити
+              Додати
             </Button>
           </div>
         </form>

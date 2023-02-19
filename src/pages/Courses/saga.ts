@@ -12,8 +12,7 @@ import {
   createCoursesTopic,
   setCourseTopic,
   createCoursesTopicActivity,
-  setCourseTopicActivitiesAssignment,
-  setCourseTopicActivitiesLecture,
+  setCourseTopicActivities,
   createCoursesParticipant,
   setCoursesParticipants,
   deleteCourseParticipant,
@@ -83,26 +82,15 @@ function* createTopic(action: ReduxAction<Topic>) {
 
 function* deleteTopic(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.delete, `courses/topics/${action.payload}`);
+  console.log(response);
   if (response.error) return;
   yield put(deleteCourseTopic(action.payload));
 }
 
-function* getLectureActivities(action: ReduxAction<string>) {
-  const response: APIResponse = yield call(
-    Api.get,
-    `courses/topics/${action.payload}/activities?type=LECTURE`,
-  );
+function* getActivities(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `courses/topics/${action.payload}/activities`);
   if (response.error) return;
-  yield put(setCourseTopicActivitiesLecture(response.data.data.result));
-}
-
-function* getAssignmentActivities(action: ReduxAction<string>) {
-  const response: APIResponse = yield call(
-    Api.get,
-    `courses/topics/${action.payload}/activities?type=ASSIGNMENT`,
-  );
-  if (response.error) return;
-  yield put(setCourseTopicActivitiesAssignment(response.data.data.result));
+  yield put(setCourseTopicActivities(response.data.data.result));
 }
 
 function* createActivity(action: ReduxAction<Activity>) {
@@ -159,8 +147,7 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPIC_GET, getTopic);
   yield takeLatest(SagaAction.COURSES_TOPICS_CREATE, createTopic);
   yield takeLatest(SagaAction.COURSES_TOPIC_DELETE, deleteTopic);
-  yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ACTIVITIES_GET, getLectureActivities);
-  yield takeLatest(SagaAction.COURSES_TOPICS_LECTURE_ASSIGNMENT_GET, getAssignmentActivities);
+  yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITIES_GET, getActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_CREATE, createActivity);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, deleteActivity);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);

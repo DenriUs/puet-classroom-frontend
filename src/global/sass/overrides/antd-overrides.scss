@@ -126,7 +126,7 @@
 
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   font-weight: 600;
-  color: rgba(36, 41, 47, 1);
+  color: #254664;
 }
 
 .ant-tabs-ink-bar {
@@ -142,6 +142,10 @@
 .ant-tabs-content-holder {
   border-left: 6px solid #e7e7e7 !important;
   margin-left: -6px !important;
+}
+
+.ant-tabs-nav {
+  height: 78vh;
 }
 
 // road
@@ -184,4 +188,11 @@
 
 .ant-empty-image {
   height: 150px;
+}
+
+//table
+
+.ant-table-thead > tr > th {
+  font-weight: 700 !important;
+  font-size: 16px;
 }

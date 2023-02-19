@@ -3,6 +3,7 @@ import { Action } from 'redux';
 import { SelectEffect, select as sagaSelect } from 'redux-saga/effects';
 
 import {
+  CourseActivityTypeEnum,
   LoadDataPayload,
   PaginationQueryParams,
   ReduxAction,
@@ -53,3 +54,14 @@ export const getUserShortName = (teacher: Partial<UserEntity>) =>
 
 export const getUserFullName = (teacher: Partial<UserEntity>) =>
   `${teacher.lastName} ${teacher.firstName} ${teacher.middleName}`;
+
+export const getFullDate = (date: Date) => {
+  const fullDate = new Date(date);
+  return fullDate.toLocaleDateString();
+};
+
+export const getTypeActivity = (type: CourseActivityTypeEnum) => {
+  if (type == 'LECTURE') {
+    return 'Лекція';
+  } else return 'Практична';
+};
