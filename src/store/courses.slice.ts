@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   CourseActivityEntity,
-  CourseActivityTypeEnum,
   CourseEntity,
   CourseParticipantEntity,
   TopicEntity,
@@ -13,8 +12,7 @@ export interface CoursesState {
   course?: CourseEntity;
   courseTopics?: TopicEntity[];
   courseTopic?: TopicEntity;
-  courseActivitiesLecture?: CourseActivityEntity[];
-  courseActivitiesAssignment?: CourseActivityEntity[];
+  courseActivities?: CourseActivityEntity[];
   courseParticipants?: CourseParticipantEntity[];
 }
 
@@ -54,31 +52,17 @@ const coursesSlice = createSlice({
       );
       state.courseTopics = newTopics;
     },
-    setCourseTopicActivitiesLecture: (state, action: PayloadAction<CourseActivityEntity[]>) => {
-      state.courseActivitiesLecture = action.payload;
-    },
-    setCourseTopicActivitiesAssignment: (state, action: PayloadAction<CourseActivityEntity[]>) => {
-      state.courseActivitiesAssignment = action.payload;
+    setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
+      state.courseActivities = action.payload;
     },
     createCoursesTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
-      if (action.payload.type == CourseActivityTypeEnum.LECTURE) {
-        state.courseActivitiesLecture?.push(action.payload);
-      } else {
-        state.courseActivitiesAssignment?.push(action.payload);
-      }
+      state.courseActivities?.push(action.payload);
     },
     deleteCourseActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
-      if (action.payload.type == CourseActivityTypeEnum.LECTURE) {
-        const newLectures = state.courseActivitiesLecture?.filter(
-          (lectures) => lectures.id !== action.payload.id,
-        );
-        state.courseActivitiesLecture = newLectures;
-      } else {
-        const newAssignment = state.courseActivitiesAssignment?.filter(
-          (assignments) => assignments.id !== action.payload.id,
-        );
-        state.courseActivitiesAssignment = newAssignment;
-      }
+      const newLectures = state.courseActivities?.filter(
+        (activity) => activity.id !== action.payload.id,
+      );
+      state.courseActivities = newLectures;
     },
     setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
       state.courseParticipants = action.payload;
@@ -105,8 +89,7 @@ export const {
   deleteCourses,
   setCourseTopics,
   setCourseTopic,
-  setCourseTopicActivitiesLecture,
-  setCourseTopicActivitiesAssignment,
+  setCourseTopicActivities,
   deleteCourseActivity,
   createCoursesTopic,
   deleteCourseTopic,

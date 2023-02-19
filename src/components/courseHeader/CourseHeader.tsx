@@ -17,21 +17,20 @@ import { UserRoleEnum } from '../../common/types';
 import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
-import { useState } from 'react';
-import SettingModal from '../modals/settings/Settings';
 import { description, statistics } from './constant';
+import { useNavigate } from 'react-router';
 
 const CourseHeader = () => {
-  const [showSettings, setShowSettings] = useState(false);
   const { course } = useAppSelector((state) => state.coursesReducer);
   const { user } = useAppSelector((state) => state.authReducer);
 
   const colorCard = new String2HexCodeColor(0.5);
+  const navigate = useNavigate();
 
   if (!course) return <AppLoader />;
 
-  const handleSettingsClose = () => setShowSettings(false);
-  const handleSettingsShow = () => setShowSettings(true);
+  const onLeftClick = () => navigate('/main/home');
+  const onSettingsClick = () => navigate('settings');
 
   const menu = (
     <Menu
@@ -58,7 +57,7 @@ const CourseHeader = () => {
     <div className='course-header' style={color}>
       <div className='course-header__course-title-container'>
         <div className='course-header__course-name-container'>
-          <LeftOutlined className='icon-back' />
+          <LeftOutlined className='icon-back' onClick={onLeftClick} />
           <span className='course-header__course-name'>{course?.name}</span>
         </div>
         <div className='course-header__author-container'>
@@ -99,12 +98,11 @@ const CourseHeader = () => {
                 icon={<SettingOutlined className='icon' />}
                 shape='circle'
                 type='primary'
-                onClick={handleSettingsShow}
+                onClick={onSettingsClick}
               >
                 Налаштування
               </Button>
             </div>
-            <SettingModal onStart={showSettings} handleClose={handleSettingsClose} />
           </>
         ) : (
           <div className='course-header__button-connect-container'>
