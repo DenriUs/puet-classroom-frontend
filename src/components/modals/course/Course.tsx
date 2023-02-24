@@ -98,18 +98,28 @@ const CourseModal = (props: IProps) => {
             {errors.group && <p className='form-error-label'>{errors.group.message}</p>}
           </div>
           <div className='course-modal__area-container'>
-            <TextArea
-              className='course-modal__area'
-              placeholder='Опис курсу'
-              showCount
-              rows={3}
-              maxLength={360}
-            />
+            <label htmlFor='description'>
+              <Controller
+                control={control}
+                name='description'
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <TextArea
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
+                    className='course-modal__area'
+                    placeholder='Опис курсу'
+                    showCount
+                    rows={3}
+                    maxLength={360}
+                  />
+                )}
+              />
+            </label>
+            {errors.description && <p className='form-error-label'>{errors.description.message}</p>}
           </div>
           <div className='course-modal__image-container'>
-            <div>
-              Оформлення
-            </div>
+            <div>Оформлення</div>
             <Upload
               name='avatar'
               listType='picture-card'

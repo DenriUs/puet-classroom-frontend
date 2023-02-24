@@ -20,6 +20,7 @@ import {
   deleteCourses,
   deleteCourseActivity,
   resetCourse,
+  setCourseTopicActivity,
 } from '../../store/courses.slice';
 
 interface Topic {
@@ -82,7 +83,6 @@ function* createTopic(action: ReduxAction<Topic>) {
 
 function* deleteTopic(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.delete, `courses/topics/${action.payload}`);
-  console.log(response);
   if (response.error) return;
   yield put(deleteCourseTopic(action.payload));
 }
@@ -91,6 +91,12 @@ function* getActivities(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.get, `courses/topics/${action.payload}/activities`);
   if (response.error) return;
   yield put(setCourseTopicActivities(response.data.data.result));
+}
+
+function* getActivity(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `courses/topics/activities/${action.payload}`);
+  if (response.error) return;
+  yield put(setCourseTopicActivity(response.data.data));
 }
 
 function* createActivity(action: ReduxAction<Activity>) {
@@ -148,6 +154,7 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPICS_CREATE, createTopic);
   yield takeLatest(SagaAction.COURSES_TOPIC_DELETE, deleteTopic);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITIES_GET, getActivities);
+  yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_GET, getActivity);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_CREATE, createActivity);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, deleteActivity);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);

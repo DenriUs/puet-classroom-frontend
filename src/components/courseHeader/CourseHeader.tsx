@@ -17,7 +17,7 @@ import { UserRoleEnum } from '../../common/types';
 import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
-import { description, statistics } from './constant';
+import { statistics } from './constant';
 import { useNavigate } from 'react-router';
 
 const CourseHeader = () => {
@@ -58,10 +58,10 @@ const CourseHeader = () => {
       <div className='course-header__course-title-container'>
         <div className='course-header__course-name-container'>
           <LeftOutlined className='icon-back' onClick={onLeftClick} />
-          <span className='course-header__course-name'>{course?.name}</span>
+          <span className='course-header__course-name'>{course.name}</span>
         </div>
         <div className='course-header__author-container'>
-          <span className='course-header__author-name'>{getUserFullName(course?.teacher)}</span>
+          <span className='course-header__author-name'>{getUserFullName(course.teacher)}</span>
           <Dropdown overlay={menu} placement='bottomLeft' className='drop-down'>
             <InfoCircleOutlined className='icon-info' />
           </Dropdown>
@@ -78,7 +78,7 @@ const CourseHeader = () => {
       </div>
       <div className='course-header__description-container'>
         <div className='course-header__description' style={color}>
-          {description}
+          {course.description}
         </div>
       </div>
       <div>

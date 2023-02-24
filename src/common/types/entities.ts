@@ -28,14 +28,12 @@ export interface UserEntity {
 }
 
 export interface CourseTopicEntity {
-  readonly id: string;
-  readonly title: string;
-  // eslint-disable-next-line no-use-before-define
-  readonly course: Partial<CourseEntity>;
-  // eslint-disable-next-line no-use-before-define
-  readonly activities: Partial<CourseActivityEntity>[];
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
+  id: string;
+  title: string;
+  course: Partial<CourseEntity>;
+  activities: Partial<CourseActivityEntity>[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface CourseActivityEntity {
@@ -74,6 +72,7 @@ export interface CourseParticipantEntity {
 export interface CourseEntity {
   id: string;
   name: string;
+  description: string,
   group: string;
   meetingUrl?: string;
   cover: Partial<FileEntity>;

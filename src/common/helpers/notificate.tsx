@@ -1,11 +1,13 @@
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
+import { ReadOutlined, ReconciliationOutlined } from '@ant-design/icons';
+import { CourseActivityTypeEnum } from '../types';
 
 const { confirm } = Modal;
 
-export const showDeleteConfirm = (title: string, handle: () => void) => {
+export const showConfirm = (title: string, handle: () => void) => {
   confirm({
-    title: `Ви дійсно бажаєте видалити ${title}`,
+    title: `Ви дійсно бажаєте ${title}`,
     icon: <ExclamationCircleOutlined />,
     okText: 'Так',
     okType: 'danger',
@@ -15,4 +17,8 @@ export const showDeleteConfirm = (title: string, handle: () => void) => {
       handle();
     },
   });
+};
+
+export const getIconActivity = (type: CourseActivityTypeEnum) => {
+  return type == 'LECTURE' ? <ReadOutlined /> : <ReconciliationOutlined />;
 };
