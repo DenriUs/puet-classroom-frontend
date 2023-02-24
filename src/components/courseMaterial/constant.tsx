@@ -1,5 +1,5 @@
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { getFullDate, getTypeActivity } from '../../common/helpers';
+import { getFullDate, getTypeActivity, showConfirm } from '../../common/helpers';
 import { CourseActivityTypeEnum } from '../../common/types';
 
 export const topicsColumns = [
@@ -32,7 +32,10 @@ export const topicsColumns = [
     render: (deleteTopic: any) => (
       <div>
         <EditOutlined className='topic-icons' />
-        <DeleteOutlined className='topic-icons' onClick={() => deleteTopic()} />
+        <DeleteOutlined
+          className='topic-icons'
+          onClick={() => showConfirm('видалити тему', deleteTopic)}
+        />
       </div>
     ),
   },
@@ -77,7 +80,10 @@ export const materialsColumns = [
     render: (deleteActivities: any) => (
       <div>
         <EditOutlined className='topic-icons' />
-        <DeleteOutlined className='topic-icons' onClick={() => deleteActivities()} />
+        <DeleteOutlined
+          className='topic-icons'
+          onClick={() => showConfirm('видалити матеріал', deleteActivities)}
+        />
       </div>
     ),
   },

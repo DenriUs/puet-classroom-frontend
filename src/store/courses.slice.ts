@@ -13,6 +13,7 @@ export interface CoursesState {
   courseTopics?: TopicEntity[];
   courseTopic?: TopicEntity;
   courseActivities?: CourseActivityEntity[];
+  courseActivity?: CourseActivityEntity;
   courseParticipants?: CourseParticipantEntity[];
 }
 
@@ -55,6 +56,9 @@ const coursesSlice = createSlice({
     setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
       state.courseActivities = action.payload;
     },
+    setCourseTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
+      state.courseActivity = action.payload;
+    },
     createCoursesTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
       state.courseActivities?.push(action.payload);
     },
@@ -89,11 +93,12 @@ export const {
   deleteCourses,
   setCourseTopics,
   setCourseTopic,
-  setCourseTopicActivities,
-  deleteCourseActivity,
   createCoursesTopic,
   deleteCourseTopic,
   createCoursesTopicActivity,
+  setCourseTopicActivities,
+  setCourseTopicActivity,
+  deleteCourseActivity,
   setCoursesParticipants,
   createCoursesParticipant,
   deleteCourseParticipant,

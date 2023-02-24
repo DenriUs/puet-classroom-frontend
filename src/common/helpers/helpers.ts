@@ -61,7 +61,5 @@ export const getFullDate = (date: Date) => {
 };
 
 export const getTypeActivity = (type: CourseActivityTypeEnum) => {
-  if (type == 'LECTURE') {
-    return 'Лекція';
-  } else return 'Практична';
+  return type == 'LECTURE' ? 'Лекція' : 'Практична';
 };

@@ -2,7 +2,7 @@ import { Button, Input } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 
-import { showDeleteConfirm, showSuccessMessage } from '../../common/helpers';
+import { showConfirm, showSuccessMessage } from '../../common/helpers';
 import { SagaAction } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 
@@ -10,6 +10,8 @@ import './SettingsCourse.scss';
 
 const SettingsCourse = () => {
   const { course } = useAppSelector((state) => state.coursesReducer);
+
+  console.log(course);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const SettingsCourse = () => {
           shape='circle'
           type='primary'
           danger
-          onClick={() => showDeleteConfirm('курс', handleCourseDelete)}
+          onClick={() => showConfirm('видалити курс', handleCourseDelete)}
         >
           <DeleteOutlined className='button__icon' />
         </Button>

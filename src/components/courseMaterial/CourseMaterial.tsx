@@ -8,19 +8,20 @@ import { materialsColumns, topicsColumns } from './constant';
 import TopicModal from '../modals/topic/Topic';
 import MaterialModal from '../modals/material/Material';
 import { showSuccessMessage } from '../../common/helpers';
+import { useParams } from 'react-router';
 
 import './CourseMaterial.scss';
 
 const CourseMaterial = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
-  const { course, courseTopics, courseActivities } = useAppSelector(
-    (state) => state.coursesReducer,
-  );
+  const { courseTopics, courseActivities } = useAppSelector((state) => state.coursesReducer);
 
   const [showAddTopic, setShowTopic] = useState(false);
   const [showAddMaterial, setShowMaterial] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  const { id } = useParams();
 
   const handleTopicClose = () => setShowTopic(false);
 
@@ -36,7 +37,8 @@ const CourseMaterial = () => {
   };
 
   useEffect(() => {
-    dispatch({ type: SagaAction.COURSES_TOPICS_GET, payload: course?.id });
+    dispatch({ type: SagaAction.COURSE_GET, payload: id });
+    dispatch({ type: SagaAction.COURSES_TOPICS_GET, payload: id });
   }, [dispatch]);
 
   const handleTopicDelete = (id: string) => {

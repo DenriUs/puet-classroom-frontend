@@ -196,3 +196,17 @@
   font-weight: 700 !important;
   font-size: 16px;
 }
+
+.ant-table-tbody > tr.ant-table-row-selected > td {
+  background: #d9e1e4;
+}
+
+.ant-table-tbody > tr.ant-table-row-selected:hover > td {
+  background: #d9e1e4;
+}
+
+//menu
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background: #d9e1e4;
+}

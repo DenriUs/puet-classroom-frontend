@@ -1,12 +1,14 @@
 import { Tabs } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
+import { useNavigate, useParams } from 'react-router';
 
 import { tabsItems } from './constants';
 
 import './CourseSettings.scss';
-import { useNavigate } from 'react-router';
 
 const CourseSettings = () => {
+  const { id } = useParams();
+
   const navigate = useNavigate();
 
   const onLeftClick = () => navigate(-1);
