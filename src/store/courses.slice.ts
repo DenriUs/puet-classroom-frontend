@@ -34,6 +34,9 @@ const coursesSlice = createSlice({
     createCourses: (state, action: PayloadAction<CourseEntity>) => {
       state.courses?.push(action.payload);
     },
+    updateCourses: (state, action: PayloadAction<CourseEntity>) => {
+      state.course = action.payload;
+    },
     deleteCourses: (state, action: PayloadAction<string | undefined>) => {
       const newCourses = state.courses?.filter((course) => course.id !== action.payload);
       state.courses = newCourses;
@@ -90,6 +93,7 @@ export const {
   setCourses,
   setCourse,
   createCourses,
+  updateCourses,
   deleteCourses,
   setCourseTopics,
   setCourseTopic,

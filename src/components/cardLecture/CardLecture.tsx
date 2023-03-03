@@ -1,10 +1,18 @@
 import { useAppSelector } from '../../hooks/reduxhooks';
-import { Empty } from 'antd';
+import { Button, Empty } from 'antd';
+import { useState } from 'react';
+
+import Practical from '../modals/practical/Practical';
 
 import './CardLecture.scss';
 
 const CardLecture = () => {
   const { courseActivity } = useAppSelector((state) => state.coursesReducer);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -17,9 +25,17 @@ const CardLecture = () => {
               <div className='card-material__title-lecture'>{courseActivity?.title}</div>
             </div>
             <div className='card-material__file-container'></div>
+            {courseActivity.type == 'ASSIGNMENT' && (
+              <div className='card-material__file-container'>
+                <Button shape='round' type='primary' className='button-pass' onClick={handleShow}>
+                  Здати роботу
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}
+      <Practical onStart={show} handleClose={handleClose} />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Select, Table } from 'antd';
 import { useEffect } from 'react';
 
-import { getUserFullName, showConfirm, showSuccessMessage } from '../../common/helpers';
+import { getUserFullName } from '../../common/helpers';
 import { SagaAction } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { courseParticipantsColumns } from './constant';
@@ -19,12 +19,10 @@ const CourseStudents = () => {
 
   const handleCourseStudentSubmit = (id: string) => {
     dispatch({ type: SagaAction.COURSES_PARTICIPANTS_CREATE, payload: { courseId, id } });
-    showSuccessMessage('Студента на курс успішно додано!');
   };
 
   const handleCourseStudentDelete = (id: string) => {
     dispatch({ type: SagaAction.COURSES_PARTICIPANTS_DELETE, payload: id });
-    showSuccessMessage('Студента видалено з курсу!');
   };
 
   useEffect(() => {

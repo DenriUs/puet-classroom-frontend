@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { materialsColumns, topicsColumns } from './constant';
 import TopicModal from '../modals/topic/Topic';
 import MaterialModal from '../modals/material/Material';
-import { showSuccessMessage } from '../../common/helpers';
 import { useParams } from 'react-router';
 
 import './CourseMaterial.scss';
@@ -43,12 +42,10 @@ const CourseMaterial = () => {
 
   const handleTopicDelete = (id: string) => {
     dispatch({ type: SagaAction.COURSES_TOPIC_DELETE, payload: id });
-    showSuccessMessage('Тему видалено з курсу!');
   };
 
   const handlePracticalDelete = (id: string) => {
     dispatch({ type: SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, payload: id });
-    showSuccessMessage('Матеріал видалено з курсу!');
   };
 
   const topicsData = courseTopics?.map(({ id, title, createdAt, updatedAt }) => ({

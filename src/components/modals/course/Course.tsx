@@ -10,7 +10,6 @@ import { group } from './constants';
 import { courseSchema } from './schemas';
 import { CourseSchemaType } from './type';
 import { SagaAction } from '../../../common/types';
-import { showSuccessMessage } from '../../../common/helpers';
 import TextArea from 'antd/lib/input/TextArea';
 import { useState } from 'react';
 
@@ -37,13 +36,12 @@ const CourseModal = (props: IProps) => {
   const handleCourseSubmit = (data: CourseSchemaType) => {
     dispatch({ type: SagaAction.COURSE_CREATE, payload: data });
     handleClose();
-    showSuccessMessage('Курс успішно додано!');
   };
 
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <div>Upload</div>
     </div>
   );
 
