@@ -1,17 +1,22 @@
 import { Tabs } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
-import { useNavigate, useParams } from 'react-router';
-
-import { tabsItems } from './constants';
+import { useNavigate } from 'react-router';
 
 import './CourseSettings.scss';
 
-const CourseSettings = () => {
-  const { id } = useParams();
+import { SagaAction } from '../../../common/types';
+import { tabsItems } from './constants';
+import { useAppDispatch } from '../../../hooks/reduxhooks';
 
+const CourseSettings = () => {
   const navigate = useNavigate();
 
-  const onLeftClick = () => navigate(-1);
+  const dispatch = useAppDispatch();
+
+  const onLeftClick = () => {
+    dispatch({ type: SagaAction.COURSES_RESET });
+    navigate(-1);
+  };
 
   return (
     <div className='couser-settings'>

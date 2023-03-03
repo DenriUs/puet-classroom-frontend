@@ -8,7 +8,6 @@ import { useAppDispatch } from '../../../hooks/reduxhooks';
 import { topicSchema } from './schemas';
 import { TopicSchemaType } from './type';
 import { SagaAction } from '../../../common/types';
-import { showSuccessMessage } from '../../../common/helpers';
 import { useParams } from 'react-router';
 
 interface IProps {
@@ -35,7 +34,6 @@ const TopicModal = (props: IProps) => {
   const handleTopicSubmit = (data: TopicSchemaType) => {
     dispatch({ type: SagaAction.COURSES_TOPICS_CREATE, payload: { id, ...data } });
     handleClose();
-    showSuccessMessage('Тему успішно додано!');
   };
 
   return (

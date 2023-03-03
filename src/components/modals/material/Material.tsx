@@ -1,5 +1,4 @@
 import { Button, Input, Modal, Radio, RadioChangeEvent } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -9,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { materialSchema } from './schemas';
 import { MaterialSchemaType } from './type';
 import { CourseActivityTypeEnum, SagaAction } from '../../../common/types';
-import { showSuccessMessage } from '../../../common/helpers';
 import { useState } from 'react';
 import { materialOptions } from './contants';
 
@@ -23,7 +21,7 @@ const MaterialModal = (props: IProps) => {
   const [typeActivity, setType] = useState('LECTURE');
 
   const { courseTopic } = useAppSelector((state) => state.coursesReducer);
-  const courseTopicId = courseTopic?.id;
+  const topic = courseTopic?.id;
 
   const {
     control,
@@ -43,10 +41,9 @@ const MaterialModal = (props: IProps) => {
   const handleMaterialSubmit = (data: MaterialSchemaType) => {
     dispatch({
       type: SagaAction.COURSES_TOPICS_ACTIVITY_CREATE,
-      payload: { courseTopicId, ...data },
+      payload: { topic, ...data },
     });
     handleClose();
-    showSuccessMessage('Матеріал успішно додано!');
   };
 
   return (
