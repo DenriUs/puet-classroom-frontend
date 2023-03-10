@@ -1,13 +1,19 @@
-import './SettingsProfile.scss';
 import { LoadingOutlined, PictureOutlined } from '@ant-design/icons';
 import { Button, Input, Upload } from 'antd';
 import { useState } from 'react';
 
-interface Props {}
+import { useAppSelector } from '../../hooks/reduxhooks';
+import AppLoader from '../AppLoader';
 
-const SettingsProfile = (props: Props) => {
+import './SettingsProfile.scss';
+
+const SettingsProfile = () => {
+  const { user } = useAppSelector((state) => state.authReducer);
+
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
+
+  if (!user) return <AppLoader />;
 
   const uploadButton = (
     <div>
@@ -28,25 +34,25 @@ const SettingsProfile = (props: Props) => {
           <div className='settings-input'>
             <label className='settings-title-input'>
               Призвіще:
-              <Input disabled={true} value='Іванов' />
+              <Input disabled={true} value={user?.lastName} />
             </label>
           </div>
           <div className='settings-input'>
             <label className='settings-title-input'>
               Ім'я :
-              <Input disabled={true} value='Іван' />
+              <Input disabled={true} value={user?.firstName} />
             </label>
           </div>
           <div className='settings-input'>
             <label className='settings-title-input'>
               По батькові:
-              <Input disabled={true} value='Іванович' />
+              <Input disabled={true} value={user?.middleName} />
             </label>
           </div>
           <div className='settings-input'>
             <label className='settings-title-input'>
               Email:
-              <Input disabled={true} value='gaizuk@com.ua' />
+              <Input disabled={true} value={user?.email} />
             </label>
           </div>
         </div>

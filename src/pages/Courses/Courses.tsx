@@ -3,7 +3,7 @@ import { Button, Layout, Table } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { getUserShortName } from '../../common/helpers';
-import { coursesColumns } from './constants';
+import { courseStudentColumns, courseTeacherColumns } from './constants';
 import { SagaAction, UserRoleEnum } from '../../common/types';
 
 import './Courses.scss';
@@ -30,7 +30,7 @@ const Courses = () => {
 
   if (!courses) return <AppLoader />;
 
-  const tableData = courses.map(({ id, name, teacher }) => ({
+  const tableCourseData = courses.map(({ id, name, teacher }) => ({
     key: id,
     name,
     teacher: getUserShortName(teacher),
@@ -62,12 +62,19 @@ const Courses = () => {
       </div>
       <div className='course-page__table-container'>
         <div className='course-page__table'>
-          <Table
-            pagination={{ defaultPageSize: take }}
-            showHeader={false}
-            columns={coursesColumns}
-            dataSource={tableData}
-          />
+          {user?.role == UserRoleEnum.TEACHER ? (
+            <Table
+              pagination={{ defaultPageSize: take }}
+              columns={courseTeacherColumns}
+              dataSource={courses}
+            />
+          ) : (
+            <Table
+              pagination={{ defaultPageSize: take }}
+              columns={courseStudentColumns}
+              dataSource={tableCourseData}
+            />
+          )}
         </div>
       </div>
     </Layout>

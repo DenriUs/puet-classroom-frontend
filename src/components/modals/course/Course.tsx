@@ -2,16 +2,15 @@ import { Button, Input, Modal, Select, Upload } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import TextArea from 'antd/lib/input/TextArea';
 
-import './Course.scss';
-
-import { useAppDispatch } from '../../../hooks/reduxhooks';
-import { group } from './constants';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { courseSchema } from './schemas';
 import { CourseSchemaType } from './type';
 import { SagaAction } from '../../../common/types';
-import TextArea from 'antd/lib/input/TextArea';
-import { useState } from 'react';
+
+import './Course.scss';
 
 interface IProps {
   onStart: boolean;
@@ -21,6 +20,7 @@ interface IProps {
 const CourseModal = (props: IProps) => {
   const [loading, setLoading] = useState(false);
   const { onStart, handleClose } = props;
+  const { groups } = useAppSelector((state) => state.groupsReducer);
   const {
     control,
     handleSubmit,
@@ -34,6 +34,7 @@ const CourseModal = (props: IProps) => {
   const dispatch = useAppDispatch();
 
   const handleCourseSubmit = (data: CourseSchemaType) => {
+    console.log(data);
     dispatch({ type: SagaAction.COURSE_CREATE, payload: data });
     handleClose();
   };
@@ -73,7 +74,7 @@ const CourseModal = (props: IProps) => {
             <label htmlFor='group'>
               <Controller
                 control={control}
-                name='group'
+                name='groupId'
                 render={({ field: { onBlur, onChange, value } }) => (
                   <Select
                     onBlur={onBlur}
@@ -84,16 +85,27 @@ const CourseModal = (props: IProps) => {
                     optionFilterProp='children'
                     size='large'
                     className='course-modal__select'
-                    placeholder='Введіть назву групи'
-                    filterOption={(input: string, option: any) =>
+                    placeholder='Виберіть групу'
+                    filterOption={(input, option) =>
                       (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                     }
-                    options={group}
+                    filterSort={(optionA, optionB) =>
+                      (optionA?.label ?? '')
+                        .toLowerCase()
+                        .localeCompare((optionB?.label ?? '').toLowerCase())
+                    }
+                    options={(groups || []).map((group) => ({
+                      value: group.id,
+                      label: group.name,
+                    }))}
+                    onDropdownVisibleChange={() => {
+                      dispatch({ type: SagaAction.GROUPS_GET });
+                    }}
                   />
                 )}
               />
             </label>
-            {errors.group && <p className='form-error-label'>{errors.group.message}</p>}
+            {errors.groupId && <p className='form-error-label'>{errors.groupId.message}</p>}
           </div>
           <div className='course-modal__area-container'>
             <label htmlFor='description'>

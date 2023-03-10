@@ -23,7 +23,7 @@ const HeaderPage = () => {
     <Header className='header'>
       <div className='header-page'>
         <div className='header-page__items-container'>
-          <Avatar size={45} icon={<UserOutlined />} />
+          <Avatar src={user?.cover.src} size={45} />
           <div className='name-container'>
             <span>{user && getUserShortName(user)}</span>
           </div>

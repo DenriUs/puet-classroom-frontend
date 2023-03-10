@@ -39,10 +39,10 @@
     line-height: 30px;
     color: #4f4f4f;
     padding-left: 14px;
-    @include adaptiv-font(36, 20);
+    @include adaptiv-font(34, 20);
 
     @media (min-width: 1440px) {
-      font-size: 36px;
+      font-size: 34px;
     }
   }
 

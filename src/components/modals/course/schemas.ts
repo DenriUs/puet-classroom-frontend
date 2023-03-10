@@ -5,7 +5,7 @@ export const courseSchema = zod.object({
     .string({ required_error: 'Введіть назву курсу' })
     .min(2, 'Закоротка назва')
     .max(120, 'Завелика назва'),
-  group: zod.string({ required_error: 'Введіть групу' }),
+  groupId: zod.string({ required_error: 'Виберіть групу' }),
   description: zod
     .string({ required_error: 'Введіть опис курсу' })
     .min(2, 'Закороткий опис')
