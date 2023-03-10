@@ -26,8 +26,8 @@ const CardLecture = () => {
             </div>
             <div className='card-material__file-container'></div>
             {courseActivity.type == 'ASSIGNMENT' && (
-              <div className='card-material__file-container'>
-                <Button shape='round' type='primary' className='button-pass' onClick={handleShow}>
+              <div className='card-material__button-container'>
+                <Button shape='round' type='primary' className='card-material__button-pass' onClick={handleShow}>
                   Здати роботу
                 </Button>
               </div>

@@ -3,6 +3,7 @@ import Dragger from 'antd/lib/upload/Dragger';
 import { InboxOutlined, CheckOutlined } from '@ant-design/icons';
 
 import './Practical.scss';
+import { useAppSelector } from '../../../hooks/reduxhooks';
 
 interface IProps {
   onStart: boolean;
@@ -11,6 +12,7 @@ interface IProps {
 
 const PracticalModal = (props: IProps) => {
   const { onStart, handleClose } = props;
+  const { courseActivity } = useAppSelector((state) => state.coursesReducer);
 
   const onChange = (info: any) => {
     const { status } = info.file;
@@ -30,9 +32,7 @@ const PracticalModal = (props: IProps) => {
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={600}>
-      <div className='practical-modal-title'>
-        Практична робота 1. Базові поняття інформаційних мереж
-      </div>
+      <div className='practical-modal-title'>{courseActivity?.title}</div>
       <Dragger name='Fiel' multiple maxCount={1} onChange={onChange} onDrop={onDrop}>
         <p className='ant-upload-drag-icon'>
           <InboxOutlined />

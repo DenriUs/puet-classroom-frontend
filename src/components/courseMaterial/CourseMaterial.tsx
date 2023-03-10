@@ -125,7 +125,12 @@ const CourseMaterial = () => {
           </div>
         </div>
       )}
-      <TopicModal onStart={showAddTopic} handleClose={handleTopicClose} />
+      <TopicModal
+        title='Додати тему'
+        type={SagaAction.COURSES_TOPICS_CREATE}
+        onStart={showAddTopic}
+        handleClose={handleTopicClose}
+      />
       <MaterialModal onStart={showAddMaterial} handleClose={handleMaterialClose} />
     </>
   );

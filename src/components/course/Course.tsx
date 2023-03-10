@@ -38,20 +38,22 @@ const Course = (props: Props) => {
           <UserOutlined />
         </span>
         <span className='decription__name'>
-          {user?.role == UserRoleEnum.STUDENT ? getUserShortName(teacher) : group}
+          {user?.role == UserRoleEnum.STUDENT ? getUserShortName(teacher) : group?.name}
         </span>
       </div>
       <div className='course-card__image-container'>
         <img src={test} alt='name' className='course-card__image' />
       </div>
-      <div className='course-card__progress-container'>
-        <Progress
-          type='line'
-          strokeColor={colorProgress.stringToColor(name)}
-          trailColor='rgba(255, 255, 255, 0.54)'
-          percent={40}
-        />
-      </div>
+      {user?.role == UserRoleEnum.STUDENT && (
+        <div className='course-card__progress-container'>
+          <Progress
+            type='line'
+            strokeColor={colorProgress.stringToColor(name)}
+            trailColor='rgba(255, 255, 255, 0.54)'
+            percent={40}
+          />
+        </div>
+      )}
     </div>
   );
 };

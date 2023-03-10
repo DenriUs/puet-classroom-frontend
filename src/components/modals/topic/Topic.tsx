@@ -4,19 +4,22 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import './Topic.scss';
 
-import { useAppDispatch } from '../../../hooks/reduxhooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { topicSchema } from './schemas';
 import { TopicSchemaType } from './type';
-import { SagaAction } from '../../../common/types';
-import { useParams } from 'react-router';
+import { SagaAction, TopicEntity } from '../../../common/types';
 
 interface IProps {
   onStart: boolean;
+  title: string;
+  type: SagaAction;
   handleClose: () => void;
 }
 
 const TopicModal = (props: IProps) => {
-  const { onStart, handleClose } = props;
+  const { onStart, handleClose, title, type } = props;
+  const { course } = useAppSelector((state) => state.coursesReducer);
+
   const {
     control,
     handleSubmit,
@@ -27,19 +30,19 @@ const TopicModal = (props: IProps) => {
     resolver: zodResolver(topicSchema),
   });
 
-  const { id } = useParams();
+  const id = course?.id;
 
   const dispatch = useAppDispatch();
 
   const handleTopicSubmit = (data: TopicSchemaType) => {
-    dispatch({ type: SagaAction.COURSES_TOPICS_CREATE, payload: { id, ...data } });
+    dispatch({ type, payload: { id, ...data } });
     handleClose();
   };
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={530}>
       <div className='topic-modal'>
-        <div className='topic-modal__title-container'>Додати тему</div>
+        <div className='topic-modal__title-container'>{title}</div>
         <form className='topic-modal__form-container' onSubmit={handleSubmit(handleTopicSubmit)}>
           <div className='topic-modal__input-container'>
             <label htmlFor='title'>

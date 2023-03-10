@@ -24,9 +24,7 @@
     color: #254664;
     margin: 25px;
     text-align: center;
-
     @include adaptiv-font(20, 16);
-
     @media (min-width: 1440px) {
       font-size: 20px;
     }
@@ -34,5 +32,17 @@
 
   &__file-container {
     display: grid;
+    justify-items: center;
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: center;
+  }
+
+  &__button-pass {
+    width: 200px;
+    font-weight: 600;
+    margin-bottom: 30px;
   }
 }

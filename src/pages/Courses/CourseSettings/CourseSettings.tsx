@@ -4,17 +4,12 @@ import { useNavigate } from 'react-router';
 
 import './CourseSettings.scss';
 
-import { SagaAction } from '../../../common/types';
 import { tabsItems } from './constants';
-import { useAppDispatch } from '../../../hooks/reduxhooks';
 
 const CourseSettings = () => {
   const navigate = useNavigate();
 
-  const dispatch = useAppDispatch();
-
   const onLeftClick = () => {
-    dispatch({ type: SagaAction.COURSES_RESET });
     navigate(-1);
   };
 

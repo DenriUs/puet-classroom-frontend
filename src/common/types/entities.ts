@@ -72,8 +72,8 @@ export interface CourseParticipantEntity {
 export interface CourseEntity {
   id: string;
   name: string;
-  description: string,
-  group: string;
+  description: string;
+  group: Partial<GroupEntity>;
   meetingUrl?: string;
   cover: Partial<FileEntity>;
   teacher: Partial<UserEntity>;
@@ -86,6 +86,20 @@ export interface CourseEntity {
 export interface TopicEntity {
   id: string;
   title: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SpecialityEntity {
+  id: string;
+  name: string;
+}
+
+export interface GroupEntity {
+  id: string;
+  name: string;
+  courseNumber: number;
+  speciality: Partial<SpecialityEntity>;
   createdAt: Date;
   updatedAt: Date;
 }
