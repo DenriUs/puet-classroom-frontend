@@ -1,31 +1,35 @@
 import { DeleteOutlined } from '@mui/icons-material';
+import { getFullDate, showConfirm } from '../../common/helpers';
+import { FileEntity } from '../../common/types';
 
-export const columns = [
+export const columnsFiles = [
   {
     title: 'Назва',
     dataIndex: 'filename',
-    key: 'filename',
-    width: '23%',
-    render: (filename: string) => <a className='file-name'>{filename}</a>,
-  },
-  {
-    title: 'Розмір',
-    dataIndex: 'size',
-    key: 'size',
-    width: '8%',
-    render: (size: string) => <span className='file-size'>{size}</span>,
+    width: '67%',
+    render: (filename: string, record: FileEntity) => (
+      <a href={record.src} download className='file-name'>
+        {filename}
+      </a>
+    ),
   },
   {
     title: 'Дата завантаження',
-    dataIndex: 'date',
-    key: 'date',
-    width: '10%',
-    render: (date: string) => <span className='file-date'>{date}</span>,
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    width: '20%',
+    render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
   },
   {
     title: 'Дія',
     key: 'delete',
-    width: '8%',
-    render: () => <DeleteOutlined className='topic-icons' />,
+    width: '14%',
+    dataIndex: 'deleteFiles',
+    render: (deleteFiles: () => void) => (
+      <DeleteOutlined
+        className='topic-icons'
+        onClick={() => showConfirm('видалити файл', deleteFiles)}
+      />
+    ),
   },
 ];

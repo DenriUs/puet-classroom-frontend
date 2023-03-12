@@ -1,0 +1,19 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.file-modal {
+  &__title {
+    display: grid;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 29px;
+    @extend %modal-title;
+    @include adaptiv-font(24, 20);
+  }
+
+  &__dragger {
+    display: grid;
+    grid-template-columns: 0.8fr;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+}

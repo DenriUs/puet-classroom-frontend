@@ -4,13 +4,15 @@ import { ArrowUpOutlined } from '@ant-design/icons';
 
 import './Files.scss';
 
-import HeaderPage from '../../components/header/HeaderPage';
-import Practical from '../../components/modals/practical/Practical';
-import { columns } from './constant';
+import { columnsFiles } from './constant';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { SagaAction } from '../../common/types';
+import AppLoader from '../../components/AppLoader';
+import HeaderPage from '../../components/header/HeaderPage';
+import FileModal from '../../components/modals/file/File';
 
 const Files = () => {
+  const { take } = useAppSelector((state) => state.paginatedDataReducer);
   const { files } = useAppSelector((state) => state.filesReducer);
 
   const [show, setShow] = useState(false);
@@ -20,9 +22,23 @@ const Files = () => {
 
   const dispatch = useAppDispatch();
 
+  const handleFileDelete = (id: string) => {
+    dispatch({ type: SagaAction.FILE_DELETE, payload: id });
+  };
+
   useEffect(() => {
-    dispatch({ type: SagaAction.COURSES_GET });
+    dispatch({ type: SagaAction.FIELS_GET });
   }, [dispatch]);
+
+  if (!files) return <AppLoader />;
+
+  const dataFiles = files?.map(({ id, filename, createdAt, src }) => ({
+    id,
+    filename,
+    src,
+    createdAt,
+    deleteFiles: () => handleFileDelete(id),
+  }));
 
   return (
     <Layout>
@@ -42,12 +58,16 @@ const Files = () => {
             >
               Завантажити файл
             </Button>
-            <Practical onStart={show} handleClose={handleClose} />
+            <FileModal onStart={show} handleClose={handleClose} />
           </div>
         </div>
         <div className='files-page__table-container'>
           <div className='files-page__table'>
-            <Table pagination={false} columns={columns} />
+            <Table
+              pagination={{ defaultPageSize: take }}
+              columns={columnsFiles}
+              dataSource={dataFiles}
+            />
           </div>
         </div>
       </div>

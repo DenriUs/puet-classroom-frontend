@@ -5,7 +5,7 @@ import { CourseActivityEntity } from '../../common/types';
 
 import './CardAssignment.scss';
 
-import Practical from '../modals/practical/Practical';
+import FileModal from '../modals/file/File';
 
 interface Props {
   data: CourseActivityEntity;
@@ -38,7 +38,7 @@ const CardAssignment = (props: Props) => {
           <Button shape='round' type='primary' className='button-pass' onClick={handleShow}>
             Здати роботу
           </Button>
-          <Practical onStart={show} handleClose={handleClose} />
+          <FileModal onStart={show} handleClose={handleClose} />
         </div>
       </div>
     </div>
