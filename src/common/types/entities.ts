@@ -11,7 +11,8 @@ export enum CourseActivityTypeEnum {
 export interface FileEntity {
   id: string;
   src: string;
-  file?: File;
+  filename: string;
+  createdAt: Date;
 }
 
 export interface UserEntity {

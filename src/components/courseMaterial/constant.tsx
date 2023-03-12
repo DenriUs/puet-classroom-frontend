@@ -29,7 +29,7 @@ export const topicsColumns = [
     key: 'deleteTopic',
     title: 'Дії',
     width: '10%',
-    render: (deleteTopic: any) => (
+    render: (deleteTopic: () => void) => (
       <div>
         <EditOutlined className='topic-icons' />
         <DeleteOutlined
@@ -77,7 +77,7 @@ export const materialsColumns = [
     title: 'Дії',
     key: 'deleteActivities',
     width: '10%',
-    render: (deleteActivities: any) => (
+    render: (deleteActivities: () => void) => (
       <div>
         <EditOutlined className='topic-icons' />
         <DeleteOutlined

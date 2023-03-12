@@ -37,6 +37,8 @@ export enum SagaAction {
 
   FIELS_GET = 'FIELS_GET',
   FILE_GET = 'FILE_GET',
+  FILE_DELETE = 'FILE_DELETE',
+  FILE_CREATE = 'FILE_CREATE',
 }
 
 export type RootState = ReturnType<typeof store.getState>;

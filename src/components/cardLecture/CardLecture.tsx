@@ -2,7 +2,7 @@ import { useAppSelector } from '../../hooks/reduxhooks';
 import { Button, Empty } from 'antd';
 import { useState } from 'react';
 
-import Practical from '../modals/practical/Practical';
+import FileModal from '../modals/file/File';
 
 import './CardLecture.scss';
 
@@ -27,7 +27,12 @@ const CardLecture = () => {
             <div className='card-material__file-container'></div>
             {courseActivity.type == 'ASSIGNMENT' && (
               <div className='card-material__button-container'>
-                <Button shape='round' type='primary' className='card-material__button-pass' onClick={handleShow}>
+                <Button
+                  shape='round'
+                  type='primary'
+                  className='card-material__button-pass'
+                  onClick={handleShow}
+                >
                   Здати роботу
                 </Button>
               </div>
@@ -35,7 +40,7 @@ const CardLecture = () => {
           </div>
         </div>
       )}
-      <Practical onStart={show} handleClose={handleClose} />
+      <FileModal onStart={show} handleClose={handleClose} />
     </>
   );
 };
