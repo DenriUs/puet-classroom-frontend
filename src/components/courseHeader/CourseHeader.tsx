@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Dropdown, Menu, Progress } from 'antd';
 import { String2HexCodeColor } from 'string-to-hex-code-color';
+import { useNavigate } from 'react-router';
 
 import './CourseHeader.scss';
 
@@ -18,7 +19,6 @@ import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
 import { statistics } from './constant';
-import { useNavigate } from 'react-router';
 
 const CourseHeader = () => {
   const { course } = useAppSelector((state) => state.coursesReducer);

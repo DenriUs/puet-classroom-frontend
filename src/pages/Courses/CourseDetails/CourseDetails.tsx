@@ -1,14 +1,14 @@
 import { Layout, Empty, Menu } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
-import { SagaAction } from '../../../common/types';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { useParams } from 'react-router';
 import { BookOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
+import { SagaAction } from '../../../common/types';
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import AppLoader from '../../../components/AppLoader';
 import CourseHeader from '../../../components/courseHeader/CourseHeader';
-import CardLecture from '../../../components/cardLecture/CardLecture';
+import CardMaterial from '../../../components/cardMaterial/CardMaterial';
 import { getIconActivity } from '../../../common/helpers';
 
 import './CourseDetails.scss';
@@ -93,7 +93,7 @@ const Course = () => {
             />
           </div>
           <div className='course-page__task'>
-            <CardLecture />
+            <CardMaterial />
           </div>
         </div>
       )}

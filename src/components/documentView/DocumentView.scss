@@ -1,0 +1,46 @@
+.document-view {
+  &__icon-container {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: end;
+    align-content: start;
+  }
+
+  &__icon {
+    display: block;
+    margin-right: 20px;
+    font-size: 25px;
+    color: #254664;
+  }
+
+  &__file-container {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  &__file-border {
+    border: 1px solid rgba(79, 79, 79, 0.24);
+    background-color: white;
+  }
+
+  &__file-buttons-conatiner {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 30px;
+  }
+
+  &__button-navigate {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__page-info {
+    color: #254664;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px;
+  }
+}

@@ -49,6 +49,12 @@ export default class Api {
     return Api.patch<T>(`files/${id}`, formData);
   }
 
+  public static async postFile<T = any>(url: string, file: any): Promise<APIResponse<T>> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return Api.makeRequest<T>(Methods.POST, url, formData);
+  }
+
   public static async get<T = any>(
     url: string,
     data?: any,
