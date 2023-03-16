@@ -18,6 +18,9 @@ function* getFile(action: ReduxAction<string>) {
 }
 
 function* createFile(action: ReduxAction<File>) {
+  const response: APIResponse = yield call(Api.postFile, `files`, action.payload);
+  if (response.error) return;
+  console.log(response);
   yield showSuccessMessage('Файл успішно додано!');
 }
 

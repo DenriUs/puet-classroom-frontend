@@ -1,9 +1,9 @@
 import { message, Modal } from 'antd';
 import Dragger from 'antd/lib/upload/Dragger';
-import { InboxOutlined, CheckOutlined } from '@ant-design/icons';
+import { InboxOutlined } from '@ant-design/icons';
 
 import './File.scss';
-import { RcFile } from 'antd/lib/upload';
+
 import { useAppDispatch } from '../../../hooks/reduxhooks';
 import { SagaAction } from '../../../common/types';
 
@@ -33,12 +33,23 @@ const FileModal = (props: IProps) => {
     console.log('Dropped files', e.dataTransfer.files);
   };
 
+  const handleFileUpload = ({ file }: any) => {
+    dispatch({ type: SagaAction.FILE_CREATE, payload: file });
+  };
+
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={800}>
       <div className='file-modal'>
         <div className='file-modal__title'>Завантажити файл</div>
         <div className='file-modal__dragger'>
-          <Dragger name='File' multiple={false} onChange={onChange} onDrop={onDrop}>
+          <Dragger
+            name='File'
+            multiple={false}
+            showUploadList={false}
+            onChange={onChange}
+            onDrop={onDrop}
+            customRequest={handleFileUpload}
+          >
             <p className='ant-upload-drag-icon'>
               <InboxOutlined />
             </p>

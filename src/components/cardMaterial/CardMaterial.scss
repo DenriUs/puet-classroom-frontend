@@ -3,15 +3,10 @@
 .card-material {
   display: grid;
   justify-content: center;
-  grid-template: 1fr/ 0.8fr;
+  grid-template-columns: minmax(750px, 0.7fr);
 
   &__container {
     @extend %card;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr auto;
-    width: 100%;
-    height: 100%;
   }
 
   &__title-container {
@@ -30,12 +25,7 @@
     }
   }
 
-  &__file-container {
-    display: grid;
-    justify-items: center;
-  }
-
-  &__button-container {
+  &__button-pass-container {
     display: grid;
     justify-items: center;
   }

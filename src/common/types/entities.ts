@@ -41,7 +41,7 @@ export interface CourseActivityEntity {
   id: string;
   title: string;
   type: CourseActivityTypeEnum;
-  files: Partial<FileEntity>[];
+  file: Partial<FileEntity>;
   topic: Partial<CourseTopicEntity>;
   // eslint-disable-next-line no-use-before-define
   passedAssignments: Partial<CoursePassedAssignmentEntity>[];
