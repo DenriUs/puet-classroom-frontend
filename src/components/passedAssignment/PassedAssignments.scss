@@ -1,0 +1,39 @@
+.passed-assignment {
+  &__container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  &__info-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__title-container {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+  }
+
+  &__table-container {
+    margin: 30px;
+  }
+}
+
+.title-status {
+  &__icon {
+    font-size: 25px;
+    color: #254664;
+    padding-right: 16px;
+  }
+
+  &__count {
+    font-weight: 700;
+    font-size: 16px;
+    color: #254664;
+    padding-right: 7px;
+  }
+}

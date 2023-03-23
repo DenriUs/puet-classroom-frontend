@@ -34,7 +34,6 @@ const CourseModal = (props: IProps) => {
   const dispatch = useAppDispatch();
 
   const handleCourseSubmit = (data: CourseSchemaType) => {
-    console.log(data);
     dispatch({ type: SagaAction.COURSE_CREATE, payload: data });
     handleClose();
   };
@@ -117,6 +116,7 @@ const CourseModal = (props: IProps) => {
                     onBlur={onBlur}
                     onChange={onChange}
                     value={value}
+                    disabled={isSubmitting}
                     className='course-modal__area'
                     placeholder='Опис курсу'
                     showCount

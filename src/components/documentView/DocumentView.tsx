@@ -49,7 +49,7 @@ const DocumentView = (props: Props) => {
       </div>
       <div className='document-view__file-container'>
         <div className='document-view__file-border'>
-          <Document file={fileSrc} loading={AppLoader} onLoadSuccess={onDocumentLoadSuccess}>
+          <Document noData={AppLoader} file={fileSrc} loading={AppLoader} onLoadSuccess={onDocumentLoadSuccess}>
             <Page pageNumber={pageNumber} scale={scalePage} />
           </Document>
           <div className='document-view__file-buttons-conatiner'>

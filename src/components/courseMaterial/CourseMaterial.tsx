@@ -131,6 +131,12 @@ const CourseMaterial = () => {
         onStart={showAddTopic}
         handleClose={handleTopicClose}
       />
+      <TopicModal
+        title='Редагувати тему'
+        type={SagaAction.COURSES_TOPICS_CREATE}
+        onStart={showAddTopic}
+        handleClose={handleTopicClose}
+      />
       <MaterialModal onStart={showAddMaterial} handleClose={handleMaterialClose} />
     </>
   );

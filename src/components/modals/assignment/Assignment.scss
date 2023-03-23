@@ -1,0 +1,76 @@
+@import '/src/global/sass/abstracts/placeholders/placeholders';
+
+.assignment-modal {
+  &__container {
+    display: grid;
+    grid-auto-flow: row;
+    margin: 10px;
+    justify-items: center;
+  }
+
+  &__title-container {
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    font-weight: 600;
+    @include adaptiv-font(25, 20);
+
+    @media (min-width: 1440px) {
+      font-size: 25px;
+    }
+  }
+
+  &__content-container {
+    display: grid;
+    justify-items: start;
+  }
+
+  &__info-container {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__owner-title {
+    font-size: 16px;
+    font-weight: 400;
+    padding-left: 21px;
+  }
+
+  &__file-title {
+    font-weight: 400;
+    font-size: 16px;
+    padding-right: 30px;
+  }
+
+  &__file-icon {
+    font-size: 24px;
+  }
+
+
+  &__form-container {
+    width: 100%;
+  }
+
+  &__status-title {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  &__input-container {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  &__input-number {
+    width: 130px;
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: center;
+  }
+}

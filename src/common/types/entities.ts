@@ -8,6 +8,12 @@ export enum CourseActivityTypeEnum {
   LECTURE = 'LECTURE',
   ASSIGNMENT = 'ASSIGNMENT',
 }
+
+export enum PassedAssignmentTypeEnum {
+  SENT = 'SENT',
+  RATED = 'RATED',
+}
+
 export interface FileEntity {
   id: string;
   src: string;
@@ -56,6 +62,7 @@ export interface CoursePassedAssignmentEntity {
   // eslint-disable-next-line no-use-before-define
   participant: Partial<CourseParticipantEntity>;
   file: Partial<FileEntity>;
+  status: PassedAssignmentTypeEnum;
   createdAt: Date;
   updatedAt: Date;
 }

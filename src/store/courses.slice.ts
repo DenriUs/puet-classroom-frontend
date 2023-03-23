@@ -4,6 +4,7 @@ import {
   CourseActivityEntity,
   CourseEntity,
   CourseParticipantEntity,
+  CoursePassedAssignmentEntity,
   TopicEntity,
 } from '../common/types';
 
@@ -14,6 +15,8 @@ export interface CoursesState {
   courseTopic?: TopicEntity;
   courseActivities?: CourseActivityEntity[];
   courseActivity?: CourseActivityEntity;
+  coursePassedAssignments?: CoursePassedAssignmentEntity[];
+  coursePassedAssignment?: CoursePassedAssignmentEntity;
   courseParticipants?: CourseParticipantEntity[];
 }
 
@@ -38,8 +41,7 @@ const coursesSlice = createSlice({
       state.course = action.payload;
     },
     deleteCourses: (state, action: PayloadAction<string | undefined>) => {
-      const newCourses = state.courses?.filter((course) => course.id !== action.payload);
-      state.courses = newCourses;
+      state.courses = state.courses?.filter((course) => course.id !== action.payload);
     },
     setCourseTopics: (state, action: PayloadAction<TopicEntity[]>) => {
       state.courseTopics = action.payload;
@@ -51,10 +53,9 @@ const coursesSlice = createSlice({
       state.courseTopics?.push(action.payload);
     },
     deleteCourseTopic: (state, action: PayloadAction<string | undefined>) => {
-      const newTopics = state.courseTopics?.filter(
+      state.courseTopics = state.courseTopics?.filter(
         (paticipant) => paticipant.id !== action.payload,
       );
-      state.courseTopics = newTopics;
     },
     setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
       state.courseActivities = action.payload;
@@ -66,10 +67,20 @@ const coursesSlice = createSlice({
       state.courseActivities?.push(action.payload);
     },
     deleteCourseActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
-      const newLectures = state.courseActivities?.filter(
+      state.courseActivities = state.courseActivities?.filter(
         (activity) => activity.id !== action.payload.id,
       );
-      state.courseActivities = newLectures;
+    },
+    setPassedAssignments: (state, action: PayloadAction<CoursePassedAssignmentEntity[]>) => {
+      state.coursePassedAssignments = action.payload;
+    },
+    setPassedAssignment: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
+      state.coursePassedAssignment = action.payload;
+    },
+    updatePassedAssignment: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
+      state.coursePassedAssignments?.map((passed) =>
+        passed.id === action.payload.id ? (passed.mark = action.payload.mark) : passed,
+      );
     },
     setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
       state.courseParticipants = action.payload;
@@ -78,10 +89,9 @@ const coursesSlice = createSlice({
       state.courseParticipants?.push(action.payload);
     },
     deleteCourseParticipant: (state, action: PayloadAction<string | undefined>) => {
-      const newParticipants = state.courseParticipants?.filter(
+      state.courseParticipants = state.courseParticipants?.filter(
         (paticipant) => paticipant.id !== action.payload,
       );
-      state.courseParticipants = newParticipants;
     },
     resetCourse: () => {
       return initialState;
@@ -103,6 +113,8 @@ export const {
   setCourseTopicActivities,
   setCourseTopicActivity,
   deleteCourseActivity,
+  setPassedAssignments,
+  setPassedAssignment,
   setCoursesParticipants,
   createCoursesParticipant,
   deleteCourseParticipant,
