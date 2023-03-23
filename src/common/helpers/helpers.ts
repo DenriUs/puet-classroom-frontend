@@ -49,11 +49,10 @@ export const loadData = <T = any>(
   payload: { endpoint, action, query },
 });
 
-export const getUserShortName = (teacher: Partial<UserEntity>) =>
-  `${teacher.firstName} ${teacher.lastName}`;
+export const getUserShortName = (user: Partial<UserEntity>) => `${user.firstName} ${user.lastName}`;
 
-export const getUserFullName = (teacher: Partial<UserEntity>) =>
-  `${teacher.lastName} ${teacher.firstName} ${teacher.middleName}`;
+export const getUserFullName = (user: Partial<UserEntity | undefined>) =>
+  `${user?.lastName} ${user?.firstName} ${user?.middleName}`;
 
 export const getFullDate = (date: Date) => {
   const fullDate = new Date(date);

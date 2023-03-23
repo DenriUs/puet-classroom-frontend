@@ -9,6 +9,7 @@
   justify-items: center;
 
   &__title-container {
+    font-size: 26px;
     @extend %modal-title;
   }
 

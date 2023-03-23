@@ -19,7 +19,7 @@ const AssignmentInfo = () => {
       </div>
       <div className='assignment-info__title-container'>
         <p className='title__mark'>Немає спроб</p>
-        <p className='title__mark'>4,00 / 5,00</p>
+        <p className='title__mark'>0 / 100</p>
       </div>
       <div className='assignment-info__button-container'>
         <Button
