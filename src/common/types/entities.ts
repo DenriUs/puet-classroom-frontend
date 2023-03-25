@@ -91,13 +91,6 @@ export interface CourseEntity {
   updatedAt: Date;
 }
 
-export interface TopicEntity {
-  id: string;
-  title: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export interface SpecialityEntity {
   id: string;
   name: string;

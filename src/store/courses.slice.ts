@@ -5,14 +5,14 @@ import {
   CourseEntity,
   CourseParticipantEntity,
   CoursePassedAssignmentEntity,
-  TopicEntity,
+  CourseTopicEntity,
 } from '../common/types';
 
 export interface CoursesState {
   courses?: CourseEntity[];
   course?: CourseEntity;
-  courseTopics?: TopicEntity[];
-  courseTopic?: TopicEntity;
+  courseTopics?: CourseTopicEntity[];
+  courseTopic?: CourseTopicEntity;
   courseActivities?: CourseActivityEntity[];
   courseActivity?: CourseActivityEntity;
   coursePassedAssignments?: CoursePassedAssignmentEntity[];
@@ -43,19 +43,26 @@ const coursesSlice = createSlice({
     deleteCourses: (state, action: PayloadAction<string | undefined>) => {
       state.courses = state.courses?.filter((course) => course.id !== action.payload);
     },
-    setCourseTopics: (state, action: PayloadAction<TopicEntity[]>) => {
+    setCourseTopics: (state, action: PayloadAction<CourseTopicEntity[]>) => {
       state.courseTopics = action.payload;
     },
-    setCourseTopic: (state, action: PayloadAction<TopicEntity>) => {
+    setCourseTopic: (state, action: PayloadAction<CourseTopicEntity>) => {
       state.courseTopic = action.payload;
     },
-    createCoursesTopic: (state, action: PayloadAction<TopicEntity>) => {
+    createCoursesTopic: (state, action: PayloadAction<CourseTopicEntity>) => {
       state.courseTopics?.push(action.payload);
+    },
+    updateCourseTopic: (state, action: PayloadAction<CourseTopicEntity>) => {
+      const newTopics = state.courseTopics?.map((topic) =>
+        topic.id == action.payload.id ? action.payload : topic,
+      );
+      state.courseTopics = newTopics;
     },
     deleteCourseTopic: (state, action: PayloadAction<string | undefined>) => {
       state.courseTopics = state.courseTopics?.filter(
         (paticipant) => paticipant.id !== action.payload,
       );
+      state.courseActivities = undefined;
     },
     setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
       state.courseActivities = action.payload;
@@ -107,6 +114,7 @@ export const {
   deleteCourses,
   setCourseTopics,
   setCourseTopic,
+  updateCourseTopic,
   createCoursesTopic,
   deleteCourseTopic,
   createCoursesTopicActivity,

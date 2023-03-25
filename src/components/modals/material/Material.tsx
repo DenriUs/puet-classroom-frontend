@@ -1,6 +1,7 @@
 import { Button, Input, Modal, Radio, RadioChangeEvent } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, useEffect } from 'react';
 
 import './Material.scss';
 
@@ -8,25 +9,28 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { materialSchema } from './schemas';
 import { MaterialSchemaType } from './type';
 import { CourseActivityTypeEnum, SagaAction } from '../../../common/types';
-import { useState } from 'react';
 import { materialOptions } from './contants';
 
 interface IProps {
+  topic: string | undefined;
+  name: string;
+  type: SagaAction;
   onStart: boolean;
+  materialName?: string;
   handleClose: () => void;
 }
 
 const MaterialModal = (props: IProps) => {
-  const { onStart, handleClose } = props;
-  const [typeActivity, setType] = useState('LECTURE');
+  const { onStart, handleClose, topic, name, type, materialName } = props;
+  const [typeActivity, setType] = useState(CourseActivityTypeEnum.LECTURE);
 
-  const { courseTopic } = useAppSelector((state) => state.coursesReducer);
-  const topic = courseTopic?.id;
-
+  console.log(typeActivity);
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
+    resetField,
   } = useForm<MaterialSchemaType>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
@@ -38,18 +42,32 @@ const MaterialModal = (props: IProps) => {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
+
+  useEffect(() => {
+    reset({
+      title: materialName,
+    });
+  }, [materialName]);
+
   const handleMaterialSubmit = (data: MaterialSchemaType) => {
+    console.log(data);
     dispatch({
-      type: SagaAction.COURSES_TOPICS_ACTIVITY_CREATE,
+      type,
       payload: { topic, ...data },
     });
+    resetField('type');
     handleClose();
   };
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={630}>
       <div className='course-modal'>
-        <div className='course-modal__title-container'>Додати матеріал</div>
+        <div className='course-modal__title-container'>{name} матеріал</div>
         <form
           className='course-modal__form-container'
           onSubmit={handleSubmit(handleMaterialSubmit)}
@@ -64,6 +82,9 @@ const MaterialModal = (props: IProps) => {
                     options={materialOptions}
                     onChange={({ target: { value } }: RadioChangeEvent) => {
                       setType(value);
+                      reset({
+                        type: value,
+                      });
                       field.onChange(value);
                     }}
                     optionType='button'
@@ -99,7 +120,7 @@ const MaterialModal = (props: IProps) => {
               htmlType='submit'
               className='course-modal__button button'
             >
-              Створити
+              {name}
             </Button>
           </div>
         </form>
