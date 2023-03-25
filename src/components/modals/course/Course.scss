@@ -4,10 +4,11 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, auto);
-  grid-gap: 30px;
+  grid-gap: 25px;
   align-items: center;
 
   &__title-container {
+    font-size: 26px;
     @extend %modal-title;
   }
 

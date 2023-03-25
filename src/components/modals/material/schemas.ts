@@ -6,5 +6,5 @@ export const materialSchema = zod.object({
     .string({ required_error: 'Введіть назву' })
     .min(2, 'Закоротка назва')
     .max(300, 'Завелика назва'),
-  type: zod.nativeEnum(CourseActivityTypeEnum),
+  type: zod.nativeEnum(CourseActivityTypeEnum).optional(),
 });

@@ -12,25 +12,24 @@ import { CourseActivityTypeEnum, SagaAction } from '../../../common/types';
 import { materialOptions } from './contants';
 
 interface IProps {
-  topic: string | undefined;
+  id: string | undefined;
   name: string;
   type: SagaAction;
   onStart: boolean;
   materialName?: string;
+  createMode?: boolean;
   handleClose: () => void;
 }
 
 const MaterialModal = (props: IProps) => {
-  const { onStart, handleClose, topic, name, type, materialName } = props;
+  const { onStart, handleClose, id, name, type, materialName, createMode } = props;
   const [typeActivity, setType] = useState(CourseActivityTypeEnum.LECTURE);
 
-  console.log(typeActivity);
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
     reset,
-    resetField,
   } = useForm<MaterialSchemaType>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
@@ -42,27 +41,26 @@ const MaterialModal = (props: IProps) => {
 
   const dispatch = useAppDispatch();
 
+  const handleMaterialSubmit = (data: MaterialSchemaType) => {
+    dispatch({
+      type,
+      payload: { id, ...data },
+    });
+    handleClose();
+  };
+
+  useEffect(() => {
+    reset({
+      title: materialName,
+      type: typeActivity,
+    });
+  }, [materialName]);
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
-
-  useEffect(() => {
-    reset({
-      title: materialName,
-    });
-  }, [materialName]);
-
-  const handleMaterialSubmit = (data: MaterialSchemaType) => {
-    console.log(data);
-    dispatch({
-      type,
-      payload: { topic, ...data },
-    });
-    resetField('type');
-    handleClose();
-  };
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={630}>
@@ -72,28 +70,30 @@ const MaterialModal = (props: IProps) => {
           className='course-modal__form-container'
           onSubmit={handleSubmit(handleMaterialSubmit)}
         >
-          <div className='course-modal__radio-container'>
-            <label htmlFor='type'>
-              <Controller
-                control={control}
-                name='type'
-                render={({ field }) => (
-                  <Radio.Group
-                    options={materialOptions}
-                    onChange={({ target: { value } }: RadioChangeEvent) => {
-                      setType(value);
-                      reset({
-                        type: value,
-                      });
-                      field.onChange(value);
-                    }}
-                    optionType='button'
-                    defaultValue={typeActivity}
-                  />
-                )}
-              />
-            </label>
-          </div>
+          {createMode && (
+            <div className='course-modal__radio-container'>
+              <label htmlFor='type'>
+                <Controller
+                  control={control}
+                  name='type'
+                  render={({ field }) => (
+                    <Radio.Group
+                      options={materialOptions}
+                      onChange={({ target: { value } }: RadioChangeEvent) => {
+                        setType(value);
+                        reset({
+                          type: value,
+                        });
+                        field.onChange(value);
+                      }}
+                      optionType='button'
+                      defaultValue={typeActivity}
+                    />
+                  )}
+                />
+              </label>
+            </div>
+          )}
           <div className='course-modal__input-container'>
             <label htmlFor='title'>
               Назва
