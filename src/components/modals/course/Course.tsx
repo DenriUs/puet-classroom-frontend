@@ -2,7 +2,7 @@ import { Button, Input, Modal, Select, Upload } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextArea from 'antd/lib/input/TextArea';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
@@ -24,7 +24,8 @@ const CourseModal = (props: IProps) => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
   } = useForm<CourseSchemaType>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
@@ -37,6 +38,12 @@ const CourseModal = (props: IProps) => {
     dispatch({ type: SagaAction.COURSE_CREATE, payload: data });
     handleClose();
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   const uploadButton = (
     <div>

@@ -125,7 +125,6 @@
 }
 
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  font-weight: 600;
   color: #254664;
 }
 
@@ -140,12 +139,8 @@
 }
 
 .ant-tabs-content-holder {
-  border-left: 6px solid #e7e7e7 !important;
+  border-left: 6px solid #ffffff !important;
   margin-left: -6px !important;
-}
-
-.ant-tabs-nav {
-  height: 78vh;
 }
 
 // road
@@ -198,11 +193,19 @@
 }
 
 .ant-table-tbody > tr.ant-table-row-selected > td {
-  background: #d9e1e4;
+  background: #ffffff;
 }
 
 .ant-table-tbody > tr.ant-table-row-selected:hover > td {
-  background: #d9e1e4;
+  background: #ffffff;
+}
+.ant-table-thead > tr > th {
+  background: white;
+}
+
+.ant-table-cell-row-hover {
+  color: #4f4f4f;
+  background: white !important;
 }
 
 //menu

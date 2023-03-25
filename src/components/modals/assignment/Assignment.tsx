@@ -2,13 +2,14 @@ import { Avatar, Button, InputNumber, Modal } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileTextOutlined, UserOutlined } from '@ant-design/icons';
+import { useEffect } from 'react';
 
 import './Assignment.scss';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { assignmentSchema } from './schemas';
 import { AssignmentSchemaType } from './type';
-import { SagaAction, TopicEntity } from '../../../common/types';
+import { SagaAction } from '../../../common/types';
 import { getUserFullName } from '../../../common/helpers';
 
 interface IProps {
@@ -25,7 +26,8 @@ const AssignmentModal = (props: IProps) => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
   } = useForm<AssignmentSchemaType>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
@@ -41,6 +43,12 @@ const AssignmentModal = (props: IProps) => {
     await dispatch({ type: SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, payload: { id, ...data } });
     handleClose();
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={800}>
