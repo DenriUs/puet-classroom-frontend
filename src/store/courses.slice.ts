@@ -73,6 +73,12 @@ const coursesSlice = createSlice({
     createCoursesTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
       state.courseActivities?.push(action.payload);
     },
+    updateCoursesTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
+      const newActivities = state.courseActivities?.map((activity) =>
+        activity.id == action.payload.id ? action.payload : activity,
+      );
+      state.courseActivities = newActivities;
+    },
     deleteCourseActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
       state.courseActivities = state.courseActivities?.filter(
         (activity) => activity.id !== action.payload.id,
@@ -120,6 +126,7 @@ export const {
   createCoursesTopicActivity,
   setCourseTopicActivities,
   setCourseTopicActivity,
+  updateCoursesTopicActivity,
   deleteCourseActivity,
   setPassedAssignments,
   setPassedAssignment,

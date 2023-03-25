@@ -32,6 +32,7 @@ import {
   setPassedAssignments,
   setPassedAssignment,
   updateCourseTopic,
+  updateCoursesTopicActivity,
 } from '../../store/courses.slice';
 
 interface Paricipant {
@@ -123,14 +124,25 @@ function* getActivity(action: ReduxAction<string>) {
 
 function* createActivity(action: ReduxAction<CourseActivityEntity>) {
   if (!action.payload) return;
-  const { topic, title, type } = action.payload;
-  const response: APIResponse = yield call(Api.post, `courses/topics/${topic}/activities`, {
+  const { id, title, type } = action.payload;
+  const response: APIResponse = yield call(Api.post, `courses/topics/${id}/activities`, {
     title,
     type,
   });
   if (response.error) return;
   yield put(createCoursesTopicActivity(response.data.data));
   yield showSuccessMessage('Матеріал успішно додано!');
+}
+
+function* updateActivity(action: ReduxAction<CourseActivityEntity>) {
+  if (!action.payload) return;
+  const { id, title } = action.payload;
+  const response: APIResponse = yield call(Api.patch, `courses/topics/activities/${id}`, {
+    title,
+  });
+  if (response.error) return;
+  yield put(updateCoursesTopicActivity(response.data.data));
+  yield showSuccessMessage('Матеріал успішно оновлено!');
 }
 
 function* deleteActivity(action: ReduxAction<string>) {
@@ -215,6 +227,7 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITIES_GET, getActivities);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_GET, getActivity);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_CREATE, createActivity);
+  yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_UPDATE, updateActivity);
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, deleteActivity);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENTS_GET, getPassedAssignments);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_GET, getPassedAssignment);
