@@ -13,12 +13,13 @@ const CourseStudents = () => {
   const { course, courseParticipants } = useAppSelector((state) => state.coursesReducer);
   const { users } = useAppSelector((state) => state.authReducer);
 
-  const courseId = course?.id;
-
   const dispatch = useAppDispatch();
 
   const handleCourseStudentSubmit = (id: string) => {
-    dispatch({ type: SagaAction.COURSES_PARTICIPANTS_CREATE, payload: { courseId, id } });
+    dispatch({
+      type: SagaAction.COURSES_PARTICIPANTS_CREATE,
+      payload: { course: course?.id, id },
+    });
   };
 
   const handleCourseStudentDelete = (id: string) => {

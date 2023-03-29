@@ -29,9 +29,8 @@ const SettingsCourse = () => {
     resolver: zodResolver(courseUpdateSchema),
   });
 
-  const id = course?.id;
-
   const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
 
   const handleCourseDelete = () => {
@@ -40,7 +39,7 @@ const SettingsCourse = () => {
   };
 
   const handleCourseUpdate = (data: CourseUpdateSchemaType) => {
-    dispatch({ type: SagaAction.COURSE_UPDATE, payload: { id, ...data } });
+    dispatch({ type: SagaAction.COURSE_UPDATE, payload: { id: course?.id, ...data } });
   };
 
   const uploadButton = (

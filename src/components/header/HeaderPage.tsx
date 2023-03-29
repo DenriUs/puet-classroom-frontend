@@ -5,7 +5,7 @@ import { UserOutlined } from '@ant-design/icons';
 import './HeaderPage.scss';
 
 import LogoutIcon from '../Icons/LogoutIcon';
-import { getUserShortName, removeFromLocalStorage } from '../../common/helpers';
+import { getUserIcon, getUserShortName, removeFromLocalStorage } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 
 const { Header } = Layout;
@@ -23,7 +23,7 @@ const HeaderPage = () => {
     <Header className='header'>
       <div className='header-page'>
         <div className='header-page__items-container'>
-          <Avatar src={user?.cover.src} size={45} />
+          {getUserIcon(user)}
           <div className='name-container'>
             <span>{user && getUserShortName(user)}</span>
           </div>

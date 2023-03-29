@@ -4,6 +4,7 @@ import { SelectEffect, select as sagaSelect } from 'redux-saga/effects';
 
 import {
   CourseActivityTypeEnum,
+  CoursePassedAssignmentEntity,
   LoadDataPayload,
   PaginationQueryParams,
   ReduxAction,
@@ -61,4 +62,8 @@ export const getFullDate = (date: Date) => {
 
 export const getTypeActivity = (type: CourseActivityTypeEnum) => {
   return type == 'LECTURE' ? 'Лекція' : 'Практична';
+};
+
+export const getVerifiedWorks = (passed: Partial<CoursePassedAssignmentEntity | undefined>) => {
+  const verifiedWorks = passed
 };

@@ -23,11 +23,6 @@ export const coursesColumns = [
     icon: <FileTextFilled className='sidebar__icon' />,
   },
   {
-    name: 'files',
-    title: 'Мої файли',
-    icon: <StarFilled className='sidebar__icon' />,
-  },
-  {
     name: 'settings',
     title: 'Налаштування',
     icon: <SettingFilled className='sidebar__icon' />,

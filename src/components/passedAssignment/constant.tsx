@@ -1,5 +1,5 @@
 import { ColumnsType } from 'antd/lib/table';
-import { getFullDate } from '../../common/helpers';
+import { getFullDate, getUserFullName, getUserIcon } from '../../common/helpers';
 import { CoursePassedAssignmentEntity } from '../../common/types';
 
 export const passedAssignmentColumns: ColumnsType<CoursePassedAssignmentEntity> = [
@@ -8,7 +8,12 @@ export const passedAssignmentColumns: ColumnsType<CoursePassedAssignmentEntity> 
     title: 'П.І.Б',
     key: 'title',
     width: '45%',
-    render: (title) => <span className='topic-name'>{title}</span>,
+    render: (_, record) => (
+      <div className='passed-name-container'>
+        <span>{getUserIcon(record?.participant?.user)}</span>
+        <span className='passed-name-title'>{getUserFullName(record?.participant?.user)}</span>
+      </div>
+    ),
   },
   {
     dataIndex: 'createdAt',
@@ -29,6 +34,8 @@ export const passedAssignmentColumns: ColumnsType<CoursePassedAssignmentEntity> 
     title: 'Статус',
     key: 'status',
     width: '20%',
-    render: (status) => <span className='topic-date'>{status}</span>,
+    render: (_, record) => (
+      <span className='passed-status'>{!record?.mark ? 'Здано' : 'Оцінено'}</span>
+    ),
   },
 ];

@@ -1,4 +1,4 @@
-import { Layout } from 'antd';
+import { Empty, Layout } from 'antd';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxhooks';
 import { useNavigate } from 'react-router';
@@ -50,7 +50,11 @@ const Home = () => {
         <div className='course__title-container'>
           <p className='course__title'>Мої поточні курси</p>
         </div>
-        {courses ? <div className='course-card'>{renderedCourses}</div> : <AppLoader />}
+        {courses?.length ? (
+          <div className='course-card'>{renderedCourses}</div>
+        ) : (
+          <Empty description={<span className='empty-title'>Курси відсутні</span>} />
+        )}
       </div>
     </Layout>
   );

@@ -43,7 +43,6 @@ const FileModal = (props: IProps) => {
         <div className='file-modal__title'>Завантажити файл</div>
         <div className='file-modal__dragger'>
           <Dragger
-            name='File'
             multiple={false}
             showUploadList={false}
             onChange={onChange}
@@ -53,7 +52,7 @@ const FileModal = (props: IProps) => {
             <p className='ant-upload-drag-icon'>
               <InboxOutlined />
             </p>
-            <p className='ant-upload-text'>Click or drag file to this area to upload</p>
+            <p className='ant-upload-text'>Click to this area to upload</p>
             <p className='ant-upload-hint'>
               Support for a single or bulk upload. Strictly prohibit from uploading company data or
               other band files

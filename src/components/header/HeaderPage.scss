@@ -18,11 +18,6 @@
       align-items: center;
       gap: 20px;
 
-      .profile-icon {
-        width: 45px;
-        height: 45px;
-      }
-
       .name-container {
         @extend %sub-title;
       }
