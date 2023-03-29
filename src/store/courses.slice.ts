@@ -90,10 +90,11 @@ const coursesSlice = createSlice({
     setPassedAssignment: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
       state.coursePassedAssignment = action.payload;
     },
-    updatePassedAssignment: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
-      state.coursePassedAssignments?.map((passed) =>
-        passed.id === action.payload.id ? (passed.mark = action.payload.mark) : passed,
+    updatePassed: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
+      const newPassedAssignment = state.coursePassedAssignments?.map((passed) =>
+        passed.id === action.payload.id ? action.payload : passed,
       );
+      state.coursePassedAssignments = newPassedAssignment;
     },
     setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
       state.courseParticipants = action.payload;
@@ -130,6 +131,7 @@ export const {
   deleteCourseActivity,
   setPassedAssignments,
   setPassedAssignment,
+  updatePassed,
   setCoursesParticipants,
   createCoursesParticipant,
   deleteCourseParticipant,

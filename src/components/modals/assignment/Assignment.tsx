@@ -1,7 +1,7 @@
-import { Avatar, Button, InputNumber, Modal } from 'antd';
+import { Button, InputNumber, Modal } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FileTextOutlined, UserOutlined } from '@ant-design/icons';
+import { FileTextOutlined, FileExclamationOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 
 import './Assignment.scss';
@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { assignmentSchema } from './schemas';
 import { AssignmentSchemaType } from './type';
 import { SagaAction } from '../../../common/types';
-import { getUserFullName } from '../../../common/helpers';
+import { getUserFullName, getUserIcon } from '../../../common/helpers';
 
 interface IProps {
   onStart: boolean;
@@ -19,47 +19,52 @@ interface IProps {
 
 const AssignmentModal = (props: IProps) => {
   const { onStart, handleClose } = props;
-  const { courseActivity, coursePassedAssignment } = useAppSelector(
+  const { coursePassedAssignment, courseActivity } = useAppSelector(
     (state) => state.coursesReducer,
   );
 
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<AssignmentSchemaType>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
     resolver: zodResolver(assignmentSchema),
-    defaultValues: coursePassedAssignment,
+    defaultValues: {
+      mark: coursePassedAssignment?.mark,
+    },
   });
-
-  const id = courseActivity?.id;
 
   const dispatch = useAppDispatch();
 
-  const handleAssignmentSubmit = async (data: AssignmentSchemaType): Promise<void> => {
-    await dispatch({ type: SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, payload: { id, ...data } });
+  const handleAssignmentSubmit = (data: AssignmentSchemaType) => {
+    dispatch({
+      type: SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE,
+      payload: { id: coursePassedAssignment?.id, ...data },
+    });
     handleClose();
   };
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
+    reset({
+      mark: coursePassedAssignment?.mark,
+    });
+  }, [coursePassedAssignment]);
 
   return (
-    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={800}>
+    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={650}>
       <div className='assignment-modal__container'>
         <div className='assignment-modal__title-container'>
           <h1 className='assignment-modal__title'>{courseActivity?.title}</h1>
         </div>
         <div className='assignment-modal__content-container'>
           <div className='assignment-modal__info-container'>
-            <Avatar icon={<UserOutlined />} size={45}></Avatar>
-            <span className='assignment-modal__owner-title'>Комар Ілля Ігорович</span>
+            {getUserIcon(coursePassedAssignment?.participant?.user)}
+            <span className='assignment-modal__owner-title'>
+              {getUserFullName(coursePassedAssignment?.participant?.user)}
+            </span>
           </div>
           <div className='assignment-modal__info-container'>
             <span className='assignment-modal__file-title'>Файл: </span>
@@ -68,12 +73,18 @@ const AssignmentModal = (props: IProps) => {
               href={coursePassedAssignment?.file.src}
               download
             >
-              <FileTextOutlined />
+              {!coursePassedAssignment?.file.src ? (
+                <FileExclamationOutlined className='assignment-modal__file-icon-error' />
+              ) : (
+                <FileTextOutlined />
+              )}
             </a>
           </div>
           <div className='assignment-modal__info-container'>
             <span className='assignment-modal__file-title'>Статус оцінювання роботи:</span>
-            <span className='assignment-modal__status-title'>Надіслано</span>
+            <span className='assignment-modal__status-title'>
+              {!coursePassedAssignment?.mark ? 'Здано' : 'Оцінено'}
+            </span>
           </div>
           <form
             className='assignment-modal__form-container'

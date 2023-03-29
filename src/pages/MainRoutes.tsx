@@ -33,7 +33,6 @@ const MainRoutes = () => {
         <Route path='home' element={<Home />} />
         <Route path='courses' element={<Course />} />
         <Route path='grade' element={<GradeBook />} />
-        <Route path='files' element={<Files />} />
         <Route path='settings' element={<Settings />} />
         <Route path='courses/:id' element={<CourseDetails />} />
         <Route path='courses/:id/settings' element={<CourseSettings />} />

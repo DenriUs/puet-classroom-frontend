@@ -6,6 +6,7 @@ import { loadData, showSuccessMessage } from '../../common/helpers';
 import {
   CourseActivityEntity,
   CourseEntity,
+  CourseParticipantEntity,
   CoursePassedAssignmentEntity,
   CourseTopicEntity,
   ReduxAction,
@@ -32,13 +33,9 @@ import {
   setPassedAssignments,
   setPassedAssignment,
   updateCourseTopic,
+  updatePassed,
   updateCoursesTopicActivity,
 } from '../../store/courses.slice';
-
-interface Paricipant {
-  courseId: string;
-  id: string;
-}
 
 function* getCourses() {
   yield put(loadData('courses', setCourses));
@@ -183,8 +180,8 @@ function* updatePassedAssignment(action: ReduxAction<CoursePassedAssignmentEntit
     { mark },
   );
   if (response.error) return;
-  yield put(updateCourses(response.data.data));
-  yield showSuccessMessage('Оцінку успішно додано!');
+  yield put(updatePassed(response.data.data));
+  yield showSuccessMessage('Оцінку успішно оновлено!');
 }
 
 function* getParticipants(action: ReduxAction<string>) {
@@ -193,10 +190,10 @@ function* getParticipants(action: ReduxAction<string>) {
   yield put(setCoursesParticipants(response.data.data.result));
 }
 
-function* createParticipant(action: ReduxAction<Paricipant>) {
+function* createParticipant(action: ReduxAction<CourseParticipantEntity>) {
   if (!action.payload) return;
-  const { courseId, id } = action.payload;
-  const response: APIResponse = yield call(Api.post, `courses/${courseId}/participants`, { id });
+  const { course, id } = action.payload;
+  const response: APIResponse = yield call(Api.post, `courses/${course}/participants`, { id });
   if (response.error) return;
   yield put(createCoursesParticipant(response.data.data));
   yield showSuccessMessage('Студента на курс успішно додано!');
