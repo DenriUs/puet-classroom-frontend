@@ -1,5 +1,5 @@
 import { Button, Input, UploadFile, UploadProps } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SagaAction } from '../../common/types';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
@@ -10,6 +10,7 @@ import './SettingsProfile.scss';
 
 const SettingsProfile = () => {
   const { user } = useAppSelector((state) => state.authReducer);
+  const { file } = useAppSelector((state) => state.filesReducer);
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -20,12 +21,15 @@ const SettingsProfile = () => {
     setFileList(newFileList);
   };
 
-  const handleUserUpdate = () => {
+  const handleUserUpdate = () =>
     dispatch({
       type: SagaAction.FILE_UPLOAD,
       payload: { id: user?.cover.id, file: fileList[0]?.originFileObj },
     });
-  };
+
+  useEffect(() => {
+    dispatch({ type: SagaAction.PROFILE_GET });
+  }, [file]);
 
   if (!user) return <AppLoader />;
 
