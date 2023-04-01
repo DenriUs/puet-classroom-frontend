@@ -1,15 +1,30 @@
 import { Button } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
+import { SagaAction } from '../../common/types';
+import { getMarkAssignment, getStatusAssignment } from '../../common/helpers';
+import FileModal from '../modals/file/File';
 
 import './AssignmentInfo.scss';
 
-import FileModal from '../modals/file/File';
-
 const AssignmentInfo = () => {
+  const { courseActivity, coursePassedAssignments } = useAppSelector(
+    (state) => state.coursesReducer,
+  );
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch({ type: SagaAction.COURSES_PASSED_ASSIGNMENTS_GET, payload: courseActivity?.id });
+  }, [dispatch, courseActivity]);
+
+  const coursePassedAssignment = coursePassedAssignments?.[0];
 
   return (
     <div className='assignment-info__container'>
@@ -18,8 +33,8 @@ const AssignmentInfo = () => {
         <p className='title__status'>Оцінка :</p>
       </div>
       <div className='assignment-info__title-container'>
-        <p className='title__mark'>Немає спроб</p>
-        <p className='title__mark'>0 / 100</p>
+        <p className='title__mark'>{getStatusAssignment(coursePassedAssignment)}</p>
+        <p className='title__mark'>{getMarkAssignment(coursePassedAssignment)} / 100</p>
       </div>
       <div className='assignment-info__button-container'>
         <Button

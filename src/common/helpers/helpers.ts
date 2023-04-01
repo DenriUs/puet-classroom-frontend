@@ -1,4 +1,5 @@
 import { notification } from 'antd';
+import { RcFile } from 'antd/lib/upload';
 import { Action } from 'redux';
 import { SelectEffect, select as sagaSelect } from 'redux-saga/effects';
 
@@ -64,6 +65,28 @@ export const getTypeActivity = (type: CourseActivityTypeEnum) => {
   return type == 'LECTURE' ? 'Лекція' : 'Практична';
 };
 
-export const getVerifiedWorks = (passed: Partial<CoursePassedAssignmentEntity | undefined>) => {
-  const verifiedWorks = passed
+export const getVerifiedWorks = (
+  passedAssignment: Partial<CoursePassedAssignmentEntity[] | undefined>,
+) => {
+  return passedAssignment?.filter((passed) => passed?.mark !== null).length;
 };
+
+export const getStatusAssignment = (
+  passedAssignment: Partial<CoursePassedAssignmentEntity | undefined>,
+) => {
+  return !passedAssignment ? 'Немає спроб' : !passedAssignment?.mark ? 'Здано' : 'Оцінено';
+};
+
+export const getMarkAssignment = (
+  passedAssignment: Partial<CoursePassedAssignmentEntity | undefined>,
+) => {
+  return passedAssignment?.mark === null || !passedAssignment ? 0 : passedAssignment?.mark;
+};
+
+export const getBase64 = (file: RcFile): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });

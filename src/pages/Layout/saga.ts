@@ -7,7 +7,7 @@ import { SagaAction } from '../../common/types';
 import { setProfile, setUsers } from '../../store/auth.slice';
 
 function* getProfile() {
-  const response: APIResponse = yield call(Api.get, `auth/profile`);
+  const response: APIResponse = yield call(Api.get, `auth/profile`, { eager: true });
   if (response.error) return;
   yield put(setProfile(response.data.data));
 }

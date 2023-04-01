@@ -1,30 +1,33 @@
-import { LoadingOutlined, PictureOutlined } from '@ant-design/icons';
-import { Button, Input, Upload } from 'antd';
+import { Button, Input, UploadFile, UploadProps } from 'antd';
 import { useState } from 'react';
+import { SagaAction } from '../../common/types';
 
-import { useAppSelector } from '../../hooks/reduxhooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
+import ImageUpload from '../imageUpload/ImageUpload';
 
 import './SettingsProfile.scss';
 
 const SettingsProfile = () => {
   const { user } = useAppSelector((state) => state.authReducer);
 
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const dispatch = useAppDispatch();
+
+  const onDraggerChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    if (newFileList[0]) newFileList[0].status = 'done';
+    setFileList(newFileList);
+  };
+
+  const handleUserUpdate = () => {
+    dispatch({
+      type: SagaAction.FILE_UPLOAD,
+      payload: { id: user?.cover.id, file: fileList[0]?.originFileObj },
+    });
+  };
 
   if (!user) return <AppLoader />;
-
-  const uploadButton = (
-    <div>
-      {loading ? (
-        <LoadingOutlined className='settings-icon' />
-      ) : (
-        <PictureOutlined className='settings-icon' />
-      )}
-      <div className='upload-title'>Upload avatar</div>
-    </div>
-  );
 
   return (
     <div className='settings-profile'>
@@ -57,12 +60,20 @@ const SettingsProfile = () => {
           </div>
         </div>
         <div className='settings-profile__upload'>
-          <Upload name='avatar' listType='picture-card' showUploadList={false}>
-            {imageUrl ? <img src={imageUrl} alt='avatar' /> : uploadButton}
-          </Upload>
+          <ImageUpload
+            id={user?.cover.id as string}
+            url={user?.cover.src as string}
+            name={user?.cover.filename as string}
+            onChange={onDraggerChange}
+          />
         </div>
         <div className='settings-profile__button'>
-          <Button shape='round' type='primary' className='save-button'>
+          <Button
+            onClick={() => handleUserUpdate()}
+            shape='round'
+            type='primary'
+            className='save-button'
+          >
             Зберегти
           </Button>
         </div>

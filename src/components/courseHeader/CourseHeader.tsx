@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router';
 
 import './CourseHeader.scss';
 
-import test from '../../global/images/icons/Atom.png';
+import test from '../../global/images/icons/Test.png';
 import { UserRoleEnum } from '../../common/types';
 import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
@@ -133,7 +133,11 @@ const CourseHeader = () => {
         </div>
       )}
       <div className='course-header__design-container'>
-        <img src={test} alt='name' className='course-header__image' />
+        {course.cover.src ? (
+          <img src={course.cover.src} alt='name' className='course-header__image' />
+        ) : (
+          <img src={test} alt='test' className='course-header__image' />
+        )}
       </div>
     </div>
   );

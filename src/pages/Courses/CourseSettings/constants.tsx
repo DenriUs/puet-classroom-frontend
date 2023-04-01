@@ -2,7 +2,6 @@ import {
   TeamOutlined,
   SettingOutlined,
   DatabaseOutlined,
-  FileDoneOutlined,
   ReconciliationOutlined,
 } from '@ant-design/icons';
 import CourseMaterial from '../../../components/courseMaterial/CourseMaterial';
@@ -17,26 +16,20 @@ export const tabsItems = [
     icon: <DatabaseOutlined />,
   },
   {
-    label: 'Тести',
-    key: '2',
-    children: [],
-    icon: <FileDoneOutlined />,
-  },
-  {
     label: 'Студенти',
-    key: '3',
+    key: '2',
     children: [<CourseStudents />],
     icon: <TeamOutlined />,
   },
   {
     label: 'Журнал оцінок',
-    key: '4',
+    key: '3',
     children: [],
     icon: <ReconciliationOutlined />,
   },
   {
     label: 'Налаштування',
-    key: '5',
+    key: '4',
     children: [<SettingsCourse />],
     icon: <SettingOutlined />,
   },

@@ -1,8 +1,7 @@
-import { Button, Input, Modal, Select, Upload } from 'antd';
+import { Button, Input, Modal, Select } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import TextArea from 'antd/lib/input/TextArea';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
@@ -18,7 +17,6 @@ interface IProps {
 }
 
 const CourseModal = (props: IProps) => {
-  const [loading, setLoading] = useState(false);
   const { onStart, handleClose } = props;
   const { groups } = useAppSelector((state) => state.groupsReducer);
   const {
@@ -44,13 +42,6 @@ const CourseModal = (props: IProps) => {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div>Upload</div>
-    </div>
-  );
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={630}>
@@ -134,17 +125,6 @@ const CourseModal = (props: IProps) => {
               />
             </label>
             {errors.description && <p className='form-error-label'>{errors.description.message}</p>}
-          </div>
-          <div className='course-modal__image-container'>
-            <div>Оформлення</div>
-            <Upload
-              name='avatar'
-              listType='picture-card'
-              className='course-modal__upload'
-              showUploadList={false}
-            >
-              {uploadButton}
-            </Upload>
           </div>
           <div className='course-modal__button-container'>
             <Button

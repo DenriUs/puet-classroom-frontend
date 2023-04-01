@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { passedAssignmentColumns } from './constant';
 import { SagaAction } from '../../common/types';
 import AssignmentModal from '../modals/assignment/Assignment';
+import { getVerifiedWorks } from '../../common/helpers';
 
 const PassedAssignments = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
@@ -42,7 +43,7 @@ const PassedAssignments = () => {
         <div className='passed-assignment__title-container'>
           <AuditOutlined className='title-status__icon' />
           <p className='title-status__count'>Кількість перевірених робіт:</p>
-          <p className='title-status__count'>4</p>
+          <p className='title-status__count'>{getVerifiedWorks(coursePassedAssignments)}</p>
         </div>
       </div>
       <div className='passed-assignment__table-container'>

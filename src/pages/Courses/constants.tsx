@@ -15,8 +15,8 @@ export const courseStudentColumns = [
     dataIndex: 'name',
     key: 'name',
     width: '35%',
-    render: (name: string, key: Course) => (
-      <Link to={'/main/courses/' + key} className='course-name'>
+    render: (name: string, course: Course) => (
+      <Link to={'/main/courses/' + course.key} className='course-name'>
         {name}
       </Link>
     ),
