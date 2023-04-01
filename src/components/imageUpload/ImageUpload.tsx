@@ -1,4 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
+import ImgCrop from 'antd-img-crop';
 import { useState } from 'react';
 import { message, Modal, Upload } from 'antd';
 import { UploadChangeParam, RcFile, UploadFile, UploadProps } from 'antd/lib/upload/interface';
@@ -57,15 +58,17 @@ const ImageUpload = (props: Props) => {
 
   return (
     <>
-      <Upload
-        accept={'image/*'}
-        listType='picture-card'
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={onUpload}
-      >
-        {fileList?.length >= 1 ? null : uploadButton}
-      </Upload>
+      <ImgCrop rotationSlider modalTitle='Редагувати'>
+        <Upload
+          accept={'image/*'}
+          listType='picture-card'
+          fileList={fileList}
+          onPreview={handlePreview}
+          onChange={onUpload}
+        >
+          {fileList?.length >= 1 ? null : uploadButton}
+        </Upload>
+      </ImgCrop>
       <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img alt='preview' className='img-preview' src={previewImage} />
       </Modal>

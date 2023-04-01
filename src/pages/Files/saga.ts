@@ -33,6 +33,7 @@ function* uploadFile(action: ReduxAction<FileUpload>) {
   const { id, file } = action.payload;
   const response: APIResponse = yield call(Api.uploadFile, id, file);
   if (response.error) return;
+  yield put(setFile(response.data.data));
   yield showSuccessMessage('Файл успішно оновлено!');
 }
 
