@@ -30,6 +30,8 @@ import {
   resetCourse,
   setCourseTopicActivity,
   updateCourses,
+  createPassedAssignments,
+  deletePassedAssignments,
   setPassedAssignments,
   setPassedAssignment,
   updateCourseTopic,
@@ -171,6 +173,24 @@ function* getPassedAssignment(action: ReduxAction<string>) {
   yield put(setPassedAssignment(response.data.data));
 }
 
+function* createPassedAssignment(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(
+    Api.post,
+    `courses/topics/activities/${action.payload}/passed-assignments`,
+  );
+  if (response.error) return;
+  yield put(createPassedAssignments(response.data.data));
+}
+
+function* deletePassedAssignment(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(
+    Api.delete,
+    `courses/topics/activities/passed-assignments/${action.payload}`,
+  );
+  if (response.error) return;
+  yield put(deletePassedAssignments(response.data.data));
+}
+
 function* updatePassedAssignment(action: ReduxAction<CoursePassedAssignmentEntity>) {
   if (!action.payload) return;
   const { id, mark } = action.payload;
@@ -228,6 +248,8 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, deleteActivity);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENTS_GET, getPassedAssignments);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_GET, getPassedAssignment);
+  yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_CREATE, createPassedAssignment);
+  yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_DELETE, deletePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, updatePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_CREATE, createParticipant);

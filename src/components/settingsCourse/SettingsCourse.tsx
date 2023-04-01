@@ -1,22 +1,25 @@
-import { Button, Input, Upload } from 'antd';
-import { DeleteOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Input, UploadProps } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 import { zodResolver } from '@hookform/resolvers/zod';
 import TextArea from 'antd/lib/input/TextArea';
-import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { UploadFile } from 'antd/lib/upload';
+import { useState } from 'react';
 
 import { showConfirm } from '../../common/helpers';
 import { SagaAction } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { CourseUpdateSchemaType } from '../modals/course';
 import { courseUpdateSchema } from '../modals/course/schemas';
+import ImageUpload from '../imageUpload/ImageUpload';
 
 import './SettingsCourse.scss';
 
 const SettingsCourse = () => {
   const { course } = useAppSelector((state) => state.coursesReducer);
-  const [loading, setLoading] = useState(false);
+
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const {
     control,
@@ -40,14 +43,16 @@ const SettingsCourse = () => {
 
   const handleCourseUpdate = (data: CourseUpdateSchemaType) => {
     dispatch({ type: SagaAction.COURSE_UPDATE, payload: { id: course?.id, ...data } });
+    dispatch({
+      type: SagaAction.FILE_UPLOAD,
+      payload: { id: course?.cover?.id, file: fileList[0]?.originFileObj },
+    });
   };
 
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div>Upload</div>
-    </div>
-  );
+  const onDraggerChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    if (newFileList[0]) newFileList[0].status = 'done';
+    setFileList(newFileList);
+  };
 
   return (
     <div className='setting-course'>
@@ -100,14 +105,12 @@ const SettingsCourse = () => {
           </div>
           <div className='setting-course__upload-container'>
             <label>Оформлення</label>
-            <Upload
-              name='avatar'
-              listType='picture-card'
-              className='setting-course__upload'
-              showUploadList={false}
-            >
-              {uploadButton}
-            </Upload>
+            <ImageUpload
+              id={course?.cover.id as string}
+              url={course?.cover.src as string}
+              name={course?.cover.filename as string}
+              onChange={onDraggerChange}
+            />
           </div>
           <div>
             <Button

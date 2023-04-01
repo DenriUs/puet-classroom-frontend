@@ -13,7 +13,7 @@ export const statistics = [
   },
   {
     number: 15,
-    title: 'тестів',
+    title: 'тем',
     icon: <FileDoneOutlined className='statistic__icon' />,
   },
 ];

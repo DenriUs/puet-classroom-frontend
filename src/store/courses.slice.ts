@@ -90,6 +90,14 @@ const coursesSlice = createSlice({
     setPassedAssignment: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
       state.coursePassedAssignment = action.payload;
     },
+    createPassedAssignments: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
+      state.coursePassedAssignments?.push(action.payload);
+    },
+    deletePassedAssignments: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
+      state.coursePassedAssignments = state.coursePassedAssignments?.filter(
+        (passed) => passed.id !== action.payload.id,
+      );
+    },
     updatePassed: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
       const newPassedAssignment = state.coursePassedAssignments?.map((passed) =>
         passed.id === action.payload.id ? action.payload : passed,
@@ -130,6 +138,8 @@ export const {
   updateCoursesTopicActivity,
   deleteCourseActivity,
   setPassedAssignments,
+  createPassedAssignments,
+  deletePassedAssignments,
   setPassedAssignment,
   updatePassed,
   setCoursesParticipants,
