@@ -12,6 +12,7 @@ import {
   ReduxAction,
   SagaAction,
 } from '../../common/types';
+import { MaterialSchemaType } from '../../components/modals/material';
 import {
   setCourses,
   setCourse,
@@ -38,6 +39,12 @@ import {
   updatePassed,
   updateCoursesTopicActivity,
 } from '../../store/courses.slice';
+
+interface ActivityCreate {
+  id: string;
+  data: CourseActivityEntity;
+  file: File;
+}
 
 function* getCourses() {
   yield put(loadData('courses', setCourses));
@@ -121,15 +128,17 @@ function* getActivity(action: ReduxAction<string>) {
   yield put(setCourseTopicActivity(response.data.data));
 }
 
-function* createActivity(action: ReduxAction<CourseActivityEntity>) {
+function* createActivity(action: ReduxAction<ActivityCreate>) {
   if (!action.payload) return;
-  const { id, title, type } = action.payload;
-  const response: APIResponse = yield call(Api.post, `courses/topics/${id}/activities`, {
-    title,
-    type,
+  const { id, data, file } = action.payload;
+  const responseActivity: APIResponse = yield call(Api.post, `courses/topics/${id}/activities`, {
+    title: data.title,
+    type: data.type,
   });
-  if (response.error) return;
-  yield put(createCoursesTopicActivity(response.data.data));
+  if (responseActivity.error) return;
+  yield put(createCoursesTopicActivity(responseActivity.data.data));
+  const responseFile: APIResponse = yield call(Api.uploadFile, responseActivity.data.data.file.id, file);
+  if (responseFile.error) return;
   yield showSuccessMessage('Матеріал успішно додано!');
 }
 
