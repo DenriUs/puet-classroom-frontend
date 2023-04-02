@@ -1,5 +1,5 @@
 import { Button, Layout, Table } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ArrowUpOutlined } from '@ant-design/icons';
 
 import './Files.scss';
@@ -9,16 +9,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { SagaAction } from '../../common/types';
 import AppLoader from '../../components/AppLoader';
 import HeaderPage from '../../components/header/HeaderPage';
-import FileModal from '../../components/modals/file/File';
 
 const Files = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
   const { files } = useAppSelector((state) => state.filesReducer);
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const dispatch = useAppDispatch();
 
@@ -54,11 +48,9 @@ const Files = () => {
               type='primary'
               icon={<ArrowUpOutlined className='icon' />}
               className='button-upload-file'
-              onClick={handleShow}
             >
               Завантажити файл
             </Button>
-            <FileModal onStart={show} handleClose={handleClose} />
           </div>
         </div>
         <div className='files-page__table-container'>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { SagaAction } from '../../common/types';
 import { getMarkAssignment, getStatusAssignment } from '../../common/helpers';
-import FileModal from '../modals/file/File';
+import PassedModal from '../modals/passed/Passed';
 
 import './AssignmentInfo.scss';
 
@@ -45,7 +45,7 @@ const AssignmentInfo = () => {
         >
           Здати роботу
         </Button>
-        <FileModal onStart={show} handleClose={handleClose} />
+        <PassedModal onStart={show} handleClose={handleClose} />
       </div>
     </div>
   );

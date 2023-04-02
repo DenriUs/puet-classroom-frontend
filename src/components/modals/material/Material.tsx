@@ -1,15 +1,16 @@
-import { Button, Input, Modal, Radio, RadioChangeEvent } from 'antd';
+import { Button, Input, Modal, Radio, RadioChangeEvent, UploadFile, UploadProps } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState, useEffect } from 'react';
 
 import './Material.scss';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
+import { useAppDispatch } from '../../../hooks/reduxhooks';
 import { materialSchema } from './schemas';
 import { MaterialSchemaType } from './type';
 import { CourseActivityTypeEnum, SagaAction } from '../../../common/types';
 import { materialOptions } from './contants';
+import FileUpload from '../../fileUpload/FileUpload';
 
 interface IProps {
   id: string | undefined;
@@ -23,7 +24,9 @@ interface IProps {
 
 const MaterialModal = (props: IProps) => {
   const { onStart, handleClose, id, name, type, materialName, createMode } = props;
+
   const [typeActivity, setType] = useState(CourseActivityTypeEnum.LECTURE);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const {
     control,
@@ -41,12 +44,17 @@ const MaterialModal = (props: IProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleMaterialSubmit = (data: MaterialSchemaType) => {
+  const handleMaterialSubmit = async (data: MaterialSchemaType) => {
     dispatch({
       type,
-      payload: { id, ...data },
+      payload: { id, data, file: fileList[0]?.originFileObj },
     });
     handleClose();
+  };
+
+  const onDraggerChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    if (newFileList[0]) newFileList[0].status = 'done';
+    setFileList(newFileList);
   };
 
   useEffect(() => {
@@ -112,6 +120,9 @@ const MaterialModal = (props: IProps) => {
               />
             </label>
             {errors.title && <p className='form-error-label'>{errors.title.message}</p>}
+          </div>
+          <div className='course-modal__dragger-container '>
+            <FileUpload onChange={onDraggerChange} />
           </div>
           <div className='course-modal__button-container'>
             <Button
