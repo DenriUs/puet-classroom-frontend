@@ -1,14 +1,14 @@
 import { Button, Input, Modal, Radio, RadioChangeEvent, UploadFile, UploadProps } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, SetStateAction, Dispatch } from 'react';
 
 import './Material.scss';
 
 import { useAppDispatch } from '../../../hooks/reduxhooks';
 import { materialSchema } from './schemas';
 import { MaterialSchemaType } from './type';
-import { CourseActivityTypeEnum, SagaAction } from '../../../common/types';
+import { CourseActivityTypeEnum, FileEntity, SagaAction } from '../../../common/types';
 import { materialOptions } from './contants';
 import FileUpload from '../../fileUpload/FileUpload';
 
@@ -18,15 +18,18 @@ interface IProps {
   type: SagaAction;
   onStart: boolean;
   materialName?: string;
+  materialFile?: Partial<FileEntity> | undefined;
   createMode?: boolean;
   handleClose: () => void;
 }
 
 const MaterialModal = (props: IProps) => {
-  const { onStart, handleClose, id, name, type, materialName, createMode } = props;
+  const { onStart, handleClose, id, name, type, materialName, createMode, materialFile } = props;
 
   const [typeActivity, setType] = useState(CourseActivityTypeEnum.LECTURE);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const uploadRef = useRef<{ setFileList: Dispatch<SetStateAction<UploadFile<any>[]>> }>(null);
 
   const {
     control,
@@ -43,6 +46,11 @@ const MaterialModal = (props: IProps) => {
   });
 
   const dispatch = useAppDispatch();
+
+  const clearFileList = () => {
+    setFileList([]);
+    uploadRef.current && uploadRef.current.setFileList([]);
+  };
 
   const handleMaterialSubmit = async (data: MaterialSchemaType) => {
     dispatch({
@@ -67,6 +75,7 @@ const MaterialModal = (props: IProps) => {
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
+      clearFileList();
     }
   }, [isSubmitSuccessful, reset]);
 
@@ -122,7 +131,13 @@ const MaterialModal = (props: IProps) => {
             {errors.title && <p className='form-error-label'>{errors.title.message}</p>}
           </div>
           <div className='course-modal__dragger-container '>
-            <FileUpload onChange={onDraggerChange} />
+            <FileUpload
+              id={materialFile?.id as string}
+              name={materialFile?.filename as string}
+              url={materialFile?.src as string}
+              onChange={onDraggerChange}
+              ref={uploadRef}
+            />
           </div>
           <div className='course-modal__button-container'>
             <Button

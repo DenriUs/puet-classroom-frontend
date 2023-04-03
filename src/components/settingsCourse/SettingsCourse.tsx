@@ -43,10 +43,13 @@ const SettingsCourse = () => {
 
   const handleCourseUpdate = (data: CourseUpdateSchemaType) => {
     dispatch({ type: SagaAction.COURSE_UPDATE, payload: { id: course?.id, ...data } });
-    dispatch({
-      type: SagaAction.FILE_UPLOAD,
-      payload: { id: course?.cover?.id, file: fileList[0]?.originFileObj },
-    });
+    if (fileList.length !== 0) {
+      dispatch({
+        type: SagaAction.FILE_UPLOAD,
+        payload: { id: course?.cover?.id, file: fileList[0]?.originFileObj },
+      });
+      setFileList([]);
+    }
   };
 
   const onDraggerChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
