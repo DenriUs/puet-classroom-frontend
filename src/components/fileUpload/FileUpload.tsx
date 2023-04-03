@@ -1,5 +1,5 @@
 import { UploadOutlined, FilePdfOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import { message } from 'antd';
 import { UploadChangeParam, UploadFile, UploadProps } from 'antd/lib/upload/interface';
 import Dragger from 'antd/lib/upload/Dragger';
@@ -7,11 +7,14 @@ import Dragger from 'antd/lib/upload/Dragger';
 import './FileUpload.scss';
 
 interface Props {
+  id: string;
+  name: string;
+  url: string;
   onChange: UploadProps['onChange'];
 }
 
-const FileUpload = (props: Props) => {
-  const { onChange } = props;
+const FileUpload = forwardRef((props: Props, ref: any) => {
+  const { id, name, url, onChange } = props;
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -22,6 +25,22 @@ const FileUpload = (props: Props) => {
     setFileList(event.fileList);
     if (onChange) onChange(event);
   };
+
+  useImperativeHandle(ref, () => ({
+    setFileList,
+  }));
+
+  useEffect(() => {
+    if (id) {
+      setFileList([
+        {
+          uid: id,
+          name: name,
+          url: url,
+        },
+      ]);
+    }
+  }, [id]);
 
   return (
     <Dragger
@@ -41,6 +60,6 @@ const FileUpload = (props: Props) => {
       <p className='ant-upload-hint'>Max file size if 50 MB</p>
     </Dragger>
   );
-};
+});
 
 export default FileUpload;

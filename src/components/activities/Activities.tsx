@@ -109,6 +109,7 @@ const Activities = () => {
         onStart={showEditMaterial}
         handleClose={handleEditMaterialClose}
         materialName={courseActivity?.title}
+        materialFile={courseActivity?.file}
       />
     </>
   );
