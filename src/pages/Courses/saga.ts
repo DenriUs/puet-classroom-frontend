@@ -40,7 +40,7 @@ import {
   updateCoursesTopicActivity,
 } from '../../store/courses.slice';
 
-interface ActivityCreate {
+interface IActivity {
   id: string;
   data: CourseActivityEntity;
   file: File;
@@ -128,7 +128,7 @@ function* getActivity(action: ReduxAction<string>) {
   yield put(setCourseTopicActivity(response.data.data));
 }
 
-function* createActivity(action: ReduxAction<ActivityCreate>) {
+function* createActivity(action: ReduxAction<IActivity>) {
   if (!action.payload) return;
   const { id, data, file } = action.payload;
   const responseActivity: APIResponse = yield call(Api.post, `courses/topics/${id}/activities`, {
@@ -137,19 +137,28 @@ function* createActivity(action: ReduxAction<ActivityCreate>) {
   });
   if (responseActivity.error) return;
   yield put(createCoursesTopicActivity(responseActivity.data.data));
-  const responseFile: APIResponse = yield call(Api.uploadFile, responseActivity.data.data.file.id, file);
+  const responseFile: APIResponse = yield call(
+    Api.uploadFile,
+    responseActivity.data.data.file.id,
+    file,
+  );
   if (responseFile.error) return;
   yield showSuccessMessage('Матеріал успішно додано!');
 }
 
-function* updateActivity(action: ReduxAction<CourseActivityEntity>) {
+function* updateActivity(action: ReduxAction<IActivity>) {
+  console.log(action.payload);
   if (!action.payload) return;
-  const { id, title } = action.payload;
-  const response: APIResponse = yield call(Api.patch, `courses/topics/activities/${id}`, {
-    title,
+  const { id, data, file } = action.payload;
+  const responseActivity: APIResponse = yield call(Api.patch, `courses/topics/activities/${id}`, {
+    title: data.title,
   });
-  if (response.error) return;
-  yield put(updateCoursesTopicActivity(response.data.data));
+  if (responseActivity.error) return;
+  yield put(updateCoursesTopicActivity(responseActivity.data.data));
+  if (action.payload.file && data.file?.id) {
+    const responseFile: APIResponse = yield call(Api.uploadFile, data.file.id, file);
+    if (responseFile.error) return;
+  }
   yield showSuccessMessage('Матеріал успішно оновлено!');
 }
 
