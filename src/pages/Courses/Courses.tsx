@@ -9,7 +9,6 @@ import { SagaAction, UserRoleEnum } from '../../common/types';
 import './Courses.scss';
 
 import HeaderPage from '../../components/header/HeaderPage';
-import AppLoader from '../../components/AppLoader';
 import CourseModal from '../../components/modals/course/Course';
 
 const Courses = () => {
@@ -28,9 +27,7 @@ const Courses = () => {
     dispatch({ type: SagaAction.COURSES_GET });
   }, [dispatch]);
 
-  if (!courses) return <AppLoader />;
-
-  const tableCourseData = courses.map(({ id, name, teacher }) => ({
+  const tableCourseData = courses?.map(({ id, name, teacher }) => ({
     key: id,
     name,
     teacher: getUserShortName(teacher),

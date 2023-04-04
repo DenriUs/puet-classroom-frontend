@@ -73,7 +73,7 @@ const MaterialModal = (props: IProps) => {
   }, [materialName]);
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
+    if (isSubmitSuccessful && createMode) {
       reset();
       clearFileList();
     }

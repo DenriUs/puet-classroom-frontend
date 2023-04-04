@@ -37,6 +37,14 @@ const SettingsProfile = () => {
     <div className='settings-profile'>
       <div className='settings-profile__container'>
         <div className='settings-profile__title'>Налаштування профілю</div>
+        <div className='settings-profile__upload'>
+          <ImageUpload
+            id={user?.cover.id as string}
+            url={user?.cover.src as string}
+            name={user?.cover.filename as string}
+            onChange={onDraggerChange}
+          />
+        </div>
         <div className='settings-profile__form'>
           <div className='settings-input'>
             <label className='settings-title-input'>
@@ -62,14 +70,6 @@ const SettingsProfile = () => {
               <Input disabled={true} value={user?.email} />
             </label>
           </div>
-        </div>
-        <div className='settings-profile__upload'>
-          <ImageUpload
-            id={user?.cover.id as string}
-            url={user?.cover.src as string}
-            name={user?.cover.filename as string}
-            onChange={onDraggerChange}
-          />
         </div>
         <div className='settings-profile__button'>
           <Button
