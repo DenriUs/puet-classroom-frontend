@@ -44,6 +44,7 @@ interface IActivity {
   id: string;
   data: CourseActivityEntity;
   file: File;
+  fileId?: string;
 }
 
 function* getCourses() {
@@ -56,7 +57,7 @@ function* getCourse(action: ReduxAction<string>) {
   yield put(setCourse(response.data.data));
 }
 
-function* createCourse(action: ReduxAction<string>) {
+function* createCourse(action: ReduxAction<CourseEntity>) {
   const response: APIResponse = yield call(Api.post, `courses`, action.payload);
   if (response.error) return;
   yield put(createCourses(response.data.data));
@@ -73,6 +74,7 @@ function* updateCourse(action: ReduxAction<CourseEntity>) {
 }
 
 function* deleteСourse(action: ReduxAction<string>) {
+  console.log(action.payload);
   const response: APIResponse = yield call(Api.delete, `courses/${action.payload}`);
   if (response.error) return;
   yield put(deleteCourses(action.payload));
@@ -147,16 +149,15 @@ function* createActivity(action: ReduxAction<IActivity>) {
 }
 
 function* updateActivity(action: ReduxAction<IActivity>) {
-  console.log(action.payload);
   if (!action.payload) return;
-  const { id, data, file } = action.payload;
+  const { id, data, file, fileId } = action.payload;
   const responseActivity: APIResponse = yield call(Api.patch, `courses/topics/activities/${id}`, {
     title: data.title,
   });
   if (responseActivity.error) return;
   yield put(updateCoursesTopicActivity(responseActivity.data.data));
-  if (action.payload.file && data.file?.id) {
-    const responseFile: APIResponse = yield call(Api.uploadFile, data.file.id, file);
+  if (action.payload.file && fileId) {
+    const responseFile: APIResponse = yield call(Api.uploadFile, fileId, file);
     if (responseFile.error) return;
   }
   yield showSuccessMessage('Матеріал успішно оновлено!');

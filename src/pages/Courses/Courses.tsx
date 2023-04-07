@@ -10,6 +10,7 @@ import './Courses.scss';
 
 import HeaderPage from '../../components/header/HeaderPage';
 import CourseModal from '../../components/modals/course/Course';
+import AppLoader from '../../components/AppLoader';
 
 const Courses = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
@@ -34,6 +35,8 @@ const Courses = () => {
     count: '15/30',
     progress: 80,
   }));
+
+  if (!courses) return <AppLoader />;
 
   return (
     <Layout>

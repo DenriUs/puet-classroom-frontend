@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.vite';
 import { Button } from 'antd';
 import {
@@ -29,6 +29,8 @@ const DocumentView = (props: Props) => {
   const onDocumentLoadSuccess = ({ numPages }: any) => {
     setNumPages(numPages);
   };
+
+  useEffect
 
   const goToPrevPage = () => setPageNumber(pageNumber - 1 <= 1 ? 1 : pageNumber - 1);
 

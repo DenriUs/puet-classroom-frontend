@@ -8,7 +8,6 @@ import {
   LeftOutlined,
 } from '@ant-design/icons';
 import { Button, Dropdown, Menu, Progress } from 'antd';
-import { String2HexCodeColor } from 'string-to-hex-code-color';
 import { useNavigate } from 'react-router';
 
 import './CourseHeader.scss';
@@ -24,7 +23,6 @@ const CourseHeader = () => {
   const { course } = useAppSelector((state) => state.coursesReducer);
   const { user } = useAppSelector((state) => state.authReducer);
 
-  const colorCard = new String2HexCodeColor(0.5);
   const navigate = useNavigate();
 
   if (!course) return <AppLoader />;
@@ -36,25 +34,21 @@ const CourseHeader = () => {
     <Menu
       items={[
         {
+          key: 1,
           label: `${course?.teacher.phoneNumber}`,
-          key: '1',
           icon: <PhoneOutlined />,
         },
         {
+          key: 2,
           label: `${course?.teacher.email}`,
-          key: '2',
           icon: <MailOutlined />,
         },
       ]}
     />
   );
 
-  const color = {
-    borderColor: colorCard.stringToColor(course.name),
-  };
-
   return (
-    <div className='course-header' style={color}>
+    <div className='course-header' style={{ borderColor: course.color }}>
       <div className='course-header__course-title-container'>
         <div className='course-header__course-name-container'>
           <LeftOutlined className='icon-back' onClick={onLeftClick} />
@@ -77,7 +71,7 @@ const CourseHeader = () => {
         ))}
       </div>
       <div className='course-header__description-container'>
-        <div className='course-header__description' style={color}>
+        <div className='course-header__description' style={{ borderColor: course.color }}>
           {course.description}
         </div>
       </div>
@@ -125,7 +119,7 @@ const CourseHeader = () => {
           </div>
           <Progress
             type='line'
-            strokeColor={colorCard.stringToColor(course.name)}
+            strokeColor={course.color}
             trailColor='rgba(199, 212, 224, 1)'
             percent={70}
             showInfo={false}

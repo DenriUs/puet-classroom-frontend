@@ -80,7 +80,7 @@ const Course = () => {
       {courseTopics?.length == 0 ? (
         <Empty description={<span className='empty-title'>Теми відсутні</span>} />
       ) : (
-        <div className='course-page-container'>
+        <div className='course-page__container'>
           <div className='course-page__sidebar'>
             <div className='smartphone-menu-trigger'></div>
             <Menu

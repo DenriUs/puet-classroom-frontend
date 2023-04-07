@@ -166,6 +166,11 @@
   color: rgba(79, 79, 79, 0.6);
 }
 
+.ant-progress-inner{
+  border: solid 0.1px rgba(255, 255, 255, 0.54);
+}
+
+
 //@at-root
 .ant-upload.ant-upload-select-picture-card {
   width: 100px;
@@ -209,27 +214,42 @@
 }
 
 //menu
+.ant-menu {
+  background: transparent;
+}
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
   background: #d9e1e4;
 }
 
 .ant-menu-sub.ant-menu-inline {
-  background: white;
+  background: transparent;
+}
+
+.ant-menu-inline {
+  border: none;
 }
 
 // upload
 
-.ant-upload.ant-upload-drag{
+.ant-upload.ant-upload-drag {
   height: auto;
 }
 
-.ant-upload-list-picture-card-container{
+.ant-upload-list-picture-card-container {
   width: 150px;
   height: 150px;
 }
 
-.ant-upload-list-picture-card-container{
+.ant-upload-list-picture-card-container {
   width: 150px;
   height: 150px;
+}
+
+// empty
+
+.empty-title {
+  font-size: 27px;
+  font-weight: 700;
+  color: #999999;
 }

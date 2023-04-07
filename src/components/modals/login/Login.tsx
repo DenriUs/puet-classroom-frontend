@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 
-import puetLogo from '../../../assets/puetLogo.png';
+import logo from '../../../assets/logo-big.png';
 
 import './Login.scss';
 import { LoginService } from '../../../common/api';
@@ -34,8 +34,7 @@ const LoginModal = () => {
       <div className='login-modal'>
         <div className='login-modal__left-side'>
           <div className='login-modal__left-side-content'>
-            <img alt='logo' className='login-modal__logo' src={puetLogo} />
-            <p className='login-modal__logo-name'>Classroom</p>
+            <img alt='logo' className='login-modal__logo' src={logo} />
           </div>
         </div>
         <div className='login-modal__right-side'>

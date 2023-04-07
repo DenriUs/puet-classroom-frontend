@@ -65,6 +65,7 @@ const coursesSlice = createSlice({
       state.courseActivities = undefined;
     },
     setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
+      action.payload.sort((a, b) => (a.type < b.type ? 1 : -1));
       state.courseActivities = action.payload;
     },
     setCourseTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {

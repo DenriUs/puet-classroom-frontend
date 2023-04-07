@@ -1,6 +1,7 @@
 import { Button, Input, Modal, Select } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { String2HexCodeColor } from 'string-to-hex-code-color';
 import { useEffect } from 'react';
 import TextArea from 'antd/lib/input/TextArea';
 
@@ -32,8 +33,11 @@ const CourseModal = (props: IProps) => {
 
   const dispatch = useAppDispatch();
 
+  const colorCourse = new String2HexCodeColor(0.5);
+
   const handleCourseSubmit = (data: CourseSchemaType) => {
-    dispatch({ type: SagaAction.COURSE_CREATE, payload: data });
+    const color = colorCourse.stringToColor(data.name);
+    dispatch({ type: SagaAction.COURSE_CREATE, payload: { color, ...data } });
     handleClose();
   };
 
