@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './Sidebar.scss';
 
-import puetLogo from '../../assets/puetLogo.png';
+import logo from '../../assets/logo.svg';
 import { coursesColumns } from './constant';
 
 const { Sider } = Layout;
@@ -12,7 +12,7 @@ const Sidebar = () => (
   <Sider breakpoint='md' collapsedWidth='0' className='sidebar' width={150}>
     <div className='sidebar__top'>
       <div className='sidebar__logo-image'>
-        <img src={puetLogo} alt='logo' />
+        <img src={logo} alt='logo' />
       </div>
     </div>
     <div className='sidebar__center'>

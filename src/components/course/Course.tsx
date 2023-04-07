@@ -14,23 +14,16 @@ interface Props {
   onClick: () => void;
 }
 
-const colorCard = new String2HexCodeColor(0.75);
-const colorProgress = new String2HexCodeColor(0.4);
-
 const Course = (props: Props) => {
   const {
     onClick,
-    data: { name, teacher, group, cover },
+    data: { name, teacher, group, cover, color },
   } = props;
 
   const { user } = useAppSelector((state) => state.authReducer);
 
   return (
-    <div
-      className='course-card__container'
-      style={{ backgroundColor: colorCard.stringToColor(name) }}
-      onClick={onClick}
-    >
+    <div className='course-card__container' style={{ backgroundColor: color }} onClick={onClick}>
       <img src={hatIcon} className='icon-study' alt='icon' />
       <span className='title'>{name}</span>
       <div className='decription'>
@@ -52,7 +45,7 @@ const Course = (props: Props) => {
         <div className='course-card__progress-container'>
           <Progress
             type='line'
-            strokeColor={colorProgress.stringToColor(name)}
+            strokeColor={color}
             trailColor='rgba(255, 255, 255, 0.54)'
             percent={40}
           />

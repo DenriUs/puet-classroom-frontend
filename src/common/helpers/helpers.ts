@@ -61,6 +61,11 @@ export const getFullDate = (date: Date) => {
   return fullDate.toLocaleDateString();
 };
 
+export const getCurrentDate = () => {
+  const now = new Date();
+  return now.toLocaleDateString();
+};
+
 export const getTypeActivity = (type: CourseActivityTypeEnum) => {
   return type == 'LECTURE' ? 'Лекція' : 'Практична';
 };

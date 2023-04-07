@@ -83,6 +83,7 @@ export interface CourseEntity {
   description: string;
   group: Partial<GroupEntity>;
   meetingUrl?: string;
+  color?: string;
   cover: Partial<FileEntity>;
   teacher: Partial<UserEntity>;
   participants: Partial<CourseParticipantEntity>[];

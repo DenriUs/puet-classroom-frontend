@@ -2,7 +2,6 @@ import {
   HomeFilled,
   BookFilled,
   FileTextFilled,
-  StarFilled,
   SettingFilled,
 } from '@ant-design/icons';
 

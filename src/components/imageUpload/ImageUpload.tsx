@@ -58,7 +58,7 @@ const ImageUpload = (props: Props) => {
 
   return (
     <>
-      <ImgCrop rotationSlider modalTitle='Редагувати'>
+      <ImgCrop fillColor='transparent' rotationSlider modalTitle='Редагувати'>
         <Upload
           accept={'image/*'}
           listType='picture-card'

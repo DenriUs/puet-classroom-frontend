@@ -55,7 +55,7 @@ const MaterialModal = (props: IProps) => {
   const handleMaterialSubmit = async (data: MaterialSchemaType) => {
     dispatch({
       type,
-      payload: { id, data, file: fileList[0]?.originFileObj },
+      payload: { id, data, file: fileList[0]?.originFileObj, fileId: materialFile?.id },
     });
     handleClose();
   };
