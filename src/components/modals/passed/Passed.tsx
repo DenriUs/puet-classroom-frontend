@@ -15,15 +15,11 @@ interface IProps {
 }
 
 const PassedModal = (props: IProps) => {
-  const { coursePassedAssignment, courseActivity } = useAppSelector(
-    (state) => state.coursesReducer,
-  );
+  const { courseActivity } = useAppSelector((state) => state.coursesReducer);
 
   const uploadRef = useRef<{ setFileList: Dispatch<SetStateAction<UploadFile<any>[]>> }>(null);
 
   const { data, onStart, handleClose } = props;
-
-  console.log(data);
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -31,7 +27,6 @@ const PassedModal = (props: IProps) => {
 
   const clearFileList = () => {
     setFileList([]);
-    console.log('fsdfsfd');
     uploadRef.current && uploadRef.current.setFileList([]);
   };
 
@@ -45,7 +40,6 @@ const PassedModal = (props: IProps) => {
       },
     });
     handleClose();
-    clearFileList();
   };
 
   const handlePassedDelete = () => {

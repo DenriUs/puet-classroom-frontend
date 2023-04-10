@@ -19,10 +19,6 @@ const FileUpload = forwardRef((props: Props, ref: any) => {
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  console.log(name);
-
-  console.log(fileList);
-
   const onUpload = (event: UploadChangeParam<UploadFile>) => {
     if (event.fileList.some((file) => file.size && file.size > 5e7)) {
       message.error('Uploaded file is too large');
@@ -45,7 +41,7 @@ const FileUpload = forwardRef((props: Props, ref: any) => {
         },
       ]);
     }
-  }, [name]);
+  }, [id, name, onChange]);
 
   return (
     <Dragger
