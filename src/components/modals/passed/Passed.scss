@@ -6,8 +6,9 @@
   &__title {
     display: grid;
     justify-content: center;
+    font-weight: 600;
     @extend %modal-title;
-    @include adaptiv-font(24, 20);
+    @include adaptiv-font(26, 20);
   }
 
   &__dragger {
@@ -18,8 +19,12 @@
     margin-bottom: 30px;
   }
 
-  &__button {
+  &__button-container {
     display: grid;
     justify-content: center;
+  }
+
+  &__button{
+    width: 200px;
   }
 }

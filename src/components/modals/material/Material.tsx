@@ -135,6 +135,7 @@ const MaterialModal = (props: IProps) => {
               id={materialFile?.id as string}
               name={materialFile?.filename as string}
               url={materialFile?.src as string}
+              accept={'.pdf'}
               onChange={onDraggerChange}
               ref={uploadRef}
             />

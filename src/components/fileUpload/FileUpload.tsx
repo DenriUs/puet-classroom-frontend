@@ -10,13 +10,18 @@ interface Props {
   id: string;
   name: string;
   url: string;
+  accept: string;
   onChange: UploadProps['onChange'];
 }
 
 const FileUpload = forwardRef((props: Props, ref: any) => {
-  const { id, name, url, onChange } = props;
+  const { id, name, url, onChange, accept } = props;
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  console.log(name);
+
+  console.log(fileList);
 
   const onUpload = (event: UploadChangeParam<UploadFile>) => {
     if (event.fileList.some((file) => file.size && file.size > 5e7)) {
@@ -31,7 +36,7 @@ const FileUpload = forwardRef((props: Props, ref: any) => {
   }));
 
   useEffect(() => {
-    if (id) {
+    if (name) {
       setFileList([
         {
           uid: id,
@@ -40,7 +45,7 @@ const FileUpload = forwardRef((props: Props, ref: any) => {
         },
       ]);
     }
-  }, [id]);
+  }, [name]);
 
   return (
     <Dragger
@@ -49,14 +54,13 @@ const FileUpload = forwardRef((props: Props, ref: any) => {
       onChange={onUpload}
       fileList={fileList}
       name='file'
-      accept={'.pdf'}
+      accept={accept}
       iconRender={() => <FilePdfOutlined />}
     >
       <p className='ant-upload-drag-icon'>
         <UploadOutlined />
       </p>
       <p className='ant-upload-text'>Click or drag file to this area to upload</p>
-      <p className='ant-upload-hint'>Only PDF</p>
       <p className='ant-upload-hint'>Max file size if 50 MB</p>
     </Dragger>
   );
