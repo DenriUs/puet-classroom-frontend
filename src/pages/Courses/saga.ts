@@ -47,6 +47,11 @@ interface IActivity {
   fileId?: string;
 }
 
+interface IPassed {
+  id: string;
+  file: File;
+}
+
 function* getCourses() {
   yield put(loadData('courses', setCourses));
 }
@@ -192,13 +197,27 @@ function* getPassedAssignment(action: ReduxAction<string>) {
   yield put(setPassedAssignment(response.data.data));
 }
 
-function* createPassedAssignment(action: ReduxAction<string>) {
+function* getPassedAssignmentForStudent(action: ReduxAction<string>) {
   const response: APIResponse = yield call(
-    Api.post,
-    `courses/topics/activities/${action.payload}/passed-assignments`,
+    Api.get,
+    `courses/topics/activities/${action.payload}/passed-assignment`,
   );
   if (response.error) return;
-  yield put(createPassedAssignments(response.data.data));
+  yield put(setPassedAssignment(response.data.data));
+}
+
+function* createPassedAssignment(action: ReduxAction<IPassed>) {
+  if (!action.payload?.file) return;
+  const { id, file } = action.payload;
+  const passed: APIResponse = yield call(
+    Api.post,
+    `courses/topics/activities/${id}/passed-assignments`,
+  );
+  if (passed.error) return;
+  yield put(createPassedAssignments(passed.data.data));
+  const responseFile: APIResponse = yield call(Api.uploadFile, passed.data.data.file.id, file);
+  if (responseFile.error) return;
+  yield showSuccessMessage('Роботу відправлено на перевірку!');
 }
 
 function* deletePassedAssignment(action: ReduxAction<string>) {
@@ -207,7 +226,8 @@ function* deletePassedAssignment(action: ReduxAction<string>) {
     `courses/topics/activities/passed-assignments/${action.payload}`,
   );
   if (response.error) return;
-  yield put(deletePassedAssignments(response.data.data));
+  yield put(deletePassedAssignments());
+  yield showSuccessMessage('Роботу успішно видалено!');
 }
 
 function* updatePassedAssignment(action: ReduxAction<CoursePassedAssignmentEntity>) {
@@ -267,6 +287,10 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_TOPICS_ACTIVITY_DELETE, deleteActivity);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENTS_GET, getPassedAssignments);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_GET, getPassedAssignment);
+  yield takeLatest(
+    SagaAction.COURSES_PASSED_ASSIGNMENT_GET_FOR_STUDENT,
+    getPassedAssignmentForStudent,
+  );
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_CREATE, createPassedAssignment);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_DELETE, deletePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, updatePassedAssignment);

@@ -1,30 +1,59 @@
 import { Modal, UploadFile, UploadProps, Button } from 'antd';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useRef, useState, useEffect } from 'react';
 
 import './Passed.scss';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
-import { SagaAction } from '../../../common/types';
+import { CoursePassedAssignmentEntity, SagaAction } from '../../../common/types';
 import FileUpload from '../../fileUpload/FileUpload';
+import { showConfirm } from '../../../common/helpers';
 
 interface IProps {
   onStart: boolean;
+  data: CoursePassedAssignmentEntity | undefined;
   handleClose: () => void;
 }
 
 const PassedModal = (props: IProps) => {
-  const { coursePassedAssignment } = useAppSelector((state) => state.coursesReducer);
-  const { onStart, handleClose } = props;
+  const { coursePassedAssignment, courseActivity } = useAppSelector(
+    (state) => state.coursesReducer,
+  );
+
+  const uploadRef = useRef<{ setFileList: Dispatch<SetStateAction<UploadFile<any>[]>> }>(null);
+
+  const { data, onStart, handleClose } = props;
+
+  console.log(data);
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const dispatch = useAppDispatch();
 
+  const clearFileList = () => {
+    setFileList([]);
+    console.log('fsdfsfd');
+    uploadRef.current && uploadRef.current.setFileList([]);
+  };
+
   const handleFileUpload = () => {
     dispatch({
-      type: SagaAction.FILE_UPLOAD,
-      payload: { id: coursePassedAssignment?.file.id, file: fileList[0]?.originFileObj },
+      type: SagaAction.COURSES_PASSED_ASSIGNMENT_CREATE,
+      payload: {
+        id: courseActivity?.id,
+        file: fileList[0]?.originFileObj,
+        fileId: data?.file.id,
+      },
     });
+    handleClose();
+    clearFileList();
+  };
+
+  const handlePassedDelete = () => {
+    dispatch({
+      type: SagaAction.COURSES_PASSED_ASSIGNMENT_DELETE,
+      payload: data?.id,
+    });
+    clearFileList();
     handleClose();
   };
 
@@ -33,22 +62,44 @@ const PassedModal = (props: IProps) => {
     setFileList(newFileList);
   };
 
+  useEffect(() => {
+    clearFileList();
+  }, [courseActivity]);
+
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={700}>
       <div className='passed-modal'>
-        <div className='passed-modal__title'>Завантажити файл</div>
+        <div className='passed-modal__title'>{courseActivity?.title}</div>
         <div className='passed-modal__dragger'>
-          <FileUpload onChange={onDraggerChange} />
+          <FileUpload
+            id={data?.file.id as string}
+            name={data?.file.filename as string}
+            url={data?.file.src as string}
+            accept={'image/*,.pdf,.doc,.docx,'}
+            onChange={onDraggerChange}
+            ref={uploadRef}
+          />
         </div>
-        <div className='passed-modal__button'>
-          <Button
-            type='primary'
-            shape='round'
-            onClick={handleFileUpload}
-            className='button-create-activity'
-          >
-            Відправити
-          </Button>
+        <div className='passed-modal__button-container'>
+          {!data ? (
+            <Button
+              type='primary'
+              shape='round'
+              onClick={handleFileUpload}
+              className='passed-modal__button'
+            >
+              Відправити
+            </Button>
+          ) : (
+            <Button
+              type='primary'
+              shape='round'
+              onClick={() => showConfirm('видалити здану роботу', handlePassedDelete)}
+              className='passed-modal__button'
+            >
+              Видалити роботу
+            </Button>
+          )}
         </div>
       </div>
     </Modal>
