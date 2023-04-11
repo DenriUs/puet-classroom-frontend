@@ -12,7 +12,6 @@ import {
   ReduxAction,
   SagaAction,
 } from '../../common/types';
-import { MaterialSchemaType } from '../../components/modals/material';
 import {
   setCourses,
   setCourse,
@@ -38,6 +37,7 @@ import {
   updateCourseTopic,
   updatePassed,
   updateCoursesTopicActivity,
+  setGradeBooks,
 } from '../../store/courses.slice';
 
 interface IActivity {
@@ -50,6 +50,11 @@ interface IActivity {
 interface IPassed {
   id: string;
   file: File;
+}
+
+interface IGradeBook {
+  courseId: string;
+  participantId?: string;
 }
 
 function* getCourses() {
@@ -206,6 +211,28 @@ function* getPassedAssignmentForStudent(action: ReduxAction<string>) {
   yield put(setPassedAssignment(response.data.data));
 }
 
+function* getGrateBookForTeacher(action: ReduxAction<IGradeBook>) {
+  if (!action.payload) return;
+  const { courseId, participantId } = action.payload;
+  const response: APIResponse = yield call(
+    Api.get,
+    `courses/${courseId}/topics/activities/passed-assignments?participantId=${participantId}`,
+  );
+  if (response.error) return;
+  yield put(setGradeBooks(response.data.data.result));
+}
+
+function* getGrateBookForStudent(action: ReduxAction<IGradeBook>) {
+  if (!action.payload) return;
+  const { courseId } = action.payload;
+  const response: APIResponse = yield call(
+    Api.get,
+    `courses/${courseId}/topics/activities/passed-assignments`,
+  );
+  if (response.error) return;
+  yield put(setGradeBooks(response.data.data.result));
+}
+
 function* createPassedAssignment(action: ReduxAction<IPassed>) {
   if (!action.payload?.file) return;
   const { id, file } = action.payload;
@@ -292,6 +319,8 @@ function* watchRequests() {
     getPassedAssignmentForStudent,
   );
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_CREATE, createPassedAssignment);
+  yield takeLatest(SagaAction.COURSES_GRADE_BOOK_GET_FOR_TEACHER, getGrateBookForTeacher);
+  yield takeLatest(SagaAction.COURSES_GRADE_BOOK_GET_FOR_STUDENT, getGrateBookForStudent);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_DELETE, deletePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, updatePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);

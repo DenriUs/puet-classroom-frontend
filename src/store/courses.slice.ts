@@ -15,6 +15,7 @@ export interface CoursesState {
   courseTopic?: CourseTopicEntity;
   courseActivities?: CourseActivityEntity[];
   courseActivity?: CourseActivityEntity;
+  courseGradeBook?: CoursePassedAssignmentEntity[];
   coursePassedAssignments?: CoursePassedAssignmentEntity[];
   coursePassedAssignment?: CoursePassedAssignmentEntity;
   courseParticipants?: CourseParticipantEntity[];
@@ -91,6 +92,9 @@ const coursesSlice = createSlice({
     setPassedAssignment: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
       state.coursePassedAssignment = action.payload;
     },
+    setGradeBooks: (state, action: PayloadAction<CoursePassedAssignmentEntity[]>) => {
+      state.courseGradeBook = action.payload;
+    },
     createPassedAssignments: (state, action: PayloadAction<CoursePassedAssignmentEntity>) => {
       state.coursePassedAssignment = action.payload;
     },
@@ -137,6 +141,7 @@ export const {
   updateCoursesTopicActivity,
   deleteCourseActivity,
   setPassedAssignments,
+  setGradeBooks,
   createPassedAssignments,
   deletePassedAssignments,
   setPassedAssignment,
