@@ -1,6 +1,6 @@
 @import '/src/global/sass/abstracts/placeholders/placeholders';
 
-.course-students {
+.estimates {
   display: grid;
   grid-template-rows: repeat(2, auto);
   grid-template-columns: 90%;
@@ -29,10 +29,11 @@
     justify-items: left;
     margin: 0 0 0 15px;
   }
-}
 
-.grade-students-select {
-  margin-top: 5px;
-  margin-bottom: 15px;
-  width: 300px;
+  &__select {
+    width: 300px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+
 }

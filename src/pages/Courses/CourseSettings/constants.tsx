@@ -6,6 +6,7 @@ import {
 } from '@ant-design/icons';
 import CourseMaterial from '../../../components/courseMaterial/CourseMaterial';
 import CourseStudents from '../../../components/courseStudents/CourseStudents';
+import Estimates from '../../../components/estimates/Estimates';
 import SettingsCourse from '../../../components/settingsCourse/SettingsCourse';
 
 export const tabsItems = [
@@ -24,7 +25,7 @@ export const tabsItems = [
   {
     label: 'Журнал оцінок',
     key: '3',
-    children: [],
+    children: [<Estimates />],
     icon: <ReconciliationOutlined />,
   },
   {

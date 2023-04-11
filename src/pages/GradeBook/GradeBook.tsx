@@ -1,116 +1,25 @@
-import { Layout, Progress, Select, Table } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { Layout, Select, Table } from 'antd';
+
+import { SagaAction } from '../../common/types';
+import HeaderPage from '../../components/header/HeaderPage';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
+import { courseGradeBookColumns } from './constant';
 
 import './GradeBook.scss';
 
-import HeaderPage from '../../components/header/HeaderPage';
-
-const { Option } = Select;
-
-const columns = [
-  {
-    title: 'Назва',
-    dataIndex: 'name',
-    key: 'name',
-    width: '23%',
-    render: (name: string) => <span className='grade-name'>{name}</span>,
-  },
-  {
-    title: 'Оцінка',
-    dataIndex: 'mark',
-    key: 'mark',
-    width: '8%',
-    render: (mark: string) => <span className='grade-mark'>{mark}</span>,
-  },
-  {
-    title: 'Інтервал',
-    dataIndex: 'interval',
-    key: 'interval',
-    width: '10%',
-    render: (interval: string) => <span className='grade-interval'>{interval}</span>,
-  },
-  {
-    title: 'Відсоток',
-    dataIndex: 'progress',
-    key: 'progress',
-    width: '8%',
-    render: (progress: number) => <Progress status='normal' percent={progress}></Progress>,
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'Практичне заняття 1. Знайомство з Anaconda та Python',
-    mark: '4,00',
-    interval: '0-5',
-    progress: 80,
-  },
-  {
-    key: '2',
-    name: 'Практичне заняття 2. Видалення аномальних спостережень',
-    mark: '4,00',
-    interval: '0-5',
-    progress: 80,
-  },
-  {
-    key: '3',
-    name: 'Практичне заняття 3. Робота з даними в Python',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '4',
-    name: 'Практичне заняття 4. Перевірка стохастичності вибірки',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '5',
-    name: 'Практичне заняття 5. Основні статистичні характеристики',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '6',
-    name: 'Практичне заняття 6. Коефіцієнт кореляції',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '7',
-    name: 'Практичне заняття 7. Кореляція якісних змінних',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '8',
-    name: 'Практичне заняття 8. Частинна кореляція',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '9',
-    name: 'Практичне заняття 9-10. Парна лінійна регресія',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-  {
-    key: '10',
-    name: 'Практичне заняття 11. Обчислення параметрів парної регресії засобами MS Excel',
-    mark: '5,00',
-    interval: '0-5',
-    progress: 100,
-  },
-];
-
 const GradeBook = () => {
+  const { take } = useAppSelector((state) => state.paginatedDataReducer);
+  const { courses, courseGradeBook } = useAppSelector((state) => state.coursesReducer);
+
+  const dispatch = useAppDispatch();
+
+  const handleCourseSubmit = (id: string) => {
+    dispatch({
+      type: SagaAction.COURSES_GRADE_BOOK_GET_FOR_STUDENT,
+      payload: { courseId: id },
+    });
+  };
+
   return (
     <Layout>
       <HeaderPage />
@@ -122,32 +31,36 @@ const GradeBook = () => {
           <div className='grade-page__card'>
             <div className='grade-page__select'>
               <Select
-                className='grade-select'
+                className='estimates__select'
                 showSearch
-                placeholder='Введіть назву курсу'
+                placeholder='Виберіть курс'
                 size='large'
                 optionFilterProp='children'
                 filterOption={(input, option) =>
-                  (option!.children as unknown as string)
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
+                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-              >
-                <Option value='1'>Аналіз даних та проектування в проектування</Option>
-                <Option value='2'>Фізика</Option>
-                <Option value='3'>Математика</Option>
-                <Option value='4'>Біологія</Option>
-                <Option value='5'>Інформатика</Option>
-                <Option value='6'>Фізкультура</Option>
-              </Select>
+                filterSort={(optionA, optionB) =>
+                  (optionA?.label ?? '')
+                    .toLowerCase()
+                    .localeCompare((optionB?.label ?? '').toLowerCase())
+                }
+                options={(courses || []).map((course) => ({
+                  value: course.id,
+                  label: course.name,
+                }))}
+                onChange={(value) => {
+                  handleCourseSubmit(value);
+                }}
+                onDropdownVisibleChange={() => {
+                  dispatch({ type: SagaAction.COURSES_GET });
+                }}
+              />
             </div>
             <div className='grade-page__table'>
               <Table
-                pagination={{
-                  defaultPageSize: 10,
-                }}
-                columns={columns}
-                dataSource={data}
+                pagination={{ defaultPageSize: take }}
+                columns={courseGradeBookColumns}
+                dataSource={courseGradeBook}
               />
             </div>
           </div>
