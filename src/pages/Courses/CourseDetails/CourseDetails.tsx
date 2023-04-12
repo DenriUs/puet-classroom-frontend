@@ -44,7 +44,7 @@ const Course = () => {
   useEffect(() => {
     dispatch({ type: SagaAction.COURSE_GET, payload: id });
     dispatch({ type: SagaAction.COURSES_TOPICS_GET, payload: id });
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     return () => {
@@ -77,12 +77,12 @@ const Course = () => {
   return (
     <Layout>
       <CourseHeader />
-      {courseTopics?.length == 0 ? (
+      {courseTopics?.length === 0 ? (
         <Empty description={<span className='empty-title'>Теми відсутні</span>} />
       ) : (
         <div className='course-page__container'>
           <div className='course-page__sidebar'>
-            <div className='smartphone-menu-trigger'></div>
+            <div className='smartphone-menu-trigger' />
             <Menu
               openKeys={openKeys}
               onOpenChange={onOpenChange}

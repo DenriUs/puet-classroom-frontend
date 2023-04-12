@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Button, Layout, Table } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
+
+import './Courses.scss';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { getUserShortName } from '../../common/helpers';
 import { courseStudentColumns, courseTeacherColumns } from './constants';
 import { SagaAction, UserRoleEnum } from '../../common/types';
-
-import './Courses.scss';
 
 import HeaderPage from '../../components/header/HeaderPage';
 import CourseModal from '../../components/modals/course/Course';
@@ -45,7 +46,7 @@ const Courses = () => {
         <div className='course-page__name-container'>
           <span>Мої курси</span>
         </div>
-        {user?.role == UserRoleEnum.TEACHER && (
+        {user?.role === UserRoleEnum.TEACHER && (
           <div className='course-page__button-container'>
             <Button
               type='primary'
@@ -62,7 +63,7 @@ const Courses = () => {
       </div>
       <div className='course-page__table-container'>
         <div className='course-page__table'>
-          {user?.role == UserRoleEnum.TEACHER ? (
+          {user?.role === UserRoleEnum.TEACHER ? (
             <Table
               pagination={{ defaultPageSize: take }}
               columns={courseTeacherColumns}

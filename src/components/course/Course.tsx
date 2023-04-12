@@ -1,13 +1,13 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Progress } from 'antd';
-import { String2HexCodeColor } from 'string-to-hex-code-color';
 
-import './Course.scss';
 import hatIcon from '../../global/images/icons/hat.svg';
 import test from '../../global/images/icons/Test.png';
 import { CourseEntity, UserRoleEnum } from '../../common/types';
 import { getUserShortName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
+
+import './Course.scss';
 
 interface Props {
   data: CourseEntity;
@@ -31,7 +31,7 @@ const Course = (props: Props) => {
           <UserOutlined />
         </span>
         <span className='decription__name'>
-          {user?.role == UserRoleEnum.STUDENT ? getUserShortName(teacher) : group?.name}
+          {user?.role === UserRoleEnum.STUDENT ? getUserShortName(teacher) : group?.name}
         </span>
       </div>
       <div className='course-card__image-container'>
@@ -41,7 +41,7 @@ const Course = (props: Props) => {
           <img src={test} alt='test' className='course-card__image' />
         )}
       </div>
-      {user?.role == UserRoleEnum.STUDENT && (
+      {user?.role === UserRoleEnum.STUDENT && (
         <div className='course-card__progress-container'>
           <Progress
             type='line'

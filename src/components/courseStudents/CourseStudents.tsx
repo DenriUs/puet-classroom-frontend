@@ -28,7 +28,7 @@ const CourseStudents = () => {
 
   useEffect(() => {
     dispatch({ type: SagaAction.COURSES_PARTICIPANTS_GET, payload: course?.id });
-  }, [dispatch]);
+  }, [course?.id, dispatch]);
 
   const courseParticipantsData = courseParticipants?.map(({ id, user }) => ({
     key: id,

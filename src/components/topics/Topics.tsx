@@ -1,13 +1,13 @@
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import { getFullDate, showConfirm } from '../../common/helpers';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
+import { useState } from 'react';
 
 import './Topics.scss';
 
+import { getFullDate, showConfirm } from '../../common/helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { CourseTopicEntity, SagaAction } from '../../common/types';
-import { useState } from 'react';
 import TopicModal from '../modals/topic/Topic';
 
 const Topics = () => {
@@ -94,13 +94,11 @@ const Topics = () => {
         columns={topicsColumns}
         dataSource={courseTopics}
         rowClassName={(_, index) => (index === rowColor ? 'table-row-select' : 'table-row-default')}
-        onRow={(_, rowIndex) => {
-          return {
-            onClick: () => {
-              setRowColor(rowIndex);
-            },
-          };
-        }}
+        onRow={(_, rowIndex) => ({
+          onClick: () => {
+            setRowColor(rowIndex);
+          },
+        })}
       />
       <TopicModal
         id={course?.id}

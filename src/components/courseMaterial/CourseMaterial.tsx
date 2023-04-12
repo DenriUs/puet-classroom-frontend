@@ -20,7 +20,7 @@ const CourseMaterial = () => {
   useEffect(() => {
     dispatch({ type: SagaAction.COURSE_GET, payload: id });
     dispatch({ type: SagaAction.COURSES_TOPICS_GET, payload: id });
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div className='course-material'>

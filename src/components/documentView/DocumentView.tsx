@@ -48,7 +48,7 @@ const DocumentView = (props: Props) => {
       <div className='document-view__icon-container'>
         <ZoomInOutlined className='document-view__icon' onClick={increase} />
         <ZoomOutOutlined className='document-view__icon' onClick={decrease} />
-        <a className='document-view__icon' href={fileSrc} target='_blank'>
+        <a className='document-view__icon' href={fileSrc} target='_blank' rel='noreferrer'>
           <DownloadOutlined />
         </a>
       </div>
@@ -67,7 +67,7 @@ const DocumentView = (props: Props) => {
               className='document-view__button-navigate'
               icon={<LeftOutlined />}
               onClick={goToPrevPage}
-            ></Button>
+            />
             <span className='document-view__page-info'>
               {pageNumber} / {numPages}
             </span>
@@ -75,7 +75,7 @@ const DocumentView = (props: Props) => {
               className='document-view__button-navigate'
               icon={<RightOutlined />}
               onClick={goToNextPage}
-            ></Button>
+            />
           </div>
         </div>
       </div>
