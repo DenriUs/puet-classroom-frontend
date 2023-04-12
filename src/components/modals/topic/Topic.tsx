@@ -1,14 +1,14 @@
 import { Button, Input, Modal } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import './Topic.scss';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
+import { useAppDispatch } from '../../../hooks/reduxhooks';
 import { topicSchema } from './schemas';
 import { TopicSchemaType } from './type';
-import { SagaAction, CourseTopicEntity } from '../../../common/types';
+import { SagaAction } from '../../../common/types';
 
 interface IProps {
   id: string | undefined;
@@ -37,7 +37,7 @@ const TopicModal = (props: IProps) => {
     reset({
       title: topicName,
     });
-  }, [topicName]);
+  }, [reset, topicName]);
 
   useEffect(() => {
     if (isSubmitSuccessful) {

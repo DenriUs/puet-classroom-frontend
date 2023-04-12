@@ -61,32 +61,34 @@ export const getFullDate = (date: Date) => {
   return fullDate.toLocaleDateString();
 };
 
+export const getDaysInSystem = (date: Date) => {
+  const msInDay = 24 * 60 * 60 * 1000;
+  return Math.round(Math.abs(Number(new Date()) - Number(new Date(date))) / msInDay);
+};
+
 export const getCurrentDate = () => {
   const now = new Date();
   return now.toLocaleDateString();
 };
 
-export const getTypeActivity = (type: CourseActivityTypeEnum) => {
-  return type == 'LECTURE' ? 'Лекція' : 'Практична';
-};
+export const getTypeActivity = (type: CourseActivityTypeEnum) =>
+  type === 'LECTURE' ? 'Лекція' : 'Практична';
 
 export const getVerifiedWorks = (
   passedAssignment: Partial<CoursePassedAssignmentEntity[] | undefined>,
-) => {
-  return passedAssignment?.filter((passed) => passed?.mark !== null).length;
-};
+) => passedAssignment?.filter((passed) => passed?.mark !== null).length;
 
 export const getStatusAssignment = (
   passedAssignment: Partial<CoursePassedAssignmentEntity | undefined>,
 ) => {
-  return !passedAssignment ? 'Немає спроб' : !passedAssignment?.mark ? 'Здано' : 'Оцінено';
+  if (!passedAssignment) return 'Немає спроб';
+  if (passedAssignment.mark || passedAssignment.mark === 0) return 'Оцінено';
+  return 'Здано';
 };
 
 export const getMarkAssignment = (
   passedAssignment: Partial<CoursePassedAssignmentEntity | undefined>,
-) => {
-  return passedAssignment?.mark === null || !passedAssignment ? 0 : passedAssignment?.mark;
-};
+) => (passedAssignment?.mark === null || !passedAssignment ? 0 : passedAssignment?.mark);
 
 export const getBase64 = (file: RcFile): Promise<string> =>
   new Promise((resolve, reject) => {

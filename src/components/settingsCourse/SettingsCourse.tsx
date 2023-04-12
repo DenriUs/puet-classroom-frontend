@@ -123,7 +123,7 @@ const SettingsCourse = () => {
               danger
               icon={<DeleteOutlined className='button__icon' />}
               onClick={() => showConfirm('видалити курс', handleCourseDelete)}
-            ></Button>
+             />
           </div>
           <div className='setting-course__button-container'>
             <Button

@@ -1,6 +1,5 @@
-import { Avatar, Layout } from 'antd';
+import { Layout } from 'antd';
 import { useNavigate } from 'react-router';
-import { UserOutlined } from '@ant-design/icons';
 
 import './HeaderPage.scss';
 

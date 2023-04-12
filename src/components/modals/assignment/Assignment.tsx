@@ -51,7 +51,7 @@ const AssignmentModal = (props: IProps) => {
     reset({
       mark: coursePassedAssignment?.mark,
     });
-  }, [coursePassedAssignment]);
+  }, [coursePassedAssignment, reset]);
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={650}>
@@ -71,7 +71,8 @@ const AssignmentModal = (props: IProps) => {
             <a
               className='assignment-modal__file-icon'
               href={coursePassedAssignment?.file.src}
-              download
+              target='_blank'
+              rel="noreferrer"
             >
               {!coursePassedAssignment?.file.src ? (
                 <FileExclamationOutlined className='assignment-modal__file-icon-error' />

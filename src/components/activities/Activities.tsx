@@ -1,11 +1,11 @@
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import { getFullDate, getTypeActivity, showConfirm } from '../../common/helpers';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { useState } from 'react';
 
 import './Activities.scss';
 
+import { getFullDate, getTypeActivity, showConfirm } from '../../common/helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { CourseActivityEntity, CourseActivityTypeEnum, SagaAction } from '../../common/types';
 import MaterialModal from '../modals/material/Material';
@@ -100,7 +100,7 @@ const Activities = () => {
         type={SagaAction.COURSES_TOPICS_ACTIVITY_CREATE}
         onStart={showAddMaterial}
         handleClose={handleMaterialClose}
-        createMode={true}
+        createMode
       />
       <MaterialModal
         id={courseActivity?.id}

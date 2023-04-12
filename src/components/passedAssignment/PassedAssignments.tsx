@@ -1,6 +1,5 @@
 import { Table } from 'antd';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FileDoneOutlined, AuditOutlined } from '@ant-design/icons';
 
 import './PassedAssignments.scss';
@@ -51,13 +50,11 @@ const PassedAssignments = () => {
           pagination={{ defaultPageSize: take }}
           columns={passedAssignmentColumns}
           dataSource={coursePassedAssignments}
-          onRow={(record) => {
-            return {
-              onClick: () => {
-                onRowSelect(record.id);
-              },
-            };
-          }}
+          onRow={(record) => ({
+            onClick: () => {
+              onRowSelect(record.id);
+            },
+          })}
         />
         <AssignmentModal onStart={show} handleClose={handleClose} />
       </div>

@@ -10,14 +10,14 @@ import {
 import { Button, Dropdown, Menu, Progress } from 'antd';
 import { useNavigate } from 'react-router';
 
-import './CourseHeader.scss';
-
 import test from '../../global/images/icons/Test.png';
 import { UserRoleEnum } from '../../common/types';
 import { getUserFullName } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
 import { statistics } from './constant';
+
+import './CourseHeader.scss';
 
 const CourseHeader = () => {
   const { course } = useAppSelector((state) => state.coursesReducer);
@@ -76,28 +76,26 @@ const CourseHeader = () => {
         </div>
       </div>
       <div>
-        {user?.role == UserRoleEnum.TEACHER ? (
-          <>
-            <div className='course-header__buttons-container'>
-              <Button
-                className='course-header__button-create-meet'
-                type='primary'
-                shape='round'
-                icon={<VideoCameraAddOutlined className='icon' />}
-              >
-                Розпочати зустріч
-              </Button>
-              <Button
-                className='course-header__button-settings'
-                icon={<SettingOutlined className='icon' />}
-                shape='circle'
-                type='primary'
-                onClick={onSettingsClick}
-              >
-                Налаштування
-              </Button>
-            </div>
-          </>
+        {user?.role === UserRoleEnum.TEACHER ? (
+          <div className='course-header__buttons-container'>
+            <Button
+              className='course-header__button-create-meet'
+              type='primary'
+              shape='round'
+              icon={<VideoCameraAddOutlined className='icon' />}
+            >
+              Розпочати зустріч
+            </Button>
+            <Button
+              className='course-header__button-settings'
+              icon={<SettingOutlined className='icon' />}
+              shape='circle'
+              type='primary'
+              onClick={onSettingsClick}
+            >
+              Налаштування
+            </Button>
+          </div>
         ) : (
           <div className='course-header__button-connect-container'>
             <Button
@@ -111,7 +109,7 @@ const CourseHeader = () => {
           </div>
         )}
       </div>
-      {user?.role == UserRoleEnum.STUDENT && (
+      {user?.role === UserRoleEnum.STUDENT && (
         <div className='course-header__progress_container'>
           <div className='course-header__progress-title'>
             <span className='course-progress__name'>Прогрес курсу</span>

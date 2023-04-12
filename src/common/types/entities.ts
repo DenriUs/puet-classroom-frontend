@@ -34,10 +34,51 @@ export interface UserEntity {
   updatedAt: Date;
 }
 
+export interface SpecialityEntity {
+  id: string;
+  name: string;
+}
+
+export interface GroupEntity {
+  id: string;
+  name: string;
+  courseNumber: number;
+  speciality: Partial<SpecialityEntity>;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CourseParticipantEntity {
+  id: string;
+  user: Partial<UserEntity>;
+  // eslint-disable-next-line no-use-before-define
+  course: Partial<CourseEntity>;
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CourseEntity {
+  id: string;
+  name: string;
+  description: string;
+  group: Partial<GroupEntity>;
+  meetingUrl?: string;
+  color?: string;
+  cover: Partial<FileEntity>;
+  teacher: Partial<UserEntity>;
+  participants: Partial<CourseParticipantEntity>[];
+  // eslint-disable-next-line no-use-before-define
+  topics: Partial<CourseTopicEntity>[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface CourseTopicEntity {
   id: string;
   title: string;
   course: Partial<CourseEntity>;
+  // eslint-disable-next-line no-use-before-define
   activities: Partial<CourseActivityEntity>[];
   createdAt: Date;
   updatedAt: Date;
@@ -63,45 +104,6 @@ export interface CoursePassedAssignmentEntity {
   participant: Partial<CourseParticipantEntity>;
   file: Partial<FileEntity>;
   status: PassedAssignmentTypeEnum;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface CourseParticipantEntity {
-  id: string;
-  user: Partial<UserEntity>;
-  // eslint-disable-next-line no-use-before-define
-  course: Partial<CourseEntity>;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface CourseEntity {
-  id: string;
-  name: string;
-  description: string;
-  group: Partial<GroupEntity>;
-  meetingUrl?: string;
-  color?: string;
-  cover: Partial<FileEntity>;
-  teacher: Partial<UserEntity>;
-  participants: Partial<CourseParticipantEntity>[];
-  topics: Partial<CourseTopicEntity>[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface SpecialityEntity {
-  id: string;
-  name: string;
-}
-
-export interface GroupEntity {
-  id: string;
-  name: string;
-  courseNumber: number;
-  speciality: Partial<SpecialityEntity>;
   createdAt: Date;
   updatedAt: Date;
 }

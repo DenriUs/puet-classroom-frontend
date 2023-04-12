@@ -36,12 +36,12 @@ const FileUpload = forwardRef((props: Props, ref: any) => {
       setFileList([
         {
           uid: id,
-          name: name,
-          url: url,
+          name,
+          url,
         },
       ]);
     }
-  }, [id, name, onChange]);
+  }, [id, name, onChange, url]);
 
   return (
     <Dragger

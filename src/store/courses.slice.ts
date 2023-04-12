@@ -55,7 +55,7 @@ const coursesSlice = createSlice({
     },
     updateCourseTopic: (state, action: PayloadAction<CourseTopicEntity>) => {
       const newTopics = state.courseTopics?.map((topic) =>
-        topic.id == action.payload.id ? action.payload : topic,
+        topic.id === action.payload.id ? action.payload : topic,
       );
       state.courseTopics = newTopics;
     },
@@ -77,7 +77,7 @@ const coursesSlice = createSlice({
     },
     updateCoursesTopicActivity: (state, action: PayloadAction<CourseActivityEntity>) => {
       const newActivities = state.courseActivities?.map((activity) =>
-        activity.id == action.payload.id ? action.payload : activity,
+        activity.id === action.payload.id ? action.payload : activity,
       );
       state.courseActivities = newActivities;
     },
@@ -118,9 +118,7 @@ const coursesSlice = createSlice({
         (paticipant) => paticipant.id !== action.payload,
       );
     },
-    resetCourse: () => {
-      return initialState;
-    },
+    resetCourse: () => initialState,
   },
 });
 

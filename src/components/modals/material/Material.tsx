@@ -70,14 +70,14 @@ const MaterialModal = (props: IProps) => {
       title: materialName,
       type: typeActivity,
     });
-  }, [materialName]);
+  }, [materialName, reset, typeActivity]);
 
   useEffect(() => {
     if (isSubmitSuccessful && createMode) {
       reset();
       clearFileList();
     }
-  }, [isSubmitSuccessful, reset]);
+  }, [createMode, isSubmitSuccessful, reset]);
 
   return (
     <Modal centered open={onStart} onCancel={handleClose} footer={null} width={630}>
@@ -135,7 +135,7 @@ const MaterialModal = (props: IProps) => {
               id={materialFile?.id as string}
               name={materialFile?.filename as string}
               url={materialFile?.src as string}
-              accept={'.pdf'}
+              accept=".pdf"
               onChange={onDraggerChange}
               ref={uploadRef}
             />

@@ -29,7 +29,7 @@ const SettingsProfile = () => {
 
   useEffect(() => {
     dispatch({ type: SagaAction.PROFILE_GET });
-  }, [file]);
+  }, [dispatch, file]);
 
   if (!user) return <AppLoader />;
 
@@ -49,25 +49,25 @@ const SettingsProfile = () => {
           <div className='settings-input'>
             <label className='settings-title-input'>
               Призвіще:
-              <Input disabled={true} value={user?.lastName} />
+              <Input disabled value={user?.lastName} />
             </label>
           </div>
           <div className='settings-input'>
             <label className='settings-title-input'>
               Ім'я :
-              <Input disabled={true} value={user?.firstName} />
+              <Input disabled value={user?.firstName} />
             </label>
           </div>
           <div className='settings-input'>
             <label className='settings-title-input'>
               По батькові:
-              <Input disabled={true} value={user?.middleName} />
+              <Input disabled value={user?.middleName} />
             </label>
           </div>
           <div className='settings-input'>
             <label className='settings-title-input'>
               Email:
-              <Input disabled={true} value={user?.email} />
+              <Input disabled value={user?.email} />
             </label>
           </div>
         </div>
