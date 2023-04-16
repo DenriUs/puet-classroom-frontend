@@ -98,7 +98,7 @@ export interface CourseActivityEntity {
 
 export interface CoursePassedAssignmentEntity {
   id: string;
-  mark?: number;
+  mark: number;
   activity: Partial<CourseActivityEntity>;
   // eslint-disable-next-line no-use-before-define
   participant: Partial<CourseParticipantEntity>;

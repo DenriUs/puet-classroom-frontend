@@ -1,7 +1,7 @@
 import { Select, Table } from 'antd';
 import { useEffect } from 'react';
 
-import { getUserFullName } from '../../common/helpers';
+import { filterOption, filterSort, getUserFullName } from '../../common/helpers';
 import { SagaAction } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { courseParticipantsColumns } from './constant';
@@ -49,14 +49,8 @@ const CourseStudents = () => {
             placeholder='Введіть призвіще та імя студента'
             size='large'
             optionFilterProp='children'
-            filterOption={(input, option) =>
-              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-            }
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? '')
-                .toLowerCase()
-                .localeCompare((optionB?.label ?? '').toLowerCase())
-            }
+            filterOption={(input, option) => filterOption(input, option)}
+            filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
             options={(users || []).map((user) => ({
               value: user.id,
               label: getUserFullName(user),

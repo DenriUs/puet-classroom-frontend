@@ -3,7 +3,7 @@
 .course-header {
   display: grid;
   grid-template-columns: 1fr 0.4fr;
-  grid-template-rows: 0.6fr 0.4fr 0.5fr 0.5fr;
+  grid-template-rows: 0.6fr auto 0.5fr 0.5fr;
   align-items: center;
   padding-left: 38px;
   border-style: solid;
@@ -85,11 +85,7 @@
   }
 
   &__statistics-container {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 90px 130px 90px;
-    padding-bottom: 20px;
-    gap: 38px;
+    padding-bottom: 10px;
 
     @media (max-width: 767px) {
       display: none;
@@ -97,7 +93,8 @@
   }
 
   &__description-container {
-    padding-bottom: 23px;
+    padding-top: 10px;
+    padding-bottom: 26px;
 
     @media (max-width: 767px) {
       display: none;

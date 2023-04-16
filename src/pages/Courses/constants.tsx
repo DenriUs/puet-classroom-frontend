@@ -1,22 +1,18 @@
-import { Progress } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+
 import { Link } from 'react-router-dom';
-import { CourseEntity, CourseParticipantEntity, GroupEntity } from '../../common/types';
 import type { ColumnsType } from 'antd/es/table';
-import { getFullDate } from '../../common/helpers';
+import { CourseEntity, GroupEntity } from '../../common/types';
+import { getFullDate, getUserFullName } from '../../common/helpers';
 
-interface Course {
-  key: string;
-}
-
-export const courseStudentColumns = [
+export const courseStudentColumns: ColumnsType<CourseEntity> = [
   {
     title: 'Назва',
     dataIndex: 'name',
     key: 'name',
-    width: '35%',
-    render: (name: string, course: Course) => (
-      <Link to={'/main/courses/' + course.key} className='course-name'>
+    width: '60%',
+    render: (name: string, record) => (
+      <Link to={`/main/courses/${record.id}`} className='course-name'>
         {name}
       </Link>
     ),
@@ -25,26 +21,21 @@ export const courseStudentColumns = [
     title: 'Викладач',
     dataIndex: 'teacher',
     key: 'teacher',
-    width: '14%',
-    render: (teacher: string) => (
+    width: '20%',
+    responsive: ['xl'],
+    render: (_, record) => (
       <div>
-        <UserOutlined /> <span className='course-teacher'>{teacher}</span>
+        <UserOutlined /> <span className='topic-date'>{getUserFullName(record.teacher)}</span>
       </div>
     ),
   },
   {
-    title: 'Завдання',
-    dataIndex: 'count',
-    key: 'count',
-    width: '10%',
-    render: (count: string) => <span className='course-count'>{count}</span>,
-  },
-  {
-    title: 'Прогрес',
-    dataIndex: 'progress',
-    key: 'progress',
-    width: '10%',
-    render: (progress: number) => <Progress percent={progress} />,
+    dataIndex: 'createdAt',
+    title: 'Дата створення',
+    key: 'createdAt',
+    width: '20%',
+    responsive: ['xl'],
+    render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
   },
 ];
 
@@ -55,7 +46,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     key: 'name',
     width: '45%',
     render: (name: string, record) => (
-      <Link to={'/main/courses/' + record.id} className='course-name'>
+      <Link to={`/main/courses/${record.id}`} className='course-name'>
         {name}
       </Link>
     ),
@@ -65,6 +56,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     dataIndex: 'group',
     key: 'group',
     width: '10%',
+    responsive: ['md'],
     render: (group: GroupEntity) => (
       <div>
         <UserOutlined /> <span className='course-teacher'>{group?.name}</span>
@@ -76,6 +68,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     dataIndex: 'group',
     key: 'group',
     width: '15%',
+    responsive: ['lg'],
     render: (group: GroupEntity) => (
       <div>
         <span className='course-teacher'>{group?.speciality?.name}</span>
@@ -87,6 +80,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     title: 'Дата створення',
     key: 'createdAt',
     width: '15%',
+    responsive: ['xl'],
     render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
   },
   {
@@ -94,6 +88,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     title: 'Дата оновлення',
     key: 'updatedAt',
     width: '15%',
+    responsive: ['xl'],
     render: (updatedAt: Date) => <span className='topic-date'>{getFullDate(updatedAt)}</span>,
   },
 ];

@@ -7,6 +7,7 @@ import TextArea from 'antd/lib/input/TextArea';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { courseSchema } from './schemas';
+import { filterOption, filterSort } from '../../../common/helpers';
 import { CourseSchemaType } from './type';
 import { SagaAction } from '../../../common/types';
 
@@ -87,14 +88,8 @@ const CourseModal = (props: IProps) => {
                     size='large'
                     className='course-modal__select'
                     placeholder='Виберіть групу'
-                    filterOption={(input, option) =>
-                      (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                    }
-                    filterSort={(optionA, optionB) =>
-                      (optionA?.label ?? '')
-                        .toLowerCase()
-                        .localeCompare((optionB?.label ?? '').toLowerCase())
-                    }
+                    filterOption={(input, option) => filterOption(input, option)}
+                    filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
                     options={(groups || []).map((group) => ({
                       value: group.id,
                       label: group.name,

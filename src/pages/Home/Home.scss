@@ -1,24 +1,6 @@
 @import '/src/global/sass/abstracts/placeholders/placeholders';
 
 .home-page {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-
-  .container-statistics {
-    display: grid;
-    align-items: center;
-
-    @media (max-width: 1486px) {
-      display: grid;
-      grid-column-start: 1;
-      grid-column-end: 3;
-    }
-
-    @media (max-width: 1024px) {
-      display: none !important;
-    }
-  }
-
   &__name-container {
     display: grid;
     align-items: center;
@@ -26,35 +8,57 @@
     @extend %main-title;
   }
 
-  @media (max-width: 1486px) {
+  &__content-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 1fr;
+    grid-template-columns: 2.1fr 1fr;
+
+    @media (max-width: 1645px) {
+      grid-template-columns: 2.2fr 1.1fr;
+    }
+
+    @media (max-width: 1576px) and (min-width: 1257px) {
+      grid-template-columns: 2fr 1.2fr;
+    }
+
+    @media (max-width: 1257px) {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 1fr;
+      justify-content: center;
+    }
   }
 
-  @media (max-width: 1024px) {
-    display: grid;
-    grid-template-columns: 92%;
-    grid-template-rows: 1fr 1fr;
-    justify-content: center;
-  }
-}
+  &__course {
+    margin: 40px;
 
-.course {
-  margin: 0px 40px 40px 40px;
-
-  &__title-container {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    align-items: center;
+    @media (max-width: 1257px) {
+      display: grid;
+      grid-row-start: 2;
+    }
   }
 
-  &__title {
-    font-weight: 400;
-    font-size: max(1.2vw, 20px);
-    color: #000000;
-    padding-bottom: 30px;
+  &__activity {
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-template-columns: auto;
+    gap: 40px;
+    margin: 40px 40px 40px 0px;
+    top: 30px;
+    position: sticky;
+    height: max-content;
+
+    @media (max-width: 1257px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 40px;
+      position: static;
+    }
+
+    @media (max-width: 846px) {
+      display: grid;
+      grid-template-columns: 1fr;
+      margin: 40px;
+    }
   }
 }
 
