@@ -4,8 +4,6 @@ import { message } from 'antd';
 import { UploadChangeParam, UploadFile, UploadProps } from 'antd/lib/upload/interface';
 import Dragger from 'antd/lib/upload/Dragger';
 
-import './FileUpload.scss';
-
 interface Props {
   id: string;
   name: string;

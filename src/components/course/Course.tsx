@@ -1,5 +1,4 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Progress } from 'antd';
 
 import hatIcon from '../../global/images/icons/hat.svg';
 import test from '../../global/images/icons/Test.png';
@@ -41,16 +40,6 @@ const Course = (props: Props) => {
           <img src={test} alt='test' className='course-card__image' />
         )}
       </div>
-      {user?.role === UserRoleEnum.STUDENT && (
-        <div className='course-card__progress-container'>
-          <Progress
-            type='line'
-            strokeColor={color}
-            trailColor='rgba(255, 255, 255, 0.54)'
-            percent={40}
-          />
-        </div>
-      )}
     </div>
   );
 };

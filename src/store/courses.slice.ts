@@ -63,7 +63,7 @@ const coursesSlice = createSlice({
       state.courseTopics = state.courseTopics?.filter(
         (paticipant) => paticipant.id !== action.payload,
       );
-      state.courseActivities = undefined;
+      state.courseActivities = [];
     },
     setCourseTopicActivities: (state, action: PayloadAction<CourseActivityEntity[]>) => {
       action.payload.sort((a, b) => (a.type < b.type ? 1 : -1));
@@ -118,6 +118,9 @@ const coursesSlice = createSlice({
         (paticipant) => paticipant.id !== action.payload,
       );
     },
+    resetCourseGradeBook: (state) => {
+      state.courseGradeBook = [];
+    },
     resetCourse: () => initialState,
   },
 });
@@ -147,6 +150,7 @@ export const {
   setCoursesParticipants,
   createCoursesParticipant,
   deleteCourseParticipant,
+  resetCourseGradeBook,
   resetCourse,
 } = coursesSlice.actions;
 

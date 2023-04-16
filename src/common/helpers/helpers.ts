@@ -17,6 +17,11 @@ import {
 
 import { LocalStorageData } from './types';
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 export const getFromLocalStorage = (key: LocalStorageData): string | null =>
   localStorage.getItem(key);
 
@@ -97,3 +102,9 @@ export const getBase64 = (file: RcFile): Promise<string> =>
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => reject(error);
   });
+
+export const filterOption = (input: string, option: Option | undefined) =>
+  (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+export const filterSort = (optionA: Option, optionB: Option) =>
+  (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase());

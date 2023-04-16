@@ -8,9 +8,9 @@ export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> =
     title: 'Назва',
     dataIndex: 'activity',
     key: 'activity',
-    width: '50%',
+    width: '55%',
     render: (activity: CourseActivityEntity, record) => (
-      <a href={record.file.src} target={'_blank'} className='course-name'>
+      <a href={record.file.src} target='_blank' className='course-name' rel='noreferrer'>
         {activity.title}
       </a>
     ),
@@ -19,21 +19,21 @@ export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> =
     dataIndex: 'createdAt',
     title: 'Дата здачі',
     key: 'createdAt',
-    width: '15%',
+    responsive: ['lg'],
     render: (createdAt) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
   },
   {
     title: 'Оцінка',
     dataIndex: 'mark',
     key: 'mark',
-    width: '15%',
+    responsive: ['md'],
     render: (mark: number) => <span className='course-teacher'>{!mark ? 0 : mark}</span>,
   },
   {
     title: 'Відсоток',
     dataIndex: 'mark',
     key: 'progress',
-    width: '20%',
-    render: (mark: number) => <Progress status='normal' percent={mark}></Progress>,
+    responsive: ['lg'],
+    render: (mark: number) => <Progress status='normal' strokeColor='#254664' percent={mark} />,
   },
 ];

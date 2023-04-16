@@ -5,7 +5,6 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import './Courses.scss';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
-import { getUserShortName } from '../../common/helpers';
 import { courseStudentColumns, courseTeacherColumns } from './constants';
 import { SagaAction, UserRoleEnum } from '../../common/types';
 
@@ -28,14 +27,6 @@ const Courses = () => {
   useEffect(() => {
     dispatch({ type: SagaAction.COURSES_GET });
   }, [dispatch]);
-
-  const tableCourseData = courses?.map(({ id, name, teacher }) => ({
-    key: id,
-    name,
-    teacher: getUserShortName(teacher),
-    count: '15/30',
-    progress: 80,
-  }));
 
   if (!courses) return <AppLoader />;
 
@@ -73,7 +64,7 @@ const Courses = () => {
             <Table
               pagination={{ defaultPageSize: take }}
               columns={courseStudentColumns}
-              dataSource={tableCourseData}
+              dataSource={courses}
             />
           )}
         </div>

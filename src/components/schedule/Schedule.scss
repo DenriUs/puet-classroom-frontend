@@ -3,22 +3,18 @@
 .schedule {
   @extend %card;
   display: grid;
-  margin: 40px 20px;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: auto 1fr;
   align-items: start;
   justify-items: start;
   padding: 20px 25px;
 
   &__title {
+    margin-bottom: 30px;
     display: grid;
     font-weight: 400;
     font-size: max(14px, 16px);
     color: #828282;
-  }
-
-  @media (max-width: 1486px) {
-    margin: 40px 40px;
   }
 
   @media (max-width: 768px) {

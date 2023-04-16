@@ -3,10 +3,8 @@
 .meeting {
   @extend %card;
   display: grid;
-  margin: 40px 40px 40px 20px;
   grid-template-columns: 1fr;
-  grid-template-rows: 20px 100px 150px;
-  padding: 30px 40px;
+  padding: 20px 25px;
 
   &__title {
     display: grid;
@@ -20,7 +18,7 @@
     justify-items: center;
     align-items: center;
     width: 100%;
-    padding-top: 10px;
+    margin: 30px 0px;
   }
 
   &__select {
@@ -35,15 +33,14 @@
     display: grid;
     justify-items: center;
     align-items: center;
+    margin-bottom: 20px;
     width: 100%;
   }
 
   &__button-connect {
     height: 45px;
+    font-size: 15px;
     font-weight: 600;
   }
 
-  @media (max-width: 1486px) {
-    margin: 40px 40px;
-  }
 }

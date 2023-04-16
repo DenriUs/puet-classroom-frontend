@@ -19,6 +19,17 @@
     margin-bottom: 40px;
   }
 
+  &__select-container {
+    display: inline-grid;
+    grid-auto-flow: column;
+
+    @media (max-width: 930px) {
+      display: grid;
+      justify-items: center;
+      grid-auto-flow: row;
+    }
+  }
+
   &__card {
     @extend %card;
     padding: 40px;
@@ -29,9 +40,10 @@
   }
 
   &__select {
-    display: grid;
-    align-items: center;
-    padding-bottom: 20px;
+    padding: 20px;
+    @media (max-width: 930px) {
+      width: 100%;
+    }
   }
 }
 
@@ -55,14 +67,4 @@
   font-weight: 600;
   font-size: max(13px, 14px);
   color: #4f4f4f;
-}
-
-@media (max-width: 800px) {
-  .grade-select {
-    width: 200px;
-  }
-  .grade-page__card{
-    overflow-x: scroll;
-  }
-
 }

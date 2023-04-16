@@ -38,6 +38,7 @@ import {
   updatePassed,
   updateCoursesTopicActivity,
   setGradeBooks,
+  resetCourseGradeBook,
 } from '../../store/courses.slice';
 
 interface IActivity {
@@ -84,7 +85,6 @@ function* updateCourse(action: ReduxAction<CourseEntity>) {
 }
 
 function* deleteСourse(action: ReduxAction<string>) {
-  console.log(action.payload);
   const response: APIResponse = yield call(Api.delete, `courses/${action.payload}`);
   if (response.error) return;
   yield put(deleteCourses(action.payload));
@@ -292,6 +292,10 @@ function* deleteParticipant(action: ReduxAction<string>) {
   yield showSuccessMessage('Студента видалено з курсу!');
 }
 
+function* resetCourseGrade() {
+  yield put(resetCourseGradeBook());
+}
+
 function* resetCourses() {
   yield put(resetCourse());
 }
@@ -326,6 +330,7 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_CREATE, createParticipant);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_DELETE, deleteParticipant);
+  yield takeLatest(SagaAction.COURSES_GRADE_BOOK_RESET, resetCourseGrade);
   yield takeLatest(SagaAction.COURSES_RESET, resetCourses);
 }
 

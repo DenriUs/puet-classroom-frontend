@@ -2,11 +2,7 @@
 
 .current-activity {
   @extend %card;
-  margin-right: 40px;
-  margin-left: 20px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  height: 130px;
+  height: fit-content;
 
   &__container {
     display: grid;
@@ -41,12 +37,5 @@
       max-width: 50px;
       max-height: 50px;
     }
-  }
-}
-
-@media (max-width: 1357px) {
-  .current-activity {
-    margin-top: 40px;
-    margin-left: 40px;
   }
 }

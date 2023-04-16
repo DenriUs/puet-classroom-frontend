@@ -10,7 +10,6 @@ import HeaderPage from '../../components/header/HeaderPage';
 import Schedule from '../../components/schedule/Schedule';
 import Course from '../../components/course/Course';
 import CurrentActivity from '../../components/currentActivity/CurrentActivity';
-import CardStatistics from '../../components/cardStatistics/CardStatistics';
 import Meetings from '../../components/meetings/Meetings';
 
 const Home = () => {
@@ -33,25 +32,23 @@ const Home = () => {
   return (
     <Layout>
       <HeaderPage />
-      <div className='home-page__name-container'>
-        <span>Головна сторінка</span>
-      </div>
       <div className='home-page'>
-        <div className='container-statistics'>
-          <CardStatistics />
+        <div className='home-page__name-container'>
+          <span>Головна сторінка</span>
         </div>
-        <Schedule />
-        {user?.role === UserRoleEnum.TEACHER ? <Meetings /> : <CurrentActivity />}
-      </div>
-      <div className='course'>
-        <div className='course__title-container'>
-          <p className='course__title'>Мої поточні курси</p>
+        <div className='home-page__content-container'>
+          <div className='home-page__course'>
+            {courses?.length ? (
+              <div className='course-card'>{renderedCourses}</div>
+            ) : (
+              <Empty description={<span className='empty-title'>Курси відсутні</span>} />
+            )}
+          </div>
+          <div className='home-page__activity'>
+            {user?.role === UserRoleEnum.TEACHER ? <Meetings /> : <CurrentActivity />}
+            <Schedule />
+          </div>
         </div>
-        {courses?.length ? (
-          <div className='course-card'>{renderedCourses}</div>
-        ) : (
-          <Empty description={<span className='empty-title'>Курси відсутні</span>} />
-        )}
       </div>
     </Layout>
   );

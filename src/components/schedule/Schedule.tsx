@@ -17,7 +17,6 @@ const Schedule = (props: Props) => (
           description='9.30 - 10.50'
         />
         <Step title='Програмування' description='11.00 - 12.20' />
-        <Step title='Теорія алгоритмів' description='12.40 - 13.20' />
       </Steps>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { Select, Table } from 'antd';
 
-import { getUserFullName } from '../../common/helpers';
+import { filterOption, filterSort, getUserFullName } from '../../common/helpers';
 import { SagaAction } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { courseGradeBookColumns } from './constant';
@@ -34,14 +34,8 @@ const Estimates = () => {
             placeholder='Введіть призвіще та імя студента'
             size='large'
             optionFilterProp='children'
-            filterOption={(input, option) =>
-              (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-            }
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? '')
-                .toLowerCase()
-                .localeCompare((optionB?.label ?? '').toLowerCase())
-            }
+            filterOption={(input, option) => filterOption(input, option)}
+            filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
             options={(courseParticipants || []).map((participant) => ({
               value: participant.id,
               label: getUserFullName(participant.user),
