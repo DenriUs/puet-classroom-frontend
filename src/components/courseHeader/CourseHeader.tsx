@@ -4,7 +4,6 @@ import {
   MailOutlined,
   SettingOutlined,
   InfoCircleOutlined,
-  VideoCameraAddOutlined,
   LeftOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
@@ -13,7 +12,7 @@ import { useNavigate } from 'react-router';
 
 import test from '../../global/images/icons/Test.png';
 import { UserRoleEnum } from '../../common/types';
-import { getUserFullName } from '../../common/helpers';
+import { getUserFullName, showInfoMessage } from '../../common/helpers';
 import { useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
 
@@ -30,6 +29,14 @@ const CourseHeader = () => {
 
   const onLeftClick = () => navigate('/main/home');
   const onSettingsClick = () => navigate('settings');
+
+  const onConnectClick = () => {
+    if (course?.meetingUrl) {
+      navigate(`/main/chat?roomID=${course?.meetingUrl}`);
+    } else {
+      showInfoMessage('Мітинг ще не розпочато');
+    }
+  };
 
   const menu = (
     <Menu
@@ -79,14 +86,6 @@ const CourseHeader = () => {
         {user?.role === UserRoleEnum.TEACHER ? (
           <div className='course-header__buttons-container'>
             <Button
-              className='course-header__button-create-meet'
-              type='primary'
-              shape='round'
-              icon={<VideoCameraAddOutlined className='icon' />}
-            >
-              Розпочати зустріч
-            </Button>
-            <Button
               className='course-header__button-settings'
               icon={<SettingOutlined className='icon' />}
               shape='circle'
@@ -103,6 +102,7 @@ const CourseHeader = () => {
               type='primary'
               shape='round'
               icon={<PlayCircleOutlined className='icon' />}
+              onClick={onConnectClick}
             >
               Приєднатися
             </Button>

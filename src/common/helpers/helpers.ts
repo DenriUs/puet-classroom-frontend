@@ -36,6 +36,9 @@ export const showSuccessMessage = (message: string, description?: string) =>
 export const showErrorMessage = (message: string, description?: string) =>
   notification.error({ message, description });
 
+export const showInfoMessage = (message: string, description?: string) =>
+  notification.info({ message, description });
+
 export const selectState = <T>(selector: (s: RootState) => T): SelectEffect => sagaSelect(selector);
 
 export const constructPaginationUrlQuery = (params: PaginationQueryParams) =>
@@ -56,7 +59,8 @@ export const loadData = <T = any>(
   payload: { endpoint, action, query },
 });
 
-export const getUserShortName = (user: Partial<UserEntity>) => `${user.firstName} ${user.lastName}`;
+export const getUserShortName = (user: Partial<UserEntity | undefined>) =>
+  `${user?.firstName} ${user?.lastName}`;
 
 export const getUserFullName = (user: Partial<UserEntity | undefined>) =>
   `${user?.lastName} ${user?.firstName} ${user?.middleName}`;
@@ -108,3 +112,20 @@ export const filterOption = (input: string, option: Option | undefined) =>
 
 export const filterSort = (optionA: Option, optionB: Option) =>
   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase());
+
+export const randomID = (length: number) => {
+  let result = '';
+  if (result) return result;
+  const chars = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP';
+  const maxPos = chars.length;
+  length = length || 5;
+  for (let i = 0; i < length; i += 1) {
+    result += chars.charAt(Math.floor(Math.random() * maxPos));
+  }
+  return result;
+};
+
+export const getUrlParams = (url = window.location.href) => {
+  const urlStr = url.split('?')[1];
+  return new URLSearchParams(urlStr);
+};

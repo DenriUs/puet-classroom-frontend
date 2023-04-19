@@ -11,6 +11,7 @@ import Settings from './Settings/Settings';
 import { useAppDispatch } from '../hooks/reduxhooks';
 import { SagaAction } from '../common/types';
 import CourseSettings from './Courses/CourseSettings/CourseSettings';
+import Chat from './Chat/Chat';
 
 const MainRoutes = () => {
   const isAuthorized = getFromLocalStorage('token');
@@ -31,6 +32,7 @@ const MainRoutes = () => {
         <Route index element={<Navigate to='/main/home' />} />
         <Route path='home' element={<Home />} />
         <Route path='courses' element={<Course />} />
+        <Route path='chat' element={<Chat />} />
         <Route path='grade' element={<GradeBook />} />
         <Route path='settings' element={<Settings />} />
         <Route path='courses/:id' element={<CourseDetails />} />

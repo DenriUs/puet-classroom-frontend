@@ -29,9 +29,27 @@
     padding: 0 15px 15px 15px;
   }
 
+  &__offline {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    padding: 15px;
+    justify-content: center;
+  }
+
+  &__offline-text {
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    font-size: max(14px, 20px);
+    color: #828282;
+    padding-right: 15px;
+  }
+
   &__image {
     grid-row-start: 1;
     grid-row-end: span 2;
+    cursor: pointer;
 
     img {
       max-width: 50px;

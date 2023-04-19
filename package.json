@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
     "@reduxjs/toolkit": "^1.8.6",
+    "@zegocloud/zego-uikit-prebuilt": "^1.7.5",
     "antd": "^4.23.3",
     "antd-img-crop": "^4.11.1",
     "axios": "^0.27.2",
