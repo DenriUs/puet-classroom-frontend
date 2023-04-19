@@ -3,6 +3,7 @@ import {
   BookFilled,
   FileTextFilled,
   SettingFilled,
+  PhoneFilled,
 } from '@ant-design/icons';
 
 export const coursesColumns = [
@@ -20,6 +21,11 @@ export const coursesColumns = [
     name: 'grade',
     title: 'Журнал оцінок',
     icon: <FileTextFilled className='sidebar__icon' />,
+  },
+  {
+    name: 'chat',
+    title: 'Зустрічі',
+    icon: <PhoneFilled className='sidebar__icon' />,
   },
   {
     name: 'settings',

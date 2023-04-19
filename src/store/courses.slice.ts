@@ -11,6 +11,7 @@ import {
 export interface CoursesState {
   courses?: CourseEntity[];
   course?: CourseEntity;
+  courseMeeting?: CourseEntity;
   courseTopics?: CourseTopicEntity[];
   courseTopic?: CourseTopicEntity;
   courseActivities?: CourseActivityEntity[];
@@ -35,11 +36,21 @@ const coursesSlice = createSlice({
     setCourse: (state, action: PayloadAction<CourseEntity>) => {
       state.course = action.payload;
     },
+    setCourseMeeting: (state) => {
+      state.courseMeeting = state.courses?.find((course) => course.meetingUrl !== null);
+    },
+    deleteCourseMeeting: (state) => {
+      state.courseMeeting = undefined;
+    },
     createCourses: (state, action: PayloadAction<CourseEntity>) => {
       state.courses?.push(action.payload);
     },
     updateCourses: (state, action: PayloadAction<CourseEntity>) => {
       state.course = action.payload;
+      const newCourses = state.courses?.map((course) =>
+        course.id === action.payload.id ? action.payload : course,
+      );
+      state.courses = newCourses;
     },
     deleteCourses: (state, action: PayloadAction<string | undefined>) => {
       state.courses = state.courses?.filter((course) => course.id !== action.payload);
@@ -129,6 +140,8 @@ export const {
   setCourses,
   setCourse,
   createCourses,
+  setCourseMeeting,
+  deleteCourseMeeting,
   updateCourses,
   deleteCourses,
   setCourseTopics,

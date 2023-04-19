@@ -39,6 +39,8 @@ import {
   updateCoursesTopicActivity,
   setGradeBooks,
   resetCourseGradeBook,
+  setCourseMeeting,
+  deleteCourseMeeting,
 } from '../../store/courses.slice';
 
 interface IActivity {
@@ -68,6 +70,14 @@ function* getCourse(action: ReduxAction<string>) {
   yield put(setCourse(response.data.data));
 }
 
+function* getCourseMeeting() {
+  yield put(setCourseMeeting());
+}
+
+function* deleteCoursesMeeting() {
+  yield put(deleteCourseMeeting());
+}
+
 function* createCourse(action: ReduxAction<CourseEntity>) {
   const response: APIResponse = yield call(Api.post, `courses`, action.payload);
   if (response.error) return;
@@ -77,8 +87,12 @@ function* createCourse(action: ReduxAction<CourseEntity>) {
 
 function* updateCourse(action: ReduxAction<CourseEntity>) {
   if (!action.payload) return;
-  const { id, name, description } = action.payload;
-  const response: APIResponse = yield call(Api.patch, `courses/${id}`, { name, description });
+  const { id, name, description, meetingUrl } = action.payload;
+  const response: APIResponse = yield call(Api.patch, `courses/${id}`, {
+    name,
+    description,
+    meetingUrl,
+  });
   if (response.error) return;
   yield put(updateCourses(response.data.data));
   yield showSuccessMessage('Курс успішно оновлено!');
@@ -305,6 +319,8 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSE_GET, getCourse);
   yield takeLatest(SagaAction.COURSE_CREATE, createCourse);
   yield takeLatest(SagaAction.COURSE_UPDATE, updateCourse);
+  yield takeLatest(SagaAction.COURSE_MEETING_GET, getCourseMeeting);
+  yield takeLatest(SagaAction.COURSE_MEETING_DELETE, deleteCoursesMeeting);
   yield takeLatest(SagaAction.COURSE_DELETE, deleteСourse);
   yield takeLatest(SagaAction.COURSES_TOPICS_GET, getTopics);
   yield takeLatest(SagaAction.COURSES_TOPIC_GET, getTopic);
