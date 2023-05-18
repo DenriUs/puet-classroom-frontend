@@ -1,20 +1,27 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { showConfirm } from '../../common/helpers';
 
-export const courseParticipantsColumns = [
+export const courseScheduleColumns = [
   {
-    title: 'П.І.Б',
+    title: 'День',
     dataIndex: 'name',
     key: 'name',
     width: '60%',
     render: (name: string) => <span className='table__title'>{name}</span>,
   },
   {
-    title: 'Email',
+    title: 'Час початку пари',
     dataIndex: 'email',
     key: 'email',
     width: '30%',
-    render: (email: string) => <span className='table__info'>{email}</span>,
+    render: (email: string) => <span className='course-teacher'>{email}</span>,
+  },
+  {
+    title: 'Час закінчення пари',
+    dataIndex: 'email',
+    key: 'email',
+    width: '30%',
+    render: (email: string) => <span className='course-teacher'>{email}</span>,
   },
   {
     title: 'Дія',
@@ -23,7 +30,7 @@ export const courseParticipantsColumns = [
     width: '10%',
     render: (deleteStudents: () => void) => (
       <div onClick={() => showConfirm('видалити студента з курсу', deleteStudents)}>
-        <DeleteOutlined className='table__icon' />
+        <DeleteOutlined className='file-icon' />
       </div>
     ),
   },

@@ -3,6 +3,7 @@ import {
   SettingOutlined,
   DatabaseOutlined,
   ReconciliationOutlined,
+  CalendarOutlined,
 } from '@ant-design/icons';
 import CourseMaterial from '../../../components/courseMaterial/CourseMaterial';
 import CourseStudents from '../../../components/courseStudents/CourseStudents';
@@ -29,8 +30,14 @@ export const tabsItems = [
     icon: <ReconciliationOutlined />,
   },
   {
-    label: 'Налаштування',
+    label: 'Розклад',
     key: '4',
+    children: [<Estimates />],
+    icon: <CalendarOutlined />,
+  },
+  {
+    label: 'Налаштування',
+    key: '5',
     children: [<SettingsCourse />],
     icon: <SettingOutlined />,
   },

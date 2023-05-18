@@ -1,5 +1,3 @@
-@import '/src/global/sass/abstracts/placeholders/placeholders';
-
 .assignment-modal {
   &__container {
     display: grid;
@@ -16,10 +14,6 @@
     text-align: center;
     font-weight: 600;
     @include adaptiv-font(25, 20);
-
-    @media (min-width: 1440px) {
-      font-size: 25px;
-    }
   }
 
   &__content-container {

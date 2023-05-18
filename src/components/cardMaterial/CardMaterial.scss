@@ -1,9 +1,8 @@
-@import '/src/global/sass/abstracts/placeholders/placeholders';
-
 .card-material {
   display: grid;
   justify-content: center;
   grid-template-columns: minmax(750px, 0.7fr);
+  padding-bottom: 30px;
 
   &__container {
     @extend %card;
@@ -20,9 +19,6 @@
     margin: 25px;
     text-align: center;
     @include adaptiv-font(20, 16);
-    @media (min-width: 1440px) {
-      font-size: 20px;
-    }
   }
 
   &__button-pass-container {

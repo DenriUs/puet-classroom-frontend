@@ -1,5 +1,3 @@
-@import '/src/global/sass/abstracts/placeholders/placeholders';
-
 .course-page {
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -37,29 +35,6 @@
     padding: 40px 40px 20px 40px;
     @extend %card;
   }
-}
-
-.course-name {
-  color: #254664;
-  font-weight: 600;
-  font-size: max(10px, 16px);
-  cursor: pointer;
-}
-
-.course-name:hover {
-  color: rgba(37, 70, 100, 0.5);
-}
-
-.course-teacher {
-  font-weight: 600;
-  font-size: max(13px, 14px);
-  color: #4f4f4f;
-}
-
-.course-count {
-  font-weight: 400;
-  font-size: max(13px, 14px);
-  color: #4f4f4f;
 }
 
 @media (max-width: 500px) {

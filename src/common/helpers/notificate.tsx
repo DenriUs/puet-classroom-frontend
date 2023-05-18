@@ -1,5 +1,11 @@
-import { ExclamationCircleOutlined, ReadOutlined, ReconciliationOutlined } from '@ant-design/icons';
-import { Avatar, Modal } from 'antd';
+import {
+  ExclamationCircleOutlined,
+  ReadOutlined,
+  ReconciliationOutlined,
+  ClockCircleOutlined,
+  CheckCircleOutlined,
+} from '@ant-design/icons';
+import { Avatar, Modal, Tag } from 'antd';
 import { CourseActivityTypeEnum, UserEntity } from '../types';
 
 const { confirm } = Modal;
@@ -28,4 +34,15 @@ export const getUserIcon = (user: Partial<UserEntity | undefined>) =>
     <Avatar style={{ backgroundColor: '#0C4E77', color: '#fff' }} size={40}>
       {user?.firstName?.charAt(0)}
     </Avatar>
+  );
+
+export const getStatusMark = (mark: number) =>
+  !mark ? (
+    <Tag icon={<ClockCircleOutlined />} color='geekblue'>
+      Здано
+    </Tag>
+  ) : (
+    <Tag icon={<CheckCircleOutlined />} color='success'>
+      Оцінено
+    </Tag>
   );

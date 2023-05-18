@@ -41,8 +41,8 @@ const Activities = () => {
       dataIndex: 'title',
       title: 'Назва',
       key: 'title',
-      width: '50%',
-      render: (title: string) => <span className='topic-name'>{title}</span>,
+      width: '55%',
+      render: (title: string) => <span className='table__title'>{title}</span>,
     },
     {
       dataIndex: 'type',
@@ -50,7 +50,7 @@ const Activities = () => {
       key: 'type',
       width: '10%',
       render: (type: CourseActivityTypeEnum) => (
-        <span className='topic-date'>{getTypeActivity(type)}</span>
+        <span className='table__info'>{getTypeActivity(type)}</span>
       ),
     },
     {
@@ -58,24 +58,24 @@ const Activities = () => {
       title: 'Дата створення',
       key: 'createdAt',
       width: '15%',
-      render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
+      render: (createdAt: Date) => <span className='table__info'>{getFullDate(createdAt)}</span>,
     },
     {
       dataIndex: 'updatedAt',
       title: 'Дата оновлення',
       key: 'updatedAt',
       width: '15%',
-      render: (updatedAt: Date) => <span className='topic-date'>{getFullDate(updatedAt)}</span>,
+      render: (updatedAt: Date) => <span className='table__info'>{getFullDate(updatedAt)}</span>,
     },
     {
       title: 'Дії',
       key: 'action',
-      width: '10%',
+      width: '5%',
       render: (_, record) => (
-        <div>
-          <EditOutlined className='topic-icons' onClick={() => handleEditMaterialShow(record.id)} />
+        <div className='table__icon--container'>
+          <EditOutlined className='table__icon' onClick={() => handleEditMaterialShow(record.id)} />
           <DeleteOutlined
-            className='topic-icons'
+            className='table__icon'
             onClick={() => showConfirm('видалити матеріал', () => handleMaterialDelete(record.id))}
           />
         </div>

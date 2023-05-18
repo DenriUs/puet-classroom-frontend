@@ -1,35 +1,45 @@
 import {
   HomeFilled,
+  HomeOutlined,
   BookFilled,
+  BookOutlined,
   FileTextFilled,
+  FileTextOutlined,
   SettingFilled,
   PhoneFilled,
+  PhoneOutlined,
+  SettingOutlined,
 } from '@ant-design/icons';
 
-export const coursesColumns = [
+export const sidebarData = [
   {
     name: 'home',
     title: 'Головна',
-    icon: <HomeFilled className='sidebar__icon' />,
+    iconFilled: <HomeFilled className='sidebar__icon' />,
+    iconOutlined: <HomeOutlined className='sidebar__icon' />,
   },
   {
     name: 'courses',
     title: 'Курси',
-    icon: <BookFilled className='sidebar__icon' />,
+    iconFilled: <BookFilled className='sidebar__icon' />,
+    iconOutlined: <BookOutlined className='sidebar__icon' />,
   },
   {
     name: 'grade',
     title: 'Журнал оцінок',
-    icon: <FileTextFilled className='sidebar__icon' />,
+    iconFilled: <FileTextFilled className='sidebar__icon' />,
+    iconOutlined: <FileTextOutlined className='sidebar__icon' />,
   },
   {
     name: 'chat',
     title: 'Зустрічі',
-    icon: <PhoneFilled className='sidebar__icon' />,
+    iconFilled: <PhoneFilled className='sidebar__icon' />,
+    iconOutlined: <PhoneOutlined className='sidebar__icon' />,
   },
   {
     name: 'settings',
     title: 'Налаштування',
-    icon: <SettingFilled className='sidebar__icon' />,
+    iconFilled: <SettingFilled className='sidebar__icon' />,
+    iconOutlined: <SettingOutlined className='sidebar__icon' />,
   },
 ];

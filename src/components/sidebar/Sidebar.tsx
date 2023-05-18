@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './Sidebar.scss';
 
 import logo from '../../assets/logo.svg';
-import { coursesColumns } from './constant';
+import { sidebarData } from './constant';
 
 const { Sider } = Layout;
 
@@ -17,12 +17,18 @@ const Sidebar = () => (
     </div>
     <div className='sidebar__center'>
       <ul className='sidebar__center__nav-links'>
-        {coursesColumns.map((color) => (
+        {sidebarData.map((sidebar) => (
           <li>
-            <NavLink to={color.name}>
-              <Tooltip placement='rightTop' color='#254664' title={color.title}>
-                <div className='icon-container'>{color.icon}</div>
-              </Tooltip>
+            <NavLink to={sidebar.name}>
+              {({ isActive }) => (
+                <Tooltip placement='rightTop' color='#254664' title={sidebar.title}>
+                  {isActive ? (
+                    <div className='icon-container'>{sidebar.iconFilled}</div>
+                  ) : (
+                    <div className='icon-container'>{sidebar.iconOutlined}</div>
+                  )}
+                </Tooltip>
+              )}
             </NavLink>
           </li>
         ))}

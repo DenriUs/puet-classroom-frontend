@@ -1,5 +1,5 @@
 %main-title {
-  font-size: max(1.7vw, 25px);
+  @include adaptiv-font(32, 25);
   font-weight: 700;
   line-height: 27px;
   color: #000000;
@@ -42,19 +42,4 @@
   font-size: 36px;
   line-height: 49px;
   color: #000000;
-}
-
-%icon-file {
-  margin-left: 10px;
-  margin-right: 32px;
-  font-size: 30px;
-  color: #e34c33;
-}
-
-$maxWidth: 1440;
-
-@mixin adaptiv-font($pcSize, $mobSize) {
-  $addSize: $pcSize - $mobSize;
-  $maxWidth: $maxWidth - 414;
-  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 414px) / #{$maxWidth}));
 }

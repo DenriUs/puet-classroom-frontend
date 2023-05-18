@@ -11,7 +11,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @import "./src/global/sass/abstracts/variables/_colors.scss";
+          @import "./src/global/sass/abstracts/_abstracts.scss";
         `,
       },
       less: {

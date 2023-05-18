@@ -123,14 +123,14 @@ const SettingsCourse = () => {
               danger
               icon={<DeleteOutlined className='button__icon' />}
               onClick={() => showConfirm('видалити курс', handleCourseDelete)}
-             />
+            />
           </div>
           <div className='setting-course__button-container'>
             <Button
+              className='setting-course__button-submit'
               htmlType='submit'
               type='primary'
               shape='round'
-              className='button-create-activity'
             >
               Зберегти
             </Button>
