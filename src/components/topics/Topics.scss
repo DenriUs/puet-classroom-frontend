@@ -1,5 +1,3 @@
-@import '/src/global/sass/abstracts/placeholders/placeholders';
-
 .topic-material {
   &__table_topic-container {
     padding: 30px;
@@ -13,32 +11,7 @@
     color: #254664;
     @include adaptiv-font(25, 20);
     margin-bottom: 30px;
-
-    @media (min-width: 1440px) {
-      font-size: 25px;
-    }
   }
-}
-
-.topic-name {
-  font-weight: 600;
-  font-size: max(10px, 16px);
-  cursor: pointer;
-}
-
-.topic-date {
-  font-weight: 600;
-}
-
-.topic-icons {
-  font-size: 17px;
-  margin-right: 15px;
-  cursor: pointer;
-}
-
-.topic-icon-container {
-  display: grid;
-  grid-auto-flow: column;
 }
 
 .table-row-select {

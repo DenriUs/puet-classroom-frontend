@@ -11,12 +11,12 @@ const Schedule = (props: Props) => (
     <div className='schedule__title'>РОЗКЛАД НА СЬОГОДНІ {getCurrentDate()}</div>
     <div>
       <Steps size='small' progressDot current={2} direction='vertical'>
-        <Step title='Бази даних та інформаційні системи' description='8.00 - 9.30' />
+        <Step title='Алгоритми' description='8.00 - 9.30' />
         <Step
-          title='Аналіз даних та прикладні пакети статистичної обробки'
+          title='Маркетинг'
           description='9.30 - 10.50'
         />
-        <Step title='Програмування' description='11.00 - 12.20' />
+        <Step title='Граматика' description='11.00 - 12.20' />
       </Steps>
     </div>
   </div>

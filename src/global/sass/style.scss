@@ -1,48 +1,13 @@
-/*!
-Normalizing styles have been helped along thanks to the fine work of
-Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
-*/
-
-/*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
-# Generic
-	- Normalize
-	- Box sizing
-# Base
-	- Typography
-	- Links
-	- Forms
-# Utilities
-	- Accessibility
-	- Alignments
-
---------------------------------------------------------------*/
-
-// Import variables and mixins.
 @import 'abstracts/abstracts';
 
-/* Normalize
---------------------------------------------- */
 @import 'generic/normalize';
 
-/* Box sizing
---------------------------------------------- */
 @import 'generic/box-sizing';
 
-/*--------------------------------------------------------------
-# Base
---------------------------------------------------------------*/
 @import 'base/base';
 
-/* Accessibility
---------------------------------------------- */
 @import 'utilities/accessibility';
 
-/* Alignments
---------------------------------------------- */
 @import 'utilities/alignments';
 
-/* Overrides
---------------------------------------------- */
 @import 'overrides/antd-overrides';

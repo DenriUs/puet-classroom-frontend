@@ -1,5 +1,5 @@
 import { ColumnsType } from 'antd/lib/table';
-import { getFullDate } from '../../common/helpers';
+import { getFullDate, getStatusMark } from '../../common/helpers';
 import { CourseActivityEntity, CoursePassedAssignmentEntity } from '../../common/types';
 
 export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> = [
@@ -7,9 +7,9 @@ export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> =
     title: 'Назва',
     dataIndex: 'activity',
     key: 'activity',
-    width: '65%',
+    width: '55%',
     render: (activity: CourseActivityEntity, record) => (
-      <a href={record.file.src} target={'_blank'} className='course-name'>
+      <a href={record.file.src} target="_blank" className='table__title table__title--active' rel="noreferrer">
         {activity.title}
       </a>
     ),
@@ -18,14 +18,21 @@ export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> =
     dataIndex: 'createdAt',
     title: 'Дата здачі',
     key: 'createdAt',
-    width: '20%',
-    render: (createdAt) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
+    width: '15%',
+    render: (createdAt) => <span className='table__info'>{getFullDate(createdAt)}</span>,
   },
   {
     title: 'Оцінка',
     dataIndex: 'mark',
     key: 'mark',
-    width: '15%',
-    render: (mark: number) => <span className='course-teacher'>{!mark ? 0 : mark}</span>,
+    width: '10%',
+    render: (mark: number) => <span className='table__info'>{!mark ? 0 : mark} / 100</span>,
+  },
+  {
+    dataIndex: 'staus',
+    title: 'Статус',
+    key: 'status',
+    width: '10%',
+    render: (_, record) => <span className='table__info'>{getStatusMark(record.mark)}</span>,
   },
 ];

@@ -24,8 +24,7 @@ const CourseSettings = () => {
           defaultActiveKey='1'
           centered
           tabPosition='left'
-          items={tabsItems.map(({ label, key, children, icon }) => {
-            return {
+          items={tabsItems.map(({ label, key, children, icon }) => ({
               label: (
                 <span>
                   {icon} {label}
@@ -33,8 +32,7 @@ const CourseSettings = () => {
               ),
               key,
               children,
-            };
-          })}
+            }))}
         />
       </div>
     </div>

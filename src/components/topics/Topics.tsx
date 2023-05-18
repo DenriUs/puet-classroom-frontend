@@ -48,7 +48,7 @@ const Topics = () => {
       key: 'title',
       width: '50%',
       render: (title: string, record) => (
-        <span className='topic-name' onClick={() => onTopicClick(record.id)}>
+        <span className='table__title table__title--select' onClick={() => onTopicClick(record.id)}>
           {title}
         </span>
       ),
@@ -58,24 +58,31 @@ const Topics = () => {
       title: 'Дата створення',
       key: 'createdAt',
       width: '20%',
-      render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
+      render: (createdAt: Date) => (
+        <span className='table__info--select'>{getFullDate(createdAt)}</span>
+      ),
     },
     {
       dataIndex: 'updatedAt',
       title: 'Дата оновлення',
       key: 'updatedAt',
       width: '20%',
-      render: (updatedAt: Date) => <span className='topic-date'>{getFullDate(updatedAt)}</span>,
+      render: (updatedAt: Date) => (
+        <span className='table__info--select'>{getFullDate(updatedAt)}</span>
+      ),
     },
     {
       title: 'Дії',
       key: 'action',
       width: '5%',
       render: (_, record) => (
-        <div className='topic-icon-container'>
-          <EditOutlined className='topic-icons' onClick={() => handleEditTopicShow(record.id)} />
+        <div className='table__icon--container'>
+          <EditOutlined
+            className='table__icon--select'
+            onClick={() => handleEditTopicShow(record.id)}
+          />
           <DeleteOutlined
-            className='topic-icons'
+            className='table__icon--select'
             onClick={() => showConfirm('видалити тему', () => handleTopicDelete(record.id))}
           />
         </div>

@@ -1,4 +1,4 @@
-@import '/src/global/sass/abstracts/placeholders/placeholders';
+
 
 .activities {
   &__table_title {
@@ -7,9 +7,5 @@
     color: #254664;
     @include adaptiv-font(25, 20);
     margin-bottom: 30px;
-
-    @media (min-width: 1440px) {
-      font-size: 25px;
-    }
   }
 }
