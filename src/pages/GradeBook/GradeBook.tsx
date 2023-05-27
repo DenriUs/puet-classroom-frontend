@@ -14,7 +14,7 @@ const GradeBook = () => {
   const { courses, courseGradeBook, courseParticipants } = useAppSelector(
     (state) => state.coursesReducer,
   );
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   const [course, setCourse] = useState();
   const [participant, setParticipant] = useState<string>();

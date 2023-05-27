@@ -21,7 +21,7 @@ import CourseProgress from '../courseProgress/CourseProgress';
 
 const CourseHeader = () => {
   const { course } = useAppSelector((state) => state.coursesReducer);
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   const navigate = useNavigate();
 

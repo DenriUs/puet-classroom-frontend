@@ -2,8 +2,6 @@ import { Empty, Layout } from 'antd';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import './Home.scss';
-
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxhooks';
 import { SagaAction, UserRoleEnum } from '../../common/types';
 import HeaderPage from '../../components/header/HeaderPage';
@@ -12,9 +10,11 @@ import Course from '../../components/course/Course';
 import CurrentActivity from '../../components/currentActivity/CurrentActivity';
 import Meetings from '../../components/meetings/Meetings';
 
+import './Home.scss';
+
 const Home = () => {
   const { courses } = useAppSelector((state) => state.coursesReducer);
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

@@ -8,7 +8,7 @@ import './global/sass/style.scss';
 
 import App from './App';
 import store from './store';
-import Api from './common/api/services/api';
+import { Api } from './common';
 
 Api.initializeAxiosClient();
 

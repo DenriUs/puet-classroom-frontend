@@ -48,7 +48,7 @@ const TopicModal = (props: IProps) => {
   const dispatch = useAppDispatch();
 
   const handleTopicSubmit = async (data: TopicSchemaType): Promise<void> => {
-    await dispatch({ type, payload: { id, ...data } });
+    dispatch({ type, payload: { id, ...data } });
     handleClose();
   };
 

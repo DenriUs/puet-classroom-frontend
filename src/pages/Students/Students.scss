@@ -1,0 +1,44 @@
+.students-page {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+
+  &__name-container {
+    display: grid;
+    align-items: center;
+    margin: 25px 45px 0px 45px;
+    @extend %main-title;
+  }
+
+  &__table-container {
+    margin-top: 70px;
+    margin-bottom: 40px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: end;
+  }
+
+  &__button-connect {
+    margin-top: 10px;
+    margin-right: 48px;
+    width: 225px;
+    height: 45px;
+    @extend %button-title;
+  }
+
+  &__table {
+    width: 80%;
+    padding: 40px 40px 20px 40px;
+    @extend %card;
+  }
+}
+
+@media (max-width: 500px) {
+  .courses-page__name-container {
+    text-align: left;
+  }
+}

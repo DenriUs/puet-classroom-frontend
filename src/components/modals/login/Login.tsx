@@ -2,17 +2,18 @@ import { Input, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, CloseOutlined } from '@ant-design/icons';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
+
+import { LoginSchemaType } from './types';
+import { loginSchema } from './schemas';
+import { useAppDispatch } from '../../../hooks/reduxhooks';
+import { SagaAction } from '../../../common';
 
 import logo from '../../../assets/logo-big.png';
 
 import './Login.scss';
-import { LoginService } from '../../../common/api';
-import { LoginSchemaType } from './types';
-import { loginSchema } from './schemas';
 
 const LoginModal = () => {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -25,8 +26,7 @@ const LoginModal = () => {
   });
 
   const handleLoginSubmit = async (data: LoginSchemaType): Promise<void> => {
-    await LoginService.login(data);
-    navigate('/main/home');
+    dispatch({ type: SagaAction.LOG_IN, payload: data });
   };
 
   return (

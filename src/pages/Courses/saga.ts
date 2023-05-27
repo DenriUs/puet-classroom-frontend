@@ -1,9 +1,10 @@
 import { put, takeLatest, fork, call } from 'redux-saga/effects';
-import { APIResponse } from '../../common/api';
-import Api from '../../common/api/services/api';
 
-import { loadData, showSuccessMessage } from '../../common/helpers';
 import {
+  Api,
+  APIResponse,
+  loadData,
+  showSuccessMessage,
   CourseActivityEntity,
   CourseEntity,
   CourseParticipantEntity,
@@ -11,7 +12,7 @@ import {
   CourseTopicEntity,
   ReduxAction,
   SagaAction,
-} from '../../common/types';
+} from '../../common';
 import {
   setCourses,
   setCourse,
