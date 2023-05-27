@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { Button, Input, Modal } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import InputMask from 'react-input-mask';
 
-import { studentSchema } from './schemas';
-import { StudentSchemaType } from './type';
+import { teacherSchema } from './schemas';
+import { TeacherSchemaType } from './type';
 import { SagaAction, UserEntity, UserRoleEnum } from '../../../common';
 import { useAppDispatch } from '../../../hooks/reduxhooks';
 
@@ -35,17 +36,13 @@ const TeacherModal = (props: IProps) => {
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
     reset,
-  } = useForm<StudentSchemaType>({
+  } = useForm<TeacherSchemaType>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
-    resolver: zodResolver(studentSchema),
+    resolver: zodResolver(teacherSchema),
   });
 
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch({ type: SagaAction.TEACHERS_GET });
-  }, [dispatch]);
 
   useEffect(() => {
     reset({
@@ -55,6 +52,7 @@ const TeacherModal = (props: IProps) => {
       email,
       phoneNumber,
     });
+    console.log(firstName, lastName, middleName, email, phoneNumber);
   }, [reset, firstName, lastName, middleName, email, phoneNumber]);
 
   useEffect(() => {
@@ -63,7 +61,7 @@ const TeacherModal = (props: IProps) => {
     }
   }, [isSubmitSuccessful, reset]);
 
-  const handleUserSubmit = async (data: StudentSchemaType): Promise<void> => {
+  const handleUserSubmit = async (data: TeacherSchemaType): Promise<void> => {
     dispatch({ type: sagaActionType, payload: { id, ...data, role: UserRoleEnum.TEACHER } });
     handleClose();
   };
@@ -156,13 +154,16 @@ const TeacherModal = (props: IProps) => {
                 control={control}
                 name='phoneNumber'
                 render={({ field: { onBlur, onChange, value } }) => (
-                  <Input
-                    size='large'
+                  <InputMask
+                    mask='+380 (99)-999-99-99'
+                    placeholder='+380 (__)-___-__-__'
                     onBlur={onBlur}
-                    onChange={onChange}
                     value={value}
+                    onChange={onChange}
                     disabled={isSubmitting}
-                  />
+                  >
+                    <Input size='large' disabled={isSubmitting} />
+                  </InputMask>
                 )}
               />
             </label>

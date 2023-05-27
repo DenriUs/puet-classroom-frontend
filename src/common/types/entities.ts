@@ -43,8 +43,8 @@ export interface UserEntity {
   email: string;
   phoneNumber?: string;
   role: UserRoleEnum;
-  cover: Partial<FileEntity>;
-  group: Partial<GroupEntity>[];
+  cover?: Partial<FileEntity>;
+  group?: Partial<GroupEntity>;
   createdAt: Date;
   updatedAt: Date;
 }

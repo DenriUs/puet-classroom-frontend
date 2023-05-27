@@ -87,7 +87,7 @@ const Students = () => {
         />
         <StudentModal
           {...student}
-          {...(student?.groups[0] && { group: student?.groups[0] })}
+          {...{ groupId: student?.group?.id }}
           actionName='Редагувати'
           sagaActionType={SagaAction.STUDENT_UPDATE}
           onStart={showEdit}

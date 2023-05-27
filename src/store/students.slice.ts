@@ -17,6 +17,9 @@ const studentsSlice = createSlice({
     setStudents: (state, action: PayloadAction<UserEntity[]>) => {
       state.students = action.payload;
     },
+    setStudent: (state, action: PayloadAction<UserEntity>) => {
+      state.student = action.payload;
+    },
     createStudents: (state, action: PayloadAction<UserEntity>) => {
       state.students?.push(action.payload);
     },
@@ -33,7 +36,7 @@ const studentsSlice = createSlice({
   },
 });
 
-export const { setStudents, createStudents, updateStudents, deleteStudents } =
+export const { setStudents, setStudent, createStudents, updateStudents, deleteStudents } =
   studentsSlice.actions;
 
 export const studentsReducer = studentsSlice.reducer;
