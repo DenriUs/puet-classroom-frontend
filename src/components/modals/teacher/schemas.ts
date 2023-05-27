@@ -2,7 +2,7 @@ import zod from 'zod';
 
 const phoneNumberRegex = /\+[0-9]{3}\s\((\d+)\)-\d{3}-\d{2}-\d{2}/;
 
-export const studentSchema = zod.object({
+export const teacherSchema = zod.object({
   firstName: zod
     .string({ required_error: "Введіть ім'я" })
     .min(1, 'Закоротка назва')

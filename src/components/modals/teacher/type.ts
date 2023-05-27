@@ -1,4 +1,4 @@
 import zod from 'zod';
-import { studentSchema } from './schemas';
+import { teacherSchema } from './schemas';
 
-export type StudentSchemaType = zod.infer<typeof studentSchema>;
+export type TeacherSchemaType = zod.infer<typeof teacherSchema>;

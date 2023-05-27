@@ -52,26 +52,28 @@ const Teachers = () => {
     },
   }));
 
+  console.log(teacher);
+
   return (
     <Layout>
       <HeaderPage />
-      <div className='students-page'>
-        <div className='students-page__name-container'>
+      <div className='teachers-page'>
+        <div className='teachers-page__name-container'>
           <span>Викладачі</span>
         </div>
-        <div className='students-page__button-container'>
+        <div className='teachers-page__button-container'>
           <Button
             type='primary'
             shape='round'
             icon={<PlusCircleOutlined className='icon' />}
-            className='students-page__button-connect'
+            className='teachers-page__button-connect'
             onClick={handleCreateShow}
           >
             Додати викладача
           </Button>
         </div>
       </div>
-      <div className='students-page__table-container'>
+      <div className='teachers-page__table-container'>
         <div className='students-page__table'>
           <Table
             pagination={{ defaultPageSize: take }}
@@ -81,14 +83,14 @@ const Teachers = () => {
         </div>
         <TeacherModal
           actionName='Додати'
-          sagaActionType={SagaAction.STUDENT_CREATE}
+          sagaActionType={SagaAction.TEACHER_CREATE}
           onStart={showCreate}
           handleClose={handleCreateClose}
         />
         <TeacherModal
           {...teacher}
           actionName='Редагувати'
-          sagaActionType={SagaAction.STUDENT_UPDATE}
+          sagaActionType={SagaAction.TEACHER_UPDATE}
           onStart={showEdit}
           handleClose={handleEditClose}
         />

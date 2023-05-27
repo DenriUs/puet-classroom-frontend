@@ -14,11 +14,18 @@ import {
   createStudents,
   deleteStudents,
   setStudents,
+  setStudent,
   updateStudents,
 } from '../../store/students.slice';
 
 function* getStudents() {
   yield put(loadData('users', setStudents, { role: UserRoleEnum.STUDENT }));
+}
+
+function* getStudent(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `users/${action.payload}`);
+  if (response.error) return;
+  yield put(setStudent(response.data.data));
 }
 
 function* createStudent(action: ReduxAction<UserEntity>) {
@@ -47,11 +54,12 @@ function* deleteStudent(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.delete, `users/${action.payload}`);
   if (response.error) return;
   yield put(deleteStudents(action.payload));
-  yield showSuccessMessage('Користувача успішно видалено!');
+  yield showSuccessMessage('Студента успішно видалено!');
 }
 
 function* watchRequests() {
   yield takeLatest(SagaAction.STUDENTS_GET, getStudents);
+  yield takeLatest(SagaAction.STUDENT_GET, getStudent);
   yield takeLatest(SagaAction.STUDENT_CREATE, createStudent);
   yield takeLatest(SagaAction.STUDENT_UPDATE, updateStudent);
   yield takeLatest(SagaAction.STUDENT_DELETE, deleteStudent);

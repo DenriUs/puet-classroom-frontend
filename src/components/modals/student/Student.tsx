@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Button, Input, Modal, Select } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import InputMask from 'react-input-mask';
 
 import { studentSchema } from './schemas';
 import { StudentSchemaType } from './type';
@@ -47,7 +48,7 @@ const StudentModal = (props: IProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: SagaAction.STUDENTS_GET });
+    dispatch({ type: SagaAction.GROUPS_GET });
   }, [dispatch]);
 
   useEffect(() => {
@@ -160,13 +161,16 @@ const StudentModal = (props: IProps) => {
                 control={control}
                 name='phoneNumber'
                 render={({ field: { onBlur, onChange, value } }) => (
-                  <Input
-                    size='large'
+                  <InputMask
+                    mask='+380 (99)-999-99-99'
+                    placeholder='+380 (__)-___-__-__'
                     onBlur={onBlur}
-                    onChange={onChange}
                     value={value}
+                    onChange={onChange}
                     disabled={isSubmitting}
-                  />
+                  >
+                    <Input size='large' disabled={isSubmitting} />
+                  </InputMask>
                 )}
               />
             </label>

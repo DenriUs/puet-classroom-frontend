@@ -14,11 +14,18 @@ import {
   createTeachers,
   deleteTeachers,
   setTeachers,
+  setTeacher,
   updateTeachers,
 } from '../../store/teachers.slice';
 
 function* getTeachers() {
   yield put(loadData('users', setTeachers, { role: UserRoleEnum.TEACHER }));
+}
+
+function* getTeacher(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `users/${action.payload}`);
+  if (response.error) return;
+  yield put(setTeacher(response.data.data));
 }
 
 function* createTeacher(action: ReduxAction<UserEntity>) {
@@ -47,11 +54,12 @@ function* deleteTeacher(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.delete, `users/${action.payload}`);
   if (response.error) return;
   yield put(deleteTeachers(action.payload));
-  yield showSuccessMessage('Користувача успішно видалено!');
+  yield showSuccessMessage('Викладача успішно видалено!');
 }
 
 function* watchRequests() {
   yield takeLatest(SagaAction.TEACHERS_GET, getTeachers);
+  yield takeLatest(SagaAction.TEACHER_GET, getTeacher);
   yield takeLatest(SagaAction.TEACHER_CREATE, createTeacher);
   yield takeLatest(SagaAction.TEACHER_UPDATE, updateTeacher);
   yield takeLatest(SagaAction.TEACHER_DELETE, deleteTeacher);
