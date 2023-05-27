@@ -1,11 +1,14 @@
 import { put, takeLatest, fork, call } from 'redux-saga/effects';
 
-import { APIResponse } from '../../common/api';
-import { loadData, showSuccessMessage } from '../../common/helpers';
-import { FileEntity, ReduxAction, SagaAction } from '../../common/types';
+import {
+  Api,
+  APIResponse,
+  ReduxAction,
+  SagaAction,
+  loadData,
+  showSuccessMessage,
+} from '../../common';
 import { deleteFiles, setFile, setFiles } from '../../store/files.slice';
-
-import Api from '../../common/api/services/api';
 
 interface FileUpload {
   id: string;

@@ -13,12 +13,13 @@ import {
   SagaAction,
   SortingDirection,
   UserEntity,
+  UserRoleEnum,
 } from '../types';
 
 import { LocalStorageData } from './types';
 
 interface Option {
-  value: string;
+  value: any;
   label: string;
 }
 
@@ -64,6 +65,8 @@ export const getUserShortName = (user: Partial<UserEntity | undefined>) =>
 
 export const getUserFullName = (user: Partial<UserEntity | undefined>) =>
   `${user?.lastName} ${user?.firstName} ${user?.middleName}`;
+
+export const getRoleName = (role: UserRoleEnum) => (role === 'STUDENT' ? 'Студент' : 'Вчитель');
 
 export const getFullDate = (date: Date) => {
   const fullDate = new Date(date);

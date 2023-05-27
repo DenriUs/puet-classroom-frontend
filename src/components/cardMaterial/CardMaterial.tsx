@@ -10,7 +10,7 @@ import './CardMaterial.scss';
 
 const CardMaterial = () => {
   const { courseActivity } = useAppSelector((state) => state.coursesReducer);
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   const renderAssignment = () => {
     if (courseActivity?.type === 'ASSIGNMENT' && user?.role === UserRoleEnum.STUDENT) {

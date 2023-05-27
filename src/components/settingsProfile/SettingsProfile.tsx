@@ -9,7 +9,7 @@ import ImageUpload from '../imageUpload/ImageUpload';
 import './SettingsProfile.scss';
 
 const SettingsProfile = () => {
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
   const { file } = useAppSelector((state) => state.filesReducer);
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);

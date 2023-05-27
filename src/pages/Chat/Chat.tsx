@@ -7,7 +7,7 @@ import AppLoader from '../../components/AppLoader';
 import { useAppSelector } from '../../hooks/reduxhooks';
 
 const Chat = () => {
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   if (!user) return <AppLoader />;
 

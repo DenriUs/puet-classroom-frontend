@@ -19,7 +19,7 @@ const Course = (props: Props) => {
     data: { name, teacher, group, cover, color },
   } = props;
 
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   return (
     <div className='course-card__container' style={{ backgroundColor: color }} onClick={onClick}>

@@ -1,11 +1,25 @@
 import { put, takeLatest, fork, call } from 'redux-saga/effects';
 
-import { APIResponse } from '../../common/api';
-import { loadData } from '../../common/helpers';
-import { ReduxAction, SagaAction } from '../../common/types';
-import { setGroup, setGroups } from '../../store/groups.slice';
+import {
+  Api,
+  APIResponse,
+  ReduxAction,
+  SagaAction,
+  loadData,
+  showSuccessMessage,
+  GroupEntity,
+} from '../../common';
+import {
+  createGroups,
+  deleteGroups,
+  setGroup,
+  setGroups,
+  updateGroups,
+} from '../../store/groups.slice';
 
-import Api from '../../common/api/services/api';
+interface IUpdate extends Partial<GroupEntity> {
+  specialityId: string;
+}
 
 function* getGroups() {
   yield put(loadData('groups', setGroups));
@@ -17,9 +31,39 @@ function* getGroup(action: ReduxAction<string>) {
   yield put(setGroup(response.data.data));
 }
 
+function* createGroup(action: ReduxAction<GroupEntity>) {
+  const response: APIResponse = yield call(Api.post, 'groups', action.payload);
+  if (response.error) return;
+  yield put(createGroups(response.data.data));
+  yield showSuccessMessage('Групу успішно додано!');
+}
+
+function* updateGroup(action: ReduxAction<IUpdate>) {
+  if (!action.payload) return;
+  const { id, name, courseNumber, specialityId } = action.payload;
+  const response: APIResponse = yield call(Api.patch, `groups/${id}`, {
+    name,
+    courseNumber,
+    specialityId,
+  });
+  if (response.error) return;
+  yield put(updateGroups(response.data.data));
+  yield showSuccessMessage('Групу успішно оновлено!');
+}
+
+function* deleteGroup(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.delete, `groups/${action.payload}`);
+  if (response.error) return;
+  yield put(deleteGroups(action.payload));
+  yield showSuccessMessage('Групу успішно видалено!');
+}
+
 function* watchRequests() {
   yield takeLatest(SagaAction.GROUPS_GET, getGroups);
   yield takeLatest(SagaAction.GROUP_GET, getGroup);
+  yield takeLatest(SagaAction.GROUP_CREATE, createGroup);
+  yield takeLatest(SagaAction.GROUP_UPDATE, updateGroup);
+  yield takeLatest(SagaAction.GROUP_DELETE, deleteGroup);
 }
 
 const groupsSagas = [fork(watchRequests)];

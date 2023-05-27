@@ -15,7 +15,7 @@ import AppLoader from '../../components/AppLoader';
 const Courses = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
   const { courses } = useAppSelector((state) => state.coursesReducer);
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   const [show, setShow] = useState(false);
 
@@ -37,20 +37,18 @@ const Courses = () => {
         <div className='course-page__name-container'>
           <span>Мої курси</span>
         </div>
-        {user?.role === UserRoleEnum.TEACHER && (
-          <div className='course-page__button-container'>
-            <Button
-              type='primary'
-              shape='round'
-              icon={<PlusCircleOutlined className='icon' />}
-              className='course-page__button-connect'
-              onClick={handleShow}
-            >
-              Додати курс
-            </Button>
-            <CourseModal onStart={show} handleClose={handleClose} />
-          </div>
-        )}
+        <div className='course-page__button-container'>
+          <Button
+            type='primary'
+            shape='round'
+            icon={<PlusCircleOutlined className='icon' />}
+            className='course-page__button-connect'
+            onClick={handleShow}
+          >
+            Додати курс
+          </Button>
+          <CourseModal onStart={show} handleClose={handleClose} />
+        </div>
       </div>
       <div className='course-page__table-container'>
         <div className='course-page__table'>

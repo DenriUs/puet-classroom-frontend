@@ -55,7 +55,7 @@ const Meetings = () => {
   }, [isSubmitSuccessful, courses]);
 
   useMemo(() => {
-    setValue('courseId', courseMeeting?.name);
+    if (courseMeeting) setValue('courseId', courseMeeting?.name);
   }, [courseMeeting]);
 
   useEffect(() => {

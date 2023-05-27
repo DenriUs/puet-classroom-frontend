@@ -77,6 +77,16 @@
     min-width: 30px;
     min-height: 30px;
     padding-top: 4px;
+
+    &--small {
+      height: 20px;
+      padding: 0;
+    }
+
+    &--normal {
+      height: 22px;
+      padding: 0;
+    }
   }
 }
 

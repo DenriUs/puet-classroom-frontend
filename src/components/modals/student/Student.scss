@@ -1,0 +1,56 @@
+.student-modal {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 25px;
+  align-items: center;
+
+  &__title-container {
+    font-size: 26px;
+    @extend %modal-title;
+  }
+
+  &__form-container {
+    display: grid;
+    grid-template-columns: 70%;
+    grid-template-rows: auto;
+    justify-content: center;
+  }
+
+  &__input-container {
+    margin-top: 10px;
+  }
+
+  &__select-container {
+    margin-top: 10px;
+
+    &:nth-child(6) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__area-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__button-container {
+    display: grid;
+    justify-items: center;
+  }
+
+  &__select {
+    width: 100%;
+  }
+
+  &__button {
+    width: 197px;
+    height: 45px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__area > .ant-input {
+    border-radius: 5px;
+  }
+}

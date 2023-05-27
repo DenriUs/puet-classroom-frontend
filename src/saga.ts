@@ -1,7 +1,6 @@
 import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
-import { APIResponse } from './common/api';
-import Api from './common/api/services/api';
+import { Api, APIResponse } from './common';
 import {
   getSortingDirectionShortName,
   constructPaginationUrlQuery,

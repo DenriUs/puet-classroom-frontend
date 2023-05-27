@@ -11,7 +11,7 @@ import './CourseStudents.scss';
 const CourseStudents = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
   const { course, courseParticipants } = useAppSelector((state) => state.coursesReducer);
-  const { users } = useAppSelector((state) => state.authReducer);
+  const { students } = useAppSelector((state) => state.studentsReducer);
 
   const dispatch = useAppDispatch();
 
@@ -51,15 +51,15 @@ const CourseStudents = () => {
             optionFilterProp='children'
             filterOption={(input, option) => filterOption(input, option)}
             filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
-            options={(users || []).map((user) => ({
-              value: user.id,
-              label: getUserFullName(user),
+            options={(students || []).map((student) => ({
+              value: student.id,
+              label: getUserFullName(student),
             }))}
             onChange={(value) => {
               handleCourseStudentSubmit(value);
             }}
             onDropdownVisibleChange={() => {
-              dispatch({ type: SagaAction.USERS_GET });
+              dispatch({ type: SagaAction.STUDENTS_GET });
             }}
           />
         </div>

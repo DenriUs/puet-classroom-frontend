@@ -20,9 +20,23 @@ const groupsSlice = createSlice({
     setGroup: (state, action: PayloadAction<GroupEntity>) => {
       state.group = action.payload;
     },
+    createGroups: (state, action: PayloadAction<GroupEntity>) => {
+      state.groups?.push(action.payload);
+    },
+    updateGroups: (state, action: PayloadAction<GroupEntity>) => {
+      state.group = action.payload;
+      const newSpecialities = state.groups?.map((group) =>
+        group.id === action.payload.id ? action.payload : group,
+      );
+      state.groups = newSpecialities;
+    },
+    deleteGroups: (state, action: PayloadAction<string | undefined>) => {
+      state.groups = state.groups?.filter((group) => group.id !== action.payload);
+    },
   },
 });
 
-export const { setGroups, setGroup } = groupsSlice.actions;
+export const { setGroups, setGroup, createGroups, updateGroups, deleteGroups } =
+  groupsSlice.actions;
 
 export const groupsReducer = groupsSlice.reducer;

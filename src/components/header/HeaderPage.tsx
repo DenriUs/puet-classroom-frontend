@@ -11,7 +11,7 @@ const { Header } = Layout;
 
 const HeaderPage = () => {
   const navigate = useNavigate();
-  const { user } = useAppSelector((state) => state.authReducer);
+  const { user } = useAppSelector((state) => state.profileReducer);
 
   const onLogoutClick = () => {
     removeFromLocalStorage('token');

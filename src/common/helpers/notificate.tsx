@@ -1,3 +1,4 @@
+import { Avatar, Modal, Tag } from 'antd';
 import {
   ExclamationCircleOutlined,
   ReadOutlined,
@@ -5,7 +6,7 @@ import {
   ClockCircleOutlined,
   CheckCircleOutlined,
 } from '@ant-design/icons';
-import { Avatar, Modal, Tag } from 'antd';
+
 import { CourseActivityTypeEnum, UserEntity } from '../types';
 
 const { confirm } = Modal;

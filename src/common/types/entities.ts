@@ -21,6 +21,20 @@ export interface FileEntity {
   createdAt: Date;
 }
 
+export interface SpecialityEntity {
+  id: string;
+  name: string;
+}
+
+export interface GroupEntity {
+  id: string;
+  name: string;
+  courseNumber: string;
+  speciality: Partial<SpecialityEntity>;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface UserEntity {
   id: string;
   firstName: string;
@@ -30,24 +44,10 @@ export interface UserEntity {
   phoneNumber?: string;
   role: UserRoleEnum;
   cover: Partial<FileEntity>;
+  group: Partial<GroupEntity>[];
   createdAt: Date;
   updatedAt: Date;
 }
-
-export interface SpecialityEntity {
-  id: string;
-  name: string;
-}
-
-export interface GroupEntity {
-  id: string;
-  name: string;
-  courseNumber: number;
-  speciality: Partial<SpecialityEntity>;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export interface CourseParticipantEntity {
   id: string;
   user: Partial<UserEntity>;

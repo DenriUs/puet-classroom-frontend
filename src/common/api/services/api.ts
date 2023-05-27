@@ -11,7 +11,7 @@ enum Methods {
   DELETE = 'delete',
 }
 
-export default class Api {
+export class Api {
   public static axios: AxiosInstance;
 
   public static initializeAxiosClient() {
