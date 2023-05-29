@@ -15,6 +15,12 @@
     color: #828282;
   }
 
+  &__empty {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
     margin-bottom: 0;
   }

@@ -83,6 +83,11 @@ export const getCurrentDate = () => {
   return now.toLocaleDateString();
 };
 
+export const getCurrentISODate = () => {
+  const now = new Date();
+  return now.toISOString();
+};
+
 export const getTypeActivity = (type: CourseActivityTypeEnum) =>
   type === 'LECTURE' ? 'Лекція' : 'Практична';
 

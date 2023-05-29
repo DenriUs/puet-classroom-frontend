@@ -12,6 +12,7 @@ import {
   CourseTopicEntity,
   ReduxAction,
   SagaAction,
+  CourseTimetableEntity,
 } from '../../common';
 import {
   setCourses,
@@ -42,6 +43,10 @@ import {
   resetCourseGradeBook,
   setCourseMeeting,
   deleteCourseMeeting,
+  setTimeTable,
+  setTimeTables,
+  deleteTimeTables,
+  createCoursesTimeTable,
 } from '../../store/courses.slice';
 
 interface IActivity {
@@ -285,6 +290,41 @@ function* updatePassedAssignment(action: ReduxAction<CoursePassedAssignmentEntit
   yield showSuccessMessage('Оцінку успішно оновлено!');
 }
 
+function* getTimeTable(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(
+    Api.get,
+    `courses/timetables?startDate=${action.payload}&endDate=${action.payload}`,
+  );
+  if (response.error) return;
+  yield put(setTimeTable(response.data.data));
+}
+
+function* getCourseTimeTables(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `courses/${action.payload}/timetables`);
+  if (response.error) return;
+  yield put(setTimeTables(response.data.data.result));
+}
+
+function* createCourseTimeTables(action: ReduxAction<CourseTimetableEntity>) {
+  if (!action.payload) return;
+  const { id, weekday, startTime, endTime } = action.payload;
+  const response: APIResponse = yield call(Api.post, `courses/${id}/timetables`, {
+    weekday,
+    startTime,
+    endTime,
+  });
+  if (response.error) return;
+  yield put(createCoursesTimeTable(response.data.data));
+  yield showSuccessMessage('Дату успішно додано!');
+}
+
+function* deleteTimeTable(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.delete, `courses/timetables/${action.payload}`);
+  if (response.error) return;
+  yield put(deleteTimeTables(action.payload));
+  yield showSuccessMessage('День успішно видалено!');
+}
+
 function* getParticipants(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.get, `courses/${action.payload}/participants`);
   if (response.error) return;
@@ -344,6 +384,10 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_GRADE_BOOK_GET_FOR_STUDENT, getGrateBookForStudent);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_DELETE, deletePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, updatePassedAssignment);
+  yield takeLatest(SagaAction.COURSES_TIMETABLE_GET, getTimeTable);
+  yield takeLatest(SagaAction.COURSES_TIMETABLES_GET, getCourseTimeTables);
+  yield takeLatest(SagaAction.COURSES_TIMETABLE_DELETE, deleteTimeTable);
+  yield takeLatest(SagaAction.COURSES_TIMETABLE_CREATE, createCourseTimeTables);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_CREATE, createParticipant);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_DELETE, deleteParticipant);
