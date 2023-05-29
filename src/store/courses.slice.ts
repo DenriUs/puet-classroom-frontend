@@ -5,6 +5,8 @@ import {
   CourseEntity,
   CourseParticipantEntity,
   CoursePassedAssignmentEntity,
+  CourseTimetableEntity,
+  CourseTimetableTodayEntity,
   CourseTopicEntity,
 } from '../common/types';
 
@@ -19,6 +21,8 @@ export interface CoursesState {
   courseGradeBook?: CoursePassedAssignmentEntity[];
   coursePassedAssignments?: CoursePassedAssignmentEntity[];
   coursePassedAssignment?: CoursePassedAssignmentEntity;
+  courseTimetableToday?: CourseTimetableTodayEntity;
+  courseTimetable?: CourseTimetableEntity[];
   courseParticipants?: CourseParticipantEntity[];
 }
 
@@ -118,6 +122,18 @@ const coursesSlice = createSlice({
       );
       state.coursePassedAssignments = newPassedAssignment;
     },
+    setTimeTable: (state, action: PayloadAction<CourseTimetableTodayEntity[]>) => {
+      [state.courseTimetableToday] = action.payload;
+    },
+    setTimeTables: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
+      state.courseTimetable = action.payload;
+    },
+    createCoursesTimeTable: (state, action: PayloadAction<CourseTimetableEntity>) => {
+      state.courseTimetable?.push(action.payload);
+    },
+    deleteTimeTables: (state, action: PayloadAction<string | undefined>) => {
+      state.courseTimetable = state.courseTimetable?.filter((time) => time.id !== action.payload);
+    },
     setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
       state.courseParticipants = action.payload;
     },
@@ -164,6 +180,10 @@ export const {
   createCoursesParticipant,
   deleteCourseParticipant,
   resetCourseGradeBook,
+  setTimeTable,
+  setTimeTables,
+  deleteTimeTables,
+  createCoursesTimeTable,
   resetCourse,
 } = coursesSlice.actions;
 

@@ -14,6 +14,16 @@ export enum PassedAssignmentTypeEnum {
   RATED = 'RATED',
 }
 
+export enum CourseTimeTableWeekdayEnum {
+  MONDAY = 'MONDAY',
+  TUESDAY = 'TUESDAY',
+  WEDNESDAY = 'WEDNESDAY',
+  THURSDAY = 'THURSDAY',
+  FRIDAY = 'FRIDAY',
+  SATURDAY = 'SATURDAY',
+  SUNDAY = 'SUNDAY',
+}
+
 export interface FileEntity {
   id: string;
   src: string;
@@ -106,4 +116,23 @@ export interface CoursePassedAssignmentEntity {
   status: PassedAssignmentTypeEnum;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CourseTimetableEntity {
+  id: string;
+  weekday: CourseTimeTableWeekdayEnum;
+  course: Partial<CourseEntity>;
+  startTime: Date;
+  endTime: Date;
+}
+
+export interface CourseTimeToday {
+  courseName: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface CourseTimetableTodayEntity {
+  coursesTimetables: Partial<CourseTimeToday>[];
+  date: Date;
 }

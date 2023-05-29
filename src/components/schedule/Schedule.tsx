@@ -1,25 +1,46 @@
-import { Steps } from 'antd';
+import { Empty, Steps } from 'antd';
+import { useEffect } from 'react';
+
+import { getCurrentISODate, SagaAction } from '../../common';
 import { getCurrentDate } from '../../common/helpers';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
+
 import './Schedule.scss';
 
 const { Step } = Steps;
 
 interface Props {}
 
-const Schedule = (props: Props) => (
-  <div className='schedule'>
-    <div className='schedule__title'>РОЗКЛАД НА СЬОГОДНІ {getCurrentDate()}</div>
-    <div>
-      <Steps size='small' progressDot current={2} direction='vertical'>
-        <Step title='Алгоритми' description='8.00 - 9.30' />
-        <Step
-          title='Маркетинг'
-          description='9.30 - 10.50'
-        />
-        <Step title='Граматика' description='11.00 - 12.20' />
-      </Steps>
+const Schedule = (props: Props) => {
+  const { courseTimetableToday } = useAppSelector((state) => state.coursesReducer);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch({ type: SagaAction.COURSES_TIMETABLE_GET, payload: getCurrentISODate() });
+  }, [dispatch]);
+
+  return (
+    <div className='schedule'>
+      <div className='schedule__title'>РОЗКЛАД НА СЬОГОДНІ {getCurrentDate()}</div>
+
+      {courseTimetableToday ? (
+        <Steps size='small' progressDot direction='vertical'>
+          {courseTimetableToday?.coursesTimetables.map((time) => (
+            <Step
+              title={time.courseName}
+              description={`${time.startTime?.slice(0, 5)}-${time.endTime?.slice(0, 5)}`}
+              status='finish'
+            />
+          ))}
+        </Steps>
+      ) : (
+        <div className='schedule__empty'>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='Розклад відсутній' />
+        </div>
+      )}
     </div>
-  </div>
-);
+  );
+};
 
 export default Schedule;

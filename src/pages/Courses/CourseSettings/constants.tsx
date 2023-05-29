@@ -6,6 +6,7 @@ import {
   CalendarOutlined,
 } from '@ant-design/icons';
 import CourseMaterial from '../../../components/courseMaterial/CourseMaterial';
+import CourseSchedule from '../../../components/courseSchedule/CourseSchedule';
 import CourseStudents from '../../../components/courseStudents/CourseStudents';
 import Estimates from '../../../components/estimates/Estimates';
 import SettingsCourse from '../../../components/settingsCourse/SettingsCourse';
@@ -32,7 +33,7 @@ export const tabsItems = [
   {
     label: 'Розклад',
     key: '4',
-    children: [<Estimates />],
+    children: [<CourseSchedule />],
     icon: <CalendarOutlined />,
   },
   {
