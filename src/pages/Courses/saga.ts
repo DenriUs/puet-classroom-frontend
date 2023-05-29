@@ -296,6 +296,7 @@ function* getTimeTable(action: ReduxAction<string>) {
     `courses/timetables?startDate=${action.payload}&endDate=${action.payload}`,
   );
   if (response.error) return;
+  console.log(response.data.data);
   yield put(setTimeTable(response.data.data));
 }
 
@@ -307,9 +308,9 @@ function* getCourseTimeTables(action: ReduxAction<string>) {
 
 function* createCourseTimeTables(action: ReduxAction<CourseTimetableEntity>) {
   if (!action.payload) return;
-  const { id, weekday, startTime, endTime } = action.payload;
+  const { id, date, startTime, endTime } = action.payload;
   const response: APIResponse = yield call(Api.post, `courses/${id}/timetables`, {
-    weekday,
+    date,
     startTime,
     endTime,
   });

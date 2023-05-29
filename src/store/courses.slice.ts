@@ -6,7 +6,6 @@ import {
   CourseParticipantEntity,
   CoursePassedAssignmentEntity,
   CourseTimetableEntity,
-  CourseTimetableTodayEntity,
   CourseTopicEntity,
 } from '../common/types';
 
@@ -21,7 +20,7 @@ export interface CoursesState {
   courseGradeBook?: CoursePassedAssignmentEntity[];
   coursePassedAssignments?: CoursePassedAssignmentEntity[];
   coursePassedAssignment?: CoursePassedAssignmentEntity;
-  courseTimetableToday?: CourseTimetableTodayEntity;
+  courseTimetableToday?: CourseTimetableEntity[];
   courseTimetable?: CourseTimetableEntity[];
   courseParticipants?: CourseParticipantEntity[];
 }
@@ -122,8 +121,8 @@ const coursesSlice = createSlice({
       );
       state.coursePassedAssignments = newPassedAssignment;
     },
-    setTimeTable: (state, action: PayloadAction<CourseTimetableTodayEntity[]>) => {
-      [state.courseTimetableToday] = action.payload;
+    setTimeTable: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
+      state.courseTimetableToday = action.payload;
     },
     setTimeTables: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
       state.courseTimetable = action.payload;
