@@ -1,7 +1,7 @@
 import { Empty, Steps } from 'antd';
 import { useEffect } from 'react';
 
-import { getCurrentISODate, SagaAction } from '../../common';
+import { getCurrentISODate, getTimeDate, SagaAction } from '../../common';
 import { getCurrentDate } from '../../common/helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 
@@ -9,9 +9,7 @@ import './Schedule.scss';
 
 const { Step } = Steps;
 
-interface Props {}
-
-const Schedule = (props: Props) => {
+const Schedule = () => {
   const { courseTimetableToday } = useAppSelector((state) => state.coursesReducer);
 
   const dispatch = useAppDispatch();
@@ -23,13 +21,12 @@ const Schedule = (props: Props) => {
   return (
     <div className='schedule'>
       <div className='schedule__title'>РОЗКЛАД НА СЬОГОДНІ {getCurrentDate()}</div>
-
       {courseTimetableToday ? (
         <Steps size='small' progressDot direction='vertical'>
-          {courseTimetableToday?.coursesTimetables.map((time) => (
+          {courseTimetableToday?.map((time) => (
             <Step
-              title={time.courseName}
-              description={`${time.startTime?.slice(0, 5)}-${time.endTime?.slice(0, 5)}`}
+              title={time.course.name}
+              description={`${getTimeDate(time.startTime)}-${getTimeDate(time.endTime)}`}
               status='finish'
             />
           ))}

@@ -1,4 +1,4 @@
-import { Button, Modal, Select, TimePicker } from 'antd';
+import { Button, DatePicker, Modal, Select, TimePicker } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
@@ -8,7 +8,6 @@ import './Time.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
 import { timeSchema } from './schemas';
 import { TimeSchemaType } from './type';
-import { dayOptions } from './constants';
 import { SagaAction } from '../../../common';
 
 interface IProps {
@@ -24,7 +23,7 @@ const TimeModal = (props: IProps) => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful },
     reset,
   } = useForm<TimeSchemaType>({
     mode: 'onTouched',
@@ -50,34 +49,23 @@ const TimeModal = (props: IProps) => {
       <div className='topic-modal'>
         <div className='topic-modal__title-container'>Додати день</div>
         <form className='topic-modal__form-container' onSubmit={handleSubmit(handleTopicSubmit)}>
-          <div className='topic-modal__input-container'>
-            <label htmlFor='weekday'>
+          <div className='time__date-container'>
+            <label className='time__name-date' htmlFor='date'>
               День
               <Controller
                 control={control}
-                name='weekday'
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <Select
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                    disabled={isSubmitting}
-                    showSearch
-                    optionFilterProp='children'
-                    size='large'
-                    className='group-modal__select'
-                    placeholder='Виберіть день'
-                    options={dayOptions}
-                  />
+                name='date'
+                render={({ field: { onBlur, onChange } }) => (
+                  <DatePicker onBlur={onBlur} onChange={onChange} placeholder='Виберіть день' />
                 )}
               />
             </label>
-            {errors.weekday && <p className='form-error-label'>{errors.weekday.message}</p>}
+            {errors.date && <p className='form-error-label'>{errors.date.message}</p>}
           </div>
           <div className='time__picker-container'>
             <div className='topic-modal__input-container'>
               <label htmlFor='startTime'>
-                Час початку пари
+                Час початку
                 <Controller
                   control={control}
                   name='startTime'
@@ -96,7 +84,7 @@ const TimeModal = (props: IProps) => {
             </div>
             <div className='topic-modal__input-container'>
               <label htmlFor='endTime'>
-                Час закінчення пари
+                Час закінчення
                 <Controller
                   control={control}
                   name='endTime'

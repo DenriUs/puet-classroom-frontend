@@ -1,40 +1,34 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { CourseTimeTableWeekdayEnum } from '../../common';
-import { showConfirm } from '../../common/helpers';
-
-const WeekdayNames = new Map<CourseTimeTableWeekdayEnum, string>([
-  [CourseTimeTableWeekdayEnum.SUNDAY, 'Неділя'],
-  [CourseTimeTableWeekdayEnum.MONDAY, 'Понеділок'],
-  [CourseTimeTableWeekdayEnum.TUESDAY, 'Вівторок'],
-  [CourseTimeTableWeekdayEnum.WEDNESDAY, 'Середа'],
-  [CourseTimeTableWeekdayEnum.THURSDAY, 'Четвер'],
-  [CourseTimeTableWeekdayEnum.FRIDAY, "П'ятниця"],
-  [CourseTimeTableWeekdayEnum.SATURDAY, 'Субота'],
-]);
+import { getDayDate, getFullDate, getTimeDate, showConfirm } from '../../common/helpers';
 
 export const courseScheduleColumns = [
   {
+    title: 'Дата',
+    dataIndex: 'date',
+    key: 'date',
+    width: '25%',
+    render: (date: Date) => <span className='table__info'>{getFullDate(date)}</span>,
+  },
+  {
     title: 'День',
-    dataIndex: 'weekday',
-    key: 'weekday',
-    width: '50%',
-    render: (weekday: CourseTimeTableWeekdayEnum) => (
-      <span className='table__title'>{WeekdayNames.get(weekday)}</span>
-    ),
+    dataIndex: 'date',
+    key: 'date',
+    width: '25%',
+    render: (date: Date) => <span className='table__info'>{getDayDate(date)}</span>,
   },
   {
     title: 'Час початку пари',
     dataIndex: 'startTime',
     key: 'startTime',
     width: '20%',
-    render: (startTime: string) => <span className='table__info'>{startTime.slice(0, 5)}</span>,
+    render: (startTime: Date) => <span className='table__info'>{getTimeDate(startTime)}</span>,
   },
   {
     title: 'Час закінчення пари',
     dataIndex: 'endTime',
     key: 'endTime',
     width: '20%',
-    render: (endTime: string) => <span className='table__info'>{endTime.slice(0, 5)}</span>,
+    render: (endTime: Date) => <span className='table__info'>{getTimeDate(endTime)}</span>,
   },
   {
     title: 'Дія',
@@ -42,7 +36,7 @@ export const courseScheduleColumns = [
     key: 'deleteTime',
     width: '10%',
     render: (deleteTime: () => void) => (
-      <div onClick={() => showConfirm('видалити день', deleteTime)}>
+      <div onClick={() => showConfirm('видалити дату', deleteTime)}>
         <DeleteOutlined className='table__icon--select' />
       </div>
     ),

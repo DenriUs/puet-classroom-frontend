@@ -2,11 +2,19 @@
   &__picker-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: 25px;
-    gap: 30px
+    gap: 30px;
   }
 
-  &__picker{
+  &__date-container {
+    display: grid;
+    justify-items: center;
+  }
+
+  &__name-date {
+    display: grid;
+  }
+
+  &__picker {
     width: 100%;
   }
 }

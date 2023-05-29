@@ -2,6 +2,7 @@ import { notification } from 'antd';
 import { RcFile } from 'antd/lib/upload';
 import { Action } from 'redux';
 import { SelectEffect, select as sagaSelect } from 'redux-saga/effects';
+import moment from 'moment';
 
 import {
   CourseActivityTypeEnum,
@@ -22,6 +23,16 @@ interface Option {
   value: any;
   label: string;
 }
+
+const WeekdayNames = new Map<number, string>([
+  [0, 'Неділя'],
+  [1, 'Понеділок'],
+  [2, 'Вівторок'],
+  [3, 'Середа'],
+  [4, 'Четвер'],
+  [5, "П'ятниця"],
+  [6, 'Субота'],
+]);
 
 export const getFromLocalStorage = (key: LocalStorageData): string | null =>
   localStorage.getItem(key);
@@ -71,6 +82,16 @@ export const getRoleName = (role: UserRoleEnum) => (role === 'STUDENT' ? 'Сту
 export const getFullDate = (date: Date) => {
   const fullDate = new Date(date);
   return fullDate.toLocaleDateString();
+};
+
+export const getTimeDate = (date: Date) => {
+  const timeDate = new Date(date);
+  return moment(timeDate).format('HH:mm');
+};
+
+export const getDayDate = (date: Date) => {
+  const dayDate = new Date(date);
+  return WeekdayNames.get(moment(dayDate).day());
 };
 
 export const getDaysInSystem = (date: Date) => {
