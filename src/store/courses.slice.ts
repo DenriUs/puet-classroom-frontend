@@ -22,6 +22,7 @@ export interface CoursesState {
   coursePassedAssignment?: CoursePassedAssignmentEntity;
   courseTimetableToday?: CourseTimetableEntity[];
   courseTimetable?: CourseTimetableEntity[];
+  courseTimetableForUser?: CourseTimetableEntity[];
   courseParticipants?: CourseParticipantEntity[];
 }
 
@@ -121,16 +122,19 @@ const coursesSlice = createSlice({
       );
       state.coursePassedAssignments = newPassedAssignment;
     },
-    setTimeTable: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
+    setTimetable: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
       state.courseTimetableToday = action.payload;
     },
-    setTimeTables: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
+    setTimetables: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
       state.courseTimetable = action.payload;
     },
-    createCoursesTimeTable: (state, action: PayloadAction<CourseTimetableEntity>) => {
+    setTimetablesForUser: (state, action: PayloadAction<CourseTimetableEntity[]>) => {
+      state.courseTimetableForUser = action.payload;
+    },
+    createCoursesTimetable: (state, action: PayloadAction<CourseTimetableEntity>) => {
       state.courseTimetable?.push(action.payload);
     },
-    deleteTimeTables: (state, action: PayloadAction<string | undefined>) => {
+    deleteTimetables: (state, action: PayloadAction<string | undefined>) => {
       state.courseTimetable = state.courseTimetable?.filter((time) => time.id !== action.payload);
     },
     setCoursesParticipants: (state, action: PayloadAction<CourseParticipantEntity[]>) => {
@@ -179,10 +183,11 @@ export const {
   createCoursesParticipant,
   deleteCourseParticipant,
   resetCourseGradeBook,
-  setTimeTable,
-  setTimeTables,
-  deleteTimeTables,
-  createCoursesTimeTable,
+  setTimetable,
+  setTimetables,
+  setTimetablesForUser,
+  deleteTimetables,
+  createCoursesTimetable,
   resetCourse,
 } = coursesSlice.actions;
 

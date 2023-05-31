@@ -7,28 +7,28 @@ export const courseScheduleColumns = [
     dataIndex: 'date',
     key: 'date',
     width: '25%',
-    render: (date: Date) => <span className='table__info'>{getFullDate(date)}</span>,
+    render: (date: Date) => <span>{getFullDate(date)}</span>,
   },
   {
     title: 'День',
     dataIndex: 'date',
     key: 'date',
     width: '25%',
-    render: (date: Date) => <span className='table__info'>{getDayDate(date)}</span>,
+    render: (date: Date) => <span>{getDayDate(date)}</span>,
   },
   {
     title: 'Час початку пари',
     dataIndex: 'startTime',
     key: 'startTime',
     width: '20%',
-    render: (startTime: Date) => <span className='table__info'>{getTimeDate(startTime)}</span>,
+    render: (startTime: Date) => <span>{getTimeDate(startTime)}</span>,
   },
   {
     title: 'Час закінчення пари',
     dataIndex: 'endTime',
     key: 'endTime',
     width: '20%',
-    render: (endTime: Date) => <span className='table__info'>{getTimeDate(endTime)}</span>,
+    render: (endTime: Date) => <span>{getTimeDate(endTime)}</span>,
   },
   {
     title: 'Дія',
@@ -37,7 +37,7 @@ export const courseScheduleColumns = [
     width: '10%',
     render: (deleteTime: () => void) => (
       <div onClick={() => showConfirm('видалити дату', deleteTime)}>
-        <DeleteOutlined className='table__icon--select' />
+        <DeleteOutlined className='table__icon' />
       </div>
     ),
   },

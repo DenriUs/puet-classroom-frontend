@@ -7,14 +7,14 @@ export const courseParticipantsColumns = [
     dataIndex: 'name',
     key: 'name',
     width: '60%',
-    render: (name: string) => <span className='table__title'>{name}</span>,
+    render: (name: string) => <span>{name}</span>,
   },
   {
     title: 'Email',
     dataIndex: 'email',
     key: 'email',
     width: '30%',
-    render: (email: string) => <span className='table__info'>{email}</span>,
+    render: (email: string) => <span>{email}</span>,
   },
   {
     title: 'Дія',

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxhooks';
 import { SagaAction, UserRoleEnum } from '../../common/types';
 import HeaderPage from '../../components/header/HeaderPage';
-import Schedule from '../../components/schedule/Schedule';
+import TimetableModal from '../../components/timetable/Timetable';
 import Course from '../../components/course/Course';
 import CurrentActivity from '../../components/currentActivity/CurrentActivity';
 import Meetings from '../../components/meetings/Meetings';
@@ -46,7 +46,7 @@ const Home = () => {
           </div>
           <div className='home-page__activity'>
             {user?.role === UserRoleEnum.TEACHER ? <Meetings /> : <CurrentActivity />}
-            <Schedule />
+            <TimetableModal />
           </div>
         </div>
       </div>

@@ -101,7 +101,7 @@ export const getDaysInSystem = (date: Date) => {
 
 export const getCurrentDate = () => {
   const now = new Date();
-  return now.toLocaleDateString();
+  return moment(now).format('DD.MM.y');
 };
 
 export const getCurrentISODate = () => {

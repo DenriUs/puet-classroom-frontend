@@ -1,12 +1,14 @@
 import { Button, Input, UploadFile, UploadProps } from 'antd';
 import { useState, useEffect } from 'react';
-import { SagaAction } from '../../common/types';
+import { SagaAction, UserRoleEnum } from '../../common/types';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import AppLoader from '../AppLoader';
 import ImageUpload from '../imageUpload/ImageUpload';
 
 import './SettingsProfile.scss';
+
+import telegramLogo from '../../assets/telegram-logo.svg';
 
 const SettingsProfile = () => {
   const { user } = useAppSelector((state) => state.profileReducer);
@@ -20,6 +22,8 @@ const SettingsProfile = () => {
     if (newFileList[0]) newFileList[0].status = 'done';
     setFileList(newFileList);
   };
+
+  const handleTelegramClick = () => {};
 
   const handleUserUpdate = () =>
     dispatch({
@@ -70,6 +74,19 @@ const SettingsProfile = () => {
               <Input disabled value={user?.email} />
             </label>
           </div>
+          {user.role !== UserRoleEnum.ADMIN && (
+            <div className='telegram-button__container'>
+              <Button
+                type='text'
+                shape='round'
+                icon={<img className='telegram-button__icon' alt='' src={telegramLogo} />}
+                className='telegram-button'
+                onClick={handleTelegramClick}
+              >
+                Підключити Telegram-розклад
+              </Button>
+            </div>
+          )}
         </div>
         <div className='settings-profile__button'>
           <Button

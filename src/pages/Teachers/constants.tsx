@@ -6,35 +6,33 @@ export const columnsTeachers = [
     title: 'П.І.Б',
     dataIndex: 'fullName',
     width: '15%',
-    render: (_: any, record: UserEntity) => (
-      <span className='topic-date'>{getUserFullName(record)}</span>
-    ),
+    render: (_: any, record: UserEntity) => <span>{getUserFullName(record)}</span>,
   },
   {
     title: 'Пошта',
     dataIndex: 'email',
     width: '10%',
-    render: (email: string) => <span className='topic-date'>{email}</span>,
+    render: (email: string) => <span>{email}</span>,
   },
   {
     title: 'Номер телефону',
     dataIndex: 'phoneNumber',
     width: '10%',
-    render: (phoneNumber: string) => <span className='topic-date'>{phoneNumber}</span>,
+    render: (phoneNumber: string) => <span>{phoneNumber}</span>,
   },
   {
     title: 'Дата створення',
     dataIndex: 'createdAt',
     key: 'createdAt',
     width: '10%',
-    render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
+    render: (createdAt: Date) => <span>{getFullDate(createdAt)}</span>,
   },
   {
     title: 'Дата зміни',
     dataIndex: 'updatedAt',
     key: 'updatedAt',
     width: '10%',
-    render: (updatedAt: Date) => <span className='topic-date'>{getFullDate(updatedAt)}</span>,
+    render: (updatedAt: Date) => <span>{getFullDate(updatedAt)}</span>,
   },
   {
     title: 'Дії',

@@ -51,9 +51,7 @@ const Teachers = () => {
       deleteTeachers: () => handleTeacherDelete(id),
     },
   }));
-
-  console.log(teacher);
-
+  
   return (
     <Layout>
       <HeaderPage />

@@ -43,10 +43,11 @@ import {
   resetCourseGradeBook,
   setCourseMeeting,
   deleteCourseMeeting,
-  setTimeTable,
-  setTimeTables,
-  deleteTimeTables,
-  createCoursesTimeTable,
+  setTimetable,
+  setTimetables,
+  deleteTimetables,
+  createCoursesTimetable,
+  setTimetablesForUser,
 } from '../../store/courses.slice';
 
 interface IActivity {
@@ -64,6 +65,11 @@ interface IPassed {
 interface IGradeBook {
   courseId: string;
   participantId?: string;
+}
+
+interface ITimetable {
+  startDate: Date;
+  endDate: Date;
 }
 
 function* getCourses() {
@@ -290,23 +296,31 @@ function* updatePassedAssignment(action: ReduxAction<CoursePassedAssignmentEntit
   yield showSuccessMessage('Оцінку успішно оновлено!');
 }
 
-function* getTimeTable(action: ReduxAction<string>) {
+function* getTimetable(action: ReduxAction<ITimetable>) {
   const response: APIResponse = yield call(
     Api.get,
-    `courses/timetables?startDate=${action.payload}&endDate=${action.payload}`,
+    `courses/timetables?startDate=${action.payload?.startDate}&endDate=${action.payload?.endDate}`,
   );
   if (response.error) return;
-  console.log(response.data.data);
-  yield put(setTimeTable(response.data.data));
+  yield put(setTimetable(response.data.data));
 }
 
-function* getCourseTimeTables(action: ReduxAction<string>) {
+function* getTimetablesForUser(action: ReduxAction<ITimetable>) {
+  const response: APIResponse = yield call(
+    Api.get,
+    `courses/timetables?startDate=${action.payload?.startDate}&endDate=${action.payload?.endDate}`,
+  );
+  if (response.error) return;
+  yield put(setTimetablesForUser(response.data.data));
+}
+
+function* getCourseTimetables(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.get, `courses/${action.payload}/timetables`);
   if (response.error) return;
-  yield put(setTimeTables(response.data.data.result));
+  yield put(setTimetables(response.data.data.result));
 }
 
-function* createCourseTimeTables(action: ReduxAction<CourseTimetableEntity>) {
+function* createCourseTimetables(action: ReduxAction<CourseTimetableEntity>) {
   if (!action.payload) return;
   const { id, date, startTime, endTime } = action.payload;
   const response: APIResponse = yield call(Api.post, `courses/${id}/timetables`, {
@@ -315,14 +329,14 @@ function* createCourseTimeTables(action: ReduxAction<CourseTimetableEntity>) {
     endTime,
   });
   if (response.error) return;
-  yield put(createCoursesTimeTable(response.data.data));
+  yield put(createCoursesTimetable(response.data.data));
   yield showSuccessMessage('Дату успішно додано!');
 }
 
-function* deleteTimeTable(action: ReduxAction<string>) {
+function* deleteTimetable(action: ReduxAction<string>) {
   const response: APIResponse = yield call(Api.delete, `courses/timetables/${action.payload}`);
   if (response.error) return;
-  yield put(deleteTimeTables(action.payload));
+  yield put(deleteTimetables(action.payload));
   yield showSuccessMessage('День успішно видалено!');
 }
 
@@ -385,10 +399,11 @@ function* watchRequests() {
   yield takeLatest(SagaAction.COURSES_GRADE_BOOK_GET_FOR_STUDENT, getGrateBookForStudent);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_DELETE, deletePassedAssignment);
   yield takeLatest(SagaAction.COURSES_PASSED_ASSIGNMENT_UPDATE, updatePassedAssignment);
-  yield takeLatest(SagaAction.COURSES_TIMETABLE_GET, getTimeTable);
-  yield takeLatest(SagaAction.COURSES_TIMETABLES_GET, getCourseTimeTables);
-  yield takeLatest(SagaAction.COURSES_TIMETABLE_DELETE, deleteTimeTable);
-  yield takeLatest(SagaAction.COURSES_TIMETABLE_CREATE, createCourseTimeTables);
+  yield takeLatest(SagaAction.COURSES_TIMETABLE_GET, getTimetable);
+  yield takeLatest(SagaAction.COURSES_TIMETABLES_GET_FOR_USER, getTimetablesForUser);
+  yield takeLatest(SagaAction.COURSES_TIMETABLES_GET, getCourseTimetables);
+  yield takeLatest(SagaAction.COURSES_TIMETABLE_DELETE, deleteTimetable);
+  yield takeLatest(SagaAction.COURSES_TIMETABLE_CREATE, createCourseTimetables);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_GET, getParticipants);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_CREATE, createParticipant);
   yield takeLatest(SagaAction.COURSES_PARTICIPANTS_DELETE, deleteParticipant);

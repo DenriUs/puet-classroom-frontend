@@ -42,30 +42,28 @@ const Activities = () => {
       title: 'Назва',
       key: 'title',
       width: '55%',
-      render: (title: string) => <span className='table__title'>{title}</span>,
+      render: (title: string) => <span>{title}</span>,
     },
     {
       dataIndex: 'type',
       title: 'Тип',
       key: 'type',
       width: '10%',
-      render: (type: CourseActivityTypeEnum) => (
-        <span className='table__info'>{getTypeActivity(type)}</span>
-      ),
+      render: (type: CourseActivityTypeEnum) => <span>{getTypeActivity(type)}</span>,
     },
     {
       dataIndex: 'createdAt',
       title: 'Дата створення',
       key: 'createdAt',
       width: '15%',
-      render: (createdAt: Date) => <span className='table__info'>{getFullDate(createdAt)}</span>,
+      render: (createdAt: Date) => <span>{getFullDate(createdAt)}</span>,
     },
     {
       dataIndex: 'updatedAt',
       title: 'Дата оновлення',
       key: 'updatedAt',
       width: '15%',
-      render: (updatedAt: Date) => <span className='table__info'>{getFullDate(updatedAt)}</span>,
+      render: (updatedAt: Date) => <span>{getFullDate(updatedAt)}</span>,
     },
     {
       title: 'Дії',
