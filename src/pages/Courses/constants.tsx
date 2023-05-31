@@ -25,7 +25,7 @@ export const courseStudentColumns: ColumnsType<CourseEntity> = [
     responsive: ['xl'],
     render: (_, record) => (
       <div>
-        <UserOutlined /> <span className='table__info'>{getUserFullName(record.teacher)}</span>
+        <UserOutlined /> <span>{getUserFullName(record.teacher)}</span>
       </div>
     ),
   },
@@ -35,7 +35,7 @@ export const courseStudentColumns: ColumnsType<CourseEntity> = [
     key: 'createdAt',
     width: '20%',
     responsive: ['xl'],
-    render: (createdAt: Date) => <span className='table__info'>{getFullDate(createdAt)}</span>,
+    render: (createdAt: Date) => <span>{getFullDate(createdAt)}</span>,
   },
 ];
 
@@ -59,7 +59,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     responsive: ['md'],
     render: (group: GroupEntity) => (
       <div>
-        <UserOutlined /> <span className='table__info'>{group?.name}</span>
+        <UserOutlined /> <span>{group?.name}</span>
       </div>
     ),
   },
@@ -71,7 +71,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     responsive: ['lg'],
     render: (group: GroupEntity) => (
       <div>
-        <span className='table__info'>{group?.speciality?.name}</span>
+        <span>{group?.speciality?.name}</span>
       </div>
     ),
   },
@@ -81,7 +81,7 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     key: 'createdAt',
     width: '15%',
     responsive: ['xl'],
-    render: (createdAt: Date) => <span className='table__info'>{getFullDate(createdAt)}</span>,
+    render: (createdAt: Date) => <span>{getFullDate(createdAt)}</span>,
   },
   {
     dataIndex: 'updatedAt',
@@ -89,6 +89,6 @@ export const courseTeacherColumns: ColumnsType<CourseEntity> = [
     key: 'updatedAt',
     width: '15%',
     responsive: ['xl'],
-    render: (updatedAt: Date) => <span className='table__info'>{getFullDate(updatedAt)}</span>,
+    render: (updatedAt: Date) => <span>{getFullDate(updatedAt)}</span>,
   },
 ];

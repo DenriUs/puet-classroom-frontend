@@ -6,7 +6,7 @@ import { SagaAction } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import { courseScheduleColumns } from './constant';
 
-import './CourseSchedule.scss';
+import './CourseTimetable.scss';
 import TimeModal from '../modals/time/Time';
 
 const CourseSchedule = () => {
@@ -35,14 +35,14 @@ const CourseSchedule = () => {
   }));
 
   return (
-    <div className='course-students'>
-      <div className='course-students__title'>Розклад</div>
-      <div className='course-students__table-container'>
+    <div className='course-timetable'>
+      <div className='course-timetable__title'>Розклад</div>
+      <div className='course-timetable__table-container'>
         <div className='topic-material__table_title'>
           <span>Додати день</span>
           <PlusOutlined className='course-material__plus-icon' onClick={handleCreateShow} />
         </div>
-        <div className='course-students__table'>
+        <div className='course-timetable__table'>
           <Table
             pagination={{ defaultPageSize: take }}
             columns={courseScheduleColumns}

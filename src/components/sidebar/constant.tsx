@@ -7,6 +7,8 @@ import {
   HomeOutlined,
   BookFilled,
   BookOutlined,
+  CalendarFilled,
+  CalendarOutlined,
   FileTextFilled,
   FileTextOutlined,
   SettingFilled,
@@ -17,6 +19,7 @@ import {
 
 import { UserRoleEnum } from '../../common';
 
+import auditFilled from '../../assets/audit-filled.png';
 import userFilled from '../../assets/user-filled.png';
 import teamFilled from '../../assets/team-filled.png';
 import branchesFilled from '../../assets/branches-filled.png';
@@ -26,7 +29,7 @@ export const sidebarData = [
     name: 'teachers',
     title: 'Викладачі',
     roles: [UserRoleEnum.ADMIN],
-    iconFilled: <AuditOutlined className='sidebar__icon' />,
+    iconFilled: <img alt='' className='sidebar__icon--normal' src={auditFilled} />,
     iconOutlined: <AuditOutlined className='sidebar__icon' />,
   },
   {
@@ -63,6 +66,13 @@ export const sidebarData = [
     roles: [UserRoleEnum.STUDENT, UserRoleEnum.TEACHER],
     iconFilled: <BookFilled className='sidebar__icon' />,
     iconOutlined: <BookOutlined className='sidebar__icon' />,
+  },
+  {
+    name: 'timetable',
+    title: 'Розклад',
+    roles: [UserRoleEnum.STUDENT, UserRoleEnum.TEACHER],
+    iconFilled: <CalendarFilled className='sidebar__icon' />,
+    iconOutlined: <CalendarOutlined className='sidebar__icon' />,
   },
   {
     name: 'grade',

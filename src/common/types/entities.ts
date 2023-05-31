@@ -42,6 +42,7 @@ export interface UserEntity {
   middleName: string;
   email: string;
   phoneNumber?: string;
+  telegramId?: string;
   role: UserRoleEnum;
   cover?: Partial<FileEntity>;
   group?: Partial<GroupEntity>;

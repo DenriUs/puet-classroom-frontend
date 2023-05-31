@@ -9,7 +9,12 @@ export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> =
     key: 'activity',
     width: '55%',
     render: (activity: CourseActivityEntity, record) => (
-      <a href={record.file.src} target="_blank" className='table__title table__title--active' rel="noreferrer">
+      <a
+        href={record.file.src}
+        target='_blank'
+        className='table__title table__title--active'
+        rel='noreferrer'
+      >
         {activity.title}
       </a>
     ),
@@ -19,20 +24,20 @@ export const courseGradeBookColumns: ColumnsType<CoursePassedAssignmentEntity> =
     title: 'Дата здачі',
     key: 'createdAt',
     width: '15%',
-    render: (createdAt) => <span className='table__info'>{getFullDate(createdAt)}</span>,
+    render: (createdAt) => <span>{getFullDate(createdAt)}</span>,
   },
   {
     title: 'Оцінка',
     dataIndex: 'mark',
     key: 'mark',
     width: '10%',
-    render: (mark: number) => <span className='table__info'>{!mark ? 0 : mark} / 100</span>,
+    render: (mark: number) => <span>{!mark ? 0 : mark} / 100</span>,
   },
   {
     dataIndex: 'staus',
     title: 'Статус',
     key: 'status',
     width: '10%',
-    render: (_, record) => <span className='table__info'>{getStatusMark(record.mark)}</span>,
+    render: (_, record) => <span>{getStatusMark(record.mark)}</span>,
   },
 ];

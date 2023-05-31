@@ -17,6 +17,7 @@ import AppLoader from '../components/AppLoader';
 import Chat from './Chat/Chat';
 import Teachers from './Teachers/Teachers';
 import Students from './Students/Students';
+import Timetable from './Timetable/Timetable';
 
 const MainRoutes = () => {
   const { user } = useAppSelector((state) => state.profileReducer);
@@ -50,6 +51,7 @@ const MainRoutes = () => {
             <Route index element={<Navigate to='/main/home' />} />
             <Route path='home' element={<Home />} />
             <Route path='courses' element={<Course />} />
+            <Route path='timetable' element={<Timetable />} />
             <Route path='grade' element={<GradeBook />} />
             <Route path='chat' element={<Chat />} />
             <Route path='settings' element={<Settings />} />

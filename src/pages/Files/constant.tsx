@@ -18,7 +18,7 @@ export const columnsFiles = [
     dataIndex: 'createdAt',
     key: 'createdAt',
     width: '20%',
-    render: (createdAt: Date) => <span className='topic-date'>{getFullDate(createdAt)}</span>,
+    render: (createdAt: Date) => <span>{getFullDate(createdAt)}</span>,
   },
   {
     title: 'Дія',

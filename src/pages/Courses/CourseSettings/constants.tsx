@@ -6,7 +6,7 @@ import {
   CalendarOutlined,
 } from '@ant-design/icons';
 import CourseMaterial from '../../../components/courseMaterial/CourseMaterial';
-import CourseSchedule from '../../../components/courseSchedule/CourseSchedule';
+import CourseSchedule from '../../../components/courseTimetable/CourseTimetable';
 import CourseStudents from '../../../components/courseStudents/CourseStudents';
 import Estimates from '../../../components/estimates/Estimates';
 import SettingsCourse from '../../../components/settingsCourse/SettingsCourse';
