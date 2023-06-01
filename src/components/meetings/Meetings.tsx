@@ -68,7 +68,7 @@ const Meetings = () => {
     <div className='meeting'>
       <div className='meeting__title'>ЗУСТРІЧІ</div>
       <form
-        className='course-modal__form-container'
+        className='meeting__form-container'
         onSubmit={handleSubmit(handleCourseUpdateMeet)}
       >
         <div className='meeting__select-container'>
