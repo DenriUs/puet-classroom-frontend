@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { BookOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
+import MediaQuery from 'react-responsive';
 
 import { SagaAction } from '../../../common/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
@@ -14,7 +15,7 @@ import { getIconActivity } from '../../../common/helpers';
 import './CourseDetails.scss';
 
 const Course = () => {
-  const { course, courseTopics, courseTopic, courseActivities } = useAppSelector(
+  const { course, courseTopics, courseTopic, courseActivities, courseActivity } = useAppSelector(
     (state) => state.coursesReducer,
   );
 
@@ -31,6 +32,11 @@ const Course = () => {
 
   const onActivitySelect = (id: string | undefined) => {
     dispatch({ type: SagaAction.COURSES_TOPICS_ACTIVITY_GET, payload: id });
+  };
+
+  const onActivityFileSelect = (id: string | undefined) => {
+    dispatch({ type: SagaAction.COURSES_TOPICS_ACTIVITY_GET, payload: id });
+    window.open(courseActivity?.file.src, '_blank');
   };
 
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
@@ -82,19 +88,32 @@ const Course = () => {
       ) : (
         <div className='course-page__container'>
           <div className='course-page__sidebar'>
-            <div className='smartphone-menu-trigger' />
-            <Menu
-              openKeys={openKeys}
-              onOpenChange={onOpenChange}
-              mode='inline'
-              items={topicsData}
-              inlineIndent={40}
-              onSelect={({ key }) => onActivitySelect(key)}
-            />
+            <MediaQuery minWidth={1000}>
+              <Menu
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}
+                mode='inline'
+                items={topicsData}
+                inlineIndent={40}
+                onSelect={({ key }) => onActivitySelect(key)}
+              />
+            </MediaQuery>
+            <MediaQuery maxWidth={1000}>
+              <Menu
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}
+                mode='inline'
+                items={topicsData}
+                inlineIndent={40}
+                onSelect={({ key }) => onActivityFileSelect(key)}
+              />
+            </MediaQuery>
           </div>
-          <div className='course-page__task'>
-            <CardMaterial />
-          </div>
+          <MediaQuery minWidth={1000}>
+            <div className='course-page__task'>
+              <CardMaterial />
+            </div>
+          </MediaQuery>
         </div>
       )}
     </Layout>
