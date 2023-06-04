@@ -44,7 +44,6 @@ const StudentModal = (props: IProps) => {
     reValidateMode: 'onChange',
     resolver: zodResolver(studentSchema),
   });
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -67,6 +66,10 @@ const StudentModal = (props: IProps) => {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
+
+  const handlePasswordClick = () => {
+    dispatch({ type: SagaAction.STUDENT_PASSWORD_UPDATE, payload: id });
+  };
 
   const handleUserSubmit = async (data: StudentSchemaType): Promise<void> => {
     dispatch({ type: sagaActionType, payload: { id, ...data, role: UserRoleEnum.STUDENT } });
@@ -207,6 +210,16 @@ const StudentModal = (props: IProps) => {
               />
             </label>
             {errors.groupId && <p className='form-error-label'>{errors.groupId.message}</p>}
+          </div>
+          <div className='password-button__container'>
+            <Button
+              type='text'
+              shape='round'
+              className='password-button'
+              onClick={handlePasswordClick}
+            >
+              Згенерувати новий пароль
+            </Button>
           </div>
           <div className='student-modal__button-container'>
             <Button

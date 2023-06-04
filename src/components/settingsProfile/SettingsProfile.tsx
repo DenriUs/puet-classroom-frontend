@@ -23,12 +23,14 @@ const SettingsProfile = () => {
     setFileList(newFileList);
   };
 
-  const handleTelegramClick = () => {};
+  const handleTelegramClick = () => {
+    dispatch({ type: SagaAction.TELEGRAM_TOKEN_GET });
+  };
 
   const handleUserUpdate = () =>
     dispatch({
       type: SagaAction.FILE_UPLOAD,
-      payload: { id: user?.cover.id, file: fileList[0]?.originFileObj },
+      payload: { id: user?.cover?.id, file: fileList[0]?.originFileObj },
     });
 
   useEffect(() => {
@@ -43,9 +45,9 @@ const SettingsProfile = () => {
         <div className='settings-profile__title'>Налаштування профілю</div>
         <div className='settings-profile__upload'>
           <ImageUpload
-            id={user?.cover.id as string}
-            url={user?.cover.src as string}
-            name={user?.cover.filename as string}
+            id={user?.cover?.id as string}
+            url={user?.cover?.src as string}
+            name={user?.cover?.filename as string}
             onChange={onDraggerChange}
           />
         </div>

@@ -49,6 +49,15 @@ export interface UserEntity {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface GroupParticipantEntity {
+  id: string;
+  user: Partial<UserEntity>;
+  group: Partial<GroupEntity>;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface CourseParticipantEntity {
   id: string;
   user: Partial<UserEntity>;

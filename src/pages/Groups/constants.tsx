@@ -1,5 +1,5 @@
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { getFullDate, showConfirm } from '../../common';
+import { EditOutlined, TeamOutlined, DeleteOutlined } from '@ant-design/icons';
+import { SpecialityEntity, getFullDate, showConfirm } from '../../common';
 
 export const coursesAmount = 4;
 
@@ -7,8 +7,14 @@ export const columnsGroups = [
   {
     title: 'Назва',
     dataIndex: 'name',
-    width: '67%',
+    width: '33%',
     render: (name: string) => <span>{name}</span>,
+  },
+  {
+    title: 'Назва спеціальності',
+    dataIndex: 'speciality',
+    width: '33%',
+    render: (speciality: SpecialityEntity) => <span>{speciality.name}</span>,
   },
   {
     title: 'Дата створення',
@@ -31,13 +37,16 @@ export const columnsGroups = [
     dataIndex: 'actionsGroups',
     render: ({
       updateGroups,
+      studentGroups,
       deleteGroups,
     }: {
       updateGroups: () => void;
+      studentGroups: () => void;
       deleteGroups: () => void;
     }) => (
       <div className='table__icon--container'>
         <EditOutlined className='table__icon' onClick={updateGroups} />
+        <TeamOutlined className='table__icon' onClick={studentGroups} />
         <DeleteOutlined
           className='table__icon'
           onClick={() => showConfirm('видалити групу', deleteGroups)}

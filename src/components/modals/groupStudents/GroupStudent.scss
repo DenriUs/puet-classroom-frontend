@@ -1,0 +1,36 @@
+.group-students {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 90%;
+  justify-content: center;
+
+  &__title {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 50px;
+    @extend %main-title;
+  }
+
+  &__table-container {
+    padding: 30px;
+    @extend %card;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__form {
+    display: grid;
+    align-items: center;
+    justify-items: left;
+    margin: 0 0 0 15px;
+  }
+}
+
+.grade-students-select {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  width: 300px;
+}

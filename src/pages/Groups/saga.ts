@@ -8,6 +8,7 @@ import {
   loadData,
   showSuccessMessage,
   GroupEntity,
+  GroupParticipantEntity,
 } from '../../common';
 import {
   createGroups,
@@ -15,6 +16,9 @@ import {
   setGroup,
   setGroups,
   updateGroups,
+  setGroupsParticipants,
+  createGroupsParticipant,
+  deleteGroupParticipant,
 } from '../../store/groups.slice';
 
 interface IUpdate extends Partial<GroupEntity> {
@@ -58,12 +62,37 @@ function* deleteGroup(action: ReduxAction<string>) {
   yield showSuccessMessage('Групу успішно видалено!');
 }
 
+function* getParticipants(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.get, `groups/${action.payload}/participants`);
+  if (response.error) return;
+  yield put(setGroupsParticipants(response.data.data.result));
+}
+
+function* createParticipant(action: ReduxAction<GroupParticipantEntity>) {
+  if (!action.payload) return;
+  const { group, id } = action.payload;
+  const response: APIResponse = yield call(Api.post, `groups/${group}/participants`, { id });
+  if (response.error) return;
+  yield put(createGroupsParticipant(response.data.data));
+  yield showSuccessMessage('Студента успішно додано в групу!');
+}
+
+function* deleteParticipant(action: ReduxAction<string>) {
+  const response: APIResponse = yield call(Api.delete, `groups/participants/${action.payload}`);
+  if (response.error) return;
+  yield put(deleteGroupParticipant(action.payload));
+  yield showSuccessMessage('Студента видалено з групи!');
+}
+
 function* watchRequests() {
   yield takeLatest(SagaAction.GROUPS_GET, getGroups);
   yield takeLatest(SagaAction.GROUP_GET, getGroup);
   yield takeLatest(SagaAction.GROUP_CREATE, createGroup);
   yield takeLatest(SagaAction.GROUP_UPDATE, updateGroup);
   yield takeLatest(SagaAction.GROUP_DELETE, deleteGroup);
+  yield takeLatest(SagaAction.GROUPS_PARTICIPANTS_GET, getParticipants);
+  yield takeLatest(SagaAction.GROUPS_PARTICIPANTS_CREATE, createParticipant);
+  yield takeLatest(SagaAction.GROUPS_PARTICIPANTS_DELETE, deleteParticipant);
 }
 
 const groupsSagas = [fork(watchRequests)];
