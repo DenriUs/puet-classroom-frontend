@@ -57,12 +57,21 @@ function* deleteTeacher(action: ReduxAction<string>) {
   yield showSuccessMessage('Викладача успішно видалено!');
 }
 
+function* updateTeacherPassword(action: ReduxAction<string>) {
+  if (!action.payload) return;
+  const response: APIResponse = yield call(Api.patch, `users/${action.payload}/password`);
+  if (response.error) return;
+  yield put(updateTeachers(response.data.data));
+  yield showSuccessMessage('Новий пароль для викладача успішно згенеровано!');
+}
+
 function* watchRequests() {
   yield takeLatest(SagaAction.TEACHERS_GET, getTeachers);
   yield takeLatest(SagaAction.TEACHER_GET, getTeacher);
   yield takeLatest(SagaAction.TEACHER_CREATE, createTeacher);
   yield takeLatest(SagaAction.TEACHER_UPDATE, updateTeacher);
   yield takeLatest(SagaAction.TEACHER_DELETE, deleteTeacher);
+  yield takeLatest(SagaAction.TEACHER_PASSWORD_UPDATE, updateTeacherPassword);
 }
 
 const TeachersSagas = [fork(watchRequests)];

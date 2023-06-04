@@ -2,25 +2,31 @@ import { useState, useEffect } from 'react';
 import { Button, Layout, Table } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
+import { columnsGroups } from './constants';
 import { SagaAction } from '../../common/types';
 import AppLoader from '../../components/AppLoader';
 import HeaderPage from '../../components/header/HeaderPage';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxhooks';
 import GroupModal from '../../components/modals/group/Group';
-import { columnsGroups } from './constants';
+import GroupStudentsModal from '../../components/modals/groupStudents/GroupStudents';
 
 import './Groups.scss';
 
 const Groups = () => {
   const { take } = useAppSelector((state) => state.paginatedDataReducer);
-  const { groups, group } = useAppSelector((state) => state.groupsReducer);
+  const { group, groups } = useAppSelector((state) => state.groupsReducer);
 
   const [showCreate, setShowCreate] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showGroupStudents, setShowGroupStudents] = useState(false);
 
   const handleCreateShow = () => setShowCreate(true);
 
   const handleCreateClose = () => setShowCreate(false);
+
+  const handleGroupStudentsShow = () => setShowGroupStudents(true);
+
+  const handleGroupStudentsClose = () => setShowGroupStudents(false);
 
   const handleEditShow = () => setShowEdit(true);
 
@@ -31,6 +37,12 @@ const Groups = () => {
   const handleGroupUpdate = (id: string) => {
     dispatch({ type: SagaAction.GROUP_GET, payload: id });
     handleEditShow();
+  };
+
+  const handleStudentGroups = (id: string) => {
+    dispatch({ type: SagaAction.GROUP_GET, payload: id });
+    dispatch({ type: SagaAction.GROUPS_PARTICIPANTS_GET, payload: id });
+    handleGroupStudentsShow();
   };
 
   const handleGroupDelete = (id: string) => {
@@ -47,6 +59,7 @@ const Groups = () => {
     ...rest,
     actionsGroups: {
       updateGroups: () => handleGroupUpdate(id),
+      studentGroups: () => handleStudentGroups(id),
       deleteGroups: () => handleGroupDelete(id),
     },
   }));
@@ -92,6 +105,7 @@ const Groups = () => {
           onStart={showEdit}
           handleClose={handleEditClose}
         />
+        <GroupStudentsModal onStart={showGroupStudents} handleClose={handleGroupStudentsClose} />
       </div>
     </Layout>
   );

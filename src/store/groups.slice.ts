@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GroupEntity } from '../common/types';
+import { GroupEntity, GroupParticipantEntity } from '../common/types';
 
 export interface GroupsState {
   groups?: GroupEntity[];
   group?: GroupEntity;
+  groupParticipants?: GroupParticipantEntity[];
 }
 
 const getInitialState = (): GroupsState => ({});
@@ -33,10 +34,29 @@ const groupsSlice = createSlice({
     deleteGroups: (state, action: PayloadAction<string | undefined>) => {
       state.groups = state.groups?.filter((group) => group.id !== action.payload);
     },
+    setGroupsParticipants: (state, action: PayloadAction<GroupParticipantEntity[]>) => {
+      state.groupParticipants = action.payload;
+    },
+    createGroupsParticipant: (state, action: PayloadAction<GroupParticipantEntity>) => {
+      state.groupParticipants?.push(action.payload);
+    },
+    deleteGroupParticipant: (state, action: PayloadAction<string | undefined>) => {
+      state.groupParticipants = state.groupParticipants?.filter(
+        (paticipant) => paticipant.id !== action.payload,
+      );
+    },
   },
 });
 
-export const { setGroups, setGroup, createGroups, updateGroups, deleteGroups } =
-  groupsSlice.actions;
+export const {
+  setGroups,
+  setGroup,
+  createGroups,
+  updateGroups,
+  deleteGroups,
+  setGroupsParticipants,
+  createGroupsParticipant,
+  deleteGroupParticipant,
+} = groupsSlice.actions;
 
 export const groupsReducer = groupsSlice.reducer;

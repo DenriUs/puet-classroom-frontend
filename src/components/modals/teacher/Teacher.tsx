@@ -52,7 +52,6 @@ const TeacherModal = (props: IProps) => {
       email,
       phoneNumber,
     });
-    console.log(firstName, lastName, middleName, email, phoneNumber);
   }, [reset, firstName, lastName, middleName, email, phoneNumber]);
 
   useEffect(() => {
@@ -60,6 +59,10 @@ const TeacherModal = (props: IProps) => {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
+
+  const handlePasswordClick = () => {
+    dispatch({ type: SagaAction.TEACHER_PASSWORD_UPDATE, payload: id });
+  };
 
   const handleUserSubmit = async (data: TeacherSchemaType): Promise<void> => {
     dispatch({ type: sagaActionType, payload: { id, ...data, role: UserRoleEnum.TEACHER } });
@@ -168,6 +171,16 @@ const TeacherModal = (props: IProps) => {
               />
             </label>
             {errors.phoneNumber && <p className='form-error-label'>{errors.phoneNumber.message}</p>}
+          </div>
+          <div className='password-button__container'>
+            <Button
+              type='text'
+              shape='round'
+              className='password-button'
+              onClick={handlePasswordClick}
+            >
+              Згенерувати новий пароль
+            </Button>
           </div>
           <div className='teacher-modal__button-container'>
             <Button

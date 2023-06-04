@@ -18,6 +18,10 @@ import {
   updateStudents,
 } from '../../store/students.slice';
 
+interface IUpdate extends Partial<UserEntity> {
+  groupId: string;
+}
+
 function* getStudents() {
   yield put(loadData('users', setStudents, { role: UserRoleEnum.STUDENT }));
 }
@@ -35,15 +39,16 @@ function* createStudent(action: ReduxAction<UserEntity>) {
   yield showSuccessMessage('Студента успішно додано!');
 }
 
-function* updateStudent(action: ReduxAction<UserEntity>) {
+function* updateStudent(action: ReduxAction<IUpdate>) {
   if (!action.payload) return;
-  const { id, firstName, lastName, middleName, email, phoneNumber } = action.payload;
+  const { id, firstName, lastName, middleName, email, phoneNumber, groupId } = action.payload;
   const response: APIResponse = yield call(Api.patch, `users/${id}`, {
     firstName,
     lastName,
     middleName,
     email,
     phoneNumber,
+    groupId,
   });
   if (response.error) return;
   yield put(updateStudents(response.data.data));
@@ -57,12 +62,21 @@ function* deleteStudent(action: ReduxAction<string>) {
   yield showSuccessMessage('Студента успішно видалено!');
 }
 
+function* updateStudentPassword(action: ReduxAction<string>) {
+  if (!action.payload) return;
+  const response: APIResponse = yield call(Api.patch, `users/${action.payload}/password`);
+  if (response.error) return;
+  yield put(updateStudents(response.data.data));
+  yield showSuccessMessage('Новий пароль для студента успішно згенеровано!');
+}
+
 function* watchRequests() {
   yield takeLatest(SagaAction.STUDENTS_GET, getStudents);
   yield takeLatest(SagaAction.STUDENT_GET, getStudent);
   yield takeLatest(SagaAction.STUDENT_CREATE, createStudent);
   yield takeLatest(SagaAction.STUDENT_UPDATE, updateStudent);
   yield takeLatest(SagaAction.STUDENT_DELETE, deleteStudent);
+  yield takeLatest(SagaAction.STUDENT_PASSWORD_UPDATE, updateStudentPassword);
 }
 
 const StudentsSagas = [fork(watchRequests)];
