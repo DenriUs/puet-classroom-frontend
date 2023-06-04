@@ -34,7 +34,6 @@ const SpecialityModal = (props: IProps) => {
     reset({
       name,
     });
-    console.log(name);
   }, [reset, name]);
 
   useEffect(() => {
