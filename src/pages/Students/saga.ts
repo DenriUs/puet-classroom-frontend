@@ -18,10 +18,6 @@ import {
   updateStudents,
 } from '../../store/students.slice';
 
-interface IUpdate extends Partial<UserEntity> {
-  groupId: string;
-}
-
 function* getStudents() {
   yield put(loadData('users', setStudents, { role: UserRoleEnum.STUDENT }));
 }
@@ -39,16 +35,15 @@ function* createStudent(action: ReduxAction<UserEntity>) {
   yield showSuccessMessage('Студента успішно додано!');
 }
 
-function* updateStudent(action: ReduxAction<IUpdate>) {
+function* updateStudent(action: ReduxAction<UserEntity>) {
   if (!action.payload) return;
-  const { id, firstName, lastName, middleName, email, phoneNumber, groupId } = action.payload;
+  const { id, firstName, lastName, middleName, email, phoneNumber } = action.payload;
   const response: APIResponse = yield call(Api.patch, `users/${id}`, {
     firstName,
     lastName,
     middleName,
     email,
     phoneNumber,
-    groupId,
   });
   if (response.error) return;
   yield put(updateStudents(response.data.data));

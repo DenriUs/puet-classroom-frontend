@@ -172,16 +172,18 @@ const TeacherModal = (props: IProps) => {
             </label>
             {errors.phoneNumber && <p className='form-error-label'>{errors.phoneNumber.message}</p>}
           </div>
-          <div className='password-button__container'>
-            <Button
-              type='text'
-              shape='round'
-              className='password-button'
-              onClick={handlePasswordClick}
-            >
-              Згенерувати новий пароль
-            </Button>
-          </div>
+          {sagaActionType === SagaAction.TEACHER_UPDATE && (
+            <div className='password-button__container'>
+              <Button
+                type='text'
+                shape='round'
+                className='password-button'
+                onClick={handlePasswordClick}
+              >
+                Згенерувати новий пароль
+              </Button>
+            </div>
+          )}
           <div className='teacher-modal__button-container'>
             <Button
               shape='round'
