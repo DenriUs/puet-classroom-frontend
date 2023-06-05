@@ -50,7 +50,7 @@ export const columnsTeachers = [
         <EditOutlined className='table__icon' onClick={updateTeachers} />
         <DeleteOutlined
           className='table__icon'
-          onClick={() => showConfirm('видалити спеціальність', deleteTeachers)}
+          onClick={() => showConfirm('видалити викладача', deleteTeachers)}
         />
       </div>
     ),

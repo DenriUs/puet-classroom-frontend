@@ -1,1 +1,1 @@
-export * from './Group';
+export * from './GroupStudents';

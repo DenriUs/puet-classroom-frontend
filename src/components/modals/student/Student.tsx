@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
-import { Button, Input, Modal, Select } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import InputMask from 'react-input-mask';
 
 import { studentSchema } from './schemas';
 import { StudentSchemaType } from './type';
-import { SagaAction, UserEntity, UserRoleEnum, filterOption, filterSort } from '../../../common';
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxhooks';
+import { SagaAction, UserEntity, UserRoleEnum } from '../../../common';
+import { useAppDispatch } from '../../../hooks/reduxhooks';
 
 import './Student.scss';
 
 interface IProps extends Partial<UserEntity> {
-  groupId?: string;
   actionName: string;
   sagaActionType: SagaAction;
   onStart: boolean;
@@ -31,9 +30,7 @@ const StudentModal = (props: IProps) => {
     middleName,
     email,
     phoneNumber,
-    groupId,
   } = props;
-  const { groups } = useAppSelector((state) => state.groupsReducer);
   const {
     control,
     handleSubmit,
@@ -57,9 +54,8 @@ const StudentModal = (props: IProps) => {
       middleName,
       email,
       phoneNumber,
-      groupId,
     });
-  }, [reset, firstName, lastName, middleName, email, phoneNumber, groupId]);
+  }, [reset, firstName, lastName, middleName, email, phoneNumber]);
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -179,48 +175,18 @@ const StudentModal = (props: IProps) => {
             </label>
             {errors.phoneNumber && <p className='form-error-label'>{errors.phoneNumber.message}</p>}
           </div>
-          <div className='student-modal__select-container'>
-            <label htmlFor='groupId'>
-              Група
-              <Controller
-                control={control}
-                name='groupId'
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <Select
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                    disabled={isSubmitting}
-                    showSearch
-                    optionFilterProp='children'
-                    size='large'
-                    className='group-modal__select'
-                    placeholder='Виберіть групу'
-                    filterOption={(input, option) => filterOption(input, option)}
-                    filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
-                    options={(groups || []).map((group) => ({
-                      value: group.id,
-                      label: group.name,
-                    }))}
-                    onDropdownVisibleChange={() => {
-                      dispatch({ type: SagaAction.GROUPS_GET });
-                    }}
-                  />
-                )}
-              />
-            </label>
-            {errors.groupId && <p className='form-error-label'>{errors.groupId.message}</p>}
-          </div>
-          <div className='password-button__container'>
-            <Button
-              type='text'
-              shape='round'
-              className='password-button'
-              onClick={handlePasswordClick}
-            >
-              Згенерувати новий пароль
-            </Button>
-          </div>
+          {sagaActionType === SagaAction.STUDENT_UPDATE && (
+            <div className='password-button__container'>
+              <Button
+                type='text'
+                shape='round'
+                className='password-button'
+                onClick={handlePasswordClick}
+              >
+                Згенерувати новий пароль
+              </Button>
+            </div>
+          )}
           <div className='student-modal__button-container'>
             <Button
               shape='round'

@@ -5,16 +5,16 @@ const phoneNumberRegex = /\+[0-9]{3}\s\((\d+)\)-\d{3}-\d{2}-\d{2}/;
 export const teacherSchema = zod.object({
   firstName: zod
     .string({ required_error: "Введіть ім'я" })
-    .min(1, 'Закоротка назва')
-    .max(64, 'Завелика назва'),
+    .min(2, "Закоротке ім'я")
+    .max(64, "Занадто довге ім'я"),
   lastName: zod
     .string({ required_error: 'Введіть прізвище' })
-    .min(1, 'Закоротка назва')
-    .max(64, 'Завелика назва'),
+    .min(2, 'Закоротке прізвище')
+    .max(64, 'Занадто довге прізвище'),
   middleName: zod
     .string({ required_error: "Введіть ім'я по-батькові" })
-    .min(1, 'Закоротка назва')
-    .max(64, 'Завелика назва'),
+    .min(2, "Закоротке ім'я по-батькові")
+    .max(64, "Занадто довге ім'я по-батькові"),
   email: zod
     .string({ required_error: 'Введіть пошту' })
     .email({ message: 'Введіть пошту коректно' })

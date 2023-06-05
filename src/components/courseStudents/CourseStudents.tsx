@@ -46,7 +46,7 @@ const CourseStudents = () => {
           <Select
             className='grade-students-select'
             showSearch
-            placeholder='Введіть призвіще та імя студента'
+            placeholder="Введіть призвіще та ім'я студента"
             size='large'
             optionFilterProp='children'
             filterOption={(input, option) => filterOption(input, option)}
