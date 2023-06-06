@@ -29,7 +29,11 @@ const TimetableModal = () => {
   return (
     <div className='timetable'>
       <div className='timetable__title'>РОЗКЛАД НА СЬОГОДНІ {getCurrentDate()}</div>
-      {courseTimetableToday ? (
+      {courseTimetableToday?.length === 0 ? (
+        <div className='timetable__empty'>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='Розклад відсутній' />
+        </div>
+      ) : (
         <>
           <Steps size='small' progressDot direction='vertical'>
             {courseTimetableToday?.map((time) => (
@@ -54,10 +58,6 @@ const TimetableModal = () => {
             </div>
           )}
         </>
-      ) : (
-        <div className='timetable__empty'>
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='Розклад відсутній' />
-        </div>
       )}
     </div>
   );

@@ -41,7 +41,7 @@ const Activities = () => {
       dataIndex: 'title',
       title: 'Назва',
       key: 'title',
-      width: '55%',
+      width: '45%',
       render: (title: string) => <span>{title}</span>,
     },
     {
