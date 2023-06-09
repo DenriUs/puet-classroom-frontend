@@ -65,31 +65,31 @@ const CourseStudents = () => {
         <form onSubmit={handleSubmit(handleCourseStudentSubmit)}>
           <div className='course-students__form-container'>
             <div className='course-students__form'>
-                <Controller
-                  control={control}
-                  name='studentId'
-                  render={({ field: { onBlur, onChange, value } }) => (
-                    <Select
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      value={value}
-                      disabled={isSubmitting}
-                      showSearch
-                      placeholder="Введіть призвіще та ім'я студента"
-                      size='large'
-                      optionFilterProp='children'
-                      filterOption={(input, option) => filterOption(input, option)}
-                      filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
-                      options={(students || []).map((student) => ({
-                        value: student.id,
-                        label: getUserFullName(student),
-                      }))}
-                      onDropdownVisibleChange={() => {
-                        dispatch({ type: SagaAction.STUDENTS_GET });
-                      }}
-                    />
-                  )}
-                />
+              <Controller
+                control={control}
+                name='studentId'
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <Select
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
+                    disabled={isSubmitting}
+                    showSearch
+                    placeholder="Введіть призвіще та ім'я студента"
+                    size='large'
+                    optionFilterProp='children'
+                    filterOption={(input, option) => filterOption(input, option)}
+                    filterSort={(optionA, optionB) => filterSort(optionA, optionB)}
+                    options={(students || []).map((student) => ({
+                      value: student.id,
+                      label: getUserFullName(student),
+                    }))}
+                    onDropdownVisibleChange={() => {
+                      dispatch({ type: SagaAction.STUDENTS_GET });
+                    }}
+                  />
+                )}
+              />
             </div>
             <div className='course-students__button'>
               <Button shape='round' type='primary' htmlType='submit' className='save-button'>

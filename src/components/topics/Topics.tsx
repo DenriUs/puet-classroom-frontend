@@ -58,6 +58,7 @@ const Topics = () => {
       title: 'Дата створення',
       key: 'createdAt',
       width: '20%',
+      responsive: ['xl'],
       render: (createdAt: Date) => (
         <span className='table__info--select'>{getFullDate(createdAt)}</span>
       ),
@@ -67,6 +68,7 @@ const Topics = () => {
       title: 'Дата оновлення',
       key: 'updatedAt',
       width: '20%',
+      responsive: ['xl'],
       render: (updatedAt: Date) => (
         <span className='table__info--select'>{getFullDate(updatedAt)}</span>
       ),
