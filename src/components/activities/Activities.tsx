@@ -49,6 +49,7 @@ const Activities = () => {
       title: 'Тип',
       key: 'type',
       width: '10%',
+      responsive: ['xl'],
       render: (type: CourseActivityTypeEnum) => <span>{getTypeActivity(type)}</span>,
     },
     {
@@ -56,6 +57,7 @@ const Activities = () => {
       title: 'Дата створення',
       key: 'createdAt',
       width: '15%',
+      responsive: ['xl'],
       render: (createdAt: Date) => <span>{getFullDate(createdAt)}</span>,
     },
     {
@@ -63,6 +65,7 @@ const Activities = () => {
       title: 'Дата оновлення',
       key: 'updatedAt',
       width: '15%',
+      responsive: ['xl'],
       render: (updatedAt: Date) => <span>{getFullDate(updatedAt)}</span>,
     },
     {
