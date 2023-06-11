@@ -1,20 +1,16 @@
 .time {
-  &__picker-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
-
   &__date-container {
-    display: grid;
-    justify-items: center;
-  }
-
-  &__name-date {
     display: grid;
   }
 
   &__picker {
     width: 100%;
+  }
+
+  &__form-container {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 15px;
+    width: 70%;
   }
 }

@@ -45,10 +45,10 @@ const TimeModal = (props: IProps) => {
   };
 
   return (
-    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={530}>
+    <Modal centered open={onStart} onCancel={handleClose} footer={null} width={350}>
       <div className='topic-modal'>
         <div className='topic-modal__title-container'>Додати день</div>
-        <form className='topic-modal__form-container' onSubmit={handleSubmit(handleTopicSubmit)}>
+        <form className='time__form-container' onSubmit={handleSubmit(handleTopicSubmit)}>
           <div className='time__date-container'>
             <label className='time__name-date' htmlFor='date'>
               День
@@ -56,52 +56,57 @@ const TimeModal = (props: IProps) => {
                 control={control}
                 name='date'
                 render={({ field: { onBlur, onChange } }) => (
-                  <DatePicker onBlur={onBlur} onChange={onChange} placeholder='Виберіть день' />
+                  <DatePicker
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    placeholder='Виберіть день'
+                    className='time__picker'
+                  />
                 )}
               />
             </label>
             {errors.date && <p className='form-error-label'>{errors.date.message}</p>}
           </div>
-          <div className='time__picker-container'>
-            <div className='topic-modal__input-container'>
-              <label htmlFor='startTime'>
-                Час початку
-                <Controller
-                  control={control}
-                  name='startTime'
-                  render={({ field: { onBlur, onChange } }) => (
-                    <TimePicker
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      placeholder='Виберіть час'
-                      format='HH:mm'
-                      className='time__picker'
-                    />
-                  )}
-                />
-              </label>
-              {errors.startTime && <p className='form-error-label'>{errors.startTime.message}</p>}
-            </div>
-            <div className='topic-modal__input-container'>
-              <label htmlFor='endTime'>
-                Час закінчення
-                <Controller
-                  control={control}
-                  name='endTime'
-                  render={({ field: { onBlur, onChange } }) => (
-                    <TimePicker
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      placeholder='Виберіть час'
-                      format='HH:mm'
-                      className='time__picker'
-                    />
-                  )}
-                />
-              </label>
-              {errors.endTime && <p className='form-error-label'>{errors.endTime.message}</p>}
-            </div>
+
+          <div className='topic-modal__input-container'>
+            <label htmlFor='startTime'>
+              Час початку
+              <Controller
+                control={control}
+                name='startTime'
+                render={({ field: { onBlur, onChange } }) => (
+                  <TimePicker
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    placeholder='Виберіть час'
+                    format='HH:mm'
+                    className='time__picker'
+                  />
+                )}
+              />
+            </label>
+            {errors.startTime && <p className='form-error-label'>{errors.startTime.message}</p>}
           </div>
+          <div className='topic-modal__input-container'>
+            <label htmlFor='endTime'>
+              Час закінчення
+              <Controller
+                control={control}
+                name='endTime'
+                render={({ field: { onBlur, onChange } }) => (
+                  <TimePicker
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    placeholder='Виберіть час'
+                    format='HH:mm'
+                    className='time__picker'
+                  />
+                )}
+              />
+            </label>
+            {errors.endTime && <p className='form-error-label'>{errors.endTime.message}</p>}
+          </div>
+
           <div className='topic-modal__button-container'>
             <Button
               shape='round'
