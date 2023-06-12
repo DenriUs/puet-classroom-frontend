@@ -1,7 +1,7 @@
 import axiosClient, { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
 import { getFromLocalStorage, showErrorMessage } from '../../helpers';
-import { defaultConfig } from '../constants';
+import { defaultConfig, errorsDictionary } from '../constants';
 import { APIResponse } from '../types';
 
 enum Methods {
@@ -38,7 +38,7 @@ export class Api {
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.response?.data || error.message;
       const message = Array.isArray(errorMessage) ? errorMessage[0] : errorMessage;
-      showErrorMessage('Request error', message);
+      showErrorMessage('Помилка', errorsDictionary[message as keyof typeof errorsDictionary] || '');
       return { error: error.message };
     }
   }

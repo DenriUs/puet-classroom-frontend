@@ -9,4 +9,8 @@ export const defaultConfig: AxiosRequestConfig = {
   timeout: TIMEOUT_SECONDS * 1000,
 };
 
+export const errorsDictionary = {
+  AUTH_INCORRECT_CREDENTIALS: 'Неправильно введена пошта або пароль',
+};
+
 export const telegramBotLink = VITE_TELEGRAM_BOT_LINK;

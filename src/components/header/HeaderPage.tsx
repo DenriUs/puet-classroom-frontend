@@ -15,7 +15,7 @@ const HeaderPage = () => {
 
   const onLogoutClick = () => {
     removeFromLocalStorage('token');
-    navigate('/');
+    navigate('/auth');
   };
 
   return (

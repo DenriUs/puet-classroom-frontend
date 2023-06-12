@@ -6,9 +6,9 @@
   grid-template-columns: 1fr 1fr;
   top: 50%;
   left: 50%;
-  width: 900px;
+  max-width: 900px;
   height: 600px;
-  max-width: 95%;
+  width: 100%;
   max-height: 95%;
   z-index: 1010;
   transform: translate(-50%, -50%);
@@ -30,7 +30,7 @@
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
   }
 
-  &__logo{
+  &__logo {
     width: 300px;
   }
 
@@ -45,12 +45,12 @@
     padding: 50px;
     align-items: center;
     height: 100%;
-  }
 
-  &__right-side-content {
-    display: grid;
-    grid-template-rows: 0.5fr 1.5fr;
-    height: 80%;
+    &-content {
+      display: grid;
+      grid-template-rows: 0.5fr 1.5fr;
+      height: 80%;
+    }
   }
 
   &__header {
@@ -91,5 +91,54 @@
   &_login {
     background: linear-gradient(180deg, $primary-color 0%, $secondary-color 100%);
     filter: blur(350px);
+  }
+}
+
+@media (max-width: 900px) {
+  .login-modal {
+    width: 80%;
+    grid-template-columns: 1fr 0fr;
+
+    &__left-side {
+      display: none;
+    }
+
+    &__right-side {
+      width: 100%;
+      grid-template-columns: 1fr;
+      justify-content: center;
+
+      &-content {
+        width: 100%;
+        grid-template-columns: 1fr;
+        justify-content: center;
+      }
+    }
+
+    &__header {
+      justify-content: center;
+    }
+
+    &__form {
+      grid-template-columns: 1fr;
+      justify-content: center;
+    }
+
+    .ant-btn.login-modal__submit-button {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@media (max-width: 580px) {
+  .login-modal {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .login-modal__right-side {
+    padding: 50px 10px 50px 10px;
   }
 }
