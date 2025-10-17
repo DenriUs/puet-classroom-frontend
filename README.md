@@ -1,4 +1,4 @@
-# 🤖 Learnity LMS Front-end
+# 💻 Learnity LMS Front-end
 
 Learnity Schedule is a **Learning Management System** that enables students and teachers to seamlessly engage in online education. Teachers can create courses, manage content, review student assignments, and conduct live video classes. Students can access study materials, submit assignments, and participate in live video sessions. Admins can manage users, specialities, and groups across the platform. Both students and teachers can access their schedule using LMS website or Telegram schedule bot.
 
