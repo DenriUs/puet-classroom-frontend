@@ -4,6 +4,8 @@ Learnity is a **Learning Management System** that enables students and teachers 
 
 This repository contains the code for the front-end part of the web application.
 
+💡 This is a team project. My personal contributions are outlined below.
+
 ## ✨ Features I've Implemented
 
 - 🔗 **Admin Views:**  
